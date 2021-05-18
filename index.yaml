@@ -11,4 +11,14 @@ entries:
     urls:
     - https://github.com/pwei1018/bcregistry-sre/releases/download/bcregistry-api-0.1.0/bcregistry-api-0.1.0.tgz
     version: 0.1.0
-generated: "2021-05-06T18:50:32.021101141Z"
+  - apiVersion: v2
+    appVersion: 2.0.1
+    created: "2021-05-18T21:57:27.716833499Z"
+    description: A Helm chart for Kubernetes
+    digest: 4794dcfe67a861204775f5b5a713c71b055fd00ea8a755387ad703dbac414cf8
+    name: bcregistry-api
+    type: application
+    urls:
+    - https://github.com/bcgov/bcregistry-sre/releases/download/bcregistry-api-0.0.1/bcregistry-api-0.0.1.tgz
+    version: 0.0.1
+generated: "2021-05-18T21:57:27.716841799Z"
