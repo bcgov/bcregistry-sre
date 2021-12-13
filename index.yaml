@@ -21,4 +21,37 @@ entries:
     urls:
     - https://github.com/bcgov/bcregistry-sre/releases/download/bcregistry-api-0.0.1/bcregistry-api-0.0.1.tgz
     version: 0.0.1
-generated: "2021-05-18T21:57:27.716841799Z"
+  bcregistry-cronjob:
+  - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2021-12-13T17:16:53.24162017Z"
+    description: A Helm chart for Kubernetes
+    digest: 05bb2a0aa2245c0f22163216da3358e2241e8a780fb09b000669bb1aaa1e9e6d
+    name: bcregistry-cronjob
+    type: application
+    urls:
+    - https://github.com/bcgov/bcregistry-sre/releases/download/bcregistry-cronjob-0.0.1/bcregistry-cronjob-0.0.1.tgz
+    version: 0.0.1
+  bcregistry-queue:
+  - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2021-12-13T17:16:53.399162238Z"
+    description: A Helm chart for Kubernetes
+    digest: 73db1d17ffab388610951123ab2e4587c60b97496738753ba72fd5c9db4895a3
+    name: bcregistry-queue
+    type: application
+    urls:
+    - https://github.com/bcgov/bcregistry-sre/releases/download/bcregistry-queue-0.0.1/bcregistry-queue-0.0.1.tgz
+    version: 0.0.1
+  bcregistry-ui:
+  - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2021-12-13T17:16:53.569232059Z"
+    description: A Helm chart for Kubernetes
+    digest: 1bb7115fbf3cb9309955198ec4c2877cc34a335f58f3be72e6bbdf000f7441c4
+    name: bcregistry-ui
+    type: application
+    urls:
+    - https://github.com/bcgov/bcregistry-sre/releases/download/bcregistry-ui-0.0.1/bcregistry-ui-0.0.1.tgz
+    version: 0.0.1
+generated: "2021-12-13T17:16:53.56924596Z"
