@@ -75,9 +75,14 @@ class _Config():  # pylint: disable=too-few-public-methods
     DB_PASSWORD = os.getenv('NOTIFY_DATABASE_PASSWORD', '')
     DB_NAME = os.getenv('NOTIFY_DATABASE_NAME', '')
     DB_HOST = os.getenv('NOTIFY_DATABASE_HOST', '')
-    DB_PORT = os.getenv('NOTIFY_DATABASE_PORT', '5432')  # POSTGRESQL
+    DB_PORT = os.getenv('NOTIFY_DATABASE_PORT', '5432')
     # POSTGRESQL
-    SQLALCHEMY_DATABASE_URI = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
+        # POSTGRESQL
+    if DB_UNIX_SOCKET := os.getenv('DATABASE_UNIX_SOCKET', None):
+        SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@/{DB_NAME}?host={DB_UNIX_SOCKET}'
+    else:
+        SQLALCHEMY_DATABASE_URI = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
+
 
     # Connection pool settings
     DB_MIN_POOL_SIZE = os.getenv('DATABASE_MIN_POOL_SIZE', '5')
