@@ -35,7 +35,7 @@ runs:
 
     # Add new git tag
     - name: Add git tag
-      uses: mathieudutour/github-tag-action@v6.1
+      uses: mathieudutour/github-tag-action@v6.2
       with:
         github_token: ${{ inputs.token }}
         custom_tag: ${{ env.CUSTOM_TAG }}

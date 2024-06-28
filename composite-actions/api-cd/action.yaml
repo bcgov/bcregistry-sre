@@ -75,7 +75,7 @@ runs:
     # push the changes back to the manifest repository.
     # ------------------------------------------------------------------------
     - name: Prepare deploy key
-      uses: webfactory/ssh-agent@v0.5.3
+      uses: webfactory/ssh-agent@v0.9.0
       with:
         ssh-private-key: ${{ inputs.GITOPS_REPOSITORY_DEPLOY_KEY }}
 
