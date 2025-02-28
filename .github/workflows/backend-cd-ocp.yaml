@@ -103,7 +103,7 @@ jobs:
         run: |-
           op inject -i ./devops/vaults.ocp.env -o .env -f
 
-      - name: Install CLI tools from OpenShift Mirror
+      - name: Install CLI tools from OpenShift
         uses: redhat-actions/openshift-tools-installer@v1
         with:
           oc: "4"
