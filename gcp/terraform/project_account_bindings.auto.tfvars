@@ -5,6 +5,10 @@ projects = {
     project_id = "mvnjri-prod"
     env = "prod"
     service_accounts = {
+      sa-pam-enabler = {
+        roles       = ["projects/mvnjri-prod/roles/rolecdcloudrun", "roles/cloudsql.admin", "roles/iam.serviceAccountAdmin", "roles/cloudfunctions.invoker", "roles/resourcemanager.projectIamAdmin", "roles/cloudbuild.builds.builder"]
+        description = "Service Account for running PAM entitlement grant cloud functions"
+      },
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
         description = "Service Account for running pubsub services"
@@ -65,6 +69,10 @@ projects = {
     project_id = "c4hnrd-prod"
     env = "prod"
     service_accounts = {
+      sa-pam-enabler = {
+        roles       = ["projects/c4hnrd-prod/roles/rolecdcloudrun", "roles/cloudsql.admin", "roles/iam.serviceAccountAdmin", "roles/cloudfunctions.invoker", "roles/resourcemanager.projectIamAdmin", "roles/cloudbuild.builds.builder"]
+        description = "Service Account for running PAM entitlement grant cloud functions"
+      },
       sa-pubsub = {
         roles       = ["projects/c4hnrd-prod/roles/rolequeue", "roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
         description = "Service Account for running pubsub services"
@@ -118,6 +126,10 @@ projects = {
     project_id = "gtksf3-prod"
     env = "prod"
     service_accounts = {
+      sa-pam-enabler = {
+        roles       = ["projects/gtksf3-prod/roles/rolecdcloudrun", "roles/cloudsql.admin", "roles/iam.serviceAccountAdmin", "roles/cloudfunctions.invoker", "roles/resourcemanager.projectIamAdmin", "roles/cloudbuild.builds.builder"]
+        description = "Service Account for running PAM entitlement grant cloud functions"
+      },
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
         description = "Service Account for running pubsub services"
@@ -154,6 +166,10 @@ projects = {
     project_id = "yfjq17-prod"
     env = "prod"
     service_accounts = {
+      sa-pam-enabler = {
+        roles       = ["projects/yfjq17-prod/roles/rolecdcloudrun", "roles/cloudsql.admin", "roles/iam.serviceAccountAdmin", "roles/cloudfunctions.invoker", "roles/resourcemanager.projectIamAdmin", "roles/cloudbuild.builds.builder"]
+        description = "Service Account for running PAM entitlement grant cloud functions"
+      },
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
         description = "Service Account for running pubsub services"
@@ -176,6 +192,10 @@ projects = {
     project_id = "a083gt-prod"
     env = "prod"
     service_accounts = {
+      sa-pam-enabler = {
+        roles       = ["projects/a083gt-prod/roles/rolecdcloudrun", "roles/cloudsql.admin", "roles/iam.serviceAccountAdmin", "roles/cloudfunctions.invoker", "roles/resourcemanager.projectIamAdmin", "roles/cloudbuild.builds.builder"]
+        description = "Service Account for running PAM entitlement grant cloud functions"
+      },
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
         description = "Service Account for running pubsub services"
@@ -236,6 +256,10 @@ projects = {
     project_id = "keee67-prod"
     env = "prod"
     service_accounts = {
+      sa-pam-enabler = {
+        roles       = ["projects/keee67-prod/roles/rolecdcloudrun", "roles/cloudsql.admin", "roles/iam.serviceAccountAdmin", "roles/cloudfunctions.invoker", "roles/resourcemanager.projectIamAdmin", "roles/cloudbuild.builds.builder"]
+        description = "Service Account for running PAM entitlement grant cloud functions"
+      },
       bn-tasks-run-invoker-prod = {
         roles       = ["roles/editor", "roles/iam.serviceAccountUser"]
         description = ""
@@ -264,6 +288,10 @@ projects = {
     project_id = "eogruh-prod"
     env = "prod"
     service_accounts = {
+      sa-pam-enabler = {
+        roles       = ["projects/eogruh-prod/roles/rolecdcloudrun", "roles/cloudsql.admin", "roles/iam.serviceAccountAdmin", "roles/cloudfunctions.invoker", "roles/resourcemanager.projectIamAdmin", "roles/cloudbuild.builds.builder"]
+        description = "Service Account for running PAM entitlement grant cloud functions"
+      },
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
         description = "Service Account for running pubsub services"
@@ -331,6 +359,10 @@ projects = {
     project_id = "k973yf-prod"
     env = "prod"
     service_accounts = {
+      sa-pam-enabler = {
+        roles       = ["projects/k973yf-prod/roles/rolecdcloudrun", "roles/cloudsql.admin", "roles/iam.serviceAccountAdmin", "roles/cloudfunctions.invoker", "roles/resourcemanager.projectIamAdmin", "roles/cloudbuild.builds.builder"]
+        description = "Service Account for running PAM entitlement grant cloud functions"
+      },
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
         description = "Service Account for running pubsub services"
