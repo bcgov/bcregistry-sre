@@ -168,7 +168,7 @@ do
                     --source cloud-functions/pam-grant-revoke \
                     --set-env-vars DB_INSTANCE_CONNECTION_NAME=${DB_INSTANCE_CONNECTION_NAME},PROJECT_NUMBER=${PROJECT_NUMBER} \
                     --region $REGION \
-                    --service-account "sa-pam-enabler@${PROJECT_ID}.iam.gserviceaccount.com" \
+                    --service-account "sa-pam-function@${PROJECT_ID}.iam.gserviceaccount.com" \
                     --retry
 
                 gcloud functions deploy "pam-request-grant-create-${FUNCTION_SUFFIX}" \
@@ -178,7 +178,7 @@ do
                     --source cloud-functions/pam-request-grant-create \
                     --set-env-vars DB_USER=${DB_USER},DB_NAME=${DB_NAME},DB_INSTANCE_CONNECTION_NAME=${DB_INSTANCE_CONNECTION_NAME},PROJECT_NUMBER=${PROJECT_NUMBER},PROJECT_ID=${PROJECT_ID},SECRET_ID=${DB_PASSWORD_SECRET_ID},PUBSUB_TOPIC="pam-revoke-topic-${FUNCTION_SUFFIX}" \
                     --region $REGION \
-                    --service-account "sa-pam-enabler@${PROJECT_ID}.iam.gserviceaccount.com" \
+                    --service-account "sa-pam-function@${PROJECT_ID}.iam.gserviceaccount.com" \
                     --no-allow-unauthenticated
 
                 gcloud functions add-invoker-policy-binding "pam-request-grant-create-${FUNCTION_SUFFIX}" --member="serviceAccount:${APIGEE_SA}" --region=$REGION --project=${PROJECT_ID}
