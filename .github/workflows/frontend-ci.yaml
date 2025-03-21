@@ -15,8 +15,10 @@ on:
       working_directory:
         type: string
         default: "."
-      codecov_flag:
-        type: string
+      skip_codecov: # Just here until SRE fixes codecov
+        required: false
+        type: boolean
+        default: false  
 
 jobs:
   detemine-package-manager:
@@ -146,9 +148,11 @@ jobs:
     continue-on-error: true
     steps:
     - uses: actions/download-artifact@v4
+      if: ${{ inputs.skip_codecov == true }}
       with:
         name: coveragefile
     - name: Upload coverage to Codecov
+      if: ${{ inputs.skip_codecov == true }}
       uses: codecov/codecov-action@v5
       with:
         file: coverage.xml
@@ -274,10 +278,12 @@ jobs:
     continue-on-error: true
     steps:
     - uses: actions/download-artifact@v4
+      if: ${{ inputs.skip_codecov != 'true' }}
       with:
         name: coveragefile
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v5
+      if: ${{ inputs.skip_codecov != 'true' }}
       with:
         file: coverage.xml
         flags: ${{ inputs.codecov_flag }}
