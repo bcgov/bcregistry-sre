@@ -148,11 +148,11 @@ jobs:
     continue-on-error: true
     steps:
     - uses: actions/download-artifact@v4
-      if: ${{ inputs.skip_codecov == true }}
+      if: ${{ inputs.skip_codecov == false }}
       with:
         name: coveragefile
     - name: Upload coverage to Codecov
-      if: ${{ inputs.skip_codecov == true }}
+      if: ${{ inputs.skip_codecov == false }}
       uses: codecov/codecov-action@v5
       with:
         file: coverage.xml
@@ -278,12 +278,12 @@ jobs:
     continue-on-error: true
     steps:
     - uses: actions/download-artifact@v4
-      if: ${{ inputs.skip_codecov == true }}
+      if: ${{ inputs.skip_codecov == false }}
       with:
         name: coveragefile
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v5
-      if: ${{ inputs.skip_codecov == true }}
+      if: ${{ inputs.skip_codecov == false }}
       with:
         file: coverage.xml
         flags: ${{ inputs.codecov_flag }}
