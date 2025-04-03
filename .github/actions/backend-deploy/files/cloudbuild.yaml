@@ -287,12 +287,25 @@ steps:
           --region="${_REGION}" \
           --project="$PROJECT_ID" \
           --filter="metadata.labels.release-id:${RELEASE_NAME}" \
-          --format="json" | jq -r '.[].status.conditions[] | select(.type == "Ready") | .status')
-
+          --format="json" | jq -r '
+            if length == 0 then
+              "NotFound"
+            else
+              (.[0].status.conditions // [])
+              | map(select(.type == "Ready")
+              | if length > 0 then
+                  .[0].status
+                else
+                  "Pending"
+                end
+            end
+          ')
         case "$RELEASE_STATUS" in
-          True)  echo "✅ Release ${RELEASE_NAME} completed successfully."; break ;;
-          False) echo "❌ Release ${RELEASE_NAME} failed."; exit 1 ;;
-          *)     echo "🔄 Release in progress... (Attempt ${i}/${MAX_RETRIES})"; sleep "$RETRY_INTERVAL" ;;
+          "True")   echo "✅ Ready"; break ;;
+          "False")  echo "❌ Failed"; exit 1 ;;
+          "Pending") echo "🔄 Still deploying..."; sleep "$RETRY_INTERVAL" ;;
+          "NotFound") echo "🔍 Revision not created yet"; sleep "$RETRY_INTERVAL" ;;
+          *) echo "⚠️ Unexpected: $RELEASE_STATUS"; sleep "$RETRY_INTERVAL" ;;
         esac
       done
 
