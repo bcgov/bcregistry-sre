@@ -48,3 +48,8 @@ module "pam" {
   principals            = var.default_principals
   env                   = lookup(var.environments, each.value.env, local.default_environment)
 }
+
+module "db_roles" {
+  source       = "./modules/db_roles"
+  target_bucket = "common-tools-sql"
+}
