@@ -1228,6 +1228,18 @@ projects = {
   "bcr-businesses-dev" = {
     project_id = "a083gt-dev"
     env = "dev"
+    databases = {
+      businesses-ar = {
+        instance   = "businesses-db-dev"
+        db_name    = "business-ar"
+        roles      = ["readonly", "readwrite", "admin"]
+      },
+      legal-entities = {
+        instance   = "businesses-db-dev"
+        db_name    = "legal-entities"
+        roles      = ["readonly", "readwrite", "admin"]
+      }
+    }
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
@@ -1448,6 +1460,17 @@ projects = {
   "connect-sandbox" = {
     project_id = "gtksf3-tools"
     env = "sandbox"
+    sa-cloud-function-sql-manager = {
+      roles = ["projects/a083gt-dev/roles/rolejob"]
+      description = "Service Account for running cloudsql updates"
+      resource_roles = [
+          {
+            resource = " common-tools-sql"
+            roles    = ["roles/storage.objectViewer"]
+            resource_type = "storage_bucket"
+          }
+        ]
+    }
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]

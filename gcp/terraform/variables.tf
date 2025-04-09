@@ -27,6 +27,11 @@ variable "projects" {
   type = map(object({
     project_id       = string
     env              = string
+    databases = optional(map(object({
+      instance = string
+      db_name  = string
+      roles    = list(string)
+    })), {})
     service_accounts = optional(map(object({
       roles        = optional(list(string), [])
       external_roles = optional(list(object({
