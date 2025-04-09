@@ -1460,17 +1460,6 @@ projects = {
   "connect-sandbox" = {
     project_id = "gtksf3-tools"
     env = "sandbox"
-    sa-cloud-function-sql-manager = {
-      roles = ["projects/a083gt-dev/roles/rolejob"]
-      description = "Service Account for running cloudsql updates"
-      resource_roles = [
-          {
-            resource = " common-tools-sql"
-            roles    = ["roles/storage.objectViewer"]
-            resource_type = "storage_bucket"
-          }
-        ]
-    }
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
@@ -1791,6 +1780,20 @@ projects = {
       }
     }
     service_accounts = {
+      sa-cloud-function-sql-manager = {
+        description = "Service Account for running cloudsql updates"
+        external_roles = [{
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "a083gt-dev"
+        }]
+        resource_roles = [
+            {
+              resource = "common-tools-sql"
+              roles    = ["roles/storage.objectViewer"]
+              resource_type = "storage_bucket"
+            }
+          ]
+      },
       sa-job = {
         roles       = ["projects/c4hnrd-tools/roles/rolejob", "projects/c4hnrd-tools/roles/cdcloudrun"]
         description = "Service Account for running job services"
