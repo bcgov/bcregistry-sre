@@ -40,35 +40,35 @@ resource "null_resource" "apply_roles" {
   }
 
   provisioner "local-exec" {
-      command = <<-EOT
-        set -ex
-        %{ for role in split(",", self.triggers.all_roles) ~}
-        echo "=== Applying role: ${role} ==="
+    command = <<EOT
+set -ex
+%{ for role in split(",", self.triggers.all_roles) ~}
+echo "=== Applying role: ${role} ==="
 
-        # Generate fresh token for each request
-        TOKEN=$(gcloud auth print-identity-token \
-          --audiences="${regex("^https://([^/]+)", var.cloud_function_url)[0]}" \
-          --include-email \
-          --impersonate-service-account=${var.impersonated_service_account_email}
+# Generate fresh token for each request
+TOKEN=$(gcloud auth print-identity-token \
+  --audiences="${regex("^https://([^/]+)", var.cloud_function_url)[0]}" \
+  --include-email \
+  --impersonate-service-account=${var.impersonated_service_account_email})
 
-        curl -v -X POST "${var.cloud_function_url}" \
-          -H "Authorization: Bearer $TOKEN" \
-          -H "Content-Type: application/json" \
-          -d '{
-            "instance_name": "${self.triggers.instance_name}",
-            "gcs_uri": "${jsondecode(self.triggers.gcs_uris)[role]}",
-            "database": "${self.triggers.db_name}",
-            "owner": "${each.value.owner}"
-          }' \
-          --fail
-        %{ endfor ~}
-      EOT
-    }
+curl -v -X POST "${var.cloud_function_url}" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "instance_name": "${self.triggers.instance_name}",
+    "gcs_uri": "${jsondecode(self.triggers.gcs_uris)[role]}",
+    "database": "${self.triggers.db_name}",
+    "owner": "${each.value.owner}"
+  }' \
+  --fail
+%{ endfor ~}
+EOT
+  }
 
   provisioner "local-exec" {
     when    = destroy
-    command = <<-EOT
-      echo "Database ${self.triggers.db_name} was deleted from instance ${self.triggers.instance_name}"
-    EOT
+    command = <<EOT
+echo "Database ${self.triggers.db_name} was deleted from instance ${self.triggers.instance_name}"
+EOT
   }
 }
