@@ -21,7 +21,7 @@ resource "google_storage_bucket_iam_member" "cloudsql_bucket_access" {
 
 data "google_service_account_id_token" "invoker" {
   target_audience = var.cloud_function_url
-  delegates      = ["projects/${var.project_id}/serviceAccounts/${var.service_account_email}"]
+  target_service_account  = var.service_account_email
 }
 
 resource "null_resource" "apply_roles" {
