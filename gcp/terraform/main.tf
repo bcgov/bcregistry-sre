@@ -53,3 +53,23 @@ module "db_roles" {
   source       = "./modules/db_roles"
   target_bucket = "common-tools-sql"
 }
+
+module "db_role_management" {
+  for_each = var.projects
+
+  source      = "./modules/db_role_management"
+  project_id  = each.value.project_id
+  databases   = each.value.databases
+  bucket_name = module.db_roles.target_bucket
+
+  # Pass the role definitions as input variable
+  role_definitions = {
+    for role, def in module.db_roles.role_definitions :
+    role => {
+      gcs_uri  = def.gcs_uri
+      md5hash  = def.md5hash
+    }
+  }
+
+  depends_on = [module.db_roles]
+}

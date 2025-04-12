@@ -1233,11 +1233,13 @@ projects = {
         instance   = "businesses-db-dev"
         db_name    = "business-ar"
         roles      = ["readonly", "readwrite", "admin"]
+        owner      = "business-api"
       },
       legal-entities = {
         instance   = "businesses-db-dev"
         db_name    = "legal-entities"
         roles      = ["readonly", "readwrite", "admin"]
+        owner      = "business-api"
       }
     }
     service_accounts = {

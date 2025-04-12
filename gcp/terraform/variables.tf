@@ -30,6 +30,7 @@ variable "projects" {
     databases = optional(map(object({
       instance = string
       db_name  = string
+      owner    = string
       roles    = list(string)
     })), {})
     service_accounts = optional(map(object({
