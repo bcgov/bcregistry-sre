@@ -20,8 +20,8 @@ resource "google_storage_bucket_iam_member" "cloudsql_bucket_access" {
 }
 
 data "google_service_account_id_token" "invoker" {
-  # Remove protocol and path from URL for audience
-  target_audience = regex("^https://([^/]+)", var.cloud_function_url)[0]
+  target_audience = var.cloud_function_url
+  delegates      = [google_service_account.terraform_sa.email]
 }
 
 resource "null_resource" "apply_roles" {
