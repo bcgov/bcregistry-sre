@@ -19,6 +19,11 @@ resource "google_storage_bucket_iam_member" "cloudsql_bucket_access" {
   member   = "serviceAccount:${each.value}"
 }
 
+data "google_service_account_id_token" "invoker" {
+  # Remove protocol and path from URL for audience
+  target_audience = regex("^https://([^/]+)", var.cloud_function_url)[0]
+}
+
 resource "null_resource" "apply_roles" {
   for_each = var.databases
 
@@ -40,35 +45,45 @@ resource "null_resource" "apply_roles" {
   }
 
   provisioner "local-exec" {
-    command = <<EOT
-set -ex
-%{ for role in split(",", self.triggers.all_roles) ~}
-echo "=== Applying role: ${role} ==="
+    when    = create
+    command = <<-EOT
+      set -ex
+      %{ for role in split(",", self.triggers.all_roles) ~}
+      echo "Applying role: ${role}"
 
-# Generate fresh token for each request
-TOKEN=$(gcloud auth print-identity-token \
-  --audiences="${regex("^https://([^/]+)", var.cloud_function_url)[0]}" \
-  --include-email \
-  --impersonate-service-account=${var.impersonated_service_account_email})
+      # Store payload in variable to avoid escaping issues
+      PAYLOAD=$(cat <<EOF
+      {
+        "instance_name": "${self.triggers.instance_name}",
+        "gcs_uri": "${jsondecode(self.triggers.gcs_uris)[role]}",
+        "database": "${self.triggers.db_name}",
+        "owner": "${each.value.owner}"
+      }
+      EOF
+      )
 
-curl -v -X POST "${var.cloud_function_url}" \
-  -H "Authorization: Bearer $TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "instance_name": "${self.triggers.instance_name}",
-    "gcs_uri": "${jsondecode(self.triggers.gcs_uris)[role]}",
-    "database": "${self.triggers.db_name}",
-    "owner": "${each.value.owner}"
-  }' \
-  --fail
-%{ endfor ~}
-EOT
+      # Execute curl and capture output
+      OUTPUT=$(curl -v -X POST "${var.cloud_function_url}" \
+        -H "Authorization: Bearer ${data.google_service_account_id_token.invoker.id_token}" \
+        -H "Content-Type: application/json" \
+        -d "$PAYLOAD" \
+        --fail --silent --show-error 2>&1)
+
+      # Check HTTP status manually
+      HTTP_STATUS=$(echo "$OUTPUT" | grep -oP '(?<=HTTP\/1.1 )\d+')
+      if [ -z "$HTTP_STATUS" ] || [ "$HTTP_STATUS" -ge 400 ]; then
+        echo "Error: Request failed"
+        echo "$OUTPUT"
+        exit 1
+      fi
+      %{ endfor ~}
+    EOT
   }
 
   provisioner "local-exec" {
     when    = destroy
-    command = <<EOT
-echo "Database ${self.triggers.db_name} was deleted from instance ${self.triggers.instance_name}"
-EOT
+    command = <<-EOT
+      echo "Database ${self.triggers.db_name} was deleted from instance ${self.triggers.instance_name}"
+    EOT
   }
 }
