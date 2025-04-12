@@ -5,7 +5,7 @@ DECLARE
     type_name text;
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'admin') THEN
-        CREATE ROLE admin;
+        CREATE ROLE admin NOLOGIN;
     END IF;
 
     -- Grant admin the ability to create databases and roles (superuser-lite privileges)

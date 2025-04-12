@@ -3,7 +3,7 @@ DECLARE
     schema_name text;
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'readonly') THEN
-        CREATE ROLE readonly;
+        CREATE ROLE readonly NOLOGIN;
     END IF;
     -- Loop through all schemas except system schemas
     FOR schema_name IN

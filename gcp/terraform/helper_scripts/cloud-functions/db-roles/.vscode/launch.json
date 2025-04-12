@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Cloud Function (Functions Framework)",
+        "type": "python",
+        "request": "launch",
+        "module": "functions_framework",
+        "args": [
+          "--target=execute_role_management",
+          "--port=7788",
+          "--host=localhost",
+          "--debug"
+        ],
+        "env": {
+          "FUNCTION_SIGNATURE_TYPE": "http"
+        },
+        "console": "integratedTerminal",
+        "justMyCode": false
+      }
+    ]
+  }
+  
