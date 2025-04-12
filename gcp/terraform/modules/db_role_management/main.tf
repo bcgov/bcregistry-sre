@@ -21,6 +21,8 @@ resource "google_storage_bucket_iam_member" "cloudsql_bucket_access" {
   member = "serviceAccount:${each.value}"
 }
 
+data "google_client_config" "default" {}
+
 resource "null_resource" "apply_roles" {
   for_each = var.databases
 
@@ -44,6 +46,7 @@ resource "null_resource" "apply_roles" {
     all_roles = join(",", each.value.roles)
 
     cloud_function_url = var.cloud_function_url
+
   }
 
   provisioner "local-exec" {
@@ -51,8 +54,15 @@ resource "null_resource" "apply_roles" {
     command = <<-EOT
       %{ for role in split(",", self.triggers.all_roles) ~}
       curl -X POST "${self.triggers.cloud_function_url}" \
+        -H "Authorization: Bearer ${data.google_client_config.default.access_token}" \
         -H "Content-Type: application/json" \
-        -d '{"instance_name":"${self.triggers.instance_name}", "gcs_uri":"${jsondecode(self.triggers.gcs_uris)[role]}", "database":"${self.triggers.db_name}", "owner":"${each.value.owner}"}'
+        -d '{
+          "instance_name": "${self.triggers.instance_name}",
+          "gcs_uri": "${jsondecode(self.triggers.gcs_uris)[role]}",
+          "database": "${self.triggers.db_name}",
+          "owner": "${each.value.owner}"
+        }' \
+        --fail --silent --show-error
       %{ endfor ~}
     EOT
   }
