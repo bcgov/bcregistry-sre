@@ -33,6 +33,8 @@ resource "null_resource" "apply_roles" {
       var.role_definitions[role].md5hash
     ]))
 
+    run_at = timestamp()
+
     instance_name = each.value.instance
     db_name      = each.value.db_name
     project_id   = var.project_id
