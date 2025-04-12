@@ -32,3 +32,9 @@ variable "cloud_function_url" {
   type        = string
   default     = "https://northamerica-northeast1-c4hnrd-tools.cloudfunctions.net/db-roles-create"
 }
+
+variable "impersonated_service_account_email" {
+  description = "Email of the service account to impersonate"
+  type        = string
+  default = "terraform-sa@c4hnrd-tools.iam.gserviceaccount.com"
+}
