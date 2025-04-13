@@ -1233,7 +1233,7 @@ projects = {
         instance   = "businesses-db-dev"
         db_name    = "business-ar"
         roles      = ["readonly", "readwrite", "admin"]
-        owner      = "business-api"
+        owner      = "business-ar-api"
       },
       legal-entities = {
         instance   = "businesses-db-dev"
