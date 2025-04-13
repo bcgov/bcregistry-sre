@@ -69,7 +69,7 @@ resource "null_resource" "apply_roles" {
         -H "Authorization: Bearer ${data.google_service_account_id_token.invoker.id_token}" \
         -H "Content-Type: application/json" \
         -d "$PAYLOAD" \
-        --fail --silent --show-error 2>&1)
+        --fail 2>&1)
 
       echo "$OUTPUT"
       %{ endfor ~}
