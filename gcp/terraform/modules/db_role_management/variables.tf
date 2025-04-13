@@ -3,6 +3,11 @@ variable "project_id" {
   type        = string
 }
 
+variable "region" {
+  description = "The project ID where the databases exist"
+  type        = string
+}
+
 variable "databases" {
   description = "Map of databases to manage roles for"
   type = map(object({

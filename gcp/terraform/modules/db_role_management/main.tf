@@ -34,7 +34,7 @@ resource "null_resource" "apply_roles" {
       for role in each.value.roles :
       var.role_definitions[role].md5hash
     ]))
-    instance_name = each.value.instance
+    instance_name = "${var.project_id}:${var.region}:${each.value.instance}"
     db_name      = each.value.db_name
     project_id   = var.project_id
     gcs_uris     = jsonencode({

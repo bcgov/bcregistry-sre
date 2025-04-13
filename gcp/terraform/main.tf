@@ -64,6 +64,7 @@ module "db_role_management" {
   databases   = each.value.databases
   bucket_name = module.db_roles.target_bucket
   service_account_email = var.TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL
+  region = var.region
 
   # Pass the role definitions as input variable
   role_definitions = {
