@@ -28,8 +28,8 @@ resource "null_resource" "apply_roles" {
   for_each = var.databases
 
   triggers = {
-    # Remove timestamp() for production
-    run_at = timestamp()
+    # test trigger
+    # run_at = timestamp()
     gcs_content_md5 = md5(join("", [
       for role in each.value.roles :
       var.role_definitions[role].md5hash

@@ -1787,11 +1787,20 @@ projects = {
         external_roles = [{
           roles      = ["roles/cloudsql.admin"]
           project_id = "a083gt-dev"
-        }]
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "a083gt-test"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "a083gt-integration"
+        }
+      ]
         resource_roles = [
             {
               resource = "common-tools-sql"
-              roles    = ["roles/storage.objectViewer"]
+              roles    = ["roles/storage.objectAdmin"]
               resource_type = "storage_bucket"
             }
           ]
