@@ -51,31 +51,27 @@ resource "null_resource" "apply_roles" {
       %{ for role in split(",", self.triggers.all_roles) ~}
       echo "Applying role: ${role}"
 
-      # Store payload in variable to avoid escaping issues
-      PAYLOAD=$(cat <<EOF
-      {
-        "instance_name": "${self.triggers.instance_name}",
-        "gcs_uri": "${jsondecode(self.triggers.gcs_uris)[role]}",
-        "database": "${self.triggers.db_name}",
-        "owner": "${each.value.owner}"
-      }
-      EOF
+      # Safe JSON construction using jq
+      PAYLOAD=$(jq -n \
+        --arg instance "${self.triggers.instance_name}" \
+        --arg uri "${jsondecode(self.triggers.gcs_uris)[role]}" \
+        --arg db "${self.triggers.db_name}" \
+        --arg owner "${each.value.owner}" \
+        '{
+          instance_name: $instance,
+          gcs_uri: $uri,
+          database: $db,
+          owner: $owner
+        }'
       )
 
-      # Execute curl and capture output
       OUTPUT=$(curl -v -X POST "${var.cloud_function_url}" \
         -H "Authorization: Bearer ${data.google_service_account_id_token.invoker.id_token}" \
         -H "Content-Type: application/json" \
         -d "$PAYLOAD" \
         --fail --silent --show-error 2>&1)
 
-      # Check HTTP status manually
-      HTTP_STATUS=$(echo "$OUTPUT" | grep -oP '(?<=HTTP\/1.1 )\d+')
-      if [ -z "$HTTP_STATUS" ] || [ "$HTTP_STATUS" -ge 400 ]; then
-        echo "Error: Request failed"
-        echo "$OUTPUT"
-        exit 1
-      fi
+      echo "$OUTPUT"
       %{ endfor ~}
     EOT
   }
