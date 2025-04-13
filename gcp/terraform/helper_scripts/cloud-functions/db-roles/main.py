@@ -4,6 +4,7 @@ import functions_framework
 from google.api_core import retry
 from google.auth import default
 from googleapiclient import discovery
+from googleapiclient.errors import HttpError
 
 
 @functions_framework.http
