@@ -1,7 +1,7 @@
 import logging
-import time
 
 import functions_framework
+from google.api_core import retry
 from google.auth import default
 from googleapiclient import discovery
 
@@ -9,7 +9,6 @@ from googleapiclient import discovery
 @functions_framework.http
 def execute_role_management(request):
     """HTTP Cloud Function to manage roles using Cloud SQL Admin API."""
-
     try:
         if request.method != 'POST':
             return {'error': 'Only POST requests are supported'}, 405
@@ -41,11 +40,27 @@ def execute_role_management(request):
             }
         }
 
-        response = sqladmin.instances().import_(
-            project=project,
-            instance=instance,
-            body=body
-        ).execute()
+        # Custom retry for operationInProgress errors
+        def should_retry(exc):
+            if isinstance(exc, HttpError):
+                return exc.resp.status == 409 and 'operationInProgress' in str(exc)
+            return False
+
+        custom_retry = retry.Retry(
+            predicate=should_retry,
+            initial=1,  # 1 second initial wait
+            maximum=60,  # 60 seconds maximum wait
+            multiplier=2,  # Exponential backoff
+            deadline=300  # 5 minutes total timeout
+        )
+
+        response = custom_retry(
+            sqladmin.instances().import_(
+                project=project,
+                instance=instance,
+                body=body
+            ).execute
+        )()
 
         return {
             'status': 'success',
