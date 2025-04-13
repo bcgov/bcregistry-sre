@@ -6,6 +6,7 @@ variable "TFC_GCP_PROVIDER_AUTH" {
 variable "TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL" {
   description = "The service account email address that Terraform Cloud will use to authenticate to Google Cloud"
   type        = string
+  default     = "terraform-sa@c4hnrd-tools.iam.gserviceaccount.com"
 }
 
 variable "TFC_GCP_WORKLOAD_PROVIDER_NAME" {

@@ -10,6 +10,7 @@ terraform {
 provider "google" {
   project = null
   region  = var.region
+  impersonate_service_account = local.service_account_email
 }
 
 provider "tfe" {
@@ -24,6 +25,7 @@ locals {
     environment_custom_roles = {}
     pam_bindings            = []
   }
+  service_account_email = var.TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL
 }
 
 module "iam" {
@@ -61,6 +63,7 @@ module "db_role_management" {
   project_id  = each.value.project_id
   databases   = each.value.databases
   bucket_name = module.db_roles.target_bucket
+  service_account_email = var.TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL
 
   # Pass the role definitions as input variable
   role_definitions = {

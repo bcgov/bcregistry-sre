@@ -34,7 +34,6 @@ variable "cloud_function_url" {
 }
 
 variable "service_account_email" {
-  description = "Email of the service account"
+  description = "The service account email address that Terraform Cloud will use to authenticate to Google Cloud"
   type        = string
-  default = "terraform-sa@c4hnrd-tools.iam.gserviceaccount.com"
 }
