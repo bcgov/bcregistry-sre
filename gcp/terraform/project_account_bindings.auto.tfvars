@@ -1230,13 +1230,13 @@ projects = {
     env = "dev"
     databases = {
       businesses-ar = {
-        instance   = "businesses-db-dev"
+        instance   = "a083gt-dev:northamerica-northeast1:businesses-db-dev"
         db_name    = "business-ar"
         roles      = ["readonly", "readwrite", "admin"]
         owner      = "business-api"
       },
       legal-entities = {
-        instance   = "businesses-db-dev"
+        instance   = "a083gt-dev:northamerica-northeast1:businesses-db-dev"
         db_name    = "legal-entities"
         roles      = ["readonly", "readwrite", "admin"]
         owner      = "business-api"
