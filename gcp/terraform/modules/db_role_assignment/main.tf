@@ -95,7 +95,7 @@ resource "null_resource" "db_role_assignments" {
       PROJECT_ID="${var.project_id}"
       REGION="${var.region}"
       FULL_INSTANCE_NAME="$PROJECT_ID:$REGION:$INSTANCE"
-      GCS_URI=f"gs://{bucket_name}
+      GCS_URI="gs://${var.bucket_name}"
 
       # Function to handle role assignment
       assign_role() {
@@ -128,8 +128,9 @@ resource "null_resource" "db_role_assignments" {
           -H "Content-Type: application/json" \
           -d "$PAYLOAD" 2>&1)
 
-        echo "$OUTPUT"
+        echo "$RESPONSE"
 
+        BODY=$(echo "$RESPONSE" | grep -E '^{.*}$')
         echo "Success: $BODY"
         return 0
       }
