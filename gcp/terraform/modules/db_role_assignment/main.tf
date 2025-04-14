@@ -71,7 +71,14 @@ resource "null_resource" "db_role_assignments" {
           db_name = db.db_name
           assignments = {
             for role_type in ["readonly", "readwrite", "admin"] :
-            role_type => try(db.database_role_assignment[role_type], [])
+            role_type => {
+              # Combine global, environment, and db-specific assignments, then deduplicate
+              users = distinct(concat(
+                try(var.global_assignments[role_type], []),
+                try(var.environment_assignments[role_type], []),
+                try(db.database_role_assignment[role_type], [])
+              ))
+            }
           }
         }
       ]
@@ -82,8 +89,6 @@ resource "null_resource" "db_role_assignments" {
     # test trigger
     run_at = timestamp()
     instance_config = jsonencode(each.value)
-    global_assignments = jsonencode(var.global_assignments)
-    env_assignments = jsonencode(var.environment_assignments)
     users = jsonencode(local.all_users)
   }
 
@@ -140,32 +145,9 @@ resource "null_resource" "db_role_assignments" {
 
       FAILED=0
       {
-        # Global assignments
-        %{ for role_type in ["readonly", "readwrite", "admin"] ~}
-        %{ for user in try(var.global_assignments[role_type], []) ~}
-        %{ for db in each.value.databases ~}
-        if ! assign_role "$FULL_INSTANCE_NAME" "${role_type}" "${db.db_name}" "${user}"; then
-          FAILED=$((FAILED + 1))
-        fi
-        %{ endfor ~}
-        %{ endfor ~}
-        %{ endfor ~}
-
-        # Environment assignments
-        %{ for role_type in ["readonly", "readwrite", "admin"] ~}
-        %{ for user in try(var.environment_assignments[role_type], []) ~}
-        %{ for db in each.value.databases ~}
-        if ! assign_role "$FULL_INSTANCE_NAME" "${role_type}" "${db.db_name}" "${user}"; then
-          FAILED=$((FAILED + 1))
-        fi
-        %{ endfor ~}
-        %{ endfor ~}
-        %{ endfor ~}
-
-        # Database-specific assignments
         %{ for db in each.value.databases ~}
         %{ for role_type in ["readonly", "readwrite", "admin"] ~}
-        %{ for user in try(db.assignments[role_type], []) ~}
+        %{ for user in db.assignments[role_type].users ~}
         if ! assign_role "$FULL_INSTANCE_NAME" "${role_type}" "${db.db_name}" "${user}"; then
           FAILED=$((FAILED + 1))
         fi
