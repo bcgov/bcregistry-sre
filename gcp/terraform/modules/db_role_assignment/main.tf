@@ -54,7 +54,4 @@ resource "google_sql_user" "iam_account_users" {
   instance = each.value.instance
   type     = "CLOUD_IAM_USER"
 
-  lifecycle {
-    prevent_destroy = true
-  }
 }
