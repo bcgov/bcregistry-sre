@@ -103,6 +103,11 @@ environments = {
     }
   }
   "dev" = {
+    database_role_assignment = {
+      readonly = []
+      readwrite = ["omid.x.zamani@gov.bc.ca"]
+      admin = []
+    }
     environment_custom_roles = {
       roledeveloper = {
         title = "Role Developer"

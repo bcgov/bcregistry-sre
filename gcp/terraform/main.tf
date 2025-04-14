@@ -22,6 +22,11 @@ data "tfe_organization" "current" {
 
 locals {
   default_environment = {
+    database_role_assignment = {
+      readonly  = []
+      readwrite = []
+      admin     = []
+    }
     environment_custom_roles = {}
     pam_bindings            = []
   }
@@ -61,7 +66,7 @@ module "db_role_management" {
 
   source      = "./modules/db_role_management"
   project_id  = each.value.project_id
-  databases   = each.value.databases
+  instances   = each.value.instances
   bucket_name = module.db_roles.target_bucket
   service_account_email = var.TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL
   region = var.region
@@ -77,3 +82,21 @@ module "db_role_management" {
 
   depends_on = [module.db_roles]
 }
+
+
+# module "sql_iam_users" {
+#   for_each = var.projects
+#
+#   source = "./modules/db_role_assignment"
+#
+#   project_id  = each.value.project_id
+#   instance    = try(each.value.databases[keys(each.value.databases)[0]].instance, null)
+#   environment = each.value.env
+#
+#   # Pass through the assignments
+#   global_assignments       = var.global_database_role_assignment
+#   environment_assignments  = try(var.environments[each.value.env].database_role_assignment, {})
+#   project_assignments      = try(each.value.database_role_assignment, {})
+#
+#   databases = try(each.value.databases, {})
+# }

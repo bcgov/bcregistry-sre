@@ -1,9 +1,26 @@
 locals {
-  instance_keys = toset([for db in var.databases : db.instance])
+  # Flatten the instances structure to get all unique instance names
+  instance_keys = toset(flatten([
+    for instance in var.instances : instance.instance
+  ]))
+
+  # Get service account emails for each instance
   service_accounts = {
     for key in local.instance_keys :
     key => data.google_sql_database_instance.instances[key].service_account_email_address
   }
+
+  # Create a flattened list of all databases with their instance info
+  all_databases = flatten([
+    for instance in var.instances : [
+      for db in instance.databases : {
+        instance_name = instance.instance
+        db_name       = db.db_name
+        owner         = try(db.owner, null)
+        roles         = db.roles
+      }
+    ]
+  ])
 }
 
 data "google_sql_database_instance" "instances" {
@@ -21,11 +38,13 @@ resource "google_storage_bucket_iam_member" "cloudsql_bucket_access" {
 
 data "google_service_account_id_token" "invoker" {
   target_audience = var.cloud_function_url
-  target_service_account  = var.service_account_email
+  target_service_account = var.service_account_email
 }
 
 resource "null_resource" "apply_roles" {
-  for_each = var.databases
+  for_each = { for idx, db in local.all_databases :
+    "${db.instance_name}.${db.db_name}" => db
+  }
 
   triggers = {
     # test trigger
@@ -34,7 +53,7 @@ resource "null_resource" "apply_roles" {
       for role in each.value.roles :
       var.role_definitions[role].md5hash
     ]))
-    instance_name = "${var.project_id}:${var.region}:${each.value.instance}"
+    instance_name = "${var.project_id}:${var.region}:${each.value.instance_name}"
     db_name      = each.value.db_name
     project_id   = var.project_id
     gcs_uris     = jsonencode({

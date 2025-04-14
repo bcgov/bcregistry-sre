@@ -1228,20 +1228,28 @@ projects = {
   "bcr-businesses-dev" = {
     project_id = "a083gt-dev"
     env = "dev"
-    databases = {
-      businesses-ar = {
-        instance   = "businesses-db-dev"
-        db_name    = "business-ar"
-        roles      = ["readonly", "readwrite", "admin"]
-        owner      = "business-ar-api"
-      },
-      legal-entities = {
-        instance   = "businesses-db-dev"
-        db_name    = "legal-entities"
-        roles      = ["readonly", "readwrite", "admin"]
-        owner      = "business-api"
+    instances = [
+      {
+        instance = "businesses-db-dev"
+        databases =  [
+          {
+                db_name    = "business-ar"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "business-ar-api"
+                database_role_assignment = {
+                  readonly = []
+                  readwrite = ["kial.jinnah@gov.bc.ca"]
+                  admin = []
+                }
+              },
+              {
+                db_name    = "legal-entities"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "business-api"
+              }
+            ]
       }
-    }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]

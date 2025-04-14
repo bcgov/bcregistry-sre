@@ -28,12 +28,19 @@ variable "projects" {
   type = map(object({
     project_id       = string
     env              = string
-    databases = optional(map(object({
+    instances = optional(list(object({
       instance = string
-      db_name  = string
-      owner    = string
-      roles    = list(string)
-    })), {})
+      databases = list(object({
+        db_name    = string
+        roles      = list(string)
+        owner      = optional(string)
+        database_role_assignment = optional(object({
+          readonly  = optional(list(string), [])
+          readwrite = optional(list(string), [])
+          admin     = optional(list(string), [])
+        }), {})
+      }))
+    })), [])
     service_accounts = optional(map(object({
       roles        = optional(list(string), [])
       external_roles = optional(list(object({
@@ -71,8 +78,27 @@ variable "global_custom_roles" {
   default = {}
 }
 
+variable "global_database_role_assignment" {
+  description = "Global database role assignments applied to all instances"
+  type = object({
+    readonly  = optional(list(string), [])
+    readwrite = optional(list(string), [])
+    admin     = optional(list(string), [])
+  })
+  default = {
+    readonly  = []
+    readwrite = []
+    admin     = []
+  }
+}
+
 variable "environments" {
   type = map(object({
+    database_role_assignment = optional(object({
+      readonly  = optional(list(string), [])
+      readwrite = optional(list(string), [])
+      admin     = optional(list(string), [])
+    }), {})
     environment_custom_roles = optional(map(object({
       title = string
       permissions  = list(string)

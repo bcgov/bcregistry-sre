@@ -8,15 +8,22 @@ variable "region" {
   type        = string
 }
 
-variable "databases" {
-  description = "Map of databases to manage roles for"
-  type = map(object({
+variable "instances" {
+  description = "List of database instances and their associated databases to manage roles for"
+  type = list(object({
     instance = string
-    db_name  = string
-    owner    = string
-    roles    = list(string)
+    databases = list(object({
+      db_name = string
+      owner   = optional(string)
+      roles   = list(string)
+      database_role_assignment = optional(object({
+        readonly  = optional(list(string), [])
+        readwrite = optional(list(string), [])
+        admin     = optional(list(string), [])
+      }), {})
+    }))
   }))
-  default     = {}
+  default = []
 }
 
 variable "bucket_name" {
