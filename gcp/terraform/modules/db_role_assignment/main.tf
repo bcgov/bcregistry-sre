@@ -89,6 +89,7 @@ resource "null_resource" "db_role_assignments" {
 
   provisioner "local-exec" {
     when    = create
+    interpreter = ["/bin/bash", "-c"]
     command = <<-EOT
       set -ex
       INSTANCE="${each.value.instance}"
