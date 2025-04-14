@@ -87,7 +87,7 @@ resource "null_resource" "db_role_assignments" {
 
   triggers = {
     # test trigger
-    run_at = timestamp()
+    # run_at = timestamp()
     instance_config = jsonencode(each.value)
     users = jsonencode(local.all_users)
   }
