@@ -766,6 +766,28 @@ projects = {
   "bcr-businesses-test" = {
     project_id = "a083gt-test"
     env = "test"
+    instances = [
+      {
+        instance = "businesses-db-test"
+        databases =  [
+          {
+                db_name    = "business-ar"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "business-ar-api"
+                database_role_assignment = {
+                  readonly = ["andriy.bolyachevets@gov.bc.ca"]
+                  readwrite = []
+                  admin = []
+                }
+              },
+              {
+                db_name    = "legal-entities"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "business-api"
+              }
+            ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
