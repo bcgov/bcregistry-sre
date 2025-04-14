@@ -105,7 +105,7 @@ environments = {
   "dev" = {
     database_role_assignment = {
       readonly = []
-      readwrite = ["omid.x.zamani@gov.bc.ca"]
+      readwrite = []
       admin = []
     }
     environment_custom_roles = {
