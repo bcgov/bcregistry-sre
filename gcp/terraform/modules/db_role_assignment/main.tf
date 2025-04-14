@@ -61,39 +61,62 @@ data "google_service_account_id_token" "invoker" {
   target_service_account = var.service_account_email
 }
 
-resource "null_resource" "db_role_assignments" {
-  for_each = {
-    for instance in var.instances :
-    instance.instance => {
-      instance = instance.instance
-      databases = [
-        for db in try(instance.databases, []) : {
-          db_name = db.db_name
-          assignments = {
-            for role_type in ["readonly", "readwrite", "admin"] :
-            role_type => {
-              # Combine global, environment, and db-specific assignments, then deduplicate
-              users = distinct(concat(
-                try(var.global_assignments[role_type], []),
-                try(var.environment_assignments[role_type], []),
-                try(db.database_role_assignment[role_type], [])
-              ))
-            }
+locals {
+  # Create a flattened list of all role assignments
+  all_role_assignments = distinct(flatten([
+    for instance in var.instances : [
+      for db in try(instance.databases, []) : [
+        for role_type in ["readonly", "readwrite", "admin"] : [
+          for user in try(db.database_role_assignment[role_type], []) : {
+            instance = instance.instance
+            db_name  = db.db_name
+            role     = role_type
+            user     = user
+            key      = "${instance.instance}-${db.db_name}-${role_type}-${user}"
           }
-        }
+        ]
       ]
+    ]
+  ]))
+
+  # Create a flattened list of global/env role assignments
+  global_env_assignments = distinct(flatten([
+    for instance in var.instances : [
+      for db in try(instance.databases, []) : [
+        for role_type in ["readonly", "readwrite", "admin"] : [
+          for user in distinct(concat(
+            try(var.global_assignments[role_type], []),
+            try(var.environment_assignments[role_type], [])
+          )) : {
+            instance = instance.instance
+            db_name  = db.db_name
+            role     = role_type
+            user     = user
+            key      = "${instance.instance}-${db.db_name}-${role_type}-${user}"
+          }
+        ]
+      ]
+    ]
+  ]))
+
+  # Combine all assignments, giving priority to database-specific ones
+  combined_assignments = merge(
+    { for a in local.all_role_assignments : a.key => a },
+    # Only add global/env assignments if they don't conflict with db-specific ones
+    { for a in local.global_env_assignments : a.key => a
+      if !contains([for ra in local.all_role_assignments : ra.key], a.key)
     }
-  }
+  )
+}
+
+resource "null_resource" "db_role_assignments" {
+  for_each = local.combined_assignments
 
   triggers = {
-    # test trigger
-    # run_at = timestamp()
-    instance_config = jsonencode(each.value)
-    users = jsonencode(local.all_users)
+    assignment = jsonencode(each.value)
   }
 
   provisioner "local-exec" {
-    when    = create
     interpreter = ["/bin/bash", "-c"]
     command = <<-EOT
       set -ex
@@ -103,61 +126,33 @@ resource "null_resource" "db_role_assignments" {
       FULL_INSTANCE_NAME="$PROJECT_ID:$REGION:$INSTANCE"
       GCS_URI="gs://${var.bucket_name}"
 
-      # Function to handle role assignment
-      assign_role() {
-        local instance=$1
-        local role=$2
-        local db=$3
-        local user=$4
+      PAYLOAD=$(jq -n \
+        --arg instance "$FULL_INSTANCE_NAME" \
+        --arg role "${each.value.role}" \
+        --arg db "${each.value.db_name}" \
+        --arg user "${each.value.user}" \
+        --arg gcs_uri "$GCS_URI" \
+        '{
+          instance_name: $instance,
+          role: $role,
+          database: $db,
+          user: $user,
+          gcs_uri: $gcs_uri
+        }'
+      )
 
-        echo "Processing $role role for $user on $db"
+      echo "Processing ${each.value.role} role for ${each.value.user} on ${each.value.db_name}"
+      echo "Payload: $PAYLOAD"
 
-        PAYLOAD=$(jq -n \
-          --arg instance "$instance" \
-          --arg role "$role" \
-          --arg db "$db" \
-          --arg user "$user" \
-          --arg gcs_uri "$GCS_URI" \
-          '{
-            instance_name: $instance,
-            role: $role,
-            database: $db,
-            user: $user,
-            gcs_uri: $gcs_uri
-          }'
-        )
+      RESPONSE=$(curl -v -X POST "${var.cloud_function_url}" \
+        -H "Authorization: Bearer ${data.google_service_account_id_token.invoker.id_token}" \
+        -H "Content-Type: application/json" \
+        -d "$PAYLOAD" 2>&1)
 
-        echo "Payload: $PAYLOAD"
+      echo "$RESPONSE"
 
-        RESPONSE=$(curl -v -X POST "${var.cloud_function_url}" \
-          -H "Authorization: Bearer ${data.google_service_account_id_token.invoker.id_token}" \
-          -H "Content-Type: application/json" \
-          -d "$PAYLOAD" 2>&1)
-
-        echo "$RESPONSE"
-
-        BODY=$(echo "$RESPONSE" | grep -E '^{.*}$')
-        echo "Success: $BODY"
-        return 0
-      }
-
-      export -f assign_role
-
-      FAILED=0
-      {
-        %{ for db in each.value.databases ~}
-        %{ for role_type in ["readonly", "readwrite", "admin"] ~}
-        %{ for user in db.assignments[role_type].users ~}
-        if ! assign_role "$FULL_INSTANCE_NAME" "${role_type}" "${db.db_name}" "${user}"; then
-          FAILED=$((FAILED + 1))
-        fi
-        %{ endfor ~}
-        %{ endfor ~}
-        %{ endfor ~}
-      } | tee -a role_assignment.log
-
-      if [ "$FAILED" -gt 0 ]; then
-        echo "ERROR: Failed to assign $FAILED roles"
+      if ! echo "$RESPONSE" | grep -qE '^{.*}$'; then
+        echo "ERROR: Failed to assign role"
         exit 1
       fi
     EOT
