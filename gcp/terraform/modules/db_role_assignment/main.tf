@@ -79,6 +79,8 @@ resource "null_resource" "db_role_assignments" {
   }
 
   triggers = {
+    # test trigger
+    run_at = timestamp()
     instance_config = jsonencode(each.value)
     global_assignments = jsonencode(var.global_assignments)
     env_assignments = jsonencode(var.environment_assignments)
@@ -91,88 +93,89 @@ resource "null_resource" "db_role_assignments" {
       set -ex
       INSTANCE="${each.value.instance}"
       PROJECT_ID="${var.project_id}"
-      FULL_INSTANCE_NAME="$PROJECT_ID:northamerica-northeast1:$INSTANCE"
+      REGION="${var.region}"
+      FULL_INSTANCE_NAME="$PROJECT_ID:$REGION:$INSTANCE"
+      GCS_URI=f"gs://{bucket_name}
 
-      # Process global assignments (applies to all databases)
-      %{ for role_type in ["readonly", "readwrite", "admin"] ~}
-      %{ for user in try(var.global_assignments[role_type], []) ~}
-      %{ for db in each.value.databases ~}
-      echo "Processing GLOBAL ${role_type} role for ${user} on ${db.db_name}"
-      PAYLOAD=$(jq -n \
-        --arg instance "$FULL_INSTANCE_NAME" \
-        --arg role "${role_type}" \
-        --arg db "${db.db_name}" \
-        --arg user "${user}" \
-        '{
-          instance_name: $instance,
-          role: $role,
-          database: $db,
-          user: $user,
-          scope: "global"
-        }'
-      )
-      curl -X POST "${var.cloud_function_url}" \
-        -H "Authorization: Bearer ${data.google_service_account_id_token.invoker.id_token}" \
-        -H "Content-Type: application/json" \
-        -d "$PAYLOAD" \
-        --fail || echo "Continuing despite error..."
-      %{ endfor ~}
-      %{ endfor ~}
-      %{ endfor ~}
+      # Function to handle role assignment
+      assign_role() {
+        local instance=$1
+        local role=$2
+        local db=$3
+        local user=$4
 
-      # Process environment assignments (applies to all databases)
-      %{ for role_type in ["readonly", "readwrite", "admin"] ~}
-      %{ for user in try(var.environment_assignments[role_type], []) ~}
-      %{ for db in each.value.databases ~}
-      echo "Processing ENVIRONMENT ${role_type} role for ${user} on ${db.db_name}"
-      PAYLOAD=$(jq -n \
-        --arg instance "$FULL_INSTANCE_NAME" \
-        --arg role "${role_type}" \
-        --arg db "${db.db_name}" \
-        --arg user "${user}" \
-        '{
-          instance_name: $instance,
-          role: $role,
-          database: $db,
-          user: $user,
-          scope: "environment"
-        }'
-      )
-      curl -X POST "${var.cloud_function_url}" \
-        -H "Authorization: Bearer ${data.google_service_account_id_token.invoker.id_token}" \
-        -H "Content-Type: application/json" \
-        -d "$PAYLOAD" \
-        --fail || echo "Continuing despite error..."
-      %{ endfor ~}
-      %{ endfor ~}
-      %{ endfor ~}
+        echo "Processing $role role for $user on $db"
 
-      # Process database-specific assignments
-      %{ for db in each.value.databases ~}
-      %{ for role_type in ["readonly", "readwrite", "admin"] ~}
-      %{ for user in try(db.assignments[role_type], []) ~}
-      echo "Processing DATABASE ${role_type} role for ${user} on ${db.db_name}"
-      PAYLOAD=$(jq -n \
-        --arg instance "$FULL_INSTANCE_NAME" \
-        --arg role "${role_type}" \
-        --arg db "${db.db_name}" \
-        --arg user "${user}" \
-        '{
-          instance_name: $instance,
-          role: $role,
-          database: $db,
-          user: $user,
-          scope: "database"
-        }'
-      )
-      curl -X POST "${var.cloud_function_url}" \
-        -H "Authorization: Bearer ${data.google_service_account_id_token.invoker.id_token}" \
-        -H "Content-Type: application/json" \
-        -d "$PAYLOAD" \
-        --fail || echo "Continuing despite error..."
-      %{ endfor ~}
-      %{ endfor ~}
-      %{ endfor ~}
+        PAYLOAD=$(jq -n \
+          --arg instance "$instance" \
+          --arg role "$role" \
+          --arg db "$db" \
+          --arg user "$user" \
+          --arg gcs_uri "$GCS_URI" \
+          '{
+            instance_name: $instance,
+            role: $role,
+            database: $db,
+            user: $user,
+            gcs_uri: $gcs_uri
+          }'
+        )
+
+        echo "Payload: $PAYLOAD"
+
+        RESPONSE=$(curl -v -X POST "${var.cloud_function_url}" \
+          -H "Authorization: Bearer ${data.google_service_account_id_token.invoker.id_token}" \
+          -H "Content-Type: application/json" \
+          -d "$PAYLOAD" 2>&1)
+
+        echo "$OUTPUT"
+
+        echo "Success: $BODY"
+        return 0
+      }
+
+      export -f assign_role
+
+      FAILED=0
+      {
+        # Global assignments
+        %{ for role_type in ["readonly", "readwrite", "admin"] ~}
+        %{ for user in try(var.global_assignments[role_type], []) ~}
+        %{ for db in each.value.databases ~}
+        if ! assign_role "$FULL_INSTANCE_NAME" "${role_type}" "${db.db_name}" "${user}"; then
+          FAILED=$((FAILED + 1))
+        fi
+        %{ endfor ~}
+        %{ endfor ~}
+        %{ endfor ~}
+
+        # Environment assignments
+        %{ for role_type in ["readonly", "readwrite", "admin"] ~}
+        %{ for user in try(var.environment_assignments[role_type], []) ~}
+        %{ for db in each.value.databases ~}
+        if ! assign_role "$FULL_INSTANCE_NAME" "${role_type}" "${db.db_name}" "${user}"; then
+          FAILED=$((FAILED + 1))
+        fi
+        %{ endfor ~}
+        %{ endfor ~}
+        %{ endfor ~}
+
+        # Database-specific assignments
+        %{ for db in each.value.databases ~}
+        %{ for role_type in ["readonly", "readwrite", "admin"] ~}
+        %{ for user in try(db.assignments[role_type], []) ~}
+        if ! assign_role "$FULL_INSTANCE_NAME" "${role_type}" "${db.db_name}" "${user}"; then
+          FAILED=$((FAILED + 1))
+        fi
+        %{ endfor ~}
+        %{ endfor ~}
+        %{ endfor ~}
+      } | tee -a role_assignment.log
+
+      if [ "$FAILED" -gt 0 ]; then
+        echo "ERROR: Failed to assign $FAILED roles"
+        exit 1
+      fi
     EOT
   }
 }
