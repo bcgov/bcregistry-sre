@@ -1825,6 +1825,130 @@ projects = {
         {
           roles      = ["roles/cloudsql.admin"]
           project_id = "a083gt-integration"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "a083gt-prod"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "mvnjri-prod"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "c4hnrd-dev"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "c4hnrd-test"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "c4hnrd-sandbox"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "c4hnrd-prod"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "c4hnrd-tools"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "gtksf3-dev"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "gtksf3-test"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "gtksf3-tools"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "gtksf3-prod"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "yfjq17-dev"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "yfjq17-test"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "yfjq17-tools"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "yfjq17-prod"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "keee67-dev"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "keee67-test"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "keee67-tools"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "keee67-prod"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "eogruh-dev"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "eogruh-test"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "eogruh-sandbox"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "eogruh-prod"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "k973yf-dev"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "k973yf-test"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "k973yf--tools"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "k973yf-prod"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "bcrbk9-dev"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "bcrbk9-test"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "bcrbk9-tools"
+        },
+        {
+          roles      = ["roles/cloudsql.admin"]
+          project_id = "bcrbk9-prod"
         }
       ]
         resource_roles = [
