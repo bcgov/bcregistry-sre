@@ -46,6 +46,8 @@ resource "null_resource" "apply_roles" {
     "${db.instance_name}.${db.db_name}" => db
   }
 
+  depends_on = [google_storage_bucket_iam_member.cloudsql_bucket_access]
+
   triggers = {
     # test trigger
     # run_at = timestamp()

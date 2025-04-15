@@ -87,6 +87,8 @@ data "google_service_account_id_token" "invoker" {
 resource "null_resource" "db_role_assignments" {
   for_each = local.role_assignments
 
+  depends_on = [google_sql_user.iam_account_users]
+
   triggers = {
     # Only trigger when the specific assignment changes
     assignment = sha256(jsonencode(each.value))
