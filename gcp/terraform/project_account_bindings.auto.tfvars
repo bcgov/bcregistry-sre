@@ -1021,28 +1021,28 @@ projects = {
   "ppr-test" = {
     project_id = "eogruh-test"
     env = "test"
-    # instances = [
-    #   {
-    #     instance = "ppr-test"
-    #     databases =  [
-    #       {
-    #             db_name    = "ppr"
-    #             roles      = ["readonly", "readwrite", "admin"]
-    #             owner      = "user4ca"
-    #       },
-    #       {
-    #             db_name    = "notify"
-    #             roles      = ["readonly", "readwrite", "admin"]
-    #             owner      = "notifyuser"
-    #       },
-    #       {
-    #             db_name    = "jobs"
-    #             roles      = ["readonly", "readwrite", "admin"]
-    #             owner      = "job_owner"
-    #       }
-    #     ]
-    #   }
-    # ]
+    instances = [
+      {
+        instance = "ppr-test-cloudsql"
+        databases =  [
+          {
+                db_name    = "ppr"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "user4ca"
+          },
+          {
+                db_name    = "notify"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "notifyuser"
+          },
+          {
+                db_name    = "jobs"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "job_owner"
+          }
+        ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
