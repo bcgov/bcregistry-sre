@@ -185,7 +185,7 @@ projects = {
     #       {
     #             db_name    = "auth-db"
     #             roles      = ["readonly", "readwrite", "admin"]
-    #             owner      = "auth"
+    #             owner      = "postgres"
     #           }
     #         ]
     #   }
@@ -806,7 +806,7 @@ projects = {
           {
                 db_name    = "auth-db"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "auth"
+                owner      = "postgres"
               }
             ]
       }
@@ -1334,7 +1334,7 @@ projects = {
           {
                 db_name    = "auth-db"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "auth"
+                owner      = "postgres"
               }
             ]
       }
@@ -1551,12 +1551,12 @@ projects = {
           {
                 db_name    = "notify"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "notifyuser"
+                owner      = "user4ca"
           },
           {
                 db_name    = "jobs"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "job_owner"
+                owner      = "user4ca"
           }
         ]
       }
@@ -1738,7 +1738,7 @@ projects = {
           {
                 db_name    = "auth-db"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "auth"
+                owner      = "postgres"
               }
             ]
       }
