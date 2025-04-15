@@ -1547,16 +1547,6 @@ projects = {
                 db_name    = "ppr"
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "user4ca"
-          },
-          {
-                db_name    = "notify"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "user4ca"
-          },
-          {
-                db_name    = "jobs"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "user4ca"
           }
         ]
       }
