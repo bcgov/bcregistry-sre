@@ -1454,7 +1454,7 @@ projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "business-ar-api"
                 database_role_assignment = {
-                  readonly = ["andriy.bolyachevets@gov.bc.ca"]
+                  readonly = []
                   readwrite = []
                   admin = []
                 }

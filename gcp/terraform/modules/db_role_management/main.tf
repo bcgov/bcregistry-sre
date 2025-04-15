@@ -48,7 +48,7 @@ resource "null_resource" "apply_roles" {
 
   triggers = {
     # test trigger
-    run_at = timestamp()
+    # run_at = timestamp()
     gcs_content_md5 = md5(join("", [
       for role in each.value.roles :
       var.role_definitions[role].md5hash
