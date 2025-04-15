@@ -4,6 +4,18 @@ projects = {
   "analytics-int-prod" = {
     project_id = "mvnjri-prod"
     env = "prod"
+    # instances = [
+    #   {
+    #     instance = "fin-warehouse-prod"
+    #     databases =  [
+    #           {
+    #             db_name    = "fin_warehouse"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "pay"
+    #           }
+    #         ]
+    #   }
+    # ]
     service_accounts = {
       sa-pam-function = {
         roles       = ["projects/mvnjri-prod/roles/rolepam"]
@@ -75,6 +87,28 @@ projects = {
   "common-prod" = {
     project_id = "c4hnrd-prod"
     env = "prod"
+    # instances = [
+    #   {
+    #     instance = "common-db-prod"
+    #     databases =  [
+    #           {
+    #             db_name    = "docs"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "user4ca"
+    #           }
+    #         ]
+    #   },
+    #   {
+    #     instance = "notify-db-prod"
+    #     databases =  [
+    #           {
+    #             db_name    = "notify"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "notifyuser"
+    #           }
+    #         ]
+    #   }
+    # ]
     service_accounts = {
       sa-pam-function = {
         roles       = ["projects/c4hnrd-prod/roles/rolepam"]
@@ -144,6 +178,18 @@ projects = {
   "connect-prod" = {
     project_id = "gtksf3-prod"
     env = "prod"
+    # instances = [
+    #   {
+    #     instance = "auth-db-prod"
+    #     databases =  [
+    #       {
+    #             db_name    = "auth-db"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "auth"
+    #           }
+    #         ]
+    #   }
+    # ]
     service_accounts = {
       sa-pam-function = {
         roles       = ["projects/gtksf3-prod/roles/rolepam"]
@@ -260,6 +306,33 @@ projects = {
   "bcr-businesses-prod" = {
     project_id = "a083gt-prod"
     env = "prod"
+    # instances = [
+    #   {
+    #     instance = "businesses-db-prod"
+    #     databases =  [
+    #       {
+    #             db_name    = "business-ar"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "business-ar-api"
+    #           },
+    #           {
+    #             db_name    = "legal-entities"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "business-api"
+    #           }
+    #         ]
+    #   },
+    #   {
+    #     instance = "namex-db-prod"
+    #     databases =  [
+    #       {
+    #             db_name    = "namex"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "userHQH"
+    #           }
+    #         ]
+    #   }
+    # ]
     service_accounts = {
       sa-pam-function = {
         roles       = ["projects/a083gt-prod/roles/rolepam"]
@@ -380,6 +453,28 @@ projects = {
   "ppr-prod" = {
     project_id = "eogruh-prod"
     env = "prod"
+    # instances = [
+    #   {
+    #     instance = "ppr-prod"
+    #     databases =  [
+    #       {
+    #             db_name    = "ppr"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "user4ca"
+    #       },
+    #       {
+    #             db_name    = "notify"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "notifyuser"
+    #       },
+    #       {
+    #             db_name    = "jobs"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "job_owner"
+    #       }
+    #     ]
+    #   }
+    # ]
     service_accounts = {
       sa-pam-function = {
         roles       = ["projects/eogruh-prod/roles/rolepam"]
@@ -635,6 +730,28 @@ projects = {
   "common-test" = {
     project_id = "c4hnrd-test"
     env = "test"
+    instances = [
+      {
+        instance = "common-db-test"
+        databases =  [
+              {
+                db_name    = "docs"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "user4ca"
+              }
+            ]
+      },
+      {
+        instance = "notify-db-test"
+        databases =  [
+              {
+                db_name    = "notify"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "notifyuser"
+              }
+            ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["projects/c4hnrd-test/roles/rolequeue", "roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
@@ -682,6 +799,18 @@ projects = {
   "connect-test" = {
     project_id = "gtksf3-test"
     env = "test"
+    instances = [
+      {
+        instance = "auth-db-test"
+        databases =  [
+          {
+                db_name    = "auth-db"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "auth"
+              }
+            ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
@@ -786,6 +915,16 @@ projects = {
                 owner      = "business-api"
               }
             ]
+      },
+      {
+        instance = "namex-db-test"
+        databases =  [
+          {
+                db_name    = "namex"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "userHQH"
+              }
+            ]
       }
     ]
     service_accounts = {
@@ -882,6 +1021,28 @@ projects = {
   "ppr-test" = {
     project_id = "eogruh-test"
     env = "test"
+    # instances = [
+    #   {
+    #     instance = "ppr-test"
+    #     databases =  [
+    #       {
+    #             db_name    = "ppr"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "user4ca"
+    #       },
+    #       {
+    #             db_name    = "notify"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "notifyuser"
+    #       },
+    #       {
+    #             db_name    = "jobs"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "job_owner"
+    #       }
+    #     ]
+    #   }
+    # ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
@@ -1048,6 +1209,28 @@ projects = {
   "common-dev" = {
     project_id = "c4hnrd-dev"
     env = "dev"
+    instances = [
+      {
+        instance = "common-db-dev"
+        databases =  [
+              {
+                db_name    = "docs"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "user4ca"
+              }
+            ]
+      },
+      {
+        instance = "notify-db-dev"
+        databases =  [
+              {
+                db_name    = "notify"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "notifyuser"
+              }
+            ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["projects/c4hnrd-dev/roles/rolequeue", "roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
@@ -1144,6 +1327,18 @@ projects = {
   "connect-dev" = {
     project_id = "gtksf3-dev"
     env = "dev"
+    instances = [
+      {
+        instance = "auth-db-dev"
+        databases =  [
+          {
+                db_name    = "auth-db"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "auth"
+              }
+            ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
@@ -1270,6 +1465,16 @@ projects = {
                 owner      = "business-api"
               }
             ]
+      },
+      {
+        instance = "namex-db-dev"
+        databases =  [
+          {
+                db_name    = "namex"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "userHQH"
+              }
+            ]
       }
     ]
     service_accounts = {
@@ -1334,6 +1539,28 @@ projects = {
   "ppr-dev" = {
     project_id = "eogruh-dev"
     env = "dev"
+    instances = [
+      {
+        instance = "ppr-dev-cloudsql"
+        databases =  [
+          {
+                db_name    = "ppr"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "user4ca"
+          },
+          {
+                db_name    = "notify"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "notifyuser"
+          },
+          {
+                db_name    = "jobs"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "job_owner"
+          }
+        ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
@@ -1470,6 +1697,18 @@ projects = {
   "common-sandbox" = {
     project_id = "c4hnrd-sandbox"
     env = "sandbox"
+    instances = [
+      {
+        instance = "notify-db-sandbox"
+        databases =  [
+              {
+                db_name    = "notify"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "notifyuser"
+              }
+            ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
@@ -1492,6 +1731,18 @@ projects = {
   "connect-sandbox" = {
     project_id = "gtksf3-tools"
     env = "sandbox"
+    instances = [
+      {
+        instance = "auth-db-sandbox"
+        databases =  [
+          {
+                db_name    = "auth-db"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "auth"
+              }
+            ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
@@ -1673,7 +1924,6 @@ projects = {
   "bcr-businesses-sandbox" = {
     project_id = "a083gt-integration"
     env = "sandbox"
-
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
