@@ -14,6 +14,7 @@ gcloud functions deploy "db-roles-create" \
     --source db-roles \
     --region $REGION \
     --service-account "sa-cloud-function-sql-manager@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --timeout=360s \
     --no-allow-unauthenticated
 
 gcloud functions deploy "db-roles-assign" \
@@ -23,4 +24,5 @@ gcloud functions deploy "db-roles-assign" \
     --source db-role-management \
     --region $REGION \
     --service-account "sa-cloud-function-sql-manager@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --timeout=360s \
     --no-allow-unauthenticated
