@@ -1,0 +1,75 @@
+name: 'Terraform-GCS'
+
+on:
+  workflow_call:
+    secrets:
+      GCP_SA_KEY:
+        required: true
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: production
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Authenticate to Google Cloud
+      id: auth
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GCP_SA_KEY }}
+        create_credentials_file: true
+        export_environment_variables: true
+        access_token_lifetime: 3600s
+        access_token_scopes: |
+          https://www.googleapis.com/auth/cloud-platform
+          https://www.googleapis.com/auth/compute
+
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.10.5
+        terraform_wrapper: false
+
+    - name: Clear Terraform cache
+      run: |
+        # Remove all cached Terraform files
+        rm -rf ~/.terraform.d/
+        rm -rf ~/.terraformrc
+        rm -rf .terraform/
+        rm -f .terraform.lock.hcl
+      working-directory: gcp/terraform
+
+    - name: Terraform Init
+      working-directory: gcp/terraform
+      run: |
+        terraform init \
+          -backend-config="bucket=common-tools-terraform-state" \
+          -backend-config="prefix=iam" \
+          -reconfigure \
+          -input=false
+      env:
+        OP_CONNECT_TOKEN: ${{ secrets.OP_CONNECT_TOKEN }}
+        OP_CONNECT_HOST: ${{ secrets.OP_CONNECT_HOST }}
+    - name: Terraform Plan
+      working-directory: gcp/terraform
+      run: terraform plan -input=false
+      env:
+        OP_CONNECT_TOKEN: ${{ secrets.OP_CONNECT_TOKEN }}
+        OP_CONNECT_HOST: ${{ secrets.OP_CONNECT_HOST }}
+    - name: Terraform Apply
+      working-directory: gcp/terraform
+      run: terraform apply -auto-approve -input=false
+      env:
+        OP_CONNECT_TOKEN: ${{ secrets.OP_CONNECT_TOKEN }}
+        OP_CONNECT_HOST: ${{ secrets.OP_CONNECT_HOST }}
