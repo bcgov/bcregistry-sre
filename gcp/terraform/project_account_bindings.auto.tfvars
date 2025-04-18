@@ -12,6 +12,26 @@ projects = {
                 db_name    = "fin_warehouse"
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "pay"
+                database_role_assignment = {
+                  readonly = ["andriy.bolyachevets@gov.bc.ca"]
+                  readwrite = ["andriy.bolyachevets@gov.bc.ca"]
+                  admin = ["andriy.bolyachevets@gov.bc.ca"]
+                }
+              }
+            ]
+      },
+      {
+        instance = "fin-warehouse-prod-clone"
+        databases =  [
+              {
+                db_name    = "fin_warehouse"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "pay"
+                database_role_assignment = {
+                  readonly = ["andriy.bolyachevets@gov.bc.ca"]
+                  readwrite = []
+                  admin = []
+                }
               }
             ]
       }
@@ -273,6 +293,23 @@ projects = {
   "bor-prod" = {
     project_id = "yfjq17-prod"
     env = "prod"
+    # instances = [
+    #   {
+    #     instance = "bor-db-prod"
+    #     databases =  [
+    #           {
+    #             db_name    = "bor"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "prodUser"
+    #             database_role_assignment = {
+    #               readonly = []
+    #               readwrite = []
+    #               admin = []
+    #             }
+    #           }
+    #         ]
+    #   }
+    # ]
     service_accounts = {
       sa-pam-function = {
         roles       = ["projects/yfjq17-prod/roles/rolepam"]
@@ -409,6 +446,23 @@ projects = {
   "business-number-hub-prod" = {
     project_id = "keee67-prod"
     env = "prod"
+    instances = [
+      {
+        instance = "bn-hub-prod"
+        databases =  [
+          {
+                db_name    = "bni-hub"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "bni-hub"
+          },
+          {
+                db_name    = "vans-db-prod"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "vans-prod"
+          }
+        ]
+      }
+    ]
     service_accounts = {
       sa-pam-function = {
         roles       = ["projects/keee67-prod/roles/rolepam"]
@@ -553,6 +607,23 @@ projects = {
   "search-prod" = {
     project_id = "k973yf-prod"
     env = "prod"
+    # instances = [
+    #   {
+    #     instance = "search-db-prod"
+    #     databases =  [
+    #           {
+    #             db_name    = "search"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "search_service"
+    #             database_role_assignment = {
+    #               readonly = ["andriy.bolyachevets@gov.bc.ca"]
+    #               readwrite = []
+    #               admin = []
+    #             }
+    #           }
+    #         ]
+    #   }
+    # ]
     service_accounts = {
       sa-pam-function = {
         roles       = ["projects/k973yf-prod/roles/rolepam"]
@@ -633,6 +704,18 @@ projects = {
   "strr-prod" = {
     project_id = "bcrbk9-prod"
     env = "prod"
+    # instances = [
+    #   {
+    #     instance = "strr-db-prod"
+    #     databases =  [
+    #       {
+    #             db_name    = "strr-db"
+    #             roles      = ["readonly", "readwrite", "admin"]
+    #             owner      = "strr"
+    #           }
+    #         ]
+    #   }
+    # ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/bigquery.dataOwner", "roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
@@ -873,6 +956,38 @@ projects = {
   "bor-test" = {
     project_id = "yfjq17-test"
     env = "test"
+    instances = [
+      {
+        instance = "bor-db-test"
+        databases =  [
+              {
+                db_name    = "bor"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "testUser"
+                database_role_assignment = {
+                  readonly = []
+                  readwrite = []
+                  admin = []
+                }
+              }
+            ]
+      },
+      {
+        instance = "btr-db-test"
+        databases =  [
+              {
+                db_name    = "btr"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "testUser"
+                database_role_assignment = {
+                  readonly = []
+                  readwrite = []
+                  admin = []
+                }
+              }
+            ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
@@ -986,6 +1101,18 @@ projects = {
   "business-number-hub-test" = {
     project_id = "keee67-test"
     env = "test"
+    instances = [
+      {
+        instance = "bn-hub-test"
+        databases =  [
+          {
+                db_name    = "bni-hub"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "bni-hub"
+          }
+        ]
+      }
+    ]
     service_accounts = {
       bn-batch-processor-test = {
         roles       = ["roles/cloudtasks.admin", "roles/editor", "roles/run.invoker", "roles/storage.admin"]
@@ -1038,7 +1165,7 @@ projects = {
           {
                 db_name    = "jobs"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "job_owner"
+                owner      = "job_runner"
           }
         ]
       }
@@ -1100,6 +1227,23 @@ projects = {
   "search-test" = {
     project_id = "k973yf-test"
     env = "test"
+    instances = [
+      {
+        instance = "search-db-test"
+        databases =  [
+              {
+                db_name    = "search"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "testUser"
+                database_role_assignment = {
+                  readonly = ["andriy.bolyachevets@gov.bc.ca"]
+                  readwrite = []
+                  admin = []
+                }
+              }
+            ]
+      }
+    ]
     service_accounts = {
       gha-wif = {
         roles       = ["roles/compute.admin"]
@@ -1151,6 +1295,18 @@ projects = {
   "strr-test" = {
     project_id = "bcrbk9-test"
     env = "test"
+    instances = [
+      {
+        instance = "strr-db-test"
+        databases =  [
+          {
+                db_name    = "strr-db"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "strr"
+              }
+            ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
@@ -1423,6 +1579,38 @@ projects = {
   "bor-dev" = {
     project_id = "yfjq17-dev"
     env = "dev"
+    instances = [
+      {
+        instance = "bor-db"
+        databases =  [
+              {
+                db_name    = "bor"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "devUser"
+                database_role_assignment = {
+                  readonly = []
+                  readwrite = []
+                  admin = []
+                }
+              }
+            ]
+      },
+      {
+        instance = "btr-db-dev"
+        databases =  [
+              {
+                db_name    = "btr"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "devUser"
+                database_role_assignment = {
+                  readonly = []
+                  readwrite = []
+                  admin = []
+                }
+              }
+            ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
@@ -1515,6 +1703,23 @@ projects = {
   "business-number-hub-dev" = {
     project_id = "keee67-dev"
     env = "dev"
+    instances = [
+      {
+        instance = "hub-dev"
+        databases =  [
+          {
+                db_name    = "auth-db"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "auth"
+          },
+          {
+                db_name    = "vans-db"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "vans"
+          }
+        ]
+      }
+    ]
     service_accounts = {
       bn-tasks-cloud-run-invoker = {
         roles       = ["roles/cloudtasks.enqueuer", "roles/iam.serviceAccountUser", "roles/run.invoker"]
@@ -1591,6 +1796,23 @@ projects = {
   "search-dev" = {
     project_id = "k973yf-dev"
     env = "dev"
+    instances = [
+      {
+        instance = "search-db-dev"
+        databases =  [
+              {
+                db_name    = "search"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "devUser"
+                database_role_assignment = {
+                  readonly = ["andriy.bolyachevets@gov.bc.ca"]
+                  readwrite = []
+                  admin = []
+                }
+              }
+            ]
+      }
+    ]
     service_accounts = {
       gha-wif = {
         roles       = ["roles/compute.admin", "roles/storage.objectAdmin"]
@@ -1638,6 +1860,18 @@ projects = {
   "strr-dev" = {
     project_id = "bcrbk9-dev"
     env = "dev"
+    instances = [
+      {
+        instance = "strr-db-dev"
+        databases =  [
+          {
+                db_name    = "strr-db"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "strr"
+              }
+            ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
@@ -1830,6 +2064,23 @@ projects = {
   "ppr-sandbox" = {
     project_id = "eogruh-sandbox"
     env = "sandbox"
+    instances = [
+      {
+        instance = "ppr-sandbox-pgdb"
+        databases =  [
+              {
+                db_name    = "ppr"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "user4ca"
+                database_role_assignment = {
+                  readonly = []
+                  readwrite = []
+                  admin = []
+                }
+              }
+            ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
@@ -1856,6 +2107,23 @@ projects = {
   "search-sandbox" = {
     project_id = "k973yf--tools"
     env = "sandbox"
+    instances = [
+      {
+        instance = "search-db-integration"
+        databases =  [
+              {
+                db_name    = "search"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "int_user"
+                database_role_assignment = {
+                  readonly = ["andriy.bolyachevets@gov.bc.ca"]
+                  readwrite = []
+                  admin = []
+                }
+              }
+            ]
+      }
+    ]
   }
   "web-presence-sandbox" = {
     project_id = "yfthig-tools"
@@ -1878,6 +2146,18 @@ projects = {
   "strr-sandbox" = {
     project_id = "bcrbk9-tools"
     env = "sandbox"
+    instances = [
+      {
+        instance = "strr-db-sandbox"
+        databases =  [
+          {
+                db_name    = "strr-db"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "strr"
+              }
+            ]
+      }
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
@@ -1914,6 +2194,35 @@ projects = {
   "bcr-businesses-sandbox" = {
     project_id = "a083gt-integration"
     env = "sandbox"
+
+    instances = [
+      {
+        instance = "business-integration"
+        databases =  [
+          {
+                db_name    = "businesses"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "business_app"
+                database_role_assignment = {
+                  readonly = []
+                  readwrite = []
+                  admin = []
+                }
+              }
+            ]
+      },
+      {
+        instance = "lear-db-sandbox"
+        databases =  [
+          {
+                db_name    = "lear"
+                roles      = ["readonly", "readwrite", "admin"]
+                owner      = "user5SJ"
+              }
+            ]
+      }
+    ]
+
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
