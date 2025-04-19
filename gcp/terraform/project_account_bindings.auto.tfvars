@@ -398,6 +398,13 @@ projects = {
       sa-api = {
         roles       = ["projects/a083gt-prod/roles/roleapi"]
         description = "Service Account for running api services"
+        resource_roles = [
+            {
+              resource = "projects/a083gt-prod/locations/northamerica-northeast1/services/namex-solr-synonyms-api-prod"
+              roles    = ["roles/run.invoker"]
+              resource_type = "cloud_run"
+            }
+          ]
       },
       sa-queue = {
         roles       = ["projects/a083gt-prod/roles/rolequeue"]
@@ -1054,6 +1061,13 @@ projects = {
       sa-api = {
         roles       = ["projects/a083gt-test/roles/roleapi"]
         description = "Service Account for running api services"
+        resource_roles = [
+            {
+              resource = "projects/a083gt-test/locations/northamerica-northeast1/services/namex-solr-synonyms-api-test"
+              roles    = ["roles/run.invoker"]
+              resource_type = "cloud_run"
+            }
+          ]
       },
       sa-queue = {
         roles       = ["projects/a083gt-test/roles/rolequeue"]
@@ -1677,6 +1691,13 @@ projects = {
       sa-api = {
         roles       = ["projects/a083gt-dev/roles/roleapi"]
         description = "Service Account for running api services"
+        resource_roles = [
+            {
+              resource = "projects/a083gt-dev/locations/northamerica-northeast1/services/namex-solr-synonyms-api-dev"
+              roles    = ["roles/run.invoker"]
+              resource_type = "cloud_run"
+            }
+          ]
       },
       sa-queue = {
         roles       = ["projects/a083gt-dev/roles/rolequeue"]
