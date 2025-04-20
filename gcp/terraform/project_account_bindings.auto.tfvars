@@ -531,7 +531,7 @@ projects = {
     #       {
     #             db_name    = "jobs"
     #             roles      = ["readonly", "readwrite", "admin"]
-    #             owner      = "job_owner"
+    #             owner      = "user4ca"
     #       }
     #     ]
     #   }
@@ -1179,7 +1179,7 @@ projects = {
           {
                 db_name    = "jobs"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "job_runner"
+                owner      = "user4ca"
           }
         ]
       }
