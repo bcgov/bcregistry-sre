@@ -623,7 +623,7 @@ projects = {
     #             roles      = ["readonly", "readwrite", "admin"]
     #             owner      = "search_service"
     #             database_role_assignment = {
-    #               readonly = ["andriy.bolyachevets@gov.bc.ca"]
+    #               readonly = []
     #               readwrite = []
     #               admin = []
     #             }
@@ -1826,7 +1826,7 @@ projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "devUser"
                 database_role_assignment = {
-                  readonly = ["andriy.bolyachevets@gov.bc.ca"]
+                  readonly = []
                   readwrite = []
                   admin = []
                 }

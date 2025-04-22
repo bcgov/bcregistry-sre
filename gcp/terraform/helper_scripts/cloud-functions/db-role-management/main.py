@@ -31,6 +31,7 @@ def grant_db_role(request):
 
         user = request_json['user']
         role = request_json['role']
+        db = request_json['database']
         
         if not re.match(r'^[a-zA-Z0-9_]+$', role):
             return {'error': 'Role name contains invalid characters (only letters, numbers and underscores allowed)'}, 400
@@ -53,7 +54,7 @@ def grant_db_role(request):
                 return {'error': 'gcs_uri must start with gs://'}, 400
 
             bucket_name = gcs_uri[5:].split('/')[0]
-            blob_name = os.path.join(*gcs_uri[5:].split('/')[1:], f"grant_role_{role}_{user.replace('@', '_at_')}.sql")
+            blob_name = os.path.join(*gcs_uri[5:].split('/')[1:], f"grant_role_{role}_{user.replace('@', '_at_')}_{db}.sql")
 
             storage_client = storage.Client()
             bucket = storage_client.bucket(bucket_name)
@@ -70,7 +71,7 @@ def grant_db_role(request):
             import_body = {
                 'importContext': {
                     'uri': f"gs://{bucket_name}/{blob_name}",
-                    'database': request_json['database'],
+                    'database': db,
                     'fileType': 'SQL'
                 }
             }
@@ -119,7 +120,7 @@ def grant_db_role(request):
             return {
                 'status': 'success',
                 'operationId': response['name'],
-                'database': request_json['database'],
+                'database': db,
                 'user': user,
                 'role_granted': role,
                 'sql_executed': sql_content.strip(),
