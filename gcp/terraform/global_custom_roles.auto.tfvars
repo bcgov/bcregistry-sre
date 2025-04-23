@@ -1,7 +1,7 @@
 global_database_role_assignment = {
   readonly = []
   readwrite = []
-  admin = []
+  admin = ["andriy.bolyachevets@gov.bc.ca", "patrick.wei@gov.bc.ca"]
 }
 global_custom_roles = {
   rolestore = {

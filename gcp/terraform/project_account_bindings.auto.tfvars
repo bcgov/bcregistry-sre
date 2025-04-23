@@ -13,9 +13,9 @@ projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "pay"
                 database_role_assignment = {
-                  readonly = ["andriy.bolyachevets@gov.bc.ca"]
-                  readwrite = ["andriy.bolyachevets@gov.bc.ca"]
-                  admin = ["andriy.bolyachevets@gov.bc.ca"]
+                  readonly = ["genevieve.primeau@gov.bc.ca", "severin.beauvais@gov.bc.ca"]
+                  readwrite = []
+                  admin = []
                 }
               }
             ]
@@ -28,7 +28,7 @@ projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "pay"
                 database_role_assignment = {
-                  readonly = ["andriy.bolyachevets@gov.bc.ca"]
+                  readonly = ["genevieve.primeau@gov.bc.ca", "severin.beauvais@gov.bc.ca"]
                   readwrite = []
                   admin = []
                 }
@@ -1250,7 +1250,7 @@ projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "testUser"
                 database_role_assignment = {
-                  readonly = ["andriy.bolyachevets@gov.bc.ca"]
+                  readonly = []
                   readwrite = []
                   admin = []
                 }
@@ -2137,7 +2137,7 @@ projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "int_user"
                 database_role_assignment = {
-                  readonly = ["andriy.bolyachevets@gov.bc.ca"]
+                  readonly = []
                   readwrite = []
                   admin = []
                 }

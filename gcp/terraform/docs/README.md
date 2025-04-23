@@ -47,6 +47,18 @@ Before updating Terraform configuration, ensure you have the following:
         principals          # List of principals that can be granted the role
         role_type           # Optional value, when set to 'custom' ensures custom role URI is properply generated
 
+
+    instances        = ... # Optional list of cloudsql instances
+        instance           # instance name
+        databases          # list of databases
+            db_name        # database name
+            roles          # list of created custom roles to be managed by Terraform, e.g. ["readonly", "readwrite", "admin"]
+            owner          # database owner/role creator
+            database_role_assignment   # map of custom role assignments
+                readonly               # list of ...@gov.bc.ca emails to be granted db custom roles
+                readwrite              # list of ...@gov.bc.ca emails to be granted db custom roles
+                admin                  # list of ...@gov.bc.ca emails to be granted db custom roles
+
 For example, if you want to grant sa-pubsub service account in Connect Dev an invoker role for Cloud Run in Business Dev:
 ![invoker-grant](./images/cloud-run-invoker-role.png)
 
@@ -64,6 +76,11 @@ For example, if you want to grant sa-pubsub service account in Connect Dev an in
         principals            # List of principals that can be granted the role
         role_type             # Optional value, when set to 'custom' ensures custom role URI is properply generated
 
+  database_role_assignment   # Optional map of custom role assignments
+                              (roles will apply to all databases in the corresponnding env, that are listed in `project_account_bindings.auto.tfvars`)
+      readonly               # list of ...@gov.bc.ca emails to be granted db custom roles
+      readwrite              # list of ...@gov.bc.ca emails to be granted db custom roles
+      admin                  # list of ...@gov.bc.ca emails to be granted db custom roles
 
 `global_custom_roles.auto.tfvars`
 
@@ -72,6 +89,12 @@ For example, if you want to grant sa-pubsub service account in Connect Dev an in
     title                 # Name of the custom IAM role
     permissions           # List of permissions assigned to the role
     description           # Description of the custom role
+
+    database_role_assignment   # Optional map of custom role assignments
+                                (roles will apply to all databases, that are listed in `project_account_bindings.auto.tfvars`)
+        readonly               # list of ...@gov.bc.ca emails to be granted db custom roles
+        readwrite              # list of ...@gov.bc.ca emails to be granted db custom roles
+        admin                  # list of ...@gov.bc.ca emails to be granted db custom roles
 4. Merging the new branch into main will trigger 'terraform plan'
 5. Output of terraform plan can be reviewed in https://app.terraform.io/app/BCRegistry/workspaces/gcp-iam/runs
 6. If no errors are present, and if Terraform state changes are as expected, 'terraform apply' can be executed for the run in the UI (will either need permissions to access or ask SRE team to review)

@@ -106,7 +106,7 @@ environments = {
     database_role_assignment = {
       readonly = []
       readwrite = []
-      admin = ["andriy.bolyachevets@gov.bc.ca", "patrick.wei@gov.bc.ca"]
+      admin = []
     }
     environment_custom_roles = {
       roledeveloper = {
