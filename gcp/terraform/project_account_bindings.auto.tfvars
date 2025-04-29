@@ -1540,6 +1540,11 @@ projects = {
                 db_name    = "auth-db"
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "postgres"
+                database_role_assignment = {
+                  readonly = ["thayne.werdal@gov.bc.ca"]
+                  readwrite = []
+                  admin = []
+                }
               }
             ]
       },
@@ -2000,6 +2005,11 @@ projects = {
                 db_name    = "notify"
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "postgres"
+                database_role_assignment = {
+                  readonly = []
+                  readwrite = []
+                  admin = []
+                }
               }
             ]
       }
