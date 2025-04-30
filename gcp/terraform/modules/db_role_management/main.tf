@@ -17,6 +17,7 @@ locals {
         instance_name = instance.instance
         db_name       = db.db_name
         owner         = try(db.owner, null)
+        agent         = try(db.agent, null)
         roles         = db.roles
       }
     ]
@@ -65,37 +66,38 @@ resource "null_resource" "apply_roles" {
     all_roles = join(",", each.value.roles)
   }
 
-  provisioner "local-exec" {
-    when    = create
-    command = <<-EOT
-      set -ex
-      %{ for role in split(",", self.triggers.all_roles) ~}
-      echo "Applying role: ${role}"
+provisioner "local-exec" {
+  when    = create
+  command = <<-EOT
+    set -ex
+    %{ for role in split(",", self.triggers.all_roles) ~}
+    echo "Applying role: ${role}"
 
-      # Safe JSON construction using jq
-      PAYLOAD=$(jq -n \
-        --arg instance "${self.triggers.instance_name}" \
-        --arg uri "${jsondecode(self.triggers.gcs_uris)[role]}" \
-        --arg db "${self.triggers.db_name}" \
-        --arg owner "${each.value.owner}" \
-        '{
-          instance_name: $instance,
-          gcs_uri: $uri,
-          database: $db,
-          owner: $owner
-        }'
-      )
+    PAYLOAD=$(jq -n \
+      --arg instance "${self.triggers.instance_name}" \
+      --arg uri "${jsondecode(self.triggers.gcs_uris)[role]}" \
+      --arg db "${self.triggers.db_name}" \
+      --arg owner "${each.value.owner}" \
+      --arg agent "${coalesce(each.value.agent, each.value.owner)}" \
+      '{
+        instance_name: $instance,
+        gcs_uri: $uri,
+        database: $db,
+        owner: $owner,
+        agent: $agent
+      }'
+    )
 
-      OUTPUT=$(curl -v -X POST "${var.cloud_function_url}" \
-        -H "Authorization: Bearer ${data.google_service_account_id_token.invoker.id_token}" \
-        -H "Content-Type: application/json" \
-        -d "$PAYLOAD" \
-        --fail 2>&1)
+    OUTPUT=$(curl -v -X POST "${var.cloud_function_url}" \
+      -H "Authorization: Bearer ${data.google_service_account_id_token.invoker.id_token}" \
+      -H "Content-Type: application/json" \
+      -d "$PAYLOAD" \
+      --fail 2>&1)
 
-      echo "$OUTPUT"
-      %{ endfor ~}
-    EOT
-  }
+    echo "$OUTPUT"
+    %{ endfor ~}
+  EOT
+}
 
   provisioner "local-exec" {
     when    = destroy

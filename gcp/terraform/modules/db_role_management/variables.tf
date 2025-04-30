@@ -15,6 +15,7 @@ variable "instances" {
     databases = list(object({
       db_name = string
       owner   = optional(string)
+      agent   = optional(string)
       roles   = list(string)
       database_role_assignment = optional(object({
         readonly  = optional(list(string), [])

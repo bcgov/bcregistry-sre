@@ -33,6 +33,7 @@ variable "projects" {
         db_name    = string
         roles      = list(string)
         owner      = optional(string)
+        agent      = optional(string)
         database_role_assignment = optional(object({
           readonly  = optional(list(string), [])
           readwrite = optional(list(string), [])

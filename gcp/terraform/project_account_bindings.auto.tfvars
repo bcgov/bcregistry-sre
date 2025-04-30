@@ -857,7 +857,8 @@ projects = {
               {
                 db_name    = "notify"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "postgres"
+                owner      = "notifyuser"
+                agent      = "postgres"
               }
             ]
       }
@@ -916,7 +917,8 @@ projects = {
           {
                 db_name    = "auth-db"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "postgres"
+                owner      = "auth"
+                agent      = "postgres"
               }
             ]
       },
@@ -926,7 +928,8 @@ projects = {
           {
                 db_name    = "pay-db"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "postgres"
+                owner      = "pay"
+                agent      = "postgres"
                 database_role_assignment = {
                   readonly = []
                   readwrite = []
@@ -1352,6 +1355,11 @@ projects = {
                 db_name    = "strr-db"
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "strr"
+                database_role_assignment = {
+                  readonly = []
+                  readwrite = []
+                  admin = []
+                }
               }
             ]
       }
@@ -1539,7 +1547,8 @@ projects = {
           {
                 db_name    = "auth-db"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "postgres"
+                owner      = "auth"
+                agent      = "postgres"
                 database_role_assignment = {
                   readonly = ["thayne.werdal@gov.bc.ca"]
                   readwrite = []
@@ -1554,7 +1563,8 @@ projects = {
           {
                 db_name    = "pay-db"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "postgres"
+                owner      = "pay"
+                agent      = "postgres"
                 database_role_assignment = {
                   readonly = []
                   readwrite = []
@@ -2004,7 +2014,7 @@ projects = {
               {
                 db_name    = "notify"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "postgres"
+                owner      = "sa-api@c4hnrd-sandbox.iam"
                 database_role_assignment = {
                   readonly = []
                   readwrite = []
@@ -2044,6 +2054,11 @@ projects = {
                 db_name    = "auth-db"
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "postgres"
+                database_role_assignment = {
+                  readonly = []
+                  readwrite = []
+                  admin = []
+                }
               }
             ]
       },
