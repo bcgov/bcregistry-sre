@@ -840,6 +840,24 @@ projects = {
   "common-test" = {
     project_id = "c4hnrd-test"
     env = "test"
+    custom_roles = {
+      roledbmigrate = {
+        title = "Role DB Migration"
+        description = "Role to run alembic db migrations."
+        permissions = [
+          "cloudsql.instances.connect",
+          "cloudsql.instances.get",
+          "cloudsql.instances.login",
+          "iam.serviceAccounts.getAccessToken",
+          "compute.networks.use",
+          "compute.subnetworks.use",
+          "vpcaccess.connectors.use",
+          "artifactregistry.repositories.downloadArtifacts",
+          "run.jobs.run",
+          "iam.serviceAccounts.actAs"
+        ]
+      }
+    }
     instances = [
       {
         instance = "common-db-test"
@@ -859,6 +877,11 @@ projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "notifyuser"
                 agent      = "postgres"
+                database_role_assignment = {
+                  readonly = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
+                }
               }
             ]
       }
@@ -867,6 +890,10 @@ projects = {
       sa-pubsub = {
         roles       = ["projects/c4hnrd-test/roles/rolequeue", "roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
         description = "Service Account for running pubsub services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/c4hnrd-test/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       sa-job = {
         roles       = ["projects/c4hnrd-test/roles/rolejob"]
@@ -2034,7 +2061,7 @@ projects = {
         description = "Service Account for running job services"
       },
       sa-api = {
-        roles       = ["projects/c4hnrd-sandbox/roles/roleapi"]
+        roles       = ["projects/c4hnrd-sandbox/roles/roleapi", "roles/cloudsql.instanceUser", "roles/run.serviceAgent"]
         description = "Service Account for running api services"
       },
       sa-queue = {

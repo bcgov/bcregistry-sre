@@ -62,3 +62,8 @@ variable "bucket_name" {
   description = "Name of the GCS bucket containing role definitions"
   type        = string
 }
+
+variable "all_service_account_emails" {
+  description = "Map of service account short names to emails"
+  type        = map(string)
+}

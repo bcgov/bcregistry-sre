@@ -87,13 +87,17 @@ module "sql_iam_users" {
   source = "./modules/db_role_assignment"
 
   project_id  = each.value.project_id
-  region = var.region
+  region      = var.region
   bucket_name = module.db_roles.target_bucket
   service_account_email = var.TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL
 
-  global_assignments       = var.global_database_role_assignment
-  environment_assignments  = try(lookup(var.environments, each.value.env, local.default_environment).database_role_assignment, {})
-  instances               = try(each.value.instances, {})
+  global_assignments      = var.global_database_role_assignment
+  environment_assignments = try(lookup(var.environments, each.value.env, local.default_environment).database_role_assignment, {})
+  instances               = try(each.value.instances, [])
+  all_service_account_emails = module.iam[each.key].service_account_emails
 
-  depends_on = [module.db_role_management]
+  depends_on = [
+    module.db_role_management,
+    module.iam
+  ]
 }

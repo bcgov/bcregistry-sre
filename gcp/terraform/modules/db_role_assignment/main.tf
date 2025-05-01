@@ -145,14 +145,23 @@ resource "null_resource" "user_tracker" {
   }
 }
 
-# Create IAM users - one per instance-user combination
 resource "google_sql_user" "iam_account_users" {
   for_each = null_resource.user_tracker
 
   project  = var.project_id
-  name     = each.value.triggers.user
   instance = each.value.triggers.instance
-  type     = "CLOUD_IAM_USER"
+
+  name = (
+    contains(keys(var.all_service_account_emails), each.value.triggers.user) ?
+    trimsuffix(var.all_service_account_emails[each.value.triggers.user], ".gserviceaccount.com") :
+    each.value.triggers.user
+  )
+
+  type = (
+    contains(keys(var.all_service_account_emails), each.value.triggers.user) ?
+    "CLOUD_IAM_SERVICE_ACCOUNT" :
+    "CLOUD_IAM_USER"
+  )
 
   lifecycle {
     replace_triggered_by = [null_resource.user_tracker[each.key].id]
@@ -180,7 +189,11 @@ resource "null_resource" "db_role_assignments" {
       REGION="${var.region}"
       FULL_INSTANCE_NAME="$PROJECT_ID:$REGION:$INSTANCE"
       GCS_URI="gs://${var.bucket_name}"
-      USER_EMAIL="${each.value.user}"
+      USER_EMAIL="${
+        contains(keys(var.all_service_account_emails), each.value.user) ?
+        trimsuffix(var.all_service_account_emails[each.value.user], ".gserviceaccount.com") :
+        each.value.user
+      }"
       DB_NAME="${each.value.db_name}"
       ROLE_TYPE="${each.value.role}"
 
@@ -208,4 +221,5 @@ resource "null_resource" "db_role_assignments" {
       echo "Response: $RESPONSE"
     EOT
   }
+
 }
