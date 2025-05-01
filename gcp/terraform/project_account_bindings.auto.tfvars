@@ -1573,7 +1573,7 @@ projects = {
                 owner      = "auth"
                 agent      = "postgres"
                 database_role_assignment = {
-                  readonly = ["thayne.werdal@gov.bc.ca"]
+                  readonly = ["thayne.werdal@gov.bc.ca", "hrvoje.fekete@gov.bc.ca"]
                   readwrite = []
                   admin = []
                 }
@@ -2037,10 +2037,11 @@ projects = {
               {
                 db_name    = "notify"
                 roles      = ["readonly", "readwrite", "admin"]
-                owner      = "sa-api@c4hnrd-sandbox.iam"
+                owner      = "notifyuser"
+                agent      = "postgres"
                 database_role_assignment = {
                   readonly = []
-                  readwrite = []
+                  readwrite = ["sa-api"]
                   admin = ["sa-db-migrate"]
                 }
               }
