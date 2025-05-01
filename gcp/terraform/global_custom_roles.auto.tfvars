@@ -107,21 +107,22 @@ global_custom_roles = {
       "cloudscheduler.jobs.list"
     ]
   },
-  # roledbmigrate = {
-  #   title = "Role DB Migration"
-  #   description = "Role to run alembic db migrations."
-  #   permission = [
-  #     "cloudsql.instances.connect",
-  #     "cloudsql.instances.get",
-  #     "iam.serviceAccounts.getAccessToken",
-  #     "compute.networks.use",
-  #     "compute.subnetworks.use",
-  #     "vpcaccess.connectors.use",
-  #     "artifactregistry.repositories.downloadArtifacts",
-  #     "run.jobs.run",
-  #     "iam.serviceAccounts.actAs"
-  #   ]
-  # },
+  roledbmigrate = {
+    title = "Role DB Migration"
+    description = "Role to run alembic db migrations."
+    permissions = [
+      "cloudsql.instances.connect",
+      "cloudsql.instances.get",
+      "cloudsql.instances.login",
+      "iam.serviceAccounts.getAccessToken",
+      "compute.networks.use",
+      "compute.subnetworks.use",
+      "vpcaccess.connectors.use",
+      "artifactregistry.repositories.downloadArtifacts",
+      "run.jobs.run",
+      "iam.serviceAccounts.actAs"
+    ]
+  },
   roleapi = {
     title = "Role API"
     description = "Role for API services."

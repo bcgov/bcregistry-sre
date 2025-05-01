@@ -151,6 +151,10 @@ projects = {
           }
         ]
       },
+      sa-db-migrate = {
+        roles       = ["projects/c4hnrd-prod/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
+      },
       sa-pubsub = {
         roles       = ["projects/c4hnrd-prod/roles/rolequeue", "roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
         description = "Service Account for running pubsub services"
@@ -840,24 +844,6 @@ projects = {
   "common-test" = {
     project_id = "c4hnrd-test"
     env = "test"
-    custom_roles = {
-      roledbmigrate = {
-        title = "Role DB Migration"
-        description = "Role to run alembic db migrations."
-        permissions = [
-          "cloudsql.instances.connect",
-          "cloudsql.instances.get",
-          "cloudsql.instances.login",
-          "iam.serviceAccounts.getAccessToken",
-          "compute.networks.use",
-          "compute.subnetworks.use",
-          "vpcaccess.connectors.use",
-          "artifactregistry.repositories.downloadArtifacts",
-          "run.jobs.run",
-          "iam.serviceAccounts.actAs"
-        ]
-      }
-    }
     instances = [
       {
         instance = "common-db-test"
@@ -1467,11 +1453,21 @@ projects = {
                 db_name    = "notify"
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "notifyuser"
+                agent      = "postgres"
+                database_role_assignment = {
+                  readonly = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
+                }
               }
             ]
       }
     ]
     service_accounts = {
+      sa-db-migrate = {
+        roles       = ["projects/c4hnrd-dev/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
+      },
       sa-pubsub = {
         roles       = ["projects/c4hnrd-dev/roles/rolequeue", "roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
         description = "Service Account for running pubsub services"
@@ -2045,13 +2041,17 @@ projects = {
                 database_role_assignment = {
                   readonly = []
                   readwrite = []
-                  admin = []
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
       }
     ]
     service_accounts = {
+      sa-db-migrate = {
+        roles       = ["projects/c4hnrd-sandbox/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
+      },
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
         description = "Service Account for running pubsub services"
