@@ -104,7 +104,11 @@ global_custom_roles = {
       "cloudscheduler.jobs.create",
       "cloudscheduler.jobs.delete",
       "cloudscheduler.jobs.get",
-      "cloudscheduler.jobs.list"
+      "cloudscheduler.jobs.list",
+      "pubsub.topics.publish",
+      "source.repos.get",
+      "source.repos.list",
+      "logging.logEntries.create"
     ]
   },
   roledbmigrate = {
