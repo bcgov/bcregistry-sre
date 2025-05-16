@@ -420,13 +420,23 @@ projects = {
         description = "Service Account for running job services"
       },
       sa-api = {
-        roles       = ["projects/a083gt-prod/roles/roleapi"]
+        roles       = ["projects/a083gt-prod/roles/roleapi", "roles/iam.serviceAccountTokenCreator"]
         description = "Service Account for running api services"
         resource_roles = [
             {
               resource = "projects/a083gt-prod/locations/northamerica-northeast1/services/namex-solr-synonyms-api-prod"
               roles    = ["roles/run.invoker"]
               resource_type = "cloud_run"
+            },
+            {
+              resource = "projects/a083gt-prod/topics/namex-emailer-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-prod/topics/namex-nr-state-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
             }
           ]
       },
@@ -1120,13 +1130,23 @@ projects = {
         description = "Service Account for running job services"
       },
       sa-api = {
-        roles       = ["projects/a083gt-test/roles/roleapi"]
+        roles       = ["projects/a083gt-test/roles/roleapi", "roles/iam.serviceAccountTokenCreator"]
         description = "Service Account for running api services"
         resource_roles = [
             {
               resource = "projects/a083gt-test/locations/northamerica-northeast1/services/namex-solr-synonyms-api-test"
               roles    = ["roles/run.invoker"]
               resource_type = "cloud_run"
+            },
+            {
+              resource = "projects/a083gt-test/topics/namex-emailer-test"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-test/topics/namex-nr-state-test"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
             }
           ]
       },
@@ -1834,13 +1854,23 @@ projects = {
         description = "Service Account for running job services"
       },
       sa-api = {
-        roles       = ["projects/a083gt-dev/roles/roleapi"]
+        roles       = ["projects/a083gt-dev/roles/roleapi", "roles/iam.serviceAccountTokenCreator"]
         description = "Service Account for running api services"
         resource_roles = [
             {
               resource = "projects/a083gt-dev/locations/northamerica-northeast1/services/namex-solr-synonyms-api-dev"
               roles    = ["roles/run.invoker"]
               resource_type = "cloud_run"
+            },
+            {
+              resource = "projects/a083gt-dev/topics/namex-emailer-dev"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-dev/topics/namex-nr-state-dev"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
             }
           ]
       },
@@ -2488,8 +2518,20 @@ projects = {
         description = "Service Account for running job services"
       },
       sa-api = {
-        roles       = ["projects/a083gt-integration/roles/roleapi"]
+        roles       = ["projects/a083gt-integration/roles/roleapi", "roles/iam.serviceAccountTokenCreator"]
         description = "Service Account for running api services"
+        resource_roles = [
+            {
+              resource = "projects/a083gt-integration/topics/namex-emailer-sandbox"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-integration/topics/namex-nr-state-sandbox"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            }
+          ]
       },
       sa-queue = {
         roles       = ["projects/a083gt-integration/roles/rolequeue"]
