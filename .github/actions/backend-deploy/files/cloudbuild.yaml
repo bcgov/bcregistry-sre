@@ -160,6 +160,7 @@ steps:
       TARGET_FROM="${PROJECT_NAME}-${_DEPLOYMENT_ENV_FROM:-}"
       IMAGE_PATH="${_REGION}-docker.pkg.dev/${_BUILD_PROJECT}/cloud-run-repo/${_APP_NAME}"
       IMAGE_PACKAGE_PATH="projects/${_BUILD_PROJECT}/locations/${_REGION}/repositories/cloud-run-repo/packages/${_APP_NAME}"
+      DOCKER_BUILDKIT=1
 
       # 🧩 Function to check if a Docker tag exists
       tag_exists() {
