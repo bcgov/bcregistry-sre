@@ -1863,6 +1863,11 @@ projects = {
               resource_type = "cloud_run"
             },
             {
+              resource = "projects/a083gt-dev/locations/northamerica-northeast1/services/namex-api-dev"
+              roles    = ["roles/run.invoker"]
+              resource_type = "cloud_run"
+            },
+            {
               resource = "projects/a083gt-dev/topics/namex-emailer-dev"
               roles    = ["roles/pubsub.publisher"]
               resource_type = "pubsub_topic"
