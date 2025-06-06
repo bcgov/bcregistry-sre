@@ -376,6 +376,10 @@ projects = {
       sa-queue = {
         roles       = ["projects/yfjq17-prod/roles/rolequeue"]
         description = "Service Account for running queue services"
+      },
+      sa-solr-importer = {
+        roles       = ["projects/yfjq17-prod/roles/rolesolrimporter"]
+        description = "Service Account for solr importer services"
       }
     }
   }
@@ -495,6 +499,10 @@ projects = {
             roles        = ["roles/cloudsql.client", "roles/cloudsql.admin"]
             project_id  = "a083gt-integration"
           }]
+      },
+      sa-solr-importer = {
+        roles       = ["projects/a083gt-prod/roles/rolesolrimporter"]
+        description = "Service Account for solr importer services"
       }
     }
     pam_bindings = [
@@ -1097,6 +1105,10 @@ projects = {
       sa-queue = {
         roles       = ["projects/yfjq17-test/roles/rolequeue"]
         description = "Service Account for running queue services"
+      },
+      sa-solr-importer = {
+        roles       = ["projects/yfjq17-test/roles/rolesolrimporter"]
+        description = "Service Account for solr importer services"
       }
     }
   }
@@ -1215,6 +1227,10 @@ projects = {
             }
           ]
       },
+      sa-solr-importer = {
+        roles       = ["projects/a083gt-test/roles/rolesolrimporter"]
+        description = "Service Account for solr importer services"
+      }
 
     }
   }
@@ -1806,6 +1822,10 @@ projects = {
       sa-queue = {
         roles       = ["projects/yfjq17-dev/roles/rolequeue"]
         description = "Service Account for running queue services"
+      },
+      sa-solr-importer = {
+        roles       = ["projects/yfjq17-dev/roles/rolesolrimporter"]
+        description = "Service Account for solr importer services"
       }
     }
   }
@@ -1923,6 +1943,10 @@ projects = {
       business-pubsub-sa = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
         description = ""
+      },
+      sa-solr-importer = {
+        roles       = ["projects/a083gt-dev/roles/rolesolrimporter"]
+        description = "Service Account for solr importer services"
       }
     }
   }
@@ -2314,6 +2338,10 @@ projects = {
       btr-cd = {
         roles       = ["roles/editor"]
         description = ""
+      },
+      sa-solr-importer = {
+        roles       = ["projects/yfjq17-tools/roles/rolesolrimporter"]
+        description = "Service Account for solr importer services"
       }
     }
   }
@@ -2336,6 +2364,10 @@ projects = {
       sa-queue = {
         roles       = ["projects/a083gt-tools/roles/rolequeue"]
         description = "Service Account for running queue services"
+      },
+      sa-solr-importer = {
+        roles       = ["projects/a083gt-tools/roles/rolesolrimporter"]
+        description = "Service Account for solr importer services"
       }
     }
   }
@@ -2585,6 +2617,10 @@ projects = {
               resource_type = "storage_bucket"
             }
           ]
+      },
+      sa-solr-importer = {
+        roles       = ["projects/a083gt-integration/roles/rolesolrimporter"]
+        description = "Service Account for solr importer services"
       }
     }
   }
