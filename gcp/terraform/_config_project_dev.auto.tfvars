@@ -395,7 +395,7 @@ dev_projects = {
           description = "Service Account for running job services"
         },
         sa-api = {
-          roles       = ["projects/a083gt-dev/roles/roleapi", "roles/iam.serviceAccountTokenCreator"]
+          roles       = ["projects/a083gt-dev/roles/roleapi", "roles/iam.serviceAccountTokenCreator", "roles/cloudtasks.enqueuer", "roles/cloudtasks.viewer", "roles/cloudtasks.taskDeleter"]
           description = "Service Account for running api services"
           resource_roles = [
               {
@@ -446,7 +446,6 @@ dev_projects = {
       }
     }
     cloud_tasks = {
-      location = "northamerica-northeast1"
       instances = [
         {
           instance = "namex-emailer-pending-send-queue-dev"
