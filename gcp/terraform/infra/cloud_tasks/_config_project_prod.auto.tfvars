@@ -1,10 +1,10 @@
 prod_projects = {
-  "bcr-businesses-dev" = {
-    project_id = "a083gt-dev"
-    env = "dev"
+  "bcr-businesses-prod" = {
+    project_id = "a083gt-prod"
+    env = "prod"
     instances = [
         {
-          instance = "namex-emailer-pending-send-queue-dev"
+          instance = "namex-emailer-pending-send-queue-prod"
           max_dispatches_per_second = 5
           max_concurrent_dispatches = 100
           max_attempts = 3
