@@ -202,6 +202,20 @@ variable "other_projects" {
       description  = optional(string, "Custom role managed by Terraform")
     })), {})
 
+    cloud_tasks = optional(map(object({
+      instances = list(object({
+        instance = string
+        max_dispatches_per_second = number
+        max_concurrent_dispatches = number
+        max_attempts = number
+        max_retry_duration = string
+        min_backoff = string
+        max_backoff = string
+        max_doublings = number
+        sampling_ratio = number
+      }))
+    })), {})
+
     pam_bindings = optional(list(object({
       role       = string
       principals = optional(list(string))
