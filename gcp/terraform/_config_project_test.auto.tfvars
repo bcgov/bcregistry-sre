@@ -287,7 +287,7 @@ test_projects = {
         description = "Service Account for running job services"
       },
       sa-api = {
-        roles       = ["projects/a083gt-test/roles/roleapi", "roles/iam.serviceAccountTokenCreator"]
+        roles       = ["projects/a083gt-test/roles/roleapi", "roles/iam.serviceAccountTokenCreator", "roles/cloudtasks.enqueuer", "roles/cloudtasks.viewer", "roles/cloudtasks.taskDeleter"]
         description = "Service Account for running api services"
         resource_roles = [
             {
@@ -403,6 +403,21 @@ test_projects = {
           }
         ]
       }
+    }
+    cloud_tasks = {
+      instances = [
+        {
+          instance = "namex-emailer-pending-send-queue-dev"
+          max_dispatches_per_second = 5
+          max_concurrent_dispatches = 100
+          max_attempts = 3
+          max_retry_duration = "60s"
+          min_backoff = "5s"
+          max_backoff = "5s"
+          max_doublings = 0
+          sampling_ratio = 1.0
+        }
+      ]
     }
   },
   "ppr-test" = {
