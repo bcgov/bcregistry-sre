@@ -20,6 +20,14 @@ locals {
   service_account_email = var.TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL
 }
 
+# Validate project existence before creating resources
+data "google_project" "project" {
+  for_each = {
+    for project in local.projects : project.project_id => project
+  }
+  project_id = each.key
+}
+
 resource "google_cloud_tasks_queue" "cloud_tasks_queue" {
   for_each = {
     for instance in flatten([
@@ -61,4 +69,7 @@ resource "google_cloud_tasks_queue" "cloud_tasks_queue" {
   stackdriver_logging_config {
     sampling_ratio = each.value.sampling_ratio
   }
+
+  # Ensure project exists before creating queue
+  depends_on = [data.google_project.project]
 }
