@@ -17,4 +17,3 @@ dev_projects = {
     ]
   }
 }
-  
