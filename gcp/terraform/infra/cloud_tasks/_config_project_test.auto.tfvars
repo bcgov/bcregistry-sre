@@ -1,5 +1,5 @@
 test_projects = {
-  "bcr-businesses-dev" = {
+  "bcr-businesses-test" = {
     project_id = "a083gt-test"
     env = "test"
     instances = [
