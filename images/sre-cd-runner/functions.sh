@@ -181,9 +181,12 @@ generate_manifest() {
     if [[ -n "${VPC_CONNECTOR}" ]]; then
         echo "🌐 Adding VPC connector configuration..."
         if [[ -n "${ROUTE_ALL_TO_VPC}" ]]; then
+            echo "Routing all traffic to VPC"
             yq e '.spec.template.metadata.annotations += {"run.googleapis.com/vpc-access-egress": "all-traffic", "run.googleapis.com/vpc-access-connector": env(VPC_CONNECTOR)}' -i "${temp_file}"
         else
+            echo "Routing internal traffic to VPC"
             yq e '.spec.template.metadata.annotations += {"run.googleapis.com/vpc-access-egress": "private-ranges-only", "run.googleapis.com/vpc-access-connector": env(VPC_CONNECTOR)}' -i "${temp_file}"
+        fi
     fi
 
     if [[ "${service_type}" == "service" ]]; then
