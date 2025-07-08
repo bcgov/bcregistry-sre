@@ -12,10 +12,6 @@ on:
       working_directory:
         type: string
         default: "."
-      project:
-        required: false
-        type: string
-        description: "Override project name for namespace (defaults to target)"
     secrets:
       OP_SERVICE_ACCOUNT_TOKEN:
         required: true
@@ -71,8 +67,9 @@ jobs:
           echo "TARGET=${{ env.DEPLOY_TARGET }}" >> "$GITHUB_OUTPUT"
           echo "TARGET_FROM=${{ env.TARGET_FROM }}" >> "$GITHUB_OUTPUT"
           echo "PIPELINE=${{ env.DEPLOY_PIPELINE }}" >> "$GITHUB_OUTPUT"
-          PROJECT="${{ inputs.project }}"
-          if [ -z "$PROJECT" ]; then
+          if [ "${{ env.DEPLOY_TARGET }}" = "sandbox" ]; then
+            PROJECT="tools"
+          else
             PROJECT="${{ env.DEPLOY_TARGET }}"
           fi
           echo "PROJECT=$PROJECT" >> "$GITHUB_OUTPUT"
