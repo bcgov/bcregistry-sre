@@ -249,12 +249,13 @@ environments = {
           "cloudtasks.locations.list",
           "cloudtasks.queues.get",
           "cloudtasks.queues.list",
+          "cloudtasks.queues.update",
           "cloudtasks.tasks.fullView",
           "cloudtasks.tasks.get",
           "cloudtasks.tasks.list",
           "cloudtasks.tasks.create",
-          "cloudtasks.tasks.update",
-          "cloudtasks.tasks.delete"
+          "cloudtasks.tasks.delete",
+          "cloudtasks.tasks.run"
         ]
       }
     }
