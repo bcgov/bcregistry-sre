@@ -12,6 +12,10 @@ on:
       working_directory:
         type: string
         default: "."
+      project:
+        required: false
+        type: string
+        description: "Override project name for namespace (defaults to target)"
     secrets:
       OP_SERVICE_ACCOUNT_TOKEN:
         required: true
@@ -47,6 +51,7 @@ jobs:
       TARGETS: ${{ steps.setenv.outputs.TARGETS }}
       TARGET: ${{ steps.setenv.outputs.TARGET }}
       TARGET_FROM: ${{ steps.setenv.outputs.TARGET_FROM }}
+      PROJECT: ${{ steps.setenv.outputs.PROJECT }}
 
     steps:
       # Checkout code
@@ -65,6 +70,11 @@ jobs:
           echo "TARGET=${{ env.DEPLOY_TARGET }}" >> "$GITHUB_OUTPUT"
           echo "TARGET_FROM=${{ env.TARGET_FROM }}" >> "$GITHUB_OUTPUT"
           echo "PIPELINE=${{ env.DEPLOY_PIPELINE }}" >> "$GITHUB_OUTPUT"
+          PROJECT="${{ inputs.project }}"
+          if [ -z "$PROJECT" ]; then
+            PROJECT="${{ env.DEPLOY_TARGET }}"
+          fi
+          echo "PROJECT=$PROJECT" >> "$GITHUB_OUTPUT"
 
   deploy:
     needs: setup
@@ -115,7 +125,7 @@ jobs:
         shell: bash
         env:
           SECRET_NAME: ${{ inputs.app_name }}-${{ needs.setup.outputs.TARGET }}-secret
-          NAMESPACE: ${{ secrets.OPENSHIFT_REPOSITORY }}-${{ needs.setup.outputs.TARGET }}
+          NAMESPACE: ${{ secrets.OPENSHIFT_REPOSITORY }}-${{ needs.setup.outputs.PROJECT }}
         run: |-
           LABELS=$(oc get secret ${SECRET_NAME} -o jsonpath='{.metadata.labels}' -n ${NAMESPACE})
           ANNOTATIONS=$(oc get secret ${SECRET_NAME} -o jsonpath='{.metadata.annotations}' -n ${NAMESPACE})
@@ -147,7 +157,7 @@ jobs:
         shell: bash
         env:
           TOOLS_NAMESPACE: ${{ secrets.OPENSHIFT_REPOSITORY }}-tools
-          NAMESPACE: ${{ secrets.OPENSHIFT_REPOSITORY }}-${{ needs.setup.outputs.TARGET }}
+          NAMESPACE: ${{ secrets.OPENSHIFT_REPOSITORY }}-${{ needs.setup.outputs.PROJECT }}
           APP_NAME: ${{ inputs.app_name }}
           TAG_NAME: ${{ needs.setup.outputs.TARGET }}
         run: |-
