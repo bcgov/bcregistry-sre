@@ -1,7 +1,7 @@
 steps:
 
 # Tag/Build/Push Image to Artifactory
-- name: "northamerica-northeast1-docker.pkg.dev/c4hnrd-tools/cicd-repo/sre-cd-runner:1.0.1"
+- name: 'northamerica-northeast1-docker.pkg.dev/c4hnrd-tools/cicd-repo/sre-cd-runner:${_CD_RUNNER_VERSION}'
   script: |
     #!/usr/bin/env bash
     set -euo pipefail  # Added for better error handling
@@ -240,6 +240,7 @@ options:
   automapSubstitutions: true
   substitutionOption: "ALLOW_LOOSE"
 substitutions:
+  _CD_RUNNER_VERSION: "1.0.1"
   _NODE_VERSION: ${_NODE_VERSION}
   _PNPM_VERSION: ${_PNPM_VERSION}
   _APP_NAME: ${_APP_NAME}
