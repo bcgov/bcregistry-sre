@@ -1,4 +1,4 @@
-FROM docker:28.1.1 as static-docker-source
+FROM docker:28.3.1 as static-docker-source
 FROM google/cloud-sdk:522.0.0-alpine
 COPY --from=static-docker-source /usr/local/libexec/docker/cli-plugins/docker-buildx /usr/local/libexec/docker/cli-plugins/docker-buildx
 
