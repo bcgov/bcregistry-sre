@@ -28,6 +28,7 @@ spec:
         run.googleapis.com/cloudsql-instances: valuePlaceHolder # from-param: ${cloudsql-instances}
     spec:
       taskCount: 1 # from-param: ${task-count}
+      maxRetries: 1 # from-param: ${task-max-retries}
       template:
         spec:
           containers:
@@ -45,6 +46,5 @@ spec:
               limits:
                 cpu: 1000m # from-param: ${resources-cpu}
                 memory: 512Mi # from-param: ${resources-memory}
-          maxRetries: 1 # from-param: ${task-max-retries}
           timeoutSeconds: '600' # from-param: ${task-timeout}
           serviceAccountName: valuePlaceHolder # from-param: ${service-account}
