@@ -45,6 +45,6 @@ spec:
               limits:
                 cpu: 1000m # from-param: ${resources-cpu}
                 memory: 512Mi # from-param: ${resources-memory}
-          maxRetries: 1 # from-param: ${task-max-retries}
           timeoutSeconds: '600' # from-param: ${task-timeout}
+          maxRetries: 1 # from-param: ${task-max-retries}
           serviceAccountName: valuePlaceHolder # from-param: ${service-account}
