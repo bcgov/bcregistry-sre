@@ -123,4 +123,5 @@ jobs:
           gcloud builds submit \
             --region=northamerica-northeast1 \
             --substitutions _SHORT_SHA=$SHORT_SHA,_NODE_VERSION="${{ inputs.node_version }}",_CD_RUNNER_VERSION="${{ inputs.cd_runner_version }}",_PNPM_VERSION="${{ inputs.pnpm_version }}",_APP_NAME="${{ inputs.app_name }}",_DEPLOYMENT_ENV="${{ needs.setup.outputs.TARGET }}",_DEPLOYMENT_ENV_FROM="${{ needs.setup.outputs.TARGET_FROM }}",_REDEPLOY="${{ inputs.redeploy}}" \
-            --config cloudbuild.yaml
+            --config cloudbuild.yaml \
+            --default-buckets-behavior=REGIONAL_USER_OWNED_BUCKET
