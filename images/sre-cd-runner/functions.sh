@@ -145,6 +145,8 @@ generate_secrets_file() {
         echo "❌ Error: Failed to generate secrets via 1Password vault." >&2
         return 1
     fi
+    # Remove lines where the value is just a hyphen (e.g., MY_VAR=-)
+    sed -i '/^[A-Za-z_][A-Za-z0-9_]*="-"[[:space:]]*$/d' ./devops/vaults."${env}"
 }
 
 # Generate manifest for each environment
