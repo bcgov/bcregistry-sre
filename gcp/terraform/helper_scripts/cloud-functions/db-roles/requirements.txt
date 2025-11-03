@@ -13,7 +13,7 @@ google-cloud-storage==2.7.0
 
 # Database connectors
 cloud-sql-python-connector==1.8.0
-pg8000==1.29.4
+pg8000==1.31.5
 
 # Runtime utilities
 cachetools==5.2.0
