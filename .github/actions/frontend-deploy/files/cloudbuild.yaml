@@ -108,6 +108,7 @@ steps:
     APP_HOST_NAME=$(op read -n "op://CD/${_DEPLOYMENT_ENV}/${_APP_NAME}/FIREBASE_HOST_NAME")
     DEPLOY_PROJECT_ID=$(op read -n "op://CD/${_DEPLOYMENT_ENV}/${_APP_NAME}/DEPLOY_PROJECT_ID")
     BUILD_FOLDER=$(op read -n "op://CD/${_DEPLOYMENT_ENV}/${_APP_NAME}/BUILD_FOLDER" 2>/dev/null || echo ".")
+    EXTRA_ENV_PATH=$(op read -n "op://CD/${_DEPLOYMENT_ENV}/${_APP_NAME}/EXTRA_ENV_PATH")
 
     # Validate critical variables
     [[ -z "$APP_HOST_NAME" ]] && { echo "❌ Error: APP_HOST_NAME is empty"; exit 1; }
@@ -125,6 +126,10 @@ steps:
     export APP_ENV="${_DEPLOYMENT_ENV}"
     [[ -f "./devops/vaults.env" ]] || { echo "❌ Error: vaults.env not found"; exit 1; }
     op inject -i ./devops/vaults.env -o "${BUILD_FOLDER}/.env" -f
+    if [ -n "$EXTRA_ENV_PATH" ]; then
+      [[ -f "${EXTRA_ENV_PATH}" ]] || { echo "❌ Error: EXTRA_ENV_PATH file not found"; exit 1; }
+      op inject -i "${EXTRA_ENV_PATH}" -f >> "${BUILD_FOLDER}/.env"
+    fi
 
     # Conditional secret loading with improved error handling
     load_secret() {
