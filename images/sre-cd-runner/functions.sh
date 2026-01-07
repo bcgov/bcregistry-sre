@@ -170,7 +170,20 @@ generate_manifest() {
     export VPC_CONNECTOR
     VPC_CONNECTOR=$(awk -F= '/^VPC_CONNECTOR/ {print $2}' "./devops/vaults.${env_name}")
     export VAL
-    VAL=$(awk '{f1=f2=$0; sub(/=.*/,"",f1); sub(/[^=]+=/,"",f2); printf "- name: %s\n  value: %s\n",f1,f2}' "./devops/vaults.${env_name}")
+    VAL=$(awk '{
+        f1=f2=$0;
+        sub(/=.*/,"",f1);
+        sub(/[^=]+=/,"",f2);
+        # Strip existing surrounding quotes safely
+        len = length(f2);
+        if (len >= 2 && substr(f2, 1, 1) == "\"" && substr(f2, len, 1) == "\"") {
+            f2 = substr(f2, 2, len-2);
+        }
+        # Escape double quotes in the value
+        gsub(/"/,"\\\"",f2);
+        # Wrap value in double quotes for proper YAML formatting
+        printf "- name: %s\n  value: \"%s\"\n",f1,f2
+    }' "./devops/vaults.${env_name}")
     export ROUTE_ALL_TO_VPC
     ROUTE_ALL_TO_VPC=$(awk -F= '/^ROUTE_ALL_TO_VPC/ {print $2}' "./devops/vaults.${env_name}")
 
