@@ -1,9 +1,9 @@
 output "role_definitions" {
   value = {
-    for filename, obj in google_storage_bucket_object.sql_files :
+    for filename, path in local.sql_scripts :
     trimsuffix(filename, ".sql") => {
-      gcs_uri  = "gs://${obj.bucket}/${obj.name}"
-      md5hash  = obj.md5hash
+      gcs_uri = "gs://${var.target_bucket}/${filename}"
+      md5hash = filemd5(path)
     }
   }
   description = "Combined output with both URIs and content hashes"

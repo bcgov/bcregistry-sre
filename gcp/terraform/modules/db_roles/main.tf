@@ -3,6 +3,12 @@ variable "target_bucket" {
   type        = string
 }
 
+variable "enabled" {
+  description = "Whether to upload SQL role definitions (intended to be true only in the default workspace)"
+  type        = bool
+  default     = true
+}
+
 locals {
   sql_scripts = {
     "readonly.sql"  = "${path.module}/scripts/readonly.sql"
@@ -12,7 +18,7 @@ locals {
 }
 
 resource "google_storage_bucket_object" "sql_files" {
-  for_each = local.sql_scripts
+  for_each = var.enabled ? local.sql_scripts : {}
 
   name   = each.key
   bucket = var.target_bucket

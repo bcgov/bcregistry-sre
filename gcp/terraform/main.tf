@@ -27,6 +27,16 @@ locals {
     pam_bindings            = []
   }
   service_account_email = var.TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL
+  
+  # Dynamically select projects based on workspace
+  # Workspace names: dev, test, prod, other (or default for all)
+  projects = terraform.workspace == "dev" ? var.dev_projects : (
+    terraform.workspace == "test" ? var.test_projects : (
+      terraform.workspace == "prod" ? var.prod_projects : (
+        terraform.workspace == "other" ? var.other_projects : {}
+      )
+    )
+  )
 }
 
 module "iam" {
@@ -56,6 +66,7 @@ module "pam" {
 module "db_roles" {
   source       = "./modules/db_roles"
   target_bucket = "common-tools-sql"
+  enabled       = terraform.workspace == "default"
 }
 
 module "db_role_management" {

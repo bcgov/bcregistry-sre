@@ -145,8 +145,104 @@ global_custom_roles = {  # Map of global custom roles
 }
 ```
 
+## Terraform Workspaces
+
+This configuration uses **Terraform workspaces** to separate state by environment. Each workspace manages only the resources for its corresponding environment.
+
+> **⚠️ Important:** Always use the `tf.sh` helper script instead of running `terraform` commands directly. The script handles environment setup, workspace selection, and prevents common mistakes.
+
+### Workspace Structure
+
+| Workspace | Config Variable | Manages |
+|-----------|-----------------|---------|
+| `dev` | `var.dev_projects` | All dev environment projects |
+| `test` | `var.test_projects` | All test environment projects |
+| `prod` | `var.prod_projects` | All prod environment projects |
+| `other` | `var.other_projects` | Sandbox and tools projects |
+| `default` | (none) | Shared resources only (SQL role scripts in GCS) |
+
+### State Files
+
+State is stored in GCS bucket `common-tools-terraform-state` with prefix `iam`:
+- `gs://common-tools-terraform-state/iam/default.tfstate` — default workspace
+- `gs://common-tools-terraform-state/iam/env:/dev/default.tfstate` — dev workspace
+- `gs://common-tools-terraform-state/iam/env:/test/default.tfstate` — test workspace
+- `gs://common-tools-terraform-state/iam/env:/prod/default.tfstate` — prod workspace
+- `gs://common-tools-terraform-state/iam/env:/other/default.tfstate` — other workspace
+
+### Using the tf.sh Helper Script
+
+The `tf.sh` script is the **recommended way** to run Terraform commands. It automatically:
+- Loads the `.env` file with required credentials
+- Selects the correct workspace
+- Prevents accidentally running against the wrong environment
+
+```bash
+# Check status of all workspaces
+./tf.sh status
+
+# Plan for a specific environment
+./tf.sh plan dev
+./tf.sh plan prod
+
+# Plan all workspaces
+./tf.sh plan all
+
+# Apply changes to a specific environment
+./tf.sh apply dev
+./tf.sh apply prod
+
+# List workspaces
+./tf.sh list
+```
+
+### Shared Resources
+
+The `default` workspace manages shared resources that all environments depend on:
+- SQL role definition scripts (`readonly.sql`, `readwrite.sql`, `admin.sql`) uploaded to `gs://common-tools-sql/`
+
+Environment workspaces reference these scripts but don't manage them. If you update the SQL scripts:
+```bash
+./tf.sh apply default
+./tf.sh apply all
+```
+
+### Global and Environment Configuration
+
+The following tfvars files are **shared inputs** loaded by all workspaces:
+- `_config_global_custom_roles.auto.tfvars` — Global custom roles and DB role assignments
+- `_config_environment_custom_roles.auto.tfvars` — Environment-level settings
+
+Changes to these files affect resources in multiple workspaces. After modifying them:
+```bash
+./tf.sh apply all
+```
+
 ## Applying Changes
 
 4. After merging the new branch into main you can manually run [Terraform-GCS](https://github.com/bcgov/bcregistry-sre/blob/main/.github/workflows/terraform-gcs.yaml) github action
 5. Output of terraform plan can be reviewed in https://github.com/bcgov/bcregistry-sre/actions/workflows/terraform-gcs.yaml
-6. Alternatively, you can run 'terraform plan', 'terraform apply' with your changes locally before pushing them to main. You would need to import .env file located in the Common Tools project's common-tools-terraform-state bucket (same location as Terraform's backend state file).
+6. Alternatively, you can run changes locally before pushing to main using the `tf.sh` script.
+
+### Applying Changes Locally
+
+> **⚠️ Always use `./tf.sh` instead of bare `terraform` commands.**
+
+```bash
+# Preview changes for dev
+./tf.sh plan dev
+
+# Apply changes to dev
+./tf.sh apply dev
+
+# Apply changes to all environments
+./tf.sh apply all
+
+# Check resource counts across all workspaces
+./tf.sh status
+```
+
+If you must use bare terraform commands (not recommended), ensure you:
+1. Source the environment file: `set -a && source .env && set +a`
+2. Select the correct workspace: `terraform workspace select <env>`
+3. Run plan/apply for that workspace only

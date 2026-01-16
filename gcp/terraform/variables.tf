@@ -211,15 +211,7 @@ variable "other_projects" {
   default = {}
 }
 
-# Merge all project maps into the main projects variable
-locals {
-  projects = merge(
-    var.dev_projects,
-    var.test_projects,
-    var.prod_projects,
-    var.other_projects
-  )
-}
+
 
 variable "global_custom_roles" {
   type = map(object({
