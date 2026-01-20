@@ -4,20 +4,37 @@ on:
   workflow_dispatch:
     inputs:
       terraform_directory:
-        description: 'Path to Terraform directory (e.g., gcp/terraform)'
+        description: 'Path to Terraform directory'
         required: true
         type: string
         default: 'gcp/terraform'
-      state_prefix:
-        description: 'Prefix for Terraform state (e.g., iam)'
+      workspace:
+        description: 'Terraform workspace (dev|test|prod|other|default|all)'
         required: true
-        type: string
-        default: 'iam'
+        type: choice
+        options:
+          - dev
+          - test
+          - prod
+          - other
+          - default
+          - all
+        default: 'dev'
+      action:
+        description: 'Terraform action to run'
+        required: true
+        type: choice
+        options:
+          - plan
+          - apply
+        default: 'plan'
 
 env:
   TF_VAR_TFC_GCP_PROVIDER_AUTH: ${{ secrets.TFC_GCP_PROVIDER_AUTH }}
   TF_VAR_TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL: ${{ secrets.TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL }}
   TF_VAR_TFC_GCP_WORKLOAD_PROVIDER_NAME: ${{ secrets.TFC_GCP_WORKLOAD_PROVIDER_NAME }}
+  STATE_BUCKET: 'common-tools-terraform-state'
+  STATE_PREFIX: 'iam'
 
 permissions:
   contents: read
@@ -25,7 +42,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Terraform - ${{ inputs.workspace }}'
     runs-on: ubuntu-latest
     environment: production
 
@@ -70,15 +87,11 @@ jobs:
       working-directory: ${{ inputs.terraform_directory }}
       run: |
         terraform init \
-          -backend-config="bucket=common-tools-terraform-state" \
-          -backend-config="prefix=${{ inputs.state_prefix }}" \
+          -backend-config="bucket=${{ env.STATE_BUCKET }}" \
+          -backend-config="prefix=${{ env.STATE_PREFIX }}" \
           -reconfigure \
           -input=false
 
-    - name: Terraform Plan
+    - name: Terraform ${{ inputs.action }}
       working-directory: ${{ inputs.terraform_directory }}
-      run: terraform plan -input=false
-
-    - name: Terraform Apply
-      working-directory: ${{ inputs.terraform_directory }}
-      run: terraform apply -auto-approve -input=false
+      run: ./tf.sh ${{ inputs.action }} ${{ inputs.workspace }}

@@ -26,8 +26,10 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-# Load environment
-if [[ -f .env ]]; then
+# Load environment (skip in CI - credentials already set)
+if [[ -n "$CI" || -n "$GITHUB_ACTIONS" ]]; then
+    echo -e "${BLUE}Running in CI - skipping .env load${NC}"
+elif [[ -f .env ]]; then
     set -a
     source .env
     set +a
