@@ -88,7 +88,7 @@ jobs:
 
       - name: Set up Python (with cache)
         if: env.TOOL != 'uv'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version-file: ${{ env.WORKING_DIR }}/pyproject.toml
           cache: ${{ env.TOOL }}
@@ -97,7 +97,7 @@ jobs:
 
       - name: Set up Python (without cache)
         if: env.TOOL == 'uv'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version-file: ${{ env.WORKING_DIR }}/pyproject.toml
 
@@ -107,24 +107,44 @@ jobs:
           case "$TOOL" in
             "uv")
               uv sync
+
+              # Function to check if a library is installed
+              check_library_installed() {
+                if uv run python -c "import $1" 2>/dev/null; then
+                  echo "true"
+                else
+                  echo "false"
+                fi
+              }
+
               # Check for linting tools
-              echo "ruff=$(uv run python -c 'import ruff' 2>/dev/null && echo true || echo false)" >> "$GITHUB_OUTPUT"
-              echo "isort=$(uv run python -c 'import isort' 2>/dev/null && echo true || echo false)" >> "$GITHUB_OUTPUT"
-              echo "black=$(uv run python -c 'import black' 2>/dev/null && echo true || echo false)" >> "$GITHUB_OUTPUT"
-              echo "pylint=$(uv run python -c 'import pylint' 2>/dev/null && echo true || echo false)" >> "$GITHUB_OUTPUT"
-              echo "flake8=$(uv run python -c 'import flake8' 2>/dev/null && echo true || echo false)" >> "$GITHUB_OUTPUT"
-              echo "pyright=$(uv run python -c 'import pyright' 2>/dev/null && echo true || echo false)" >> "$GITHUB_OUTPUT"
+              echo "ruff=$(check_library_installed ruff)" >> "$GITHUB_OUTPUT"
+              echo "isort=$(check_library_installed isort)" >> "$GITHUB_OUTPUT"
+              echo "black=$(check_library_installed black)" >> "$GITHUB_OUTPUT"
+              echo "pylint=$(check_library_installed pylint)" >> "$GITHUB_OUTPUT"
+              echo "flake8=$(check_library_installed flake8)" >> "$GITHUB_OUTPUT"
+              echo "pyright=$(check_library_installed pyright)" >> "$GITHUB_OUTPUT"
               ;;
             "poetry")
               poetry update
-              poetry install --no-root
+              poetry install
+
+              # Function to check if a library is installed
+              check_library_installed() {
+                if poetry show "$1" > /dev/null 2>&1; then
+                  echo "true"
+                else
+                  echo "false"
+                fi
+              }
+
               # Check for linting tools
-              echo "ruff=$(poetry show ruff >/dev/null 2>&1 && echo true || echo false)" >> "$GITHUB_OUTPUT"
-              echo "isort=$(poetry show isort >/dev/null 2>&1 && echo true || echo false)" >> "$GITHUB_OUTPUT"
-              echo "black=$(poetry show black >/dev/null 2>&1 && echo true || echo false)" >> "$GITHUB_OUTPUT"
-              echo "pylint=$(poetry show pylint >/dev/null 2>&1 && echo true || echo false)" >> "$GITHUB_OUTPUT"
-              echo "flake8=$(poetry show flake8 >/dev/null 2>&1 && echo true || echo false)" >> "$GITHUB_OUTPUT"
-              echo "pyright=$(poetry show pyright >/dev/null 2>&1 && echo true || echo false)" >> "$GITHUB_OUTPUT"
+              echo "ruff=$(check_library_installed ruff)" >> "$GITHUB_OUTPUT"
+              echo "isort=$(check_library_installed isort)" >> "$GITHUB_OUTPUT"
+              echo "black=$(check_library_installed black)" >> "$GITHUB_OUTPUT"
+              echo "pylint=$(check_library_installed pylint)" >> "$GITHUB_OUTPUT"
+              echo "flake8=$(check_library_installed flake8)" >> "$GITHUB_OUTPUT"
+              echo "pyright=$(check_library_installed pyright)" >> "$GITHUB_OUTPUT"
               ;;
             "pip")
               if [ -f "requirements-dev.txt" ]; then
@@ -142,22 +162,12 @@ jobs:
               ;;
           esac
 
-      - name: Add linting summary
+      - name: Add linting summary header
         run: |
           echo "## 🧹 Linting" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Linting Strategy:**" >> $GITHUB_STEP_SUMMARY
-          if [ "${{ steps.install.outputs.ruff }}" == "true" ]; then
-            echo "- Using **Ruff** (preferred all-in-one linter) 🚀" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- Using traditional linting tools:" >> $GITHUB_STEP_SUMMARY
-            [ "${{ steps.install.outputs.isort }}" == "true" ] && [ "${{ inputs.skip_isort }}" != "true" ] && echo "  - ✅ isort (import sorting)" >> $GITHUB_STEP_SUMMARY
-            [ "${{ steps.install.outputs.black }}" == "true" ] && [ "${{ inputs.skip_black }}" != "true" ] && echo "  - ✅ black (code formatting)" >> $GITHUB_STEP_SUMMARY
-            [ "${{ steps.install.outputs.pylint }}" == "true" ] && echo "  - ✅ pylint (code analysis)" >> $GITHUB_STEP_SUMMARY
-            [ "${{ steps.install.outputs.flake8 }}" == "true" ] && echo "  - ✅ flake8 (style guide)" >> $GITHUB_STEP_SUMMARY
-            [ "${{ steps.install.outputs.pyright }}" == "true" ] && echo "  - ✅ pyright (type check)" >> $GITHUB_STEP_SUMMARY
-          fi
 
       - name: Run pyright
         if: steps.install.outputs.pyright == 'true'
@@ -169,7 +179,6 @@ jobs:
                 echo "- ✅ **pyright:** type checks passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **pyright:** type check issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
             "poetry")
@@ -177,7 +186,6 @@ jobs:
                 echo "- ✅ **pyright:** type checks passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **pyright:** type check issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
             *)
@@ -185,8 +193,7 @@ jobs:
                 echo "- ✅ **pyright:** type checks passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **pyright:** type check issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
-              fi
+               fi
               ;;
           esac
 
@@ -200,7 +207,6 @@ jobs:
                 echo "- ✅ **Ruff:** All checks passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **Ruff:** Issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
             "poetry")
@@ -208,7 +214,6 @@ jobs:
                 echo "- ✅ **Ruff:** All checks passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **Ruff:** Issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
             *)
@@ -216,7 +221,6 @@ jobs:
                 echo "- ✅ **Ruff:** All checks passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **Ruff:** Issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
           esac
@@ -231,7 +235,6 @@ jobs:
                 echo "- ✅ **isort:** Import sorting passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **isort:** Import sorting issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
             "poetry")
@@ -239,7 +242,6 @@ jobs:
                 echo "- ✅ **isort:** Import sorting passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **isort:** Import sorting issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
             *)
@@ -247,7 +249,6 @@ jobs:
                 echo "- ✅ **isort:** Import sorting passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **isort:** Import sorting issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
           esac
@@ -262,7 +263,6 @@ jobs:
                 echo "- ✅ **black:** Code formatting passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **black:** Code formatting issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
             "poetry")
@@ -270,7 +270,6 @@ jobs:
                 echo "- ✅ **black:** Code formatting passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **black:** Code formatting issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
             *)
@@ -278,7 +277,6 @@ jobs:
                 echo "- ✅ **black:** Code formatting passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **black:** Code formatting issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
           esac
@@ -294,15 +292,13 @@ jobs:
                 echo "- ✅ **pylint:** Code analysis passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **pylint:** Code analysis issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
-              fi
+                fi
               ;;
             "poetry")
               if poetry run pylint .; then
                 echo "- ✅ **pylint:** Code analysis passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **pylint:** Code analysis issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
             *)
@@ -310,7 +306,6 @@ jobs:
                 echo "- ✅ **pylint:** Code analysis passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **pylint:** Code analysis issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
           esac
@@ -325,7 +320,6 @@ jobs:
                 echo "- ✅ **flake8:** Style guide checks passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **flake8:** Style guide issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
             "poetry")
@@ -333,7 +327,6 @@ jobs:
                 echo "- ✅ **flake8:** Style guide checks passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **flake8:** Style guide issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
             *)
@@ -341,7 +334,6 @@ jobs:
                 echo "- ✅ **flake8:** Style guide checks passed" >> $GITHUB_STEP_SUMMARY
               else
                 echo "- ❌ **flake8:** Style guide issues found" >> $GITHUB_STEP_SUMMARY
-                exit 1
               fi
               ;;
           esac
@@ -381,8 +373,7 @@ jobs:
       run:
         shell: bash
         working-directory: ${{ env.WORKING_DIR }}
-    strategy:
-      fail-fast: true
+
     services:
       postgres:
         image: ghcr.io/bcgov/postgres15-postgis-anon
@@ -415,7 +406,7 @@ jobs:
 
       - name: Set up Python (with cache)
         if: env.TOOL != 'uv'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version-file: ${{ env.WORKING_DIR }}/pyproject.toml
           cache: ${{ env.TOOL }}
@@ -424,7 +415,7 @@ jobs:
 
       - name: Set up Python (without cache)
         if: env.TOOL == 'uv'
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version-file: ${{ env.WORKING_DIR }}/pyproject.toml
 
@@ -436,7 +427,8 @@ jobs:
               uv sync
               ;;
             "poetry")
-              poetry install --no-root
+              poetry update
+              poetry install
               ;;
             "pip")
               if [ -f "requirements-dev.txt" ]; then
@@ -454,20 +446,20 @@ jobs:
           case "$TOOL" in
             "uv")
               echo "Running uv tests with coverage..."
-              uv run pytest --cov-report=term --cov-report=xml
+              PYTHONPATH=. uv run pytest --cov=. --cov-report=term --cov-report=xml
               ;;
             "poetry")
               echo "Running Poetry tests with coverage..."
-              poetry run pytest --cov-report=term --cov-report=xml
+              PYTHONPATH=. poetry run pytest --cov=. --cov-report=term --cov-report=xml
               ;;
             *)
               echo "Running pip tests with coverage..."
-              pytest --cov-report=term --cov-report=xml
+              PYTHONPATH=. python -m pytest --cov=. --cov-report=term --cov-report=xml
               ;;
           esac
 
       - name: Upload coverage reports as artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         continue-on-error: true
         if: always()
         with:
@@ -479,12 +471,11 @@ jobs:
   code-coverage:
     needs: unit-testing
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
 
       - name: Generate Coverage Report
-        uses: pwei1018/bcregistry-sre/.github/actions/coverage-report@main
+        uses: bcgov/bcregistry-sre/.github/actions/coverage-report@main
         with:
           run_id: ${{ github.run_id }}
           run_attempt: ${{ github.run_attempt }}

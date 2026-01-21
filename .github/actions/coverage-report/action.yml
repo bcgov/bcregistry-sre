@@ -3,8 +3,10 @@ description: "Coverage report"
 
 inputs:
   run_id:
+    description: "The ID of the workflow run"
     required: true
   run_attempt:
+    description: "The attempt number of the workflow run"
     required: true
   coverage_threshold:
     description: "Required coverage threshold percentage (default: 80)"
@@ -15,7 +17,7 @@ runs:
   using: "composite"
   steps:
     - name: Download coverage.xml from archive
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v7
       with:
         name: coverage-${{ inputs.run_id }}-${{ inputs.run_attempt }}
         path: ./coverage-reports/
