@@ -356,7 +356,7 @@ other_projects = {
                 owner      = "business_app"
                 database_role_assignment = {
                   readonly = []
-                  readwrite = []
+                  readwrite = ["sa-job", "sa-api"]
                   admin = []
                 }
               }
