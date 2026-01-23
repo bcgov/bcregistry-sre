@@ -48,7 +48,7 @@ pyasn1==0.6.2
 pycparser==2.22
 pyparsing==3.2.0
 python-dateutil==2.9.0.post0
-requests==2.32.3
+requests==2.32.4
 rsa==4.9
 scramp==1.4.5
 six==1.17.0
