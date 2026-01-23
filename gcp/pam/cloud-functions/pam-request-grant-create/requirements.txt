@@ -39,7 +39,7 @@ jinja2==3.1.4
 markupsafe==3.0.2
 multidict==6.1.0
 packaging==24.2
-pg8000==1.31.2
+pg8000==1.31.5
 propcache==0.2.1
 proto-plus==1.25.0
 protobuf==5.29.1
