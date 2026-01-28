@@ -89,7 +89,7 @@ test_projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "auth"
                 database_role_assignment = {
-                  readonly = ["syed.riyazzudin@gov.bc.ca", "noor.nayeem@gov.bc.ca", "patty.stemkens@gov.bc.ca", ", "janis.rogers@gov.bc.ca"]
+                  readonly = ["syed.riyazzudin@gov.bc.ca", "noor.nayeem@gov.bc.ca", "patty.stemkens@gov.bc.ca", "janis.rogers@gov.bc.ca"]
                   readwrite = ["sa-api", "anish.batra@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
