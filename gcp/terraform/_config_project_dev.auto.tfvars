@@ -608,8 +608,8 @@ dev_projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "strr"
                 database_role_assignment = {
-                  readonly = ["dima.kostenyuk@gov.bc.ca"]
-                  readwrite = []
+                  readonly = []
+                  readwrite = ["dima.kostenyuk@gov.bc.ca"]
                   admin = []
                 }
               }
