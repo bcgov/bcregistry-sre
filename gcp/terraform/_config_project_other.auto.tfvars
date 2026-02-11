@@ -355,23 +355,8 @@ other_projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "business_app"
                 database_role_assignment = {
-                  readonly = []
-                  readwrite = ["sa-job", "sa-api"]
-                  admin = []
-                }
-              }
-            ]
-      },
-      {
-        instance = "lear-db-sandbox"
-        databases =  [
-          {
-                db_name    = "lear"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "user5SJ"
-                database_role_assignment = {
                   readonly = ["sa-solr-importer"]
-                  readwrite = []
+                  readwrite = ["sa-job", "sa-api"]
                   admin = []
                 }
               }
