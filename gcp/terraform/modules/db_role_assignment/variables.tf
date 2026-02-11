@@ -1,3 +1,7 @@
+variable "service_account_email" {
+  description = "Service account email used by endpoints for DB role management"
+  type        = string
+}
 variable "project_id" {
   description = "The GCP project ID"
   type        = string
@@ -53,10 +57,6 @@ variable "cloud_function_url" {
   default     = "https://northamerica-northeast1-c4hnrd-tools.cloudfunctions.net/db-roles-assign"
 }
 
-variable "service_account_email" {
-  description = "The service account email address that Terraform Cloud will use to authenticate to Google Cloud"
-  type        = string
-}
 
 variable "bucket_name" {
   description = "Name of the GCS bucket containing role definitions"

@@ -30,21 +30,19 @@ on:
         default: 'plan'
 
 env:
-  TF_VAR_TFC_GCP_PROVIDER_AUTH: ${{ secrets.TFC_GCP_PROVIDER_AUTH }}
-  TF_VAR_TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL: ${{ secrets.TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL }}
-  TF_VAR_TFC_GCP_WORKLOAD_PROVIDER_NAME: ${{ secrets.TFC_GCP_WORKLOAD_PROVIDER_NAME }}
+  TF_VAR_DB_ROLE_MANAGEMENT_SERVICE_ACCOUNT_EMAIL: ${{ secrets.TF_VAR_DB_ROLE_MANAGEMENT_SERVICE_ACCOUNT_EMAIL }}
+
   STATE_BUCKET: 'common-tools-terraform-state'
   STATE_PREFIX: 'iam'
 
 permissions:
   contents: read
-  id-token: write
+  id-token: write   # required for Workload Identity Federation
 
 jobs:
   terraform:
     name: 'Terraform - ${{ inputs.workspace }}'
     runs-on: ubuntu-latest
-    environment: production
 
     defaults:
       run:
@@ -56,18 +54,13 @@ jobs:
 
     - name: Authenticate to Google Cloud
       id: auth
-      uses: google-github-actions/auth@v1
+      uses: google-github-actions/auth@v2
       with:
-        credentials_json: ${{ secrets.GCP_SA_KEY }}
-        create_credentials_file: true
-        export_environment_variables: true
-        access_token_lifetime: 3600s
-        access_token_scopes: |
-          https://www.googleapis.com/auth/cloud-platform
-          https://www.googleapis.com/auth/compute
+        workload_identity_provider: ${{ secrets.TFC_GCP_WORKLOAD_PROVIDER_NAME }}
+        service_account: ${{ secrets.TF_VAR_DB_ROLE_MANAGEMENT_SERVICE_ACCOUNT_EMAIL }}
 
     - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@v1
+      uses: google-github-actions/setup-gcloud@v2
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
