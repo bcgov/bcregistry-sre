@@ -74,7 +74,7 @@ module "db_role_management" {
   project_id  = each.value.project_id
   instances   = each.value.instances
   bucket_name = module.db_roles.target_bucket
-  service_account_email = var.TF_VAR_DB_ROLE_MANAGEMENT_SERVICE_ACCOUNT_EMAIL
+  service_account_email = var.DB_ROLE_MANAGEMENT_SERVICE_ACCOUNT_EMAIL
   region = var.region
 
   # Pass the role definitions as input variable
@@ -98,7 +98,7 @@ module "sql_iam_users" {
   project_id  = each.value.project_id
   region      = var.region
   bucket_name = module.db_roles.target_bucket
-  service_account_email = var.TF_VAR_DB_ROLE_MANAGEMENT_SERVICE_ACCOUNT_EMAIL
+  service_account_email = var.DB_ROLE_MANAGEMENT_SERVICE_ACCOUNT_EMAIL
 
   global_assignments      = var.global_database_role_assignment
   environment_assignments = try(lookup(var.environments, each.value.env, local.default_environment).database_role_assignment, {})
