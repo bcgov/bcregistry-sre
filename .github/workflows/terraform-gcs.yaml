@@ -58,7 +58,7 @@ jobs:
       uses: google-github-actions/auth@v2
       with:
         workload_identity_provider: ${{ secrets.TFC_GCP_WORKLOAD_PROVIDER_NAME }}
-        service_account: ${{ secrets.TFC_GCP_RUN_SERVICE_ACCOUNT_EMAIL }}
+        service_account: ${{ secrets.TF_VAR_DB_ROLE_MANAGEMENT_SERVICE_ACCOUNT_EMAIL }}
 
     - name: Set up Cloud SDK
       uses: google-github-actions/setup-gcloud@v2
