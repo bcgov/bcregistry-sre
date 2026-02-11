@@ -1,4 +1,4 @@
-variable "db_role_management_service_account_email" {
+variable "DB_ROLE_MANAGEMENT_SERVICE_ACCOUNT_EMAIL" {
   description = "Service account email used by endpoints for DB role management"
   type        = string
 }
