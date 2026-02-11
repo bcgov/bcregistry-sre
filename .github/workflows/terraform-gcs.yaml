@@ -43,7 +43,6 @@ jobs:
   terraform:
     name: 'Terraform - ${{ inputs.workspace }}'
     runs-on: ubuntu-latest
-    environment: production
 
     defaults:
       run:
