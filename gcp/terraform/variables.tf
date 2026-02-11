@@ -1,4 +1,4 @@
-variable "DB_ROLE_MANAGEMENT_SERVICE_ACCOUNT_EMAIL" {
+variable "TF_VAR_DB_ROLE_MANAGEMENT_SERVICE_ACCOUNT_EMAIL" {
   description = "Service account email used by endpoints for DB role management"
   type        = string
 }
