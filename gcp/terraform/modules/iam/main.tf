@@ -145,3 +145,24 @@ resource "google_service_account_iam_member" "resource_iam_members" {
   role               = each.value.role
   member             = "serviceAccount:${google_service_account.sa[each.value.sa_name].email}"
 }
+
+locals {
+  merged_iam_bindings = flatten([
+    for binding in concat(var.global_iam_bindings, var.env.iam_bindings, var.iam_bindings) : [
+      for member in binding.members : {
+        role   = binding.role
+        member = can(regex(":", member)) ? member : "user:${member}"
+      }
+    ]
+  ])
+}
+
+resource "google_project_iam_member" "user_iam_members" {
+  for_each = {
+    for combo in local.merged_iam_bindings : "${combo.role}-${combo.member}" => combo
+  }
+
+  project = var.project_id
+  role    = each.value.role
+  member  = each.value.member
+}

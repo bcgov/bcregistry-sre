@@ -56,6 +56,11 @@ variable "dev_projects" {
       principals = optional(list(string))
       role_type  = optional(string)
     })), [])
+
+    iam_bindings = optional(list(object({
+      role    = string
+      members = list(string)
+    })), [])
   }))
   default = {}
 }
@@ -102,6 +107,11 @@ variable "test_projects" {
       role       = string
       principals = optional(list(string))
       role_type  = optional(string)
+    })), [])
+
+    iam_bindings = optional(list(object({
+      role    = string
+      members = list(string)
     })), [])
   }))
   default = {}
@@ -150,6 +160,11 @@ variable "prod_projects" {
       principals = optional(list(string))
       role_type  = optional(string)
     })), [])
+
+    iam_bindings = optional(list(object({
+      role    = string
+      members = list(string)
+    })), [])
   }))
   default = {}
 }
@@ -197,6 +212,11 @@ variable "other_projects" {
       principals = optional(list(string))
       role_type  = optional(string)
     })), [])
+
+    iam_bindings = optional(list(object({
+      role    = string
+      members = list(string)
+    })), [])
   }))
   default = {}
 }
@@ -243,6 +263,11 @@ variable "environments" {
       principals = optional(list(string))
       role_type  = optional(string)
     })), [])
+
+    iam_bindings = optional(list(object({
+      role    = string
+      members = list(string)
+    })), [])
   }))
   default = {}
 }
@@ -251,4 +276,13 @@ variable "skip_db_role_refresh" {
   description = "Skip refreshing database role assignments during plan/apply to improve performance"
   type        = bool
   default     = false
+}
+
+variable "global_iam_bindings" {
+  description = "Global IAM bindings applied to all projects"
+  type = list(object({
+    role    = string
+    members = list(string)
+  }))
+  default = []
 }
