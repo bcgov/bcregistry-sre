@@ -165,6 +165,13 @@ prod_projects = {
       sa-job = {
         roles       = ["projects/c4hnrd-prod/roles/rolejob"]
         description = "Service Account for running job services"
+        resource_roles = [
+          {
+            resource = "sre-buckets"
+            roles    = ["roles/storage.objectUser"]
+            resource_type = "storage_bucket"
+          }
+        ]
       },
       sa-notebook = {
         roles       = ["projects/c4hnrd-prod/roles/rolejob", ]
