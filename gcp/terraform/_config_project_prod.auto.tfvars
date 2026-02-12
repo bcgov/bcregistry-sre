@@ -833,9 +833,9 @@ prod_projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "strr"
                 database_role_assignment = {
-                  readonly = ["dietrich.wolpert@gov.bc.ca", "mike.huffman@gov.bc.ca", "anushka.halder@gov.bc.ca",  "sa-strr-analytics@bcrbk9-prod.iam.gserviceaccount.com"]
-                  readwrite = []
-                  admin = []
+                  readonly = ["sa-job", "dietrich.wolpert@gov.bc.ca", "mike.huffman@gov.bc.ca", "anushka.halder@gov.bc.ca",  "sa-strr-analytics@bcrbk9-prod.iam.gserviceaccount.com"]
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
@@ -856,6 +856,10 @@ prod_projects = {
       sa-pubsub = {
         roles       = ["roles/bigquery.dataOwner", "roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
         description = "Service Account for running pubsub services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/bcrbk9-prod/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       sa-job = {
         roles       = ["projects/bcrbk9-prod/roles/rolejob", "roles/pubsub.publisher"]

@@ -608,9 +608,9 @@ dev_projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "strr"
                 database_role_assignment = {
-                  readonly = []
-                  readwrite = ["dima.kostenyuk@gov.bc.ca"]
-                  admin = []
+                  readonly = ["sa-job"]
+                  readwrite = ["sa-api", "dima.kostenyuk@gov.bc.ca"]
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
@@ -620,6 +620,10 @@ dev_projects = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
         description = "Service Account for running pubsub services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/bcrbk9-dev/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       sa-job = {
         roles       = ["projects/bcrbk9-dev/roles/rolejob"]

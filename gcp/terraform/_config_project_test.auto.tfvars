@@ -566,9 +566,9 @@ test_projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "strr"
                 database_role_assignment = {
-                  readonly = []
-                  readwrite = []
-                  admin = []
+                  readonly = ["sa-job"]
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
@@ -579,6 +579,10 @@ test_projects = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
         description = "Service Account for running pubsub services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/bcrbk9-test/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       sa-job = {
         roles       = ["projects/bcrbk9-test/roles/rolejob"]
