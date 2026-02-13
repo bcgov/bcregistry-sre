@@ -1,5 +1,12 @@
 default_principals = ["user:andriy.bolyachevets@gov.bc.ca"]
 
+global_iam_bindings = [
+   {
+     role    = "roles/viewer"
+     members = []
+   }
+]
+
 global_database_role_assignment = {
   readonly = []
   readwrite = []

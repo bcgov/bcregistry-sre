@@ -42,6 +42,26 @@ variable "env" {
       permissions  = list(string)
       description  = optional(string, "Custom role managed by Terraform")
     })), {})
+    iam_bindings = optional(list(object({
+      role    = string
+      members = list(string)
+    })), [])
   })
   default = {}
+}
+
+variable "global_iam_bindings" {
+  type = list(object({
+    role    = string
+    members = list(string)
+  }))
+  default = []
+}
+
+variable "iam_bindings" {
+  type = list(object({
+    role    = string
+    members = list(string)
+  }))
+  default = []
 }
