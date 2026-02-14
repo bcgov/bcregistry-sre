@@ -2,6 +2,152 @@ prod_projects = {
   "analytics-int-prod" = {
     project_id = "mvnjri-prod"
     env = "prod"
+    iam_bindings = [
+      {
+        role    = "projects/mvnjri-prod/roles/CustomRole"
+        members = [
+          "anushka.halder@gov.bc.ca",
+          "mike.huffman@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/mvnjri-prod/roles/SRE"
+        members = [
+          "anish.patel@gov.bc.ca",
+          "jacky.pham@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/mvnjri-prod/roles/roleba"
+        members = ["janis.rogers@gov.bc.ca"]
+      },
+      {
+        role    = "projects/mvnjri-prod/roles/roledeveloper"
+        members = [
+          "Argus.1.Chiu@gov.bc.ca",
+          "anushka.halder@gov.bc.ca",
+          "darci.denis@gov.bc.ca",
+          "genevieve.primeau@gov.bc.ca",
+          "hrvoje.fekete@gov.bc.ca",
+          "james.mcfarlane@gov.bc.ca",
+          "janis.rogers@gov.bc.ca",
+          "jia.xu@gov.bc.ca",
+          "john.a.m.lane@gov.bc.ca",
+          "melissa.stanton@gov.bc.ca",
+          "mike.huffman@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "patty.stemkens@gov.bc.ca",
+          "severin.beauvais@gov.bc.ca",
+          "vikas.singh@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/mvnjri-prod/roles/roleitops"
+        members = [
+          "Brett.cassidy@gov.bc.ca",
+          "david.draker@gov.bc.ca",
+          "jay.sharp@gov.bc.ca",
+          "michelle.hohertz@gov.bc.ca",
+          "tyson.graham@gov.bc.ca",
+          "varek.boettcher@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/cloudsql.admin"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/cloudsql.client"
+        members = [
+          "siddharth.chaturvedi@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/cloudsql.instanceUser"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "anushka.halder@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "severin.beauvais@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/cloudsql.studioUser"
+        members = ["anushka.halder@gov.bc.ca"]
+      },
+      {
+        role    = "roles/cloudsql.viewer"
+        members = ["siddharth.chaturvedi@gov.bc.ca"]
+      },
+      {
+        role    = "roles/editor"
+        members = ["travis.semple@gov.bc.ca"]
+      },
+      {
+        role    = "roles/owner"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [
+          "Brett.cassidy@gov.bc.ca",
+          "andriy.bolyachevets@gov.bc.ca",
+          "david.draker@gov.bc.ca",
+          "jay.sharp@gov.bc.ca",
+          "jia.xu@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
+          "michelle.hohertz@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+          "tyson.graham@gov.bc.ca",
+          "varek.boettcher@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [
+          "Brett.cassidy@gov.bc.ca",
+          "andriy.bolyachevets@gov.bc.ca",
+          "david.draker@gov.bc.ca",
+          "jay.sharp@gov.bc.ca",
+          "jia.xu@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
+          "michelle.hohertz@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+          "tyson.graham@gov.bc.ca",
+          "varek.boettcher@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/storage.admin"
+        members = ["travis.semple@gov.bc.ca"]
+      },
+      {
+        role    = "roles/storage.objectAdmin"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/viewer"
+        members = ["siddharth.chaturvedi@gov.bc.ca"]
+      },
+    ]
     instances = [
       {
         instance = "fin-warehouse-prod"
@@ -105,6 +251,82 @@ prod_projects = {
   "common-prod" = {
     project_id = "c4hnrd-prod"
     env = "prod"
+    iam_bindings = [
+      {
+        role    = "projects/c4hnrd-prod/roles/SRE"
+        members = [
+          "anish.patel@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
+          "jacky.pham@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/c4hnrd-prod/roles/roledeveloper"
+        members = [
+          "Argus.1.Chiu@gov.bc.ca",
+          "dietrich.wolpert@gov.bc.ca",
+          "eve.deng@gov.bc.ca",
+          "hongjing.chen@gov.bc.ca",
+          "hrvoje.fekete@gov.bc.ca",
+          "jia.xu@gov.bc.ca",
+          "ketaki.deodhar@gov.bc.ca",
+          "lucas.o'neil@gov.bc.ca",
+          "megan.a.wong@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "rajandeep.kaur@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+          "thayne.werdal@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/compute.networkUser"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/monitoring.admin"
+        members = ["anish.patel@gov.bc.ca"]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [
+          "Argus.1.Chiu@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
+          "eve.deng@gov.bc.ca",
+          "hongjing.chen@gov.bc.ca",
+          "ketaki.deodhar@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [
+          "Argus.1.Chiu@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
+          "eve.deng@gov.bc.ca",
+          "hongjing.chen@gov.bc.ca",
+          "ketaki.deodhar@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/storage.admin"
+        members = ["anish.patel@gov.bc.ca"]
+      },
+      {
+        role    = "roles/storage.objectAdmin"
+        members = ["doug.lovett@gov.bc.ca"]
+      },
+    ]
     instances = [
       {
         instance = "common-db-prod"
@@ -252,6 +474,102 @@ prod_projects = {
   "connect-prod" = {
     project_id = "gtksf3-prod"
     env = "prod"
+    iam_bindings = [
+      {
+        role    = "projects/gtksf3-prod/roles/SRE"
+        members = [
+          "anish.patel@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
+          "jacky.pham@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/gtksf3-prod/roles/roledeveloper"
+        members = [
+          "Argus.1.Chiu@gov.bc.ca",
+          "anushka.halder@gov.bc.ca",
+          "chiu.oddyseus@gov.bc.ca",
+          "dietrich.wolpert@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
+          "eve.deng@gov.bc.ca",
+          "hongjing.chen@gov.bc.ca",
+          "hrvoje.fekete@gov.bc.ca",
+          "jia.xu@gov.bc.ca",
+          "ketaki.deodhar@gov.bc.ca",
+          "megan.a.wong@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "rajandeep.kaur@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+          "syed.riyazzudin@gov.bc.ca",
+          "thayne.werdal@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+          "vysakh.menon@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/gtksf3-prod/roles/rolequeue"
+        members = ["doug.lovett@gov.bc.ca"]
+      },
+      {
+        role    = "roles/cloudsql.admin"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/editor"
+        members = [
+          "kial.jinnah@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/owner"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [
+          "Argus.1.Chiu@gov.bc.ca",
+          "andriy.bolyachevets@gov.bc.ca",
+          "eve.deng@gov.bc.ca",
+          "jia.xu@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+          "rajandeep.kaur@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [
+          "Argus.1.Chiu@gov.bc.ca",
+          "andriy.bolyachevets@gov.bc.ca",
+          "eve.deng@gov.bc.ca",
+          "jia.xu@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+          "rajandeep.kaur@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/storage.objectAdmin"
+        members = ["andriy.bolyachevets@gov.bc.ca"]
+      },
+    ]
     instances = [
       {
         instance = "auth-db-prod"
@@ -386,6 +704,48 @@ prod_projects = {
   "bor-prod" = {
     project_id = "yfjq17-prod"
     env = "prod"
+    iam_bindings = [
+      {
+        role    = "projects/yfjq17-prod/roles/SRE"
+        members = [
+          "anish.patel@gov.bc.ca",
+          "jacky.pham@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/yfjq17-prod/roles/roledeveloper"
+        members = [
+          "dietrich.wolpert@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/owner"
+        members = [
+          "kial.jinnah@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [
+          "kial.jinnah@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [
+          "kial.jinnah@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/viewer"
+        members = ["steven.chen@gov.bc.ca"]
+      },
+    ]
     instances = [
       {
         instance = "bor-db-prod"
@@ -440,6 +800,83 @@ prod_projects = {
   "bcr-businesses-prod" = {
     project_id = "a083gt-prod"
     env = "prod"
+    iam_bindings = [
+      {
+        role    = "projects/a083gt-prod/roles/SRE"
+        members = [
+          "Argus.1.Chiu@gov.bc.ca",
+          "anish.patel@gov.bc.ca",
+          "jacky.pham@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/a083gt-prod/roles/roledeveloper"
+        members = [
+          "david.li@gov.bc.ca",
+          "dietrich.wolpert@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
+          "eve.deng@gov.bc.ca",
+          "felipe.moraes@gov.bc.ca",
+          "hongjing.chen@gov.bc.ca",
+          "hrvoje.fekete@gov.bc.ca",
+          "ketaki.deodhar@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
+          "lucas.o'neil@gov.bc.ca",
+          "megan.a.wong@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "mihai.dinu@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "rajandeep.kaur@gov.bc.ca",
+          "severin.beauvais@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+          "syed.riyazzudin@gov.bc.ca",
+          "thayne.werdal@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+          "vikas.singh@gov.bc.ca",
+          "vysakh.menon@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/a083gt-prod/roles/roleitops"
+        members = ["doug.lovett@gov.bc.ca"]
+      },
+      {
+        role    = "roles/iam.serviceAccountUser"
+        members = ["steven.chen@gov.bc.ca"]
+      },
+      {
+        role    = "roles/pubsub.admin"
+        members = ["kial.jinnah@gov.bc.ca"]
+      },
+      {
+        role    = "roles/run.admin"
+        members = ["steven.chen@gov.bc.ca"]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [
+          "eve.deng@gov.bc.ca",
+          "hongjing.chen@gov.bc.ca",
+          "ketaki.deodhar@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [
+          "eve.deng@gov.bc.ca",
+          "hongjing.chen@gov.bc.ca",
+          "ketaki.deodhar@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+    ]
     instances = [
       {
         instance = "businesses-db-prod"
@@ -568,6 +1005,27 @@ prod_projects = {
   "business-number-hub-prod" = {
     project_id = "keee67-prod"
     env = "prod"
+    iam_bindings = [
+      {
+        role    = "projects/keee67-prod/roles/SRE"
+        members = [
+          "anish.patel@gov.bc.ca",
+          "jacky.pham@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/owner"
+        members = ["patrick.wei@gov.bc.ca"]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = ["patrick.wei@gov.bc.ca"]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = ["patrick.wei@gov.bc.ca"]
+      },
+    ]
     instances = [
       {
         instance = "bn-hub-prod"
@@ -629,6 +1087,56 @@ prod_projects = {
   "ppr-prod" = {
     project_id = "eogruh-prod"
     env = "prod"
+    iam_bindings = [
+      {
+        role    = "projects/eogruh-prod/roles/SRE"
+        members = [
+          "anish.patel@gov.bc.ca",
+          "jacky.pham@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/eogruh-prod/roles/roledeveloper"
+        members = [
+          "dietrich.wolpert@gov.bc.ca",
+          "eve.deng@gov.bc.ca",
+          "hongjing.chen@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/cloudsql.client"
+        members = ["omid.x.zamani@gov.bc.ca"]
+      },
+      {
+        role    = "roles/owner"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/viewer"
+        members = ["omid.x.zamani@gov.bc.ca"]
+      },
+    ]
     instances = [
       {
         instance = "ppr-prod"
@@ -734,6 +1242,51 @@ prod_projects = {
   "search-prod" = {
     project_id = "k973yf-prod"
     env = "prod"
+    iam_bindings = [
+      {
+        role    = "projects/k973yf-prod/roles/SRE"
+        members = [
+          "anish.patel@gov.bc.ca",
+          "jacky.pham@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/k973yf-prod/roles/roledeveloper"
+        members = [
+          "hrvoje.fekete@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/owner"
+        members = [
+          "doug.lovett@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
+          "hrvoje.fekete@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
+          "hrvoje.fekete@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/viewer"
+        members = ["andriy.bolyachevets@gov.bc.ca"]
+      },
+    ]
     instances = [
       {
         instance = "search-db-prod"
@@ -805,6 +1358,80 @@ prod_projects = {
   "web-presence-prod" = {
     project_id = "yfthig-prod"
     env = "prod"
+    iam_bindings = [
+      {
+        role    = "projects/yfthig-prod/roles/SRE"
+        members = [
+          "anish.patel@gov.bc.ca",
+          "jacky.pham@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/yfthig-prod/roles/roledeveloper"
+        members = [
+          "Argus.1.Chiu@gov.bc.ca",
+          "dietrich.wolpert@gov.bc.ca",
+          "eve.deng@gov.bc.ca",
+          "hongjing.chen@gov.bc.ca",
+          "ketaki.deodhar@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+          "thayne.werdal@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/editor"
+        members = ["omid.x.zamani@gov.bc.ca"]
+      },
+      {
+        role    = "roles/firebase.admin"
+        members = [
+          "eve.deng@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/owner"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
+          "eve.deng@gov.bc.ca",
+          "hongjing.chen@gov.bc.ca",
+          "ketaki.deodhar@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
+          "eve.deng@gov.bc.ca",
+          "hongjing.chen@gov.bc.ca",
+          "ketaki.deodhar@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+        ]
+      },
+    ]
     service_accounts = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
@@ -831,6 +1458,55 @@ prod_projects = {
   "strr-prod" = {
     project_id = "bcrbk9-prod"
     env = "prod"
+    iam_bindings = [
+      {
+        role    = "projects/bcrbk9-prod/roles/SRE"
+        members = [
+          "anish.patel@gov.bc.ca",
+          "jacky.pham@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/bcrbk9-prod/roles/roledeveloper"
+        members = [
+          "anushka.halder@gov.bc.ca",
+          "dietrich.wolpert@gov.bc.ca",
+          "karim.jazzar@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "mike.huffman@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/bcrbk9-prod/roles/serviceuser"
+        members = ["mike.huffman@gov.bc.ca"]
+      },
+      {
+        role    = "roles/iap.httpsResourceAccessor"
+        members = ["mike.huffman@gov.bc.ca"]
+      },
+      {
+        role    = "roles/owner"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+    ]
     instances = [
       {
         instance = "strr-db-prod"
@@ -893,6 +1569,19 @@ prod_projects = {
   "api-gateway-prod" = {
     project_id = "okagqp-prod"
     env = "prod"
+    iam_bindings = [
+      {
+        role    = "projects/okagqp-prod/roles/SRE"
+        members = [
+          "anish.patel@gov.bc.ca",
+          "jacky.pham@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/iam.serviceAccountTokenCreator"
+        members = ["andriy.bolyachevets@gov.bc.ca"]
+      },
+    ]
     service_accounts = {
       apigee-prod-sa = {
         roles       = ["roles/apigee.developerAdmin", "roles/bigquery.dataEditor", "roles/bigquery.jobUser", "roles/iam.serviceAccountTokenCreator", "roles/logging.admin", "roles/storage.admin"]
