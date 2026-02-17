@@ -11,13 +11,6 @@ prod_projects = {
         ]
       },
       {
-        role    = "projects/mvnjri-prod/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/mvnjri-prod/roles/roleba"
         members = ["janis.rogers@gov.bc.ca"]
       },
@@ -91,9 +84,7 @@ prod_projects = {
       {
         role    = "roles/owner"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -255,9 +246,7 @@ prod_projects = {
       {
         role    = "projects/c4hnrd-prod/roles/SRE"
         members = [
-          "anish.patel@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
           "travis.semple@gov.bc.ca",
         ]
       },
@@ -478,9 +467,7 @@ prod_projects = {
       {
         role    = "projects/gtksf3-prod/roles/SRE"
         members = [
-          "anish.patel@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
         ]
       },
       {
@@ -524,13 +511,6 @@ prod_projects = {
         members = [
           "kial.jinnah@gov.bc.ca",
           "travis.semple@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/owner"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -706,13 +686,6 @@ prod_projects = {
     env = "prod"
     iam_bindings = [
       {
-        role    = "projects/yfjq17-prod/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/yfjq17-prod/roles/roledeveloper"
         members = [
           "dietrich.wolpert@gov.bc.ca",
@@ -724,7 +697,6 @@ prod_projects = {
         role    = "roles/owner"
         members = [
           "kial.jinnah@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -805,8 +777,6 @@ prod_projects = {
         role    = "projects/a083gt-prod/roles/SRE"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
           "travis.semple@gov.bc.ca",
         ]
       },
@@ -1007,17 +977,6 @@ prod_projects = {
     env = "prod"
     iam_bindings = [
       {
-        role    = "projects/keee67-prod/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/owner"
-        members = ["patrick.wei@gov.bc.ca"]
-      },
-      {
         role    = "roles/securitycenter.assetsViewer"
         members = ["patrick.wei@gov.bc.ca"]
       },
@@ -1089,13 +1048,6 @@ prod_projects = {
     env = "prod"
     iam_bindings = [
       {
-        role    = "projects/eogruh-prod/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/eogruh-prod/roles/roledeveloper"
         members = [
           "dietrich.wolpert@gov.bc.ca",
@@ -1108,13 +1060,6 @@ prod_projects = {
       {
         role    = "roles/cloudsql.client"
         members = ["omid.x.zamani@gov.bc.ca"]
-      },
-      {
-        role    = "roles/owner"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
-        ]
       },
       {
         role    = "roles/securitycenter.assetsViewer"
@@ -1244,13 +1189,6 @@ prod_projects = {
     env = "prod"
     iam_bindings = [
       {
-        role    = "projects/k973yf-prod/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/k973yf-prod/roles/roledeveloper"
         members = [
           "hrvoje.fekete@gov.bc.ca",
@@ -1261,7 +1199,6 @@ prod_projects = {
         role    = "roles/owner"
         members = [
           "doug.lovett@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -1360,13 +1297,6 @@ prod_projects = {
     env = "prod"
     iam_bindings = [
       {
-        role    = "projects/yfthig-prod/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/yfthig-prod/roles/roledeveloper"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
@@ -1395,10 +1325,8 @@ prod_projects = {
       {
         role    = "roles/owner"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -1460,13 +1388,6 @@ prod_projects = {
     env = "prod"
     iam_bindings = [
       {
-        role    = "projects/bcrbk9-prod/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/bcrbk9-prod/roles/roledeveloper"
         members = [
           "anushka.halder@gov.bc.ca",
@@ -1484,13 +1405,6 @@ prod_projects = {
       {
         role    = "roles/iap.httpsResourceAccessor"
         members = ["mike.huffman@gov.bc.ca"]
-      },
-      {
-        role    = "roles/owner"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
-        ]
       },
       {
         role    = "roles/securitycenter.assetsViewer"
@@ -1570,13 +1484,6 @@ prod_projects = {
     project_id = "okagqp-prod"
     env = "prod"
     iam_bindings = [
-      {
-        role    = "projects/okagqp-prod/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
       {
         role    = "roles/iam.serviceAccountTokenCreator"
         members = ["andriy.bolyachevets@gov.bc.ca"]

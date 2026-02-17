@@ -31,13 +31,6 @@ dev_projects = {
         members = ["travis.semple@gov.bc.ca"]
       },
       {
-        role    = "roles/owner"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
-        ]
-      },
-      {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "Brett.cassidy@gov.bc.ca",
@@ -101,13 +94,6 @@ dev_projects = {
     env = "dev"
     iam_bindings = [
       {
-        role    = "projects/c4hnrd-dev/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/c4hnrd-dev/roles/roledeveloper"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
@@ -118,6 +104,7 @@ dev_projects = {
           "eve.deng@gov.bc.ca",
           "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
+          "janis.rogers@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
@@ -312,9 +299,7 @@ dev_projects = {
       {
         role    = "projects/gtksf3-dev/roles/SRE"
         members = [
-          "anish.patel@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
         ]
       },
       {
@@ -330,6 +315,7 @@ dev_projects = {
           "felipe.moraes@gov.bc.ca",
           "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
+          "janis.rogers@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "lucas.o'neil@gov.bc.ca",
@@ -370,13 +356,6 @@ dev_projects = {
         members = [
           "anish.batra@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/owner"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -438,7 +417,7 @@ dev_projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "auth"
                 database_role_assignment = {
-                  readonly = ["syed.riyazzudin@gov.bc.ca", "noor.nayeem@gov.bc.ca","janis.rogers@gov.bc.ca"]
+                  readonly = ["syed.riyazzudin@gov.bc.ca", "noor.nayeem@gov.bc.ca"]
                   readwrite = ["sa-api", "anish.batra@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
@@ -453,7 +432,7 @@ dev_projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "pay"
                 database_role_assignment = {
-                  readonly = ["noor.nayeem@gov.bc.ca", "janis.rogers@gov.bc.ca"]
+                  readonly = ["noor.nayeem@gov.bc.ca"]
                   readwrite = ["anish.batra@gov.bc.ca"]
                   admin = []
                 }
@@ -551,13 +530,6 @@ dev_projects = {
     env = "dev"
     iam_bindings = [
       {
-        role    = "projects/yfjq17-dev/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/yfjq17-dev/roles/rolecdcloudrun"
         members = [
           "brandon.1.sharratt@gov.bc.ca",
@@ -569,6 +541,7 @@ dev_projects = {
         members = [
           "brandon.1.sharratt@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
+          "janis.rogers@gov.bc.ca",
           "gunasegaran.nagarajan@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -579,7 +552,6 @@ dev_projects = {
         members = [
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -663,9 +635,7 @@ dev_projects = {
       {
         role    = "projects/a083gt-dev/roles/SRE"
         members = [
-          "anish.patel@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
         ]
       },
       {
@@ -739,9 +709,7 @@ dev_projects = {
         role    = "roles/owner"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -823,7 +791,7 @@ dev_projects = {
                   roles      = ["readonly", "readwrite", "admin"]
                   owner      = "business-api"
                   database_role_assignment = {
-                    readonly = ["sa-solr-importer", "siddharth.chaturvedi@gov.bc.ca", "janis.rogers@gov.bc.ca"]
+                    readonly = ["sa-solr-importer", "siddharth.chaturvedi@gov.bc.ca"]
                     readwrite = ["syed.riyazzudin@gov.bc.ca", "sa-job", "sa-api"]
                     admin = []
                   }
@@ -838,7 +806,7 @@ dev_projects = {
                   roles      = ["readonly", "readwrite", "admin"]
                   owner      = "userHQH"
                   database_role_assignment = {
-                    readonly = ["syed.riyazzudin@gov.bc.ca", "vishnu.preddy@gov.bc.ca", "sa-solr-importer", "janis.rogers@gov.bc.ca"]
+                    readonly = ["syed.riyazzudin@gov.bc.ca", "vishnu.preddy@gov.bc.ca", "sa-solr-importer"]
                     readwrite = ["sa-api"]
                     admin = ["sa-db-migrate"]
                   }
@@ -926,13 +894,6 @@ dev_projects = {
     env = "dev"
     iam_bindings = [
       {
-        role    = "projects/keee67-dev/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "roles/editor"
         members = ["dietrich.wolpert@gov.bc.ca"]
       },
@@ -992,27 +953,14 @@ dev_projects = {
     env = "dev"
     iam_bindings = [
       {
-        role    = "projects/eogruh-dev/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/eogruh-dev/roles/roledeveloper"
         members = [
           "dietrich.wolpert@gov.bc.ca",
           "divya.chandupatla@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "hongjing.chen@gov.bc.ca",
+          "janis.rogers@gov.bc.ca",
           "meng.dong@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/owner"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -1085,17 +1033,11 @@ dev_projects = {
     env = "dev"
     iam_bindings = [
       {
-        role    = "projects/k973yf-dev/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/k973yf-dev/roles/roledeveloper"
         members = [
           "gunasegaran.nagarajan@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
+          "janis.rogers@gov.bc.ca",
         ]
       },
       {
@@ -1175,13 +1117,6 @@ dev_projects = {
     env = "dev"
     iam_bindings = [
       {
-        role    = "projects/yfthig-dev/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/yfthig-dev/roles/roledeveloper"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
@@ -1231,10 +1166,8 @@ dev_projects = {
       {
         role    = "roles/owner"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -1318,17 +1251,11 @@ dev_projects = {
     env = "dev"
     iam_bindings = [
       {
-        role    = "projects/bcrbk9-dev/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/bcrbk9-dev/roles/roledeveloper"
         members = [
           "dietrich.wolpert@gov.bc.ca",
           "dima.kostenyuk@gov.bc.ca",
+          "janis.rogers@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -1342,9 +1269,7 @@ dev_projects = {
       {
         role    = "roles/owner"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -1424,17 +1349,6 @@ dev_projects = {
     project_id = "okagqp-dev"
     env = "dev"
     iam_bindings = [
-      {
-        role    = "projects/okagqp-dev/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/owner"
-        members = ["andriy.bolyachevets@gov.bc.ca"]
-      },
       {
         role    = "roles/securitycenter.assetsViewer"
         members = ["andriy.bolyachevets@gov.bc.ca"]

@@ -1,10 +1,20 @@
 default_principals = ["user:andriy.bolyachevets@gov.bc.ca"]
 
 global_iam_bindings = [
-   {
-     role    = "roles/viewer"
-     members = []
-   }
+      {
+        role    = "roles/owner"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "SRE"
+        members = [
+          "anish.patel@gov.bc.ca",
+          "jacky.pham@gov.bc.ca",
+        ]
+      }
 ]
 
 global_database_role_assignment = {
@@ -164,32 +174,32 @@ global_custom_roles = {
     ]
   },
   rolesolrimporter = {
-  title = "Role Solr importer"
-  description = "Role for Solr importer services."
-  permissions = [
-    "resourcemanager.projects.get",
-    "iam.serviceAccounts.actAs",
-    "iam.serviceAccounts.getAccessToken",
-    "clientauthconfig.clients.list",
-    "storage.managedFolders.get",
-    "storage.objects.get",
-    "storage.objects.list",
-    "artifactregistry.repositories.downloadArtifacts",
-    "artifactregistry.repositories.get",
-    "artifactregistry.tags.get",
-    "run.executions.get",
-    "run.executions.list",
-    "run.services.get",
-    "run.services.list",
-    "run.services.create",
-    "run.services.update",
-    "run.routes.get",
-    "run.routes.list",
-    "run.routes.invoke",
-    "cloudsql.instances.connect",
-    "cloudsql.instances.get",
-    "cloudsql.instances.login"
-  ]
+    title = "Role Solr importer"
+    description = "Role for Solr importer services."
+    permissions = [
+      "resourcemanager.projects.get",
+      "iam.serviceAccounts.actAs",
+      "iam.serviceAccounts.getAccessToken",
+      "clientauthconfig.clients.list",
+      "storage.managedFolders.get",
+      "storage.objects.get",
+      "storage.objects.list",
+      "artifactregistry.repositories.downloadArtifacts",
+      "artifactregistry.repositories.get",
+      "artifactregistry.tags.get",
+      "run.executions.get",
+      "run.executions.list",
+      "run.services.get",
+      "run.services.list",
+      "run.services.create",
+      "run.services.update",
+      "run.routes.get",
+      "run.routes.list",
+      "run.routes.invoke",
+      "cloudsql.instances.connect",
+      "cloudsql.instances.get",
+      "cloudsql.instances.login"
+    ]
 },
   SRE = {
     title = "Role SRE"
