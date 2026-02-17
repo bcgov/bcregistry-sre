@@ -9,6 +9,20 @@ global_iam_bindings = [
         ]
       },
       {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [
+          "andriy.bolyachevets@gov.bc.ca",
+          "patrick.wei@gov.bc.ca",
+        ]
+      },
+      {
         role    = "SRE"
         members = [
           "anish.patel@gov.bc.ca",

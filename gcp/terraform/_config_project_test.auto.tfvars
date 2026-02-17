@@ -53,7 +53,6 @@ test_projects = {
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
@@ -75,7 +74,6 @@ test_projects = {
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
@@ -244,14 +242,12 @@ test_projects = {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -263,14 +259,12 @@ test_projects = {
         role    = "roles/securitycenter.findingsViewer"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -409,7 +403,6 @@ test_projects = {
           "hrvoje.fekete@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -418,7 +411,6 @@ test_projects = {
           "hrvoje.fekete@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
     ]
@@ -567,7 +559,6 @@ test_projects = {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "Chris.Gabel@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "darci.denis@gov.bc.ca",
           "eve.deng@gov.bc.ca",
@@ -577,7 +568,6 @@ test_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "severin.beauvais@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "syed.riyazzudin@gov.bc.ca",
@@ -589,7 +579,6 @@ test_projects = {
         role    = "roles/securitycenter.findingsViewer"
         members = [
           "Chris.Gabel@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "darci.denis@gov.bc.ca",
           "eve.deng@gov.bc.ca",
@@ -599,7 +588,6 @@ test_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "severin.beauvais@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "syed.riyazzudin@gov.bc.ca",
@@ -806,20 +794,6 @@ test_projects = {
           "meng.dong@gov.bc.ca",
         ]
       },
-      {
-        role    = "roles/securitycenter.assetsViewer"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/securitycenter.findingsViewer"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
-        ]
-      },
     ]
     instances = [
       {
@@ -919,10 +893,6 @@ test_projects = {
         members = ["hrvoje.fekete@gov.bc.ca"]
       },
       {
-        role    = "roles/editor"
-        members = ["patrick.wei@gov.bc.ca"]
-      },
-      {
         role    = "roles/iam.serviceAccountUser"
         members = ["hrvoje.fekete@gov.bc.ca"]
       },
@@ -938,14 +908,12 @@ test_projects = {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "hrvoje.fekete@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
         role    = "roles/securitycenter.findingsViewer"
         members = [
           "hrvoje.fekete@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
     ]
@@ -1054,7 +1022,6 @@ test_projects = {
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
@@ -1065,7 +1032,6 @@ test_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "severin.beauvais@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "syed.riyazzudin@gov.bc.ca",
@@ -1078,7 +1044,6 @@ test_projects = {
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
@@ -1089,7 +1054,6 @@ test_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "severin.beauvais@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "syed.riyazzudin@gov.bc.ca",
@@ -1152,20 +1116,16 @@ test_projects = {
       {
         role    = "roles/securitycenter.assetsViewer"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "travis.semple@gov.bc.ca",
         ]
       },
       {
         role    = "roles/securitycenter.findingsViewer"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "travis.semple@gov.bc.ca",
         ]
       },

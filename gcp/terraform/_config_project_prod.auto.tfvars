@@ -91,14 +91,12 @@ prod_projects = {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "Brett.cassidy@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "david.draker@gov.bc.ca",
           "jay.sharp@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "michelle.hohertz@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "travis.semple@gov.bc.ca",
           "tyson.graham@gov.bc.ca",
@@ -109,14 +107,12 @@ prod_projects = {
         role    = "roles/securitycenter.findingsViewer"
         members = [
           "Brett.cassidy@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "david.draker@gov.bc.ca",
           "jay.sharp@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "michelle.hohertz@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "travis.semple@gov.bc.ca",
           "tyson.graham@gov.bc.ca",
@@ -517,12 +513,10 @@ prod_projects = {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -533,12 +527,10 @@ prod_projects = {
         role    = "roles/securitycenter.findingsViewer"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -703,14 +695,12 @@ prod_projects = {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "kial.jinnah@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
         role    = "roles/securitycenter.findingsViewer"
         members = [
           "kial.jinnah@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -976,14 +966,6 @@ prod_projects = {
     project_id = "keee67-prod"
     env = "prod"
     iam_bindings = [
-      {
-        role    = "roles/securitycenter.assetsViewer"
-        members = ["patrick.wei@gov.bc.ca"]
-      },
-      {
-        role    = "roles/securitycenter.findingsViewer"
-        members = ["patrick.wei@gov.bc.ca"]
-      },
     ]
     instances = [
       {
@@ -1064,17 +1046,13 @@ prod_projects = {
       {
         role    = "roles/securitycenter.assetsViewer"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
         role    = "roles/securitycenter.findingsViewer"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -1204,19 +1182,15 @@ prod_projects = {
       {
         role    = "roles/securitycenter.assetsViewer"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
         role    = "roles/securitycenter.findingsViewer"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -1332,14 +1306,12 @@ prod_projects = {
       {
         role    = "roles/securitycenter.assetsViewer"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "hongjing.chen@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "travis.semple@gov.bc.ca",
         ]
@@ -1347,14 +1319,12 @@ prod_projects = {
       {
         role    = "roles/securitycenter.findingsViewer"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "hongjing.chen@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "travis.semple@gov.bc.ca",
         ]
@@ -1405,20 +1375,6 @@ prod_projects = {
       {
         role    = "roles/iap.httpsResourceAccessor"
         members = ["mike.huffman@gov.bc.ca"]
-      },
-      {
-        role    = "roles/securitycenter.assetsViewer"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/securitycenter.findingsViewer"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
-        ]
       },
     ]
     instances = [

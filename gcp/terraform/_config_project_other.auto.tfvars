@@ -40,7 +40,6 @@ other_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "steven.chen@gov.bc.ca",
         ]
       },
@@ -53,7 +52,6 @@ other_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "steven.chen@gov.bc.ca",
         ]
       },
@@ -159,14 +157,12 @@ other_projects = {
       {
         role    = "roles/securitycenter.assetsViewer"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -176,14 +172,12 @@ other_projects = {
       {
         role    = "roles/securitycenter.findingsViewer"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -301,7 +295,6 @@ other_projects = {
           "hrvoje.fekete@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -310,7 +303,6 @@ other_projects = {
           "hrvoje.fekete@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
     ]
@@ -387,7 +379,6 @@ other_projects = {
           "jia.xu@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "syed.riyazzudin@gov.bc.ca",
           "travis.semple@gov.bc.ca",
@@ -402,7 +393,6 @@ other_projects = {
           "jia.xu@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "syed.riyazzudin@gov.bc.ca",
           "travis.semple@gov.bc.ca",
@@ -436,14 +426,6 @@ other_projects = {
     project_id = "keee67-tools"
     env = "sandbox"
     iam_bindings = [
-      {
-        role    = "roles/securitycenter.assetsViewer"
-        members = ["andriy.bolyachevets@gov.bc.ca"]
-      },
-      {
-        role    = "roles/securitycenter.findingsViewer"
-        members = ["andriy.bolyachevets@gov.bc.ca"]
-      },
     ]
   },
   "ppr-sandbox" = {
@@ -462,20 +444,6 @@ other_projects = {
       {
         role    = "roles/resourcemanager.projectOwnerInvitee"
         members = ["patrick.wei@gov.bc.ca"]
-      },
-      {
-        role    = "roles/securitycenter.assetsViewer"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/securitycenter.findingsViewer"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
-        ]
       },
     ]
     instances = [
@@ -522,18 +490,6 @@ other_projects = {
     project_id = "k973yf--tools"
     env = "sandbox"
     iam_bindings = [
-      {
-        role    = "roles/editor"
-        members = ["patrick.wei@gov.bc.ca"]
-      },
-      {
-        role    = "roles/securitycenter.assetsViewer"
-        members = ["patrick.wei@gov.bc.ca"]
-      },
-      {
-        role    = "roles/securitycenter.findingsViewer"
-        members = ["patrick.wei@gov.bc.ca"]
-      },
     ]
     instances = [
       {
@@ -625,7 +581,6 @@ other_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "steven.chen@gov.bc.ca",
         ]
       },
@@ -639,7 +594,6 @@ other_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "steven.chen@gov.bc.ca",
         ]
       },
@@ -680,14 +634,12 @@ other_projects = {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
         role    = "roles/securitycenter.findingsViewer"
         members = [
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
     ]
@@ -824,7 +776,6 @@ other_projects = {
       {
         role    = "roles/securitycenter.assetsViewer"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "hongjing.chen@gov.bc.ca",
@@ -838,7 +789,6 @@ other_projects = {
       {
         role    = "roles/securitycenter.findingsViewer"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "hongjing.chen@gov.bc.ca",
