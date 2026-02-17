@@ -150,7 +150,7 @@ locals {
   merged_iam_bindings = flatten([
     for binding in concat(var.global_iam_bindings, var.env.iam_bindings, var.iam_bindings) : [
       for member in binding.members : {
-        role   = binding.role
+        role   = (startswith(binding.role, "roles/") || startswith(binding.role, "projects/")) ? binding.role : "projects/${var.project_id}/roles/${binding.role}"
         member = can(regex(":", member)) ? member : "user:${member}"
       }
     ]

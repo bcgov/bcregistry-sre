@@ -4,13 +4,6 @@ other_projects = {
     env = "sandbox"
     iam_bindings = [
       {
-        role    = "projects/c4hnrd-sandbox/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/c4hnrd-sandbox/roles/roledeveloper"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
@@ -36,7 +29,6 @@ other_projects = {
         role    = "roles/owner"
         members = [
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -113,9 +105,7 @@ other_projects = {
       {
         role    = "projects/gtksf3-tools/roles/SRE"
         members = [
-          "anish.patel@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
         ]
       },
       {
@@ -163,8 +153,6 @@ other_projects = {
       {
         role    = "roles/owner"
         members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
           "thor.wolpert@gov.bc.ca",
         ]
       },
@@ -286,13 +274,6 @@ other_projects = {
     env = "sandbox"
     iam_bindings = [
       {
-        role    = "projects/yfjq17-tools/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/yfjq17-tools/roles/roledeveloper"
         members = [
           "dietrich.wolpert@gov.bc.ca",
@@ -312,7 +293,6 @@ other_projects = {
         members = [
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -368,9 +348,7 @@ other_projects = {
       {
         role    = "projects/a083gt-tools/roles/SRE"
         members = [
-          "anish.patel@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
         ]
       },
       {
@@ -398,7 +376,6 @@ other_projects = {
         role    = "roles/owner"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -460,17 +437,6 @@ other_projects = {
     env = "sandbox"
     iam_bindings = [
       {
-        role    = "projects/keee67-tools/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/owner"
-        members = ["andriy.bolyachevets@gov.bc.ca"]
-      },
-      {
         role    = "roles/securitycenter.assetsViewer"
         members = ["andriy.bolyachevets@gov.bc.ca"]
       },
@@ -485,13 +451,6 @@ other_projects = {
     env = "sandbox"
     iam_bindings = [
       {
-        role    = "projects/eogruh-sandbox/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/eogruh-sandbox/roles/roledeveloper"
         members = [
           "dietrich.wolpert@gov.bc.ca",
@@ -499,10 +458,6 @@ other_projects = {
           "hongjing.chen@gov.bc.ca",
           "meng.dong@gov.bc.ca",
         ]
-      },
-      {
-        role    = "roles/owner"
-        members = ["andriy.bolyachevets@gov.bc.ca"]
       },
       {
         role    = "roles/resourcemanager.projectOwnerInvitee"
@@ -636,13 +591,6 @@ other_projects = {
     env = "sandbox"
     iam_bindings = [
       {
-        role    = "projects/yfthig-tools/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/yfthig-tools/roles/roledeveloper"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
@@ -665,7 +613,6 @@ other_projects = {
         role    = "roles/owner"
         members = [
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -715,14 +662,7 @@ other_projects = {
   "strr-sandbox" = {
     project_id = "bcrbk9-tools"
     env = "sandbox"
-        iam_bindings = [
-      {
-        role    = "projects/bcrbk9-tools/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
+    iam_bindings = [
       {
         role    = "projects/bcrbk9-tools/roles/roledeveloper"
         members = [
@@ -734,7 +674,6 @@ other_projects = {
         role    = "roles/owner"
         members = [
           "max.wardle@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
         ]
       },
       {
@@ -796,13 +735,6 @@ other_projects = {
     project_id = "okagqp-sandbox"
     env = "sandbox"
     iam_bindings = [
-      {
-        role    = "projects/okagqp-sandbox/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
     ]
     service_accounts = {
       apigee-sandbox-sa = {
@@ -815,13 +747,6 @@ other_projects = {
     project_id = "a083gt-integration"
     env = "sandbox"
     iam_bindings = [
-      {
-        role    = "projects/a083gt-integration/roles/SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      },
       {
         role    = "projects/a083gt-integration/roles/cloud_sql_proxy_user"
         members = ["john.a.m.lane@gov.bc.ca"]
@@ -875,7 +800,6 @@ other_projects = {
         role    = "roles/owner"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
-          "andriy.bolyachevets@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
         ]
       },
@@ -1038,8 +962,6 @@ other_projects = {
       {
         role    = "projects/c4hnrd-tools/roles/SRE"
         members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
         ]
       },
