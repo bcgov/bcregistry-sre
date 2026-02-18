@@ -1363,6 +1363,12 @@ dev_projects = {
           "doug.lovett@gov.bc.ca",
         ]
       },
+      {
+        role    = "roles/apigee.admin"
+        members = [
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
     ]
     service_accounts = {
       apigee-dev-sa = {
