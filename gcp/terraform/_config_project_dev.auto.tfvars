@@ -188,6 +188,15 @@ dev_projects = {
         members = ["rajandeep.kaur@gov.bc.ca"]
       },
     ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/c4hnrd-dev/locations/us/repositories/gcr.io"
+        resource_type = "artifact_registry"
+        roles         = ["roles/artifactregistry.reader"]
+        members       = ["Argus.1.Chiu@gov.bc.ca", "Chris.Gabel@gov.bc.ca", "bcregistry-sre@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "hongjing.chen@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "jia.xu@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "omid.x.zamani@gov.bc.ca", "severin.beauvais@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "travis.semple@gov.bc.ca", "vysakh.menon@gov.bc.ca"]
+      },
+    ]
+
     instances = [
       {
         instance = "common-db-dev"
@@ -622,142 +631,162 @@ dev_projects = {
       project_id = "a083gt-dev"
       env = "dev"
       iam_bindings = [
-      {
-        role    = "projects/a083gt-dev/roles/SRE"
-        members = [
-          "doug.lovett@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "projects/a083gt-dev/roles/roledeveloper"
-        members = [
-          "Argus.1.Chiu@gov.bc.ca",
-          "Chris.Gabel@gov.bc.ca",
-          "brandon.1.sharratt@gov.bc.ca",
-          "chiu.oddyseus@gov.bc.ca",
-          "darci.denis@gov.bc.ca",
-          "david.li@gov.bc.ca",
-          "david.mckinnon@gov.bc.ca",
-          "dietrich.wolpert@gov.bc.ca",
-          "doug.lovett@gov.bc.ca",
-          "felipe.moraes@gov.bc.ca",
-          "gunasegaran.nagarajan@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
-          "janis.rogers@gov.bc.ca",
-          "jia.xu@gov.bc.ca",
-          "karim.jazzar@gov.bc.ca",
-          "ketaki.deodhar@gov.bc.ca",
-          "lucas.o'neil@gov.bc.ca",
-          "megan.a.wong@gov.bc.ca",
-          "meng.dong@gov.bc.ca",
-          "omid.x.zamani@gov.bc.ca",
-          "rajandeep.kaur@gov.bc.ca",
-          "severin.beauvais@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
-          "steven.chen@gov.bc.ca",
-          "syed.riyazzudin@gov.bc.ca",
-          "thayne.werdal@gov.bc.ca",
-          "vishnu.preddy@gov.bc.ca",
-          "vysakh.menon@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/accesscontextmanager.policyEditor"
-        members = ["travis.semple@gov.bc.ca"]
-      },
-      {
-        role    = "roles/accesscontextmanager.policyReader"
-        members = ["travis.semple@gov.bc.ca"]
-      },
-      {
-        role    = "roles/cloudsql.instanceUser"
-        members = ["andriy.bolyachevets@gov.bc.ca"]
-      },
-      {
-        role    = "roles/compute.loadBalancerServiceUser"
-        members = ["andriy.bolyachevets@gov.bc.ca"]
-      },
-      {
-        role    = "roles/editor"
-        members = [
-          "Chris.Gabel@gov.bc.ca",
-          "eve.deng@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-          "vysakh.menon@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/iam.serviceAccountUser"
-        members = ["steven.chen@gov.bc.ca"]
-      },
-      {
-        role    = "roles/iap.tunnelResourceAccessor"
-        members = ["hrvoje.fekete@gov.bc.ca"]
-      },
-      {
-        role    = "roles/owner"
-        members = [
-          "Argus.1.Chiu@gov.bc.ca",
-          "kial.jinnah@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/pubsub.admin"
-        members = ["lucas.o'neil@gov.bc.ca"]
-      },
-      {
-        role    = "roles/run.admin"
-        members = ["steven.chen@gov.bc.ca"]
-      },
-      {
-        role    = "roles/securitycenter.assetsViewer"
-        members = [
-          "Chris.Gabel@gov.bc.ca",
-          "chiu.oddyseus@gov.bc.ca",
-          "darci.denis@gov.bc.ca",
-          "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
-          "jia.xu@gov.bc.ca",
-          "karim.jazzar@gov.bc.ca",
-          "ketaki.deodhar@gov.bc.ca",
-          "kial.jinnah@gov.bc.ca",
-          "omid.x.zamani@gov.bc.ca",
-          "severin.beauvais@gov.bc.ca",
-          "steven.chen@gov.bc.ca",
-          "syed.riyazzudin@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-          "vysakh.menon@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/securitycenter.findingsViewer"
-        members = [
-          "Chris.Gabel@gov.bc.ca",
-          "chiu.oddyseus@gov.bc.ca",
-          "darci.denis@gov.bc.ca",
-          "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
-          "jia.xu@gov.bc.ca",
-          "karim.jazzar@gov.bc.ca",
-          "ketaki.deodhar@gov.bc.ca",
-          "kial.jinnah@gov.bc.ca",
-          "omid.x.zamani@gov.bc.ca",
-          "severin.beauvais@gov.bc.ca",
-          "steven.chen@gov.bc.ca",
-          "syed.riyazzudin@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-          "vysakh.menon@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/storage.objectUser"
-        members = [
-          "hongjing.chen@gov.bc.ca",
-          "vysakh.menon@gov.bc.ca",
-        ]
-      },
-    ]
+        {
+          role    = "projects/a083gt-dev/roles/SRE"
+          members = [
+            "doug.lovett@gov.bc.ca",
+          ]
+        },
+        {
+          role    = "projects/a083gt-dev/roles/roledeveloper"
+          members = [
+            "Argus.1.Chiu@gov.bc.ca",
+            "Chris.Gabel@gov.bc.ca",
+            "brandon.1.sharratt@gov.bc.ca",
+            "chiu.oddyseus@gov.bc.ca",
+            "darci.denis@gov.bc.ca",
+            "david.li@gov.bc.ca",
+            "david.mckinnon@gov.bc.ca",
+            "dietrich.wolpert@gov.bc.ca",
+            "doug.lovett@gov.bc.ca",
+            "felipe.moraes@gov.bc.ca",
+            "gunasegaran.nagarajan@gov.bc.ca",
+            "hongjing.chen@gov.bc.ca",
+            "janis.rogers@gov.bc.ca",
+            "jia.xu@gov.bc.ca",
+            "karim.jazzar@gov.bc.ca",
+            "ketaki.deodhar@gov.bc.ca",
+            "lucas.o'neil@gov.bc.ca",
+            "megan.a.wong@gov.bc.ca",
+            "meng.dong@gov.bc.ca",
+            "omid.x.zamani@gov.bc.ca",
+            "rajandeep.kaur@gov.bc.ca",
+            "severin.beauvais@gov.bc.ca",
+            "siddharth.chaturvedi@gov.bc.ca",
+            "steven.chen@gov.bc.ca",
+            "syed.riyazzudin@gov.bc.ca",
+            "thayne.werdal@gov.bc.ca",
+            "vishnu.preddy@gov.bc.ca",
+            "vysakh.menon@gov.bc.ca",
+          ]
+        },
+        {
+          role    = "roles/accesscontextmanager.policyEditor"
+          members = ["travis.semple@gov.bc.ca"]
+        },
+        {
+          role    = "roles/accesscontextmanager.policyReader"
+          members = ["travis.semple@gov.bc.ca"]
+        },
+        {
+          role    = "roles/cloudsql.instanceUser"
+          members = ["andriy.bolyachevets@gov.bc.ca"]
+        },
+        {
+          role    = "roles/compute.loadBalancerServiceUser"
+          members = ["andriy.bolyachevets@gov.bc.ca"]
+        },
+        {
+          role    = "roles/editor"
+          members = [
+            "Chris.Gabel@gov.bc.ca",
+            "eve.deng@gov.bc.ca",
+            "hrvoje.fekete@gov.bc.ca",
+            "travis.semple@gov.bc.ca",
+            "vysakh.menon@gov.bc.ca",
+          ]
+        },
+        {
+          role    = "roles/iam.serviceAccountUser"
+          members = ["steven.chen@gov.bc.ca"]
+        },
+        {
+          role    = "roles/iap.tunnelResourceAccessor"
+          members = ["hrvoje.fekete@gov.bc.ca"]
+        },
+        {
+          role    = "roles/owner"
+          members = [
+            "Argus.1.Chiu@gov.bc.ca",
+            "kial.jinnah@gov.bc.ca",
+          ]
+        },
+        {
+          role    = "roles/pubsub.admin"
+          members = ["lucas.o'neil@gov.bc.ca"]
+        },
+        {
+          role    = "roles/run.admin"
+          members = ["steven.chen@gov.bc.ca"]
+        },
+        {
+          role    = "roles/securitycenter.assetsViewer"
+          members = [
+            "Chris.Gabel@gov.bc.ca",
+            "chiu.oddyseus@gov.bc.ca",
+            "darci.denis@gov.bc.ca",
+            "eve.deng@gov.bc.ca",
+            "hongjing.chen@gov.bc.ca",
+            "jia.xu@gov.bc.ca",
+            "karim.jazzar@gov.bc.ca",
+            "ketaki.deodhar@gov.bc.ca",
+            "kial.jinnah@gov.bc.ca",
+            "omid.x.zamani@gov.bc.ca",
+            "severin.beauvais@gov.bc.ca",
+            "steven.chen@gov.bc.ca",
+            "syed.riyazzudin@gov.bc.ca",
+            "travis.semple@gov.bc.ca",
+            "vysakh.menon@gov.bc.ca",
+          ]
+        },
+        {
+          role    = "roles/securitycenter.findingsViewer"
+          members = [
+            "Chris.Gabel@gov.bc.ca",
+            "chiu.oddyseus@gov.bc.ca",
+            "darci.denis@gov.bc.ca",
+            "eve.deng@gov.bc.ca",
+            "hongjing.chen@gov.bc.ca",
+            "jia.xu@gov.bc.ca",
+            "karim.jazzar@gov.bc.ca",
+            "ketaki.deodhar@gov.bc.ca",
+            "kial.jinnah@gov.bc.ca",
+            "omid.x.zamani@gov.bc.ca",
+            "severin.beauvais@gov.bc.ca",
+            "steven.chen@gov.bc.ca",
+            "syed.riyazzudin@gov.bc.ca",
+            "travis.semple@gov.bc.ca",
+            "vysakh.menon@gov.bc.ca",
+          ]
+        },
+        {
+          role    = "roles/storage.objectUser"
+          members = [
+            "hongjing.chen@gov.bc.ca",
+            "vysakh.menon@gov.bc.ca",
+          ]
+        },
+      ]
+      resource_iam_bindings = [
+        {
+          resource      = "colin_extracts"
+          resource_type = "storage_bucket"
+          roles         = ["roles/storage.objectUser"]
+          members       = ["ketaki.deodhar@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
+        },
+        {
+          resource      = "namex-db-dump-dev"
+          resource_type = "storage_bucket"
+          roles         = ["roles/storage.objectAdmin"]
+          members       = ["andriy.bolyachevets@gov.bc.ca"]
+        },
+        {
+          resource      = "namex-db-dump-dev"
+          resource_type = "storage_bucket"
+          roles         = ["roles/storage.objectUser"]
+          members       = ["andriy.bolyachevets@gov.bc.ca"]
+        },
+      ]
       instances = [
         {
           instance = "businesses-db-dev"
@@ -950,6 +979,14 @@ dev_projects = {
         ]
       },
     ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/eogruh-dev/locations/us/repositories/gcr.io"
+        resource_type = "artifact_registry"
+        roles         = ["roles/artifactregistry.reader"]
+        members       = ["bcregistry-sre@gov.bc.ca"]
+      },
+    ]
     instances = [
       {
         instance = "ppr-dev-cloudsql"
@@ -1035,6 +1072,14 @@ dev_projects = {
       {
         role    = "roles/securitycenter.findingsViewer"
         members = ["hrvoje.fekete@gov.bc.ca"]
+      },
+    ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/k973yf-dev/locations/us/repositories/gcr.io"
+        resource_type = "artifact_registry"
+        roles         = ["roles/artifactregistry.reader"]
+        members       = ["gunasegaran.nagarajan@gov.bc.ca"]
       },
     ]
     instances = [
@@ -1185,6 +1230,20 @@ dev_projects = {
           "travis.semple@gov.bc.ca",
           "vysakh.menon@gov.bc.ca",
         ]
+      },
+    ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/yfthig-dev/locations/us/repositories/gcr.io"
+        resource_type = "artifact_registry"
+        roles         = ["roles/artifactregistry.reader"]
+        members       = ["Argus.1.Chiu@gov.bc.ca", "Chris.Gabel@gov.bc.ca", "brandon.1.sharratt@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "hongjing.chen@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "jia.xu@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "megan.a.wong@gov.bc.ca", "meng.dong@gov.bc.ca", "rajandeep.kaur@gov.bc.ca", "severin.beauvais@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "thayne.werdal@gov.bc.ca", "vishnu.preddy@gov.bc.ca", "vysakh.menon@gov.bc.ca"]
+      },
+      {
+        resource      = "projects/yfthig-dev/locations/us/repositories/gcr.io"
+        resource_type = "artifact_registry"
+        roles         = ["roles/artifactregistry.repoAdmin"]
+        members       = ["eve.deng@gov.bc.ca", "steven.chen@gov.bc.ca", "travis.semple@gov.bc.ca"]
       },
     ]
     service_accounts = {

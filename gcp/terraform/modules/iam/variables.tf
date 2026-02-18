@@ -65,3 +65,14 @@ variable "iam_bindings" {
   }))
   default = []
 }
+
+variable "resource_iam_bindings" {
+  description = "List of resource-level IAM bindings to apply"
+  type = list(object({
+    resource = string
+    roles    = list(string)
+    members  = list(string)
+    resource_type = string
+  }))
+  default = []
+}
