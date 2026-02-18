@@ -549,13 +549,6 @@ dev_projects = {
         ]
       },
       {
-        role    = "roles/owner"
-        members = [
-          "kial.jinnah@gov.bc.ca",
-          "max.wardle@gov.bc.ca",
-        ]
-      },
-      {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "hrvoje.fekete@gov.bc.ca",
@@ -569,6 +562,12 @@ dev_projects = {
           "hrvoje.fekete@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/yfjq17-dev/roles/SRE"
+        members = [
+          "kial.jinnah@gov.bc.ca",
         ]
       },
     ]
@@ -978,6 +977,12 @@ dev_projects = {
           "meng.dong@gov.bc.ca",
         ]
       },
+      {
+        role    = "projects/eogruh-dev/roles/SRE"
+        members = [
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
     ]
     resource_iam_bindings = [
       {
@@ -1072,6 +1077,12 @@ dev_projects = {
       {
         role    = "roles/securitycenter.findingsViewer"
         members = ["hrvoje.fekete@gov.bc.ca"]
+      },
+      {
+        role    = "projects/k973yf-dev/roles/SRE"
+        members = [
+          "kial.jinnah@gov.bc.ca",
+        ]
       },
     ]
     resource_iam_bindings = [
@@ -1372,6 +1383,12 @@ dev_projects = {
     project_id = "okagqp-dev"
     env = "dev"
     iam_bindings = [
+      {
+        role    = "projects/okagqp-dev/roles/SRE"
+        members = [
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
     ]
     service_accounts = {
       apigee-dev-sa = {

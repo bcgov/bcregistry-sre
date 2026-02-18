@@ -694,7 +694,7 @@ prod_projects = {
         ]
       },
       {
-        role    = "roles/owner"
+        role    = "projects/yfjq17-prod/roles/SRE"
         members = [
           "kial.jinnah@gov.bc.ca",
         ]
@@ -1081,6 +1081,12 @@ prod_projects = {
         role    = "roles/viewer"
         members = ["omid.x.zamani@gov.bc.ca"]
       },
+      {
+        role    = "projects/eogruh-prod/roles/SRE"
+        members = [
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
     ]
     instances = [
       {
@@ -1196,9 +1202,10 @@ prod_projects = {
         ]
       },
       {
-        role    = "roles/owner"
+        role    = "projects/k973yf-prod/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
         ]
       },
       {
@@ -1465,6 +1472,12 @@ prod_projects = {
       {
         role    = "roles/iam.serviceAccountTokenCreator"
         members = ["andriy.bolyachevets@gov.bc.ca"]
+      },
+      {
+        role    = "projects/okagqp-prod/roles/SRE"
+        members = [
+          "doug.lovett@gov.bc.ca",
+        ]
       },
     ]
     service_accounts = {

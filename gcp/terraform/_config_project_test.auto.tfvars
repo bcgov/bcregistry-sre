@@ -391,10 +391,9 @@ test_projects = {
         ]
       },
       {
-        role    = "roles/owner"
+        role    = "projects/yfjq17-test/roles/SRE"
         members = [
           "kial.jinnah@gov.bc.ca",
-          "max.wardle@gov.bc.ca",
         ]
       },
       {
@@ -794,6 +793,12 @@ test_projects = {
           "meng.dong@gov.bc.ca",
         ]
       },
+      {
+        role    = "projects/eogruh-test/roles/SRE"
+        members = [
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
     ]
     instances = [
       {
@@ -914,6 +919,12 @@ test_projects = {
         role    = "roles/securitycenter.findingsViewer"
         members = [
           "hrvoje.fekete@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/k973yf-test/roles/SRE"
+        members = [
+          "kial.jinnah@gov.bc.ca",
         ]
       },
     ]
@@ -1178,6 +1189,12 @@ test_projects = {
       {
         role    = "projects/okagqp-test/roles/roledeveloper"
         members = ["travis.semple@gov.bc.ca"]
+      },
+      {
+        role    = "projects/okagqp-test/roles/SRE"
+        members = [
+          "doug.lovett@gov.bc.ca",
+        ]
       },
     ]
     service_accounts = {

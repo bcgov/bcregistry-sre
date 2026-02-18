@@ -283,13 +283,6 @@ other_projects = {
         ]
       },
       {
-        role    = "roles/owner"
-        members = [
-          "kial.jinnah@gov.bc.ca",
-          "max.wardle@gov.bc.ca",
-        ]
-      },
-      {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "hrvoje.fekete@gov.bc.ca",
@@ -303,6 +296,12 @@ other_projects = {
           "hrvoje.fekete@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/yfjq17-tools/roles/SRE"
+        members = [
+          "kial.jinnah@gov.bc.ca",
         ]
       },
     ]
@@ -445,6 +444,12 @@ other_projects = {
         role    = "roles/resourcemanager.projectOwnerInvitee"
         members = ["patrick.wei@gov.bc.ca"]
       },
+      {
+        role    = "projects/eogruh-sandbox/roles/SRE"
+        members = [
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
     ]
     instances = [
       {
@@ -490,6 +495,12 @@ other_projects = {
     project_id = "k973yf--tools"
     env = "sandbox"
     iam_bindings = [
+      {
+        role    = "projects/k973yf--tools/roles/SRE"
+        members = [
+          "kial.jinnah@gov.bc.ca",
+        ]
+      },
     ]
     instances = [
       {
@@ -687,6 +698,12 @@ other_projects = {
     project_id = "okagqp-sandbox"
     env = "sandbox"
     iam_bindings = [
+      {
+        role    = "projects/okagqp-sandbox/roles/SRE"
+        members = [
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
     ]
     service_accounts = {
       apigee-sandbox-sa = {
