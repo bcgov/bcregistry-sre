@@ -1008,6 +1008,14 @@ other_projects = {
         ]
       },
     ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/c4hnrd-tools/locations/us/repositories/gcr.io"
+        resource_type = "artifact_registry"
+        roles         = ["roles/artifactregistry.reader"]
+        members       = ["Chris.Gabel@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "dietrich.wolpert@gov.bc.ca", "eve.deng@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "megan.a.wong@gov.bc.ca", "meng.dong@gov.bc.ca", "omid.x.zamani@gov.bc.ca", "rajandeep.kaur@gov.bc.ca", "severin.beauvais@gov.bc.ca", "steven.chen@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "thayne.werdal@gov.bc.ca", "vishnu.preddy@gov.bc.ca"]
+      },
+    ]
     custom_roles = {
       cdcloudbuild = {
         title = "CD Cloud Build"

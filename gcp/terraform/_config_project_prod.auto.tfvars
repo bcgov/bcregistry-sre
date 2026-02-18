@@ -312,6 +312,14 @@ prod_projects = {
         members = ["doug.lovett@gov.bc.ca"]
       },
     ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/c4hnrd-prod/topics/SCC-alert-prod"
+        resource_type = "pubsub_topic"
+        roles         = ["roles/pubsub.admin"]
+        members       = ["patrick.wei@gov.bc.ca"]
+      },
+    ]
     instances = [
       {
         instance = "common-db-prod"
@@ -835,6 +843,20 @@ prod_projects = {
           "steven.chen@gov.bc.ca",
           "travis.semple@gov.bc.ca",
         ]
+      },
+    ]
+    resource_iam_bindings = [
+      {
+        resource      = "lear-db-dump-prod"
+        resource_type = "storage_bucket"
+        roles         = ["roles/storage.objectAdmin"]
+        members       = ["hongjing.chen@gov.bc.ca"]
+      },
+      {
+        resource      = "lear-db-dump-prod"
+        resource_type = "storage_bucket"
+        roles         = ["roles/storage.objectViewer"]
+        members       = ["hongjing.chen@gov.bc.ca"]
       },
     ]
     instances = [

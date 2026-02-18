@@ -5,18 +5,37 @@ locals {
     var.custom_roles
   )
 
-  resource_iam_bindings = flatten([
+  managed_sa_resource_bindings = flatten([
     for sa_name, sa_attrs in var.service_accounts : [
       for role_entry in sa_attrs.resource_roles != null ? sa_attrs.resource_roles : [] : [
         for role in role_entry.roles : {
-          sa_name  = sa_name
-          role     = role
-          resource = role_entry.resource
+          sa_name       = sa_name
+          member        = null
+          role          = role
+          resource      = role_entry.resource
           resource_type = role_entry.resource_type
+          is_managed_sa = true
         }
       ]
     ]
   ])
+
+  generic_resource_bindings = flatten([
+    for binding in var.resource_iam_bindings : [
+      for member in binding.members : [
+        for role in binding.roles : {
+          sa_name       = null
+          member        = can(regex(":", member)) ? member : "user:${member}"
+          role          = role
+          resource      = binding.resource
+          resource_type = binding.resource_type
+          is_managed_sa = false
+        }
+      ]
+    ]
+  ])
+
+  resource_iam_bindings = concat(local.managed_sa_resource_bindings, local.generic_resource_bindings)
 }
 
 resource "google_service_account" "sa" {
@@ -75,75 +94,75 @@ resource "google_project_iam_custom_role" "custom_roles" {
 
 resource "google_cloud_run_service_iam_member" "resource_iam_members" {
   for_each = { for combo in local.resource_iam_bindings :
-    "${combo.sa_name}-${combo.role}-${combo.resource}" => combo
+    (combo.is_managed_sa ? "${combo.sa_name}-${combo.role}-${combo.resource}" : "${combo.member}-${combo.role}-${combo.resource}") => combo
     if combo.resource_type == "cloud_run"
   }
 
   service = each.value.resource
   role    = each.value.role
-  member  = "serviceAccount:${google_service_account.sa[each.value.sa_name].email}"
+  member  = each.value.is_managed_sa ? "serviceAccount:${google_service_account.sa[each.value.sa_name].email}" : each.value.member
 }
 
 resource "google_storage_bucket_iam_member" "resource_iam_members" {
   for_each = {
     for combo in local.resource_iam_bindings :
-    "${combo.sa_name}-${combo.role}-${combo.resource}" => combo
+    (combo.is_managed_sa ? "${combo.sa_name}-${combo.role}-${combo.resource}" : "${combo.member}-${combo.role}-${combo.resource}") => combo
     if combo.resource_type == "storage_bucket"
   }
 
   bucket = each.value.resource
   role   = each.value.role
-  member = "serviceAccount:${google_service_account.sa[each.value.sa_name].email}"
+  member = each.value.is_managed_sa ? "serviceAccount:${google_service_account.sa[each.value.sa_name].email}" : each.value.member
 }
 
 resource "google_secret_manager_secret_iam_member" "resource_iam_members" {
   for_each = {
     for combo in local.resource_iam_bindings :
-    "${combo.sa_name}-${combo.role}-${combo.resource}" => combo
+    (combo.is_managed_sa ? "${combo.sa_name}-${combo.role}-${combo.resource}" : "${combo.member}-${combo.role}-${combo.resource}") => combo
     if combo.resource_type == "secret_manager"
   }
 
   secret_id = each.value.resource
   role      = each.value.role
-  member    = "serviceAccount:${google_service_account.sa[each.value.sa_name].email}"
+  member    = each.value.is_managed_sa ? "serviceAccount:${google_service_account.sa[each.value.sa_name].email}" : each.value.member
 }
 
 
 resource "google_pubsub_topic_iam_member" "resource_iam_members" {
   for_each = {
     for combo in local.resource_iam_bindings :
-    "${combo.sa_name}-${combo.role}-${combo.resource}" => combo
+    (combo.is_managed_sa ? "${combo.sa_name}-${combo.role}-${combo.resource}" : "${combo.member}-${combo.role}-${combo.resource}") => combo
     if combo.resource_type == "pubsub_topic"
   }
 
   topic  = each.value.resource
   role   = each.value.role
-  member = "serviceAccount:${google_service_account.sa[each.value.sa_name].email}"
+  member = each.value.is_managed_sa ? "serviceAccount:${google_service_account.sa[each.value.sa_name].email}" : each.value.member
 }
 
 
 resource "google_artifact_registry_repository_iam_member" "resource_iam_members" {
   for_each = {
     for combo in local.resource_iam_bindings :
-    "${combo.sa_name}-${combo.role}-${combo.resource}" => combo
+    (combo.is_managed_sa ? "${combo.sa_name}-${combo.role}-${combo.resource}" : "${combo.member}-${combo.role}-${combo.resource}") => combo
     if combo.resource_type == "artifact_registry"
   }
 
   repository = each.value.resource
   role       = each.value.role
-  member     = "serviceAccount:${google_service_account.sa[each.value.sa_name].email}"
+  member     = each.value.is_managed_sa ? "serviceAccount:${google_service_account.sa[each.value.sa_name].email}" : each.value.member
 }
 
 
 resource "google_service_account_iam_member" "resource_iam_members" {
   for_each = { for combo in local.resource_iam_bindings :
-    "${combo.sa_name}-${combo.role}-${combo.resource}" => combo
+    (combo.is_managed_sa ? "${combo.sa_name}-${combo.role}-${combo.resource}" : "${combo.member}-${combo.role}-${combo.resource}") => combo
     if combo.resource_type == "sa_iam_member"
   }
 
   service_account_id = each.value.resource
   role               = each.value.role
-  member             = "serviceAccount:${google_service_account.sa[each.value.sa_name].email}"
+  member             = each.value.is_managed_sa ? "serviceAccount:${google_service_account.sa[each.value.sa_name].email}" : each.value.member
 }
 
 locals {

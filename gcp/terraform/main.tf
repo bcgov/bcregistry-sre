@@ -25,6 +25,7 @@ locals {
     environment_custom_roles = {}
     pam_bindings            = []
     iam_bindings            = []
+    resource_iam_bindings   = []
   }
   
   # Dynamically select projects based on workspace
@@ -49,6 +50,7 @@ module "iam" {
   global_custom_roles = var.global_custom_roles
   global_iam_bindings = var.global_iam_bindings
   iam_bindings        = try(each.value.iam_bindings, [])
+  resource_iam_bindings = try(each.value.resource_iam_bindings, [])
 }
 
 module "pam" {

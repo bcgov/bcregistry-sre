@@ -61,6 +61,13 @@ variable "dev_projects" {
       role    = string
       members = list(string)
     })), [])
+
+    resource_iam_bindings = optional(list(object({
+      resource = string
+      roles    = list(string)
+      members  = list(string)
+      resource_type = string
+    })), [])
   }))
   default = {}
 }
@@ -112,6 +119,13 @@ variable "test_projects" {
     iam_bindings = optional(list(object({
       role    = string
       members = list(string)
+    })), [])
+
+    resource_iam_bindings = optional(list(object({
+      resource = string
+      roles    = list(string)
+      members  = list(string)
+      resource_type = string
     })), [])
   }))
   default = {}
@@ -165,6 +179,13 @@ variable "prod_projects" {
       role    = string
       members = list(string)
     })), [])
+
+    resource_iam_bindings = optional(list(object({
+      resource = string
+      roles    = list(string)
+      members  = list(string)
+      resource_type = string
+    })), [])
   }))
   default = {}
 }
@@ -217,6 +238,13 @@ variable "other_projects" {
       role    = string
       members = list(string)
     })), [])
+
+    resource_iam_bindings = optional(list(object({
+      resource = string
+      roles    = list(string)
+      members  = list(string)
+      resource_type = string
+    })), [])
   }))
   default = {}
 }
@@ -267,6 +295,13 @@ variable "environments" {
     iam_bindings = optional(list(object({
       role    = string
       members = list(string)
+    })), [])
+
+    resource_iam_bindings = optional(list(object({
+      resource = string
+      roles    = list(string)
+      members  = list(string)
+      resource_type = string
     })), [])
   }))
   default = {}
