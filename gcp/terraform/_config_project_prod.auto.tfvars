@@ -78,13 +78,10 @@ prod_projects = {
         members = ["siddharth.chaturvedi@gov.bc.ca"]
       },
       {
-        role    = "roles/editor"
-        members = ["travis.semple@gov.bc.ca"]
-      },
-      {
-        role    = "roles/owner"
+        role    = "projects/mvnjri-prod/roles/SRE"
         members = [
-          "kial.jinnah@gov.bc.ca",
+           "kial.jinnah@gov.bc.ca",
+           "travis.semple@gov.bc.ca",
         ]
       },
       {
@@ -472,6 +469,8 @@ prod_projects = {
         role    = "projects/gtksf3-prod/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
         ]
       },
       {
@@ -508,13 +507,6 @@ prod_projects = {
         members = [
           "andriy.bolyachevets@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/editor"
-        members = [
-          "kial.jinnah@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
         ]
       },
       {
@@ -694,7 +686,7 @@ prod_projects = {
         ]
       },
       {
-        role    = "roles/owner"
+        role    = "projects/yfjq17-prod/roles/SRE"
         members = [
           "kial.jinnah@gov.bc.ca",
         ]
@@ -1081,6 +1073,24 @@ prod_projects = {
         role    = "roles/viewer"
         members = ["omid.x.zamani@gov.bc.ca"]
       },
+      {
+        role    = "projects/eogruh-prod/roles/SRE"
+        members = [
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [ 
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [ 
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
     ]
     instances = [
       {
@@ -1196,9 +1206,10 @@ prod_projects = {
         ]
       },
       {
-        role    = "roles/owner"
+        role    = "projects/k973yf-prod/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
         ]
       },
       {
@@ -1307,10 +1318,6 @@ prod_projects = {
         ]
       },
       {
-        role    = "roles/editor"
-        members = ["omid.x.zamani@gov.bc.ca"]
-      },
-      {
         role    = "roles/firebase.admin"
         members = [
           "eve.deng@gov.bc.ca",
@@ -1319,10 +1326,11 @@ prod_projects = {
         ]
       },
       {
-        role    = "roles/owner"
+        role    = "projects/yfthig-prod/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
         ]
       },
       {
@@ -1465,6 +1473,12 @@ prod_projects = {
       {
         role    = "roles/iam.serviceAccountTokenCreator"
         members = ["andriy.bolyachevets@gov.bc.ca"]
+      },
+      {
+        role    = "projects/okagqp-prod/roles/SRE"
+        members = [
+          "doug.lovett@gov.bc.ca",
+        ]
       },
     ]
     service_accounts = {
