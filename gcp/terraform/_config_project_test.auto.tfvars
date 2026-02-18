@@ -32,16 +32,11 @@ test_projects = {
         ]
       },
       {
-        role    = "roles/editor"
+        role    = "projects/c4hnrd-test/roles/SRE"
         members = [
-          "eve.deng@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/owner"
-        members = [
-          "doug.lovett@gov.bc.ca",
+            "eve.deng@gov.bc.ca",
+            "travis.semple@gov.bc.ca",
+            "doug.lovett@gov.bc.ca",
         ]
       },
       {
@@ -174,6 +169,9 @@ test_projects = {
         role    = "projects/gtksf3-test/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
+          "chiu.oddyseus@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
         ]
       },
       {
@@ -212,14 +210,6 @@ test_projects = {
         members = [
           "jia.xu@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/editor"
-        members = [
-          "chiu.oddyseus@gov.bc.ca",
-          "kial.jinnah@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
         ]
       },
       {
@@ -476,6 +466,11 @@ test_projects = {
         role    = "projects/a083gt-test/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
+          "Argus.1.Chiu@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
+          "hrvoje.fekete@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
+          "vysakh.menon@gov.bc.ca",
         ]
       },
       {
@@ -524,23 +519,8 @@ test_projects = {
         members = ["felipe.moraes@gov.bc.ca"]
       },
       {
-        role    = "roles/editor"
-        members = [
-          "hrvoje.fekete@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-          "vysakh.menon@gov.bc.ca",
-        ]
-      },
-      {
         role    = "roles/iam.serviceAccountUser"
         members = ["steven.chen@gov.bc.ca"]
-      },
-      {
-        role    = "roles/owner"
-        members = [
-          "Argus.1.Chiu@gov.bc.ca",
-          "kial.jinnah@gov.bc.ca",
-        ]
       },
       {
         role    = "roles/pubsub.admin"
@@ -711,10 +691,6 @@ test_projects = {
         members = ["patty.stemkens@gov.bc.ca"]
       },
       {
-        role    = "roles/owner"
-        members = ["thor.wolpert@gov.bc.ca"]
-      },
-      {
         role    = "roles/run.invoker"
         members = ["patty.stemkens@gov.bc.ca"]
       },
@@ -796,6 +772,18 @@ test_projects = {
       {
         role    = "projects/eogruh-test/roles/SRE"
         members = [
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [ 
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [ 
           "doug.lovett@gov.bc.ca",
         ]
       },
@@ -1010,8 +998,12 @@ test_projects = {
         ]
       },
       {
-        role    = "roles/editor"
-        members = ["omid.x.zamani@gov.bc.ca"]
+        role    = "projects/yfthig-test/roles/SRE"
+        members = [
+          "omid.x.zamani@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
+        ]
       },
       {
         role    = "roles/firebase.admin"
@@ -1019,13 +1011,6 @@ test_projects = {
           "eve.deng@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "travis.semple@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/owner"
-        members = [
-          "doug.lovett@gov.bc.ca",
-          "kial.jinnah@gov.bc.ca",
         ]
       },
       {
@@ -1117,12 +1102,6 @@ test_projects = {
       {
         role    = "roles/cloudsql.instanceUser"
         members = ["andriy.bolyachevets@gov.bc.ca"]
-      },
-      {
-        role    = "roles/owner"
-        members = [
-          "max.wardle@gov.bc.ca",
-        ]
       },
       {
         role    = "roles/securitycenter.assetsViewer"

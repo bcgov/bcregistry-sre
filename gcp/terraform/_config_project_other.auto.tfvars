@@ -26,12 +26,6 @@ other_projects = {
         members = ["patrick.wei@gov.bc.ca"]
       },
       {
-        role    = "roles/owner"
-        members = [
-          "max.wardle@gov.bc.ca",
-        ]
-      },
-      {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "eve.deng@gov.bc.ca",
@@ -104,6 +98,9 @@ other_projects = {
         role    = "projects/gtksf3-tools/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
+          "jia.xu@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
         ]
       },
       {
@@ -139,20 +136,6 @@ other_projects = {
       {
         role    = "roles/cloudsql.instanceUser"
         members = ["thor.wolpert@gov.bc.ca"]
-      },
-      {
-        role    = "roles/editor"
-        members = [
-          "jia.xu@gov.bc.ca",
-          "kial.jinnah@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/owner"
-        members = [
-          "thor.wolpert@gov.bc.ca",
-        ]
       },
       {
         role    = "roles/securitycenter.assetsViewer"
@@ -340,6 +323,7 @@ other_projects = {
         role    = "projects/a083gt-tools/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
+          "Argus.1.Chiu@gov.bc.ca",
         ]
       },
       {
@@ -361,12 +345,6 @@ other_projects = {
           "syed.riyazzudin@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
           "travis.semple@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/owner"
-        members = [
-          "Argus.1.Chiu@gov.bc.ca",
         ]
       },
       {
@@ -447,6 +425,18 @@ other_projects = {
       {
         role    = "projects/eogruh-sandbox/roles/SRE"
         members = [
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [ 
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [ 
           "doug.lovett@gov.bc.ca",
         ]
       },
@@ -577,12 +567,6 @@ other_projects = {
         ]
       },
       {
-        role    = "roles/owner"
-        members = [
-          "max.wardle@gov.bc.ca",
-        ]
-      },
-      {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
@@ -633,12 +617,6 @@ other_projects = {
         members = [
           "dietrich.wolpert@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/owner"
-        members = [
-          "max.wardle@gov.bc.ca",
         ]
       },
       {
@@ -751,10 +729,6 @@ other_projects = {
         members = ["john.a.m.lane@gov.bc.ca"]
       },
       {
-        role    = "roles/editor"
-        members = ["vysakh.menon@gov.bc.ca"]
-      },
-      {
         role    = "roles/iam.serviceAccountTokenCreator"
         members = ["andriy.bolyachevets@gov.bc.ca"]
       },
@@ -766,10 +740,11 @@ other_projects = {
         ]
       },
       {
-        role    = "roles/owner"
+        role    = "projects/a083gt-integration/roles/SRE"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
+          "vysakh.menon@gov.bc.ca",
         ]
       },
       {

@@ -27,8 +27,10 @@ dev_projects = {
         members = ["siddharth.chaturvedi@gov.bc.ca"]
       },
       {
-        role    = "roles/editor"
-        members = ["travis.semple@gov.bc.ca"]
+        role    = "projects/mvnjri-dev/roles/SRE"
+        members = [
+          "travis.semple@gov.bc.ca"
+        ]
       },
       {
         role    = "roles/securitycenter.assetsViewer"
@@ -117,25 +119,14 @@ dev_projects = {
         ]
       },
       {
-        role    = "roles/bigquery.admin"
-        members = ["travis.semple@gov.bc.ca"]
-      },
-      {
-        role    = "roles/cloudsql.admin"
-        members = ["travis.semple@gov.bc.ca"]
-      },
-      {
-        role    = "roles/editor"
+        role    = "projects/c4hnrd-dev/roles/SRE"
         members = [
           "eve.deng@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "travis.semple@gov.bc.ca",
+          "doug.lovett@gov.bc.ca"
         ]
-      },
-      {
-        role    = "roles/owner"
-        members = ["doug.lovett@gov.bc.ca"]
       },
       {
         role    = "roles/securitycenter.assetsViewer"
@@ -182,10 +173,6 @@ dev_projects = {
           "travis.semple@gov.bc.ca",
           "vysakh.menon@gov.bc.ca",
         ]
-      },
-      {
-        role    = "roles/viewer"
-        members = ["rajandeep.kaur@gov.bc.ca"]
       },
     ]
     resource_iam_bindings = [
@@ -305,6 +292,11 @@ dev_projects = {
         role    = "projects/gtksf3-dev/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
+          "chiu.oddyseus@gov.bc.ca",
+          "hrvoje.fekete@gov.bc.ca",
+          "jia.xu@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
         ]
       },
       {
@@ -343,16 +335,6 @@ dev_projects = {
         members = [
           "jia.xu@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/editor"
-        members = [
-          "chiu.oddyseus@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
-          "jia.xu@gov.bc.ca",
-          "kial.jinnah@gov.bc.ca",
           "travis.semple@gov.bc.ca",
         ]
       },
@@ -634,6 +616,13 @@ dev_projects = {
           role    = "projects/a083gt-dev/roles/SRE"
           members = [
             "doug.lovett@gov.bc.ca",
+            "Argus.1.Chiu@gov.bc.ca",
+            "kial.jinnah@gov.bc.ca",
+            "Chris.Gabel@gov.bc.ca",
+            "eve.deng@gov.bc.ca",
+            "hrvoje.fekete@gov.bc.ca",
+            "travis.semple@gov.bc.ca",
+            "vysakh.menon@gov.bc.ca",
           ]
         },
         {
@@ -686,29 +675,12 @@ dev_projects = {
           members = ["andriy.bolyachevets@gov.bc.ca"]
         },
         {
-          role    = "roles/editor"
-          members = [
-            "Chris.Gabel@gov.bc.ca",
-            "eve.deng@gov.bc.ca",
-            "hrvoje.fekete@gov.bc.ca",
-            "travis.semple@gov.bc.ca",
-            "vysakh.menon@gov.bc.ca",
-          ]
-        },
-        {
           role    = "roles/iam.serviceAccountUser"
           members = ["steven.chen@gov.bc.ca"]
         },
         {
           role    = "roles/iap.tunnelResourceAccessor"
           members = ["hrvoje.fekete@gov.bc.ca"]
-        },
-        {
-          role    = "roles/owner"
-          members = [
-            "Argus.1.Chiu@gov.bc.ca",
-            "kial.jinnah@gov.bc.ca",
-          ]
         },
         {
           role    = "roles/pubsub.admin"
@@ -908,12 +880,11 @@ dev_projects = {
     env = "dev"
     iam_bindings = [
       {
-        role    = "roles/editor"
-        members = ["dietrich.wolpert@gov.bc.ca"]
-      },
-      {
-        role    = "roles/owner"
-        members = ["kial.jinnah@gov.bc.ca"]
+        role    = "projects/keee67-dev/roles/SRE"
+        members = [
+          "kial.jinnah@gov.bc.ca",
+          "dietrich.wolpert@gov.bc.ca"
+        ]
       },
       {
         role    = "roles/securitycenter.assetsViewer"
@@ -980,6 +951,18 @@ dev_projects = {
       {
         role    = "projects/eogruh-dev/roles/SRE"
         members = [
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.assetsViewer"
+        members = [ 
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/securitycenter.findingsViewer"
+        members = [ 
           "doug.lovett@gov.bc.ca",
         ]
       },
@@ -1172,13 +1155,6 @@ dev_projects = {
         ]
       },
       {
-        role    = "roles/editor"
-        members = [
-          "dietrich.wolpert@gov.bc.ca",
-          "omid.x.zamani@gov.bc.ca",
-        ]
-      },
-      {
         role    = "roles/firebase.admin"
         members = [
           "eve.deng@gov.bc.ca",
@@ -1192,10 +1168,12 @@ dev_projects = {
         members = ["patrick.wei@gov.bc.ca"]
       },
       {
-        role    = "roles/owner"
+        role    = "projects/yfthig-dev/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
+          "dietrich.wolpert@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
         ]
       },
       {
@@ -1301,13 +1279,9 @@ dev_projects = {
         ]
       },
       {
-        role    = "roles/editor"
-        members = ["kial.jinnah@gov.bc.ca"]
-      },
-      {
-        role    = "roles/owner"
+        role    = "projects/bcrbk9-dev/roles/SRE"
         members = [
-          "max.wardle@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca"
         ]
       },
       {
