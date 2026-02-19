@@ -195,8 +195,8 @@ other_projects = {
                 owner      = "postgres"
                 database_role_assignment = {
                   readonly = []
-                  readwrite = []
-                  admin = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
           }
         ]
@@ -306,6 +306,10 @@ other_projects = {
       sa-queue = {
         roles       = ["projects/yfjq17-tools/roles/rolequeue"]
         description = "Service Account for running queue services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/yfjq17-tools/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       btr-cd = {
         roles       = ["roles/editor"]
@@ -453,8 +457,8 @@ other_projects = {
                 owner      = "user4ca"
                 database_role_assignment = {
                   readonly = []
-                  readwrite = []
-                  admin = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
@@ -476,6 +480,10 @@ other_projects = {
       sa-queue = {
         roles       = ["projects/eogruh-sandbox/roles/rolequeue"]
         description = "Service Account for running queue services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/eogruh-sandbox/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       ppr-sandbox-sa = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.admin", "roles/storage.admin"]
@@ -504,8 +512,8 @@ other_projects = {
                 owner      = "int_user"
                 database_role_assignment = {
                   readonly = []
-                  readwrite = []
-                  admin = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
@@ -527,6 +535,10 @@ other_projects = {
       sa-queue = {
         roles       = ["projects/k973yf--tools/roles/rolequeue"]
         description = "Service Account for running queue services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/k973yf--tools/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       gha-wif = {
         roles       = ["roles/compute.admin"]
@@ -815,7 +827,7 @@ other_projects = {
                 database_role_assignment = {
                   readonly = ["sa-solr-importer"]
                   readwrite = ["sa-job", "sa-api"]
-                  admin = []
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]

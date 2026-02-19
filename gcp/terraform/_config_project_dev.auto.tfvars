@@ -426,8 +426,8 @@ dev_projects = {
                 owner      = "pay"
                 database_role_assignment = {
                   readonly = ["noor.nayeem@gov.bc.ca"]
-                  readwrite = ["anish.batra@gov.bc.ca"]
-                  admin = []
+                  readwrite = ["sa-api", "anish.batra@gov.bc.ca"]
+                  admin = ["sa-db-migrate"]
                 }
           }
         ]
@@ -573,8 +573,8 @@ dev_projects = {
                 owner      = "devUser"
                 database_role_assignment = {
                   readonly = []
-                  readwrite = []
-                  admin = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
@@ -611,6 +611,10 @@ dev_projects = {
       sa-queue = {
         roles       = ["projects/yfjq17-dev/roles/rolequeue"]
         description = "Service Account for running queue services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/yfjq17-dev/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       sa-solr-importer = {
       roles       = ["projects/yfjq17-dev/roles/rolesolrimporter"]
@@ -789,7 +793,7 @@ dev_projects = {
                   database_role_assignment = {
                     readonly = ["sa-solr-importer", "siddharth.chaturvedi@gov.bc.ca"]
                     readwrite = ["syed.riyazzudin@gov.bc.ca", "sa-job", "sa-api"]
-                    admin = []
+                    admin = ["sa-db-migrate"]
                   }
                 }
               ]
@@ -995,8 +999,8 @@ dev_projects = {
                 owner      = "user4ca"
                 database_role_assignment = {
                   readonly = ["divya.chandupatla@gov.bc.ca"]
-                  readwrite = []
-                  admin = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
           }
         ]
@@ -1010,6 +1014,10 @@ dev_projects = {
       sa-api = {
         roles       = ["projects/eogruh-dev/roles/roleapi"]
         description = "Service Account for running api services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/eogruh-dev/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       sa-queue = {
         roles       = ["projects/eogruh-dev/roles/rolequeue"]
@@ -1096,8 +1104,8 @@ dev_projects = {
                 owner      = "devUser"
                 database_role_assignment = {
                   readonly = ["gunasegaran.nagarajan@gov.bc.ca"]
-                  readwrite = []
-                  admin = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
@@ -1126,6 +1134,10 @@ dev_projects = {
       sa-api = {
         roles       = ["projects/k973yf-dev/roles/roleapi"]
         description = "Service Account for running api services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/k973yf-dev/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       sa-queue = {
         roles       = ["projects/k973yf-dev/roles/rolequeue"]

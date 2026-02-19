@@ -577,8 +577,8 @@ prod_projects = {
                 owner      = "pay"
                 database_role_assignment = {
                   readonly = ["ketaki.deodhar@gov.bc.ca","dietrich.wolpert@gov.bc.ca", "hongjing.chen@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "jia.xu@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "megan.a.wong@gov.bc.ca", "thayne.werdal@gov.bc.ca", "anushka.halder@gov.bc.ca"]
-                  readwrite = ["steven.chen@gov.bc.ca", "eve.deng@gov.bc.ca"]
-                  admin = []
+                  readwrite = ["sa-api", "steven.chen@gov.bc.ca", "eve.deng@gov.bc.ca"]
+                  admin = ["sa-db-migrate"]
                 }
           }
         ]
@@ -728,8 +728,8 @@ prod_projects = {
                 owner      = "prodUser"
                 database_role_assignment = {
                   readonly = ["dietrich.wolpert@gov.bc.ca", "megan.a.wong@gov.bc.ca"]
-                  readwrite = []
-                  admin = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
@@ -750,6 +750,10 @@ prod_projects = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
         description = "Service Account for running pubsub services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/yfjq17-prod/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       sa-job = {
         roles       = ["projects/yfjq17-prod/roles/rolejob"]
@@ -882,7 +886,7 @@ prod_projects = {
                 database_role_assignment = {
                   readonly = ["sa-solr-importer", "sa-notebook", "vikas.singh@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "severin.beauvais@gov.bc.ca", "vysakh.menon@gov.bc.ca", "thayne.werdal@gov.bc.ca", "david.li@gov.bc.ca", "dietrich.wolpert@gov.bc.ca", "hongjing.chen@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "megan.a.wong@gov.bc.ca", "lucas.o'neil@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "kial.jinnah@gov.bc.ca", "steven.chen@gov.bc.ca", "eve.deng@gov.bc.ca", "david.mckinnon@gov.bc.ca", "mihai.dinu@gov.bc.ca"]
                   readwrite = ["sa-job", "sa-api"]
-                  admin = []
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
@@ -1112,8 +1116,8 @@ prod_projects = {
                 owner      = "user4ca"
                 database_role_assignment = {
                   readonly = ["eve.deng@gov.bc.ca"]
-                  readwrite = []
-                  admin = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
           },
           {
@@ -1140,6 +1144,10 @@ prod_projects = {
             resource_type = "secret_manager"
           }
         ]
+      },
+      sa-db-migrate = {
+        roles       = ["projects/eogruh-prod/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
@@ -1251,8 +1259,8 @@ prod_projects = {
                 owner      = "search_service"
                 database_role_assignment = {
                   readonly = ["hrvoje.fekete@gov.bc.ca"]
-                  readwrite = []
-                  admin = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
@@ -1273,6 +1281,10 @@ prod_projects = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
         description = "Service Account for running pubsub services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/k973yf-prod/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       sa-job = {
         roles       = ["projects/k973yf-prod/roles/rolejob"]
