@@ -263,6 +263,17 @@ test_projects = {
         ]
       },
     ]
+    resource_iam_bindings = [
+      {
+        resource      = "auth-static-resources-test"
+        resource_type = "storage_bucket"
+        roles         = ["roles/storage.objectUser"]
+        members       = [
+          "jia.xu@gov.bc.ca"
+          ]
+      },
+    ]
+    
     instances = [
       {
         instance = "auth-db-test"

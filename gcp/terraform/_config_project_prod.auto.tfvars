@@ -542,6 +542,16 @@ prod_projects = {
         members = ["andriy.bolyachevets@gov.bc.ca"]
       },
     ]
+    resource_iam_bindings = [
+      {
+          resource      = "auth-static-resources-prod"
+          resource_type = "storage_bucket"
+          roles         = ["roles/storage.objectUser"]
+          members       = [
+            "jia.xu@gov.bc.ca"
+            ]
+        },
+    ]
     instances = [
       {
         instance = "auth-db-prod"

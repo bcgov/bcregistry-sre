@@ -391,6 +391,16 @@ dev_projects = {
         ]
       },
     ]
+    resource_iam_bindings = [
+      {
+          resource      = "auth-static-resources-dev"
+          resource_type = "storage_bucket"
+          roles         = ["roles/storage.objectUser"]
+          members       = [
+            "jia.xu@gov.bc.ca"
+            ]
+        },
+    ]
     instances = [
       {
         instance = "auth-db-dev"

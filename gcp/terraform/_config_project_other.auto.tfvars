@@ -168,6 +168,8 @@ other_projects = {
         ]
       },
     ]
+    resource_iam_bindings = [
+    ]
     instances = [
       {
         instance = "auth-db-sandbox"
