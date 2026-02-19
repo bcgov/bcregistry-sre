@@ -299,8 +299,8 @@ test_projects = {
                 owner      = "pay"
                 database_role_assignment = {
                   readonly = ["noor.nayeem@gov.bc.ca", "patty.stemkens@gov.bc.ca"]
-                  readwrite = ["anish.batra@gov.bc.ca"]
-                  admin = []
+                  readwrite = ["sa-api", "anish.batra@gov.bc.ca"]
+                  admin = ["sa-db-migrate"]
                 }
           }
         ]
@@ -424,8 +424,8 @@ test_projects = {
                 owner      = "testUser"
                 database_role_assignment = {
                   readonly = []
-                  readwrite = []
-                  admin = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
@@ -454,6 +454,10 @@ test_projects = {
       sa-job = {
         roles       = ["projects/yfjq17-test/roles/rolejob"]
         description = "Service Account for running job services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/yfjq17-test/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       sa-api = {
         roles       = ["projects/yfjq17-test/roles/roleapi"]
@@ -607,7 +611,7 @@ test_projects = {
                 database_role_assignment = {
                   readonly = ["sa-solr-importer"]
                   readwrite = ["syed.riyazzudin@gov.bc.ca", "sa-job", "sa-api"]
-                  admin = []
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
@@ -809,8 +813,8 @@ test_projects = {
                 owner      = "user4ca"
                 database_role_assignment = {
                   readonly = ["divya.chandupatla@gov.bc.ca"]
-                  readwrite = []
-                  admin = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
           },
           {
@@ -834,6 +838,10 @@ test_projects = {
       sa-job = {
         roles       = ["projects/eogruh-test/roles/rolejob"]
         description = "Service Account for running job services"
+      },
+      sa-db-migrate = {
+        roles       = ["projects/eogruh-test/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       sa-api = {
         roles       = ["projects/eogruh-test/roles/roleapi"]
@@ -937,8 +945,8 @@ test_projects = {
                 owner      = "testUser"
                 database_role_assignment = {
                   readonly = ["gunasegaran.nagarajan@gov.bc.ca"]
-                  readwrite = []
-                  admin = []
+                  readwrite = ["sa-api"]
+                  admin = ["sa-db-migrate"]
                 }
               }
             ]
@@ -959,6 +967,10 @@ test_projects = {
               resource_type = "sa_iam_member"
             }
           ]
+      },
+      sa-db-migrate = {
+        roles       = ["projects/k973yf-test/roles/roledbmigrate"]
+        description = "Service Account for running db alembic migration job"
       },
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber", "roles/run.invoker"]
