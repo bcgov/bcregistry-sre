@@ -869,16 +869,6 @@ prod_projects = {
       {
         instance = "businesses-db-prod"
         databases =  [
-          {
-                db_name    = "business-ar"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "business-ar-api"
-                database_role_assignment = {
-                  readonly = ["sa-solr-importer"]
-                  readwrite = []
-                  admin = []
-                }
-              },
               {
                 db_name    = "business"
                 roles      = ["readonly", "readwrite", "admin"]
