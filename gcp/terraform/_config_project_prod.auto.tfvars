@@ -132,6 +132,14 @@ prod_projects = {
         members = ["siddharth.chaturvedi@gov.bc.ca"]
       },
     ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/mvnjri-prod/serviceAccounts/sa-pam-function@mvnjri-prod.iam.gserviceaccount.com"
+        roles         = ["roles/iam.serviceAccountUser"]
+        resource_type = "sa_iam_member"
+        members       = ["andriy.bolyachevets@gov.bc.ca"]
+      },
+    ]
     instances = [
       {
         instance = "fin-warehouse-prod"
@@ -315,6 +323,12 @@ prod_projects = {
         resource_type = "pubsub_topic"
         roles         = ["roles/pubsub.admin"]
         members       = ["patrick.wei@gov.bc.ca"]
+      },
+      {
+        resource      = "projects/c4hnrd-prod/serviceAccounts/sa-pam-function@c4hnrd-prod.iam.gserviceaccount.com"
+        roles         = ["roles/iam.serviceAccountUser"]
+        resource_type = "sa_iam_member"
+        members       = ["andriy.bolyachevets@gov.bc.ca"]
       },
     ]
     instances = [
@@ -551,6 +565,12 @@ prod_projects = {
             "jia.xu@gov.bc.ca"
             ]
         },
+      {
+        resource      = "projects/gtksf3-prod/serviceAccounts/sa-pam-function@gtksf3-prod.iam.gserviceaccount.com"
+        roles         = ["roles/iam.serviceAccountUser"]
+        resource_type = "sa_iam_member"
+        members       = ["andriy.bolyachevets@gov.bc.ca"]
+      },
     ]
     instances = [
       {
@@ -718,6 +738,14 @@ prod_projects = {
         members = ["steven.chen@gov.bc.ca"]
       },
     ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/yfjq17-prod/serviceAccounts/sa-pam-function@yfjq17-prod.iam.gserviceaccount.com"
+        roles         = ["roles/iam.serviceAccountUser"]
+        resource_type = "sa_iam_member"
+        members       = ["andriy.bolyachevets@gov.bc.ca"]
+      }
+    ]
     instances = [
       {
         instance = "bor-db-prod"
@@ -864,6 +892,12 @@ prod_projects = {
         roles         = ["roles/storage.objectViewer"]
         members       = ["hongjing.chen@gov.bc.ca"]
       },
+      {
+        resource      = "projects/a083gt-prod/serviceAccounts/sa-pam-function@a083gt-prod.iam.gserviceaccount.com"
+        roles         = ["roles/iam.serviceAccountUser"]
+        resource_type = "sa_iam_member"
+        members       = ["andriy.bolyachevets@gov.bc.ca"]
+      },
     ]
     instances = [
       {
@@ -985,6 +1019,14 @@ prod_projects = {
     env = "prod"
     iam_bindings = [
     ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/keee67-prod/serviceAccounts/sa-pam-function@keee67-prod.iam.gserviceaccount.com"
+        roles         = ["roles/iam.serviceAccountUser"]
+        resource_type = "sa_iam_member"
+        members       = ["andriy.bolyachevets@gov.bc.ca"]
+      }
+    ]
     instances = [
       {
         instance = "bn-hub-prod"
@@ -1095,6 +1137,14 @@ prod_projects = {
           "doug.lovett@gov.bc.ca",
         ]
       },
+    ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/eogruh-prod/serviceAccounts/sa-pam-function@eogruh-prod.iam.gserviceaccount.com"
+        roles         = ["roles/iam.serviceAccountUser"]
+        resource_type = "sa_iam_member"
+        members       = ["andriy.bolyachevets@gov.bc.ca"]
+      }
     ]
     instances = [
       {
@@ -1238,6 +1288,14 @@ prod_projects = {
         role    = "roles/viewer"
         members = ["andriy.bolyachevets@gov.bc.ca"]
       },
+    ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/k973yf-prod/serviceAccounts/sa-pam-function@k973yf-prod.iam.gserviceaccount.com"
+        roles         = ["roles/iam.serviceAccountUser"]
+        resource_type = "sa_iam_member"
+        members       = ["andriy.bolyachevets@gov.bc.ca"]
+      }
     ]
     instances = [
       {
