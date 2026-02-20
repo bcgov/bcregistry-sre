@@ -4,13 +4,6 @@ prod_projects = {
     env = "prod"
     iam_bindings = [
       {
-        role    = "projects/mvnjri-prod/roles/CustomRole"
-        members = [
-          "anushka.halder@gov.bc.ca",
-          "mike.huffman@gov.bc.ca",
-        ]
-      },
-      {
         role    = "projects/mvnjri-prod/roles/roleba"
         members = ["janis.rogers@gov.bc.ca"]
       },
@@ -31,6 +24,8 @@ prod_projects = {
           "omid.x.zamani@gov.bc.ca",
           "patty.stemkens@gov.bc.ca",
           "severin.beauvais@gov.bc.ca",
+          "siddharth.chaturvedi@gov.bc.ca",
+          "travis.semple@gov.bc.ca",
           "vikas.singh@gov.bc.ca",
         ]
       },
@@ -44,38 +39,6 @@ prod_projects = {
           "tyson.graham@gov.bc.ca",
           "varek.boettcher@gov.bc.ca",
         ]
-      },
-      {
-        role    = "roles/cloudsql.admin"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/cloudsql.client"
-        members = [
-          "siddharth.chaturvedi@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/cloudsql.instanceUser"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "anushka.halder@gov.bc.ca",
-          "omid.x.zamani@gov.bc.ca",
-          "severin.beauvais@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/cloudsql.studioUser"
-        members = ["anushka.halder@gov.bc.ca"]
-      },
-      {
-        role    = "roles/cloudsql.viewer"
-        members = ["siddharth.chaturvedi@gov.bc.ca"]
       },
       {
         role    = "projects/mvnjri-prod/roles/SRE"
@@ -115,21 +78,6 @@ prod_projects = {
           "tyson.graham@gov.bc.ca",
           "varek.boettcher@gov.bc.ca",
         ]
-      },
-      {
-        role    = "roles/storage.admin"
-        members = ["travis.semple@gov.bc.ca"]
-      },
-      {
-        role    = "roles/storage.objectAdmin"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/viewer"
-        members = ["siddharth.chaturvedi@gov.bc.ca"]
       },
     ]
     resource_iam_bindings = [
@@ -1572,16 +1520,6 @@ prod_projects = {
               resource_type = "cloud_run"
             },
             {
-              resource = "projects/keee67-prod/locations/northamerica-northeast1/services/pam-request-grant-create-vans-db-prod"
-              roles    = ["roles/run.invoker"]
-              resource_type = "cloud_run"
-            },
-            {
-              resource = "projects/keee67-prod/locations/northamerica-northeast1/services/pam-request-grant-create-bni-hub"
-              roles    = ["roles/run.invoker"]
-              resource_type = "cloud_run"
-            },
-            {
               resource = "projects/gtksf3-prod/locations/northamerica-northeast1/services/pam-request-grant-create-auth-db"
               roles    = ["roles/run.invoker"]
               resource_type = "cloud_run"
@@ -1593,16 +1531,6 @@ prod_projects = {
             },
             {
               resource = "projects/c4hnrd-prod/locations/northamerica-northeast1/services/pam-request-grant-create-notify"
-              roles    = ["roles/run.invoker"]
-              resource_type = "cloud_run"
-            },
-            {
-              resource = "projects/a083gt-prod/locations/northamerica-northeast1/services/pam-request-grant-create-legal-entities"
-              roles    = ["roles/run.invoker"]
-              resource_type = "cloud_run"
-            },
-            {
-              resource = "projects/a083gt-prod/locations/northamerica-northeast1/services/pam-request-grant-create-business-ar"
               roles    = ["roles/run.invoker"]
               resource_type = "cloud_run"
             },

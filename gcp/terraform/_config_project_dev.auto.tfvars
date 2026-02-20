@@ -60,13 +60,6 @@ dev_projects = {
           "varek.boettcher@gov.bc.ca",
         ]
       },
-      {
-        role    = "roles/viewer"
-        members = [
-          "siddharth.chaturvedi@gov.bc.ca",
-          "steven.chen@gov.bc.ca",
-        ]
-      },
     ]
     service_accounts = {
       sa-pubsub = {

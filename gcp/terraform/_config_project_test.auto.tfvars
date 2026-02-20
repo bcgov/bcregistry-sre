@@ -688,18 +688,6 @@ test_projects = {
     env = "test"
     iam_bindings = [
       {
-        role    = "projects/keee67-test/roles/CustomRole"
-        members = ["thor.wolpert@gov.bc.ca"]
-      },
-      {
-        role    = "roles/cloudsql.client"
-        members = ["patty.stemkens@gov.bc.ca"]
-      },
-      {
-        role    = "roles/run.invoker"
-        members = ["patty.stemkens@gov.bc.ca"]
-      },
-      {
         role    = "roles/secretmanager.secretAccessor"
         members = ["thor.wolpert@gov.bc.ca"]
       },
@@ -708,12 +696,10 @@ test_projects = {
         members = ["patty.stemkens@gov.bc.ca"]
       },
       {
-        role    = "roles/securitycenter.findingsViewer"
-        members = ["patty.stemkens@gov.bc.ca"]
-      },
-      {
-        role    = "roles/viewer"
-        members = ["patty.stemkens@gov.bc.ca"]
+        role    = "projects/keee67-test/roles/roledeveloper"
+        members = [
+          "patty.stemkens@gov.bc.ca"
+        ]
       },
     ]
     instances = [
