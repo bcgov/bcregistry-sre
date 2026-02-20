@@ -17,6 +17,7 @@ on:
           - test
           - prod
           - other
+          - mpf
           - default
           - all
         default: 'dev'
