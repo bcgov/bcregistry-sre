@@ -38,7 +38,7 @@ else
     exit 1
 fi
 
-WORKSPACES=("default" "dev" "test" "prod" "other")
+WORKSPACES=("default" "dev" "test" "prod" "other" "mpf")
 
 usage() {
     echo "Usage: $0 <command> [workspace] [extra args]"

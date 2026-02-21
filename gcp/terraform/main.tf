@@ -29,14 +29,21 @@ locals {
   }
   
   # Dynamically select projects based on workspace
-  # Workspace names: dev, test, prod, other (or default for all)
-  projects = terraform.workspace == "dev" ? var.dev_projects : (
-    terraform.workspace == "test" ? var.test_projects : (
-      terraform.workspace == "prod" ? var.prod_projects : (
-        terraform.workspace == "other" ? var.other_projects : {}
+  # Workspace names: dev, test, prod, other, mpf (or default for all)
+  standard_projects = terraform.workspace == "mpf" ? {} : (
+    terraform.workspace == "dev" ? var.dev_projects : (
+      terraform.workspace == "test" ? var.test_projects : (
+        terraform.workspace == "prod" ? var.prod_projects : (
+          terraform.workspace == "other" ? var.other_projects : {}
+        )
       )
     )
   )
+
+  # Only active in mpf workspace
+  mpf_projects = terraform.workspace == "mpf" ? var.mpf_projects : {}
+
+  projects = merge(local.standard_projects, local.mpf_projects)
 }
 
 module "iam" {
@@ -45,23 +52,23 @@ module "iam" {
   source           = "./modules/iam"
   project_id       = each.value.project_id
   env              = lookup(var.environments, each.value.env, local.default_environment)
-  service_accounts = each.value.service_accounts
-  custom_roles     = each.value.custom_roles
-  global_custom_roles = var.global_custom_roles
-  global_iam_bindings = var.global_iam_bindings
+  service_accounts = try(each.value.service_accounts, {})
+  custom_roles     = try(each.value.custom_roles, {})
+  global_custom_roles = terraform.workspace == "mpf" ? {} : var.global_custom_roles
+  global_iam_bindings = terraform.workspace == "mpf" ? [] : var.global_iam_bindings
   iam_bindings        = try(each.value.iam_bindings, [])
   resource_iam_bindings = try(each.value.resource_iam_bindings, [])
 }
 
 module "pam" {
-  for_each = local.projects
+  for_each = local.standard_projects
 
   source   = "./modules/pam"
 
   parent_id             = each.value.project_id
   # organization_id = data.google_organization.current.id
   organization_id = "organizations/${var.org_id}"
-  pam_bindings          = each.value.pam_bindings
+  pam_bindings          = try(each.value.pam_bindings, [])
   principals            = var.default_principals
   env                   = lookup(var.environments, each.value.env, local.default_environment)
 }
@@ -73,11 +80,11 @@ module "db_roles" {
 }
 
 module "db_role_management" {
-  for_each = local.projects
+  for_each = local.standard_projects
 
   source      = "./modules/db_role_management"
   project_id  = each.value.project_id
-  instances   = each.value.instances
+  instances   = try(each.value.instances, [])
   bucket_name = module.db_roles.target_bucket
   service_account_email = var.DB_ROLE_MANAGEMENT_SERVICE_ACCOUNT_EMAIL
   region = var.region
@@ -96,7 +103,7 @@ module "db_role_management" {
 
 
 module "sql_iam_users" {
-  for_each = local.projects
+  for_each = local.standard_projects
 
   source = "./modules/db_role_assignment"
 

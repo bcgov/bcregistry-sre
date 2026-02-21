@@ -249,6 +249,11 @@ variable "other_projects" {
   default = {}
 }
 
+variable "mpf_projects" {
+  type    = any
+  default = {}
+}
+
 
 
 variable "global_custom_roles" {
