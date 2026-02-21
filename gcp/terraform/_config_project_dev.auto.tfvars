@@ -686,7 +686,11 @@ dev_projects = {
           members = ["steven.chen@gov.bc.ca"]
         },
         {
-          role    = "roles/iap.tunnelResourceAccessor"
+          role    = "roles/compute.osAdminLogin"
+          members = ["hrvoje.fekete@gov.bc.ca"]
+        },
+        {
+          role    = "roles/compute.viewer"
           members = ["hrvoje.fekete@gov.bc.ca"]
         },
         {

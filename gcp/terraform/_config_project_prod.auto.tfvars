@@ -661,6 +661,7 @@ prod_projects = {
           "dietrich.wolpert@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
         ]
       },
       {
@@ -680,10 +681,6 @@ prod_projects = {
         members = [
           "kial.jinnah@gov.bc.ca",
         ]
-      },
-      {
-        role    = "roles/viewer"
-        members = ["steven.chen@gov.bc.ca"]
       },
     ]
     resource_iam_bindings = [
@@ -1045,6 +1042,7 @@ prod_projects = {
           "hongjing.chen@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
         ]
       },
       {
@@ -1062,10 +1060,6 @@ prod_projects = {
         members = [
           "omid.x.zamani@gov.bc.ca",
         ]
-      },
-      {
-        role    = "roles/viewer"
-        members = ["omid.x.zamani@gov.bc.ca"]
       },
       {
         role    = "projects/eogruh-prod/roles/SRE"
@@ -1231,10 +1225,6 @@ prod_projects = {
           "doug.lovett@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
         ]
-      },
-      {
-        role    = "roles/viewer"
-        members = ["andriy.bolyachevets@gov.bc.ca"]
       },
     ]
     resource_iam_bindings = [
