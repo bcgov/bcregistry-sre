@@ -222,20 +222,6 @@ dev_projects = {
         roles       = ["projects/c4hnrd-dev/roles/rolequeue"]
         description = "Service Account for running queue services"
       },
-      open-shift-artifact-registry = {
-        roles       = ["roles/artifactregistry.serviceAgent", "roles/cloudbuild.builds.builder", "roles/containerregistry.ServiceAgent"]
-        description = ""
-      },
-      documentai-workflow-service-ac = {
-        roles       = ["roles/composer.environmentAndStorageObjectViewer", "roles/documentai.apiUser", "roles/eventarc.eventReceiver", "roles/logging.logWriter", "roles/serviceusage.serviceUsageConsumer", "roles/storage.objectUser", "roles/storagetransfer.user", "roles/workflows.invoker"]
-        description = ""
-        resource_roles = [
-          { resource = "projects/c4hnrd-dev/locations/us/repositories/gcr.io"
-            roles    = ["roles/artifactregistry.repoAdmin"]
-            resource_type = "artifact_registry"
-          }
-        ]
-      },
       doc-dev-sa = {
         roles       = ["roles/artifactregistry.serviceAgent", "roles/compute.admin", "roles/storage.admin"]
         description = "Document Services Service Account"
@@ -501,35 +487,9 @@ dev_projects = {
             },
         ]
       },
-      sa-queue = {
-        roles       = ["projects/gtksf3-dev/roles/rolequeue"]
-        description = "Service Account for running queue services"
-      },
-      pay-test = {
-        roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
-        description = ""
-      },
-      pay-pubsub-sa = {
-        roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
-        description = "Service Account for handling pay pusub subscriptions"
-        external_roles = [{
-          roles       = ["roles/iam.serviceAccountTokenCreator", "roles/run.invoker"]
-          project_id  = "bcrbk9-dev"
-        },
-        {
-          roles        = ["roles/iam.serviceAccountTokenCreator", "roles/run.invoker"]
-          project_id  = "a083gt-dev"
-        }
-      ]
-
-      },
       sa-auth-db-standby-759 = {
         roles       = ["roles/cloudsql.client", "roles/cloudsql.viewer"]
         description = "Service account used to backup auth db in OpenShift Gold Cluster, as part of disaster recovery plan."
-      },
-      sre-role-testing-account = {
-        roles       = ["projects/gtksf3-dev/roles/SRE"]
-        description = ""
       }
     }
   },
@@ -820,16 +780,6 @@ dev_projects = {
         }
       ]
       service_accounts = {
-        filer-to-doc-publisher = {
-          description = "Brandon Galli's testing service account "
-          resource_roles = [
-              {
-                resource = "projects/c4hnrd-dev/topics/doc-api-app-create-record"
-                roles    = ["roles/pubsub.publisher"]
-                resource_type = "pubsub_topic"
-              }
-            ]
-        },
         sa-db-migrate = {
           roles       = ["projects/a083gt-dev/roles/roledbmigrate"]
           description = "Service Account for running db alembic migration job"
@@ -927,10 +877,6 @@ dev_projects = {
           roles       = ["roles/cloudsql.client", "roles/cloudsql.viewer"]
           description = ""
         },
-        sa-bni-file-upload-dev = {
-          roles       = ["roles/storage.objectCreator"]
-          description = "Service Account to upload raw batch files to the BNI storage bucket"
-        },
         business-pubsub-sa = {
           roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
           description = ""
@@ -982,10 +928,6 @@ dev_projects = {
       bn-tasks-cloud-run-invoker = {
         roles       = ["roles/cloudtasks.enqueuer", "roles/iam.serviceAccountUser", "roles/run.invoker"]
         description = "BN Tasks Cloud Run Invoker"
-      },
-      sa-bni-file-upload-dev = {
-        roles       = ["roles/storage.objectCreator"]
-        description = "Service Account to upload raw batch files to the BNI storage bucket"
       },
       pubsub-cloud-run-invoker = {
       description = ""
@@ -1325,10 +1267,6 @@ dev_projects = {
       apigee-dev-sa = {
         roles       = ["roles/logging.admin", "roles/storage.admin"]
         description = "Service account for BC Registries Apigee dev environment."
-      },
-      github-action-467311281 = {
-        roles       = ["roles/cloudbuild.builds.editor", "roles/firebaseauth.admin", "roles/firebasehosting.admin", "roles/run.viewer", "roles/serviceusage.apiKeysViewer", "roles/serviceusage.serviceUsageConsumer", "roles/storage.admin"]
-        description = "A service account with permission to deploy to Firebase Hosting for the GitHub repository thorwolpert/bcregistry"
       }
     }
   },
@@ -1413,14 +1351,6 @@ dev_projects = {
         roles       = ["roles/eventarc.eventReceiver", "roles/run.invoker"]
         description = "Service Account for running queue services"
       },
-      test-notebook-dev = {
-        roles       = ["roles/cloudsql.client", "roles/cloudsql.instanceUser", "roles/cloudsql.schemaViewer"]
-        description = "used with the test services"
-      },
-      client-sql-proxy-service-accnt = {
-        roles       = ["roles/cloudsql.admin", "roles/cloudsql.client"]
-        description = ""
-      }
     }
   },
   "api-gateway-dev" = {
