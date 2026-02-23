@@ -9,7 +9,6 @@ other_projects = {
           "Argus.1.Chiu@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
@@ -29,7 +28,6 @@ other_projects = {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
@@ -41,7 +39,6 @@ other_projects = {
         role    = "roles/securitycenter.findingsViewer"
         members = [
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
@@ -111,7 +108,6 @@ other_projects = {
           "dietrich.wolpert@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
@@ -340,7 +336,6 @@ other_projects = {
           "dietrich.wolpert@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
@@ -358,7 +353,6 @@ other_projects = {
         members = [
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -372,7 +366,6 @@ other_projects = {
         members = [
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -420,7 +413,6 @@ other_projects = {
         members = [
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "meng.dong@gov.bc.ca",
         ]
       },
@@ -567,7 +559,6 @@ other_projects = {
           "Argus.1.Chiu@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
@@ -585,7 +576,6 @@ other_projects = {
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
@@ -598,7 +588,6 @@ other_projects = {
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
@@ -725,7 +714,6 @@ other_projects = {
           "david.mckinnon@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "lucas.o'neil@gov.bc.ca",
@@ -755,7 +743,6 @@ other_projects = {
       {
         role    = "roles/iam.serviceAccountUser"
         members = [
-          "hongjing.chen@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
         ]
       },
@@ -770,7 +757,6 @@ other_projects = {
       {
         role    = "roles/pubsub.admin"
         members = [
-          "hongjing.chen@gov.bc.ca",
           "travis.semple@gov.bc.ca",
         ]
       },
@@ -781,7 +767,6 @@ other_projects = {
       {
         role    = "roles/run.admin"
         members = [
-          "hongjing.chen@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
         ]
       },
@@ -790,7 +775,6 @@ other_projects = {
         members = [
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "john.a.m.lane@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
@@ -803,7 +787,6 @@ other_projects = {
         members = [
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "john.a.m.lane@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
@@ -936,7 +919,6 @@ other_projects = {
           "chiu.oddyseus@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
@@ -959,7 +941,6 @@ other_projects = {
         role    = "roles/artifactregistry.admin"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "travis.semple@gov.bc.ca",
           "vysakh.menon@gov.bc.ca",
@@ -984,7 +965,6 @@ other_projects = {
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
@@ -1005,7 +985,6 @@ other_projects = {
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",

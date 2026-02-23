@@ -205,7 +205,6 @@ prod_projects = {
           "Argus.1.Chiu@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
@@ -236,7 +235,6 @@ prod_projects = {
           "Argus.1.Chiu@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -249,7 +247,6 @@ prod_projects = {
           "Argus.1.Chiu@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -444,7 +441,6 @@ prod_projects = {
           "dietrich.wolpert@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
@@ -529,7 +525,7 @@ prod_projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "auth"
                 database_role_assignment = {
-                  readonly = ["ketaki.deodhar@gov.bc.ca","dietrich.wolpert@gov.bc.ca", "hongjing.chen@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "jia.xu@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "megan.a.wong@gov.bc.ca", "thayne.werdal@gov.bc.ca", "anushka.halder@gov.bc.ca", "vysakh.menon@gov.bc.ca"]
+                  readonly = ["ketaki.deodhar@gov.bc.ca","dietrich.wolpert@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "jia.xu@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "megan.a.wong@gov.bc.ca", "thayne.werdal@gov.bc.ca", "anushka.halder@gov.bc.ca", "vysakh.menon@gov.bc.ca"]
                   readwrite = ["sa-api"]
                   admin = ["sa-db-migrate"]
                 }
@@ -544,7 +540,7 @@ prod_projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "pay"
                 database_role_assignment = {
-                  readonly = ["ketaki.deodhar@gov.bc.ca","dietrich.wolpert@gov.bc.ca", "hongjing.chen@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "jia.xu@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "megan.a.wong@gov.bc.ca", "thayne.werdal@gov.bc.ca", "anushka.halder@gov.bc.ca"]
+                  readonly = ["ketaki.deodhar@gov.bc.ca","dietrich.wolpert@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "jia.xu@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "megan.a.wong@gov.bc.ca", "thayne.werdal@gov.bc.ca", "anushka.halder@gov.bc.ca"]
                   readwrite = ["sa-api", "steven.chen@gov.bc.ca", "eve.deng@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
@@ -765,7 +761,6 @@ prod_projects = {
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "felipe.moraes@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
@@ -805,7 +800,6 @@ prod_projects = {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -816,7 +810,6 @@ prod_projects = {
         role    = "roles/securitycenter.findingsViewer"
         members = [
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -825,18 +818,6 @@ prod_projects = {
       },
     ]
     resource_iam_bindings = [
-      {
-        resource      = "lear-db-dump-prod"
-        resource_type = "storage_bucket"
-        roles         = ["roles/storage.objectAdmin"]
-        members       = ["hongjing.chen@gov.bc.ca"]
-      },
-      {
-        resource      = "lear-db-dump-prod"
-        resource_type = "storage_bucket"
-        roles         = ["roles/storage.objectViewer"]
-        members       = ["hongjing.chen@gov.bc.ca"]
-      },
       {
         resource      = "projects/a083gt-prod/serviceAccounts/sa-pam-function@a083gt-prod.iam.gserviceaccount.com"
         roles         = ["roles/iam.serviceAccountUser"]
@@ -853,7 +834,7 @@ prod_projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "business-api"
                 database_role_assignment = {
-                  readonly = ["sa-solr-importer", "sa-notebook", "vikas.singh@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "severin.beauvais@gov.bc.ca", "vysakh.menon@gov.bc.ca", "thayne.werdal@gov.bc.ca", "david.li@gov.bc.ca", "dietrich.wolpert@gov.bc.ca", "hongjing.chen@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "megan.a.wong@gov.bc.ca", "lucas.o'neil@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "kial.jinnah@gov.bc.ca", "steven.chen@gov.bc.ca", "eve.deng@gov.bc.ca", "david.mckinnon@gov.bc.ca", "mihai.dinu@gov.bc.ca"]
+                  readonly = ["sa-solr-importer", "sa-notebook", "vikas.singh@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "severin.beauvais@gov.bc.ca", "vysakh.menon@gov.bc.ca", "thayne.werdal@gov.bc.ca", "david.li@gov.bc.ca", "dietrich.wolpert@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "megan.a.wong@gov.bc.ca", "lucas.o'neil@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "kial.jinnah@gov.bc.ca", "steven.chen@gov.bc.ca", "eve.deng@gov.bc.ca", "david.mckinnon@gov.bc.ca", "mihai.dinu@gov.bc.ca"]
                   readwrite = ["sa-job", "sa-api"]
                   admin = ["sa-db-migrate"]
                 }
@@ -1039,7 +1020,6 @@ prod_projects = {
         members = [
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -1317,7 +1297,6 @@ prod_projects = {
           "Argus.1.Chiu@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -1346,7 +1325,6 @@ prod_projects = {
         members = [
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -1359,7 +1337,6 @@ prod_projects = {
         members = [
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",

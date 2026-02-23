@@ -93,7 +93,6 @@ dev_projects = {
           "chiu.oddyseus@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
           "jia.xu@gov.bc.ca",
@@ -129,7 +128,6 @@ dev_projects = {
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
@@ -152,7 +150,6 @@ dev_projects = {
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
@@ -173,7 +170,7 @@ dev_projects = {
         resource      = "projects/c4hnrd-dev/locations/us/repositories/gcr.io"
         resource_type = "artifact_registry"
         roles         = ["roles/artifactregistry.reader"]
-        members       = ["Argus.1.Chiu@gov.bc.ca", "Chris.Gabel@gov.bc.ca", "bcregistry-sre@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "hongjing.chen@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "jia.xu@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "omid.x.zamani@gov.bc.ca", "severin.beauvais@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "travis.semple@gov.bc.ca", "vysakh.menon@gov.bc.ca"]
+        members       = ["Argus.1.Chiu@gov.bc.ca", "Chris.Gabel@gov.bc.ca", "bcregistry-sre@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "jia.xu@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "omid.x.zamani@gov.bc.ca", "severin.beauvais@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "travis.semple@gov.bc.ca", "vysakh.menon@gov.bc.ca"]
       },
     ]
 
@@ -303,7 +300,6 @@ dev_projects = {
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "felipe.moraes@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
           "jia.xu@gov.bc.ca",
@@ -646,7 +642,6 @@ dev_projects = {
             "doug.lovett@gov.bc.ca",
             "felipe.moraes@gov.bc.ca",
             "gunasegaran.nagarajan@gov.bc.ca",
-            "hongjing.chen@gov.bc.ca",
             "janis.rogers@gov.bc.ca",
             "jia.xu@gov.bc.ca",
             "karim.jazzar@gov.bc.ca",
@@ -708,7 +703,6 @@ dev_projects = {
             "chiu.oddyseus@gov.bc.ca",
             "darci.denis@gov.bc.ca",
             "eve.deng@gov.bc.ca",
-            "hongjing.chen@gov.bc.ca",
             "jia.xu@gov.bc.ca",
             "karim.jazzar@gov.bc.ca",
             "ketaki.deodhar@gov.bc.ca",
@@ -728,7 +722,6 @@ dev_projects = {
             "chiu.oddyseus@gov.bc.ca",
             "darci.denis@gov.bc.ca",
             "eve.deng@gov.bc.ca",
-            "hongjing.chen@gov.bc.ca",
             "jia.xu@gov.bc.ca",
             "karim.jazzar@gov.bc.ca",
             "ketaki.deodhar@gov.bc.ca",
@@ -744,7 +737,6 @@ dev_projects = {
         {
           role    = "roles/storage.objectUser"
           members = [
-            "hongjing.chen@gov.bc.ca",
             "vysakh.menon@gov.bc.ca",
           ]
         },
@@ -944,7 +936,6 @@ dev_projects = {
           "dietrich.wolpert@gov.bc.ca",
           "divya.chandupatla@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
           "meng.dong@gov.bc.ca",
         ]
@@ -1145,7 +1136,6 @@ dev_projects = {
           "chiu.oddyseus@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
@@ -1193,7 +1183,6 @@ dev_projects = {
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
@@ -1215,7 +1204,6 @@ dev_projects = {
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hongjing.chen@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
@@ -1235,7 +1223,7 @@ dev_projects = {
         resource      = "projects/yfthig-dev/locations/us/repositories/gcr.io"
         resource_type = "artifact_registry"
         roles         = ["roles/artifactregistry.reader"]
-        members       = ["Argus.1.Chiu@gov.bc.ca", "Chris.Gabel@gov.bc.ca", "brandon.1.sharratt@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "hongjing.chen@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "jia.xu@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "megan.a.wong@gov.bc.ca", "meng.dong@gov.bc.ca", "rajandeep.kaur@gov.bc.ca", "severin.beauvais@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "thayne.werdal@gov.bc.ca", "vishnu.preddy@gov.bc.ca", "vysakh.menon@gov.bc.ca"]
+        members       = ["Argus.1.Chiu@gov.bc.ca", "Chris.Gabel@gov.bc.ca", "brandon.1.sharratt@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "jia.xu@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "megan.a.wong@gov.bc.ca", "meng.dong@gov.bc.ca", "rajandeep.kaur@gov.bc.ca", "severin.beauvais@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "thayne.werdal@gov.bc.ca", "vishnu.preddy@gov.bc.ca", "vysakh.menon@gov.bc.ca"]
       },
       {
         resource      = "projects/yfthig-dev/locations/us/repositories/gcr.io"
