@@ -635,7 +635,37 @@ prod_projects = {
               resource = "projects/gtksf3-prod/topics/account-mailer-prod"
               roles    = ["roles/pubsub.publisher"]
               resource_type = "pubsub_topic"
-            }
+            },
+            {
+              resource = "projects/gtksf3-prod/topics/namex-pay-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-prod/topics/assets-pay-notification-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-prod/topics/business-pay-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-prod/topics/ftp-poller-payment-reconciliation-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-prod/topics/namex-nr-state-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-prod/topics/business-emailer-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
         ]
       },
       sa-queue = {
