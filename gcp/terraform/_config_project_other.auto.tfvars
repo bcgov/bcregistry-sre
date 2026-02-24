@@ -881,6 +881,23 @@ other_projects = {
       sa-job = {
         roles       = ["projects/a083gt-integration/roles/rolejob", "roles/cloudsql.client", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
+        resource_roles = [
+            {
+              resource = "projects/a083gt-integration/topics/business-emailer-sandbox"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-integration/topics/business-events-sandbox"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-integration/topics/business-filer-sandbox"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+        ]
       },
       sa-api = {
         roles       = ["projects/a083gt-integration/roles/roleapi", "roles/iam.serviceAccountTokenCreator", "roles/cloudtasks.enqueuer", "roles/cloudtasks.viewer", "roles/cloudtasks.taskDeleter", "roles/cloudsql.instanceUser", "roles/run.serviceAgent"]
@@ -903,6 +920,26 @@ other_projects = {
             },
             {
               resource = "projects/a083gt-integration/topics/namex-nr-state-sandbox"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-integration/topics/business-emailer-sandbox"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-integration/topics/business-events-sandbox"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-integration/topics/business-filer-sandbox"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-tools/topics/namex-pay-sandbox"
               roles    = ["roles/pubsub.publisher"]
               resource_type = "pubsub_topic"
             }

@@ -922,6 +922,23 @@ prod_projects = {
       sa-job = {
         roles       = ["projects/a083gt-prod/roles/rolejob", "roles/cloudsql.client", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
+        resource_roles = [
+            {
+              resource = "projects/a083gt-prod/topics/business-emailer-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-prod/topics/business-events-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-prod/topics/business-filer-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+        ]
       },
       sa-api = {
         roles       = ["projects/a083gt-prod/roles/roleapi", "roles/iam.serviceAccountTokenCreator", "roles/cloudtasks.enqueuer", "roles/cloudtasks.viewer", "roles/cloudtasks.taskDeleter", "roles/cloudsql.instanceUser", "roles/run.serviceAgent"]
@@ -946,7 +963,37 @@ prod_projects = {
               resource = "projects/a083gt-prod/topics/namex-nr-state-prod"
               roles    = ["roles/pubsub.publisher"]
               resource_type = "pubsub_topic"
-            }
+            },
+            {
+              resource = "projects/a083gt-prod/topics/business-emailer-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-prod/topics/business-events-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-prod/topics/business-filer-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/a083gt-prod/topics/business-pay-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/c4hnrd-prod/topics/doc-api-app-create-record"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-prod/topics/namex-pay-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            }            
           ]
       },
       sa-queue = {
