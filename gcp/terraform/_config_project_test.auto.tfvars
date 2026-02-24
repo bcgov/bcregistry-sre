@@ -268,6 +268,17 @@ test_projects = {
           "jia.xu@gov.bc.ca"
           ]
       },
+      {
+        resource      = "projects/gtksf3-test/serviceAccounts/sa-pubsub@gtksf3-test.iam.gserviceaccount.com"
+        roles         = ["roles/iam.serviceAccountTokenCreator"]
+        resource_type = "sa_iam_member"
+        members       = [
+          "travis.semple@gov.bc.ca",
+          "anish.batra@gov.bc.ca",
+          "jia.xu@gov.bc.ca",
+          "chiu.oddyseus@gov.bc.ca",
+          ]
+      },
     ]
     
     instances = [

@@ -515,6 +515,17 @@ prod_projects = {
         resource_type = "sa_iam_member"
         members       = ["andriy.bolyachevets@gov.bc.ca"]
       },
+      {
+        resource      = "projects/gtksf3-prod/serviceAccounts/sa-pubsub@gtksf3-prod.iam.gserviceaccount.com"
+        roles         = ["roles/iam.serviceAccountTokenCreator"]
+        resource_type = "sa_iam_member"
+        members       = [
+          "travis.semple@gov.bc.ca",
+          "anish.batra@gov.bc.ca",
+          "jia.xu@gov.bc.ca",
+          "chiu.oddyseus@gov.bc.ca",
+          ]
+      },
     ]
     instances = [
       {

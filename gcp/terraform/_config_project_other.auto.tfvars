@@ -165,6 +165,17 @@ other_projects = {
       },
     ]
     resource_iam_bindings = [
+      {
+        resource      = "projects/gtksf3-tools/serviceAccounts/sa-pubsub@gtksf3-tools.iam.gserviceaccount.com"
+        roles         = ["roles/iam.serviceAccountTokenCreator"]
+        resource_type = "sa_iam_member"
+        members       = [
+          "travis.semple@gov.bc.ca",
+          "anish.batra@gov.bc.ca",
+          "jia.xu@gov.bc.ca",
+          "chiu.oddyseus@gov.bc.ca",
+          ]
+      },
     ]
     instances = [
       {
