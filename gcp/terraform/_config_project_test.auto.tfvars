@@ -379,21 +379,6 @@ test_projects = {
               roles    = ["roles/pubsub.publisher"]
               resource_type = "pubsub_topic"
             },
-            {
-              resource = "projects/gtksf3-test/topics/ftp-poller-payment-reconciliation-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/a083gt-test/topics/namex-nr-state-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/a083gt-test/topics/business-emailer-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
         ]
       },
       sa-queue = {

@@ -262,21 +262,6 @@ other_projects = {
               roles    = ["roles/pubsub.publisher"]
               resource_type = "pubsub_topic"
             },
-            {
-              resource = "projects/gtksf3-tools/topics/ftp-poller-payment-reconciliation-sandbox"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/a083gt-integration/topics/namex-nr-state-sandbox"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/a083gt-integration/topics/business-emailer-sandbox"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
         ]
       },
       sa-queue = {

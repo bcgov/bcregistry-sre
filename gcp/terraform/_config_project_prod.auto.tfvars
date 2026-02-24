@@ -651,21 +651,6 @@ prod_projects = {
               roles    = ["roles/pubsub.publisher"]
               resource_type = "pubsub_topic"
             },
-            {
-              resource = "projects/gtksf3-prod/topics/ftp-poller-payment-reconciliation-prod"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/a083gt-prod/topics/namex-nr-state-prod"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/a083gt-prod/topics/business-emailer-prod"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
         ]
       },
       sa-queue = {
