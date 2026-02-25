@@ -1068,10 +1068,6 @@ prod_projects = {
         roles       = ["roles/cloudtasks.admin", "roles/editor"]
         description = ""
       },
-      sa-bni-file-upload-prod = {
-        roles       = ["roles/storage.objectCreator"]
-        description = "Service Account to upload raw batch files to the BNI storage bucket"
-      },
       pubsub-cloud-run-invoker-prod = {
       description = ""
       resource_roles = [
@@ -1215,25 +1211,6 @@ prod_projects = {
               resource_type = "pubsub_topic"
             }
           ]
-      },
-      sa-ppr-document-storage = {
-        roles       = ["projects/eogruh-prod/roles/CustomStorageAdmin", "roles/iam.serviceAccountTokenCreator"]
-        description = "Default service account for ppr cloud services"
-      },
-      document-pubsub-invoker = {
-        roles       = ["roles/pubsub.admin"]
-        description = ""
-        resource_roles = [
-            {
-              resource = "projects/eogruh-prod/locations/northamerica-northeast1/services/document-delivery-service"
-              roles    = ["roles/run.invoker"]
-              resource_type = "cloud_run"
-            }
-          ]
-      },
-      sa-analytics-status-update-not = {
-        roles       = ["roles/cloudsql.client", "roles/cloudsql.viewer"]
-        description = ""
       },
       bc-ppr-client-direct-docs-prod = {
         roles       = ["projects/eogruh-prod/roles/CustomStorageAdmin", "roles/iam.serviceAccountTokenCreator"]

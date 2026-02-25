@@ -727,10 +727,6 @@ test_projects = {
         roles       = ["projects/a083gt-test/roles/rolequeue"]
         description = "Service Account for running queue services"
       },
-      sa-bni-file-upload-test = {
-        roles       = ["roles/storage.objectCreator"]
-        description = "Service Account to upload raw batch files to the BNI storage bucket"
-      },
       business-ar-job-proc-paid-test = {
         roles       = ["roles/run.invoker"]
         description = "submit AR back to the SOR"
@@ -795,10 +791,6 @@ test_projects = {
             resource_type = "sa_iam_member"
           }
         ]
-      },
-      sa-bni-file-upload-test = {
-        roles       = ["roles/storage.objectCreator"]
-        description = "Service Account to upload raw batch files to the BNI storage bucket"
       },
       pubsub-cloud-run-invoker-test = {
       description = ""
@@ -891,21 +883,6 @@ test_projects = {
       sa-queue = {
         roles       = ["projects/eogruh-test/roles/rolequeue"]
         description = "Service Account for running queue services"
-      },
-      ppr-temp-verification-sa = {
-        roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.admin"]
-        description = ""
-      },
-      sa-ppr-documents-test = {
-        roles       = ["projects/eogruh-test/roles/ppr_document_storage_test", "roles/cloudsql.client", "roles/iam.serviceAccountTokenCreator"]
-        description = ""
-        resource_roles = [
-          {
-            resource = "ppr_documents_test"
-            roles    = ["projects/eogruh-test/roles/ppr_document_storage_test"]
-            resource_type = "storage_bucket"
-          }
-        ]
       },
       notify-identity = {
         roles       = ["roles/cloudsql.client"]
@@ -1135,10 +1112,6 @@ test_projects = {
       sa-queue = {
         roles       = ["projects/yfthig-test/roles/rolequeue"]
         description = "Service Account for running queue services"
-      },
-      github-action-416185190 = {
-        roles       = ["roles/cloudbuild.builds.editor", "roles/firebaseauth.admin", "roles/firebasehosting.admin", "roles/run.viewer", "roles/serviceusage.apiKeysViewer", "roles/serviceusage.serviceUsageConsumer", "roles/storage.admin"]
-        description = "A service account with permission to deploy to Firebase Hosting for the GitHub repository thorwolpert/fh-test"
       },
       sa-cdcloudrun = {
         roles       = ["projects/yfthig-test/roles/rolecdcloudrun"]
