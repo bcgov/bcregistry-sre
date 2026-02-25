@@ -128,7 +128,7 @@ environments = {
     database_role_assignment = {
       readonly = ["vikas.singh@gov.bc.ca", "mihai.dinu@gov.bc.ca", "janis.rogers@gov.bc.ca"]
       readwrite = ["eve.deng@gov.bc.ca","Argus.1.Chiu@gov.bc.ca","brandon.1.sharratt@gov.bc.ca","chiu.oddyseus@gov.bc.ca","Chris.Gabel@gov.bc.ca","darci.denis@gov.bc.ca","david.li@gov.bc.ca","david.mckinnon@gov.bc.ca","dietrich.wolpert@gov.bc.ca","doug.lovett@gov.bc.ca","felipe.moraes@gov.bc.ca","hrvoje.fekete@gov.bc.ca","jia.xu@gov.bc.ca","karim.jazzar@gov.bc.ca","ketaki.deodhar@gov.bc.ca","kial.jinnah@gov.bc.ca","lucas.o'neil@gov.bc.ca","megan.a.wong@gov.bc.ca","meng.dong@gov.bc.ca","mike.huffman@gov.bc.ca","omid.x.zamani@gov.bc.ca","rajandeep.kaur@gov.bc.ca","severin.beauvais@gov.bc.ca","siddharth.chaturvedi@gov.bc.ca","steven.chen@gov.bc.ca","thayne.werdal@gov.bc.ca","travis.semple@gov.bc.ca","vysakh.menon@gov.bc.ca","thor.wolpert@gov.bc.ca"]
-      admin = []
+      admin = ["jacky.pham@gov.bc.ca", "anish.patel@gov.bc.ca"]
     }
     environment_custom_roles = {
       roledeveloper = {
