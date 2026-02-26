@@ -217,6 +217,23 @@ dev_projects = {
       sa-api = {
         roles       = ["projects/c4hnrd-dev/roles/roleapi", "roles/cloudsql.instanceUser", "roles/serverless.serviceAgent"]
         description = "Service Account for running api services"
+        resource_roles = [
+            {
+              resource = "projects/c4hnrd-dev/topics/notify-delivery-smtp-dev"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/c4hnrd-dev/topics/notify-delivery-gcnotify-dev"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/c4hnrd-dev/topics/notify-delivery-gcnotify-housing-dev"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+        ]
       },
       sa-queue = {
         roles       = ["projects/c4hnrd-dev/roles/rolequeue"]

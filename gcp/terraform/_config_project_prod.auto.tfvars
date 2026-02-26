@@ -382,6 +382,23 @@ prod_projects = {
       sa-api = {
         roles       = ["projects/c4hnrd-prod/roles/roleapi", "roles/cloudsql.instanceUser", "roles/run.serviceAgent"]
         description = "Service Account for running api services"
+        resource_roles = [
+            {
+              resource = "projects/c4hnrd-prod/topics/notify-delivery-smtp-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/c4hnrd-prod/topics/notify-delivery-gcnotify-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/c4hnrd-prod/topics/notify-delivery-gcnotify-housing-prod"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+        ]
       },
       sa-queue = {
         roles       = ["projects/c4hnrd-prod/roles/rolequeue"]

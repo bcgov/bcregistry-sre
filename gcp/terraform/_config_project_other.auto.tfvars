@@ -80,6 +80,23 @@ other_projects = {
       sa-api = {
         roles       = ["projects/c4hnrd-sandbox/roles/roleapi", "roles/cloudsql.instanceUser", "roles/run.serviceAgent"]
         description = "Service Account for running api services"
+        resource_roles = [
+            {
+              resource = "projects/c4hnrd-sandbox/topics/notify-delivery-smtp-sandbox"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/c4hnrd-sandbox/topics/notify-delivery-gcnotify-sandbox"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/c4hnrd-sandbox/topics/notify-delivery-gcnotify-housing-sandbox"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+        ]
       },
       sa-queue = {
         roles       = ["projects/c4hnrd-sandbox/roles/rolequeue"]
