@@ -13,4 +13,4 @@ pg8000==1.31.5
 sqlalchemy==2.0.36
 
 # HTTP (only if you explicitly use requests)
-requests==2.32.4
+requests==2.32.5
