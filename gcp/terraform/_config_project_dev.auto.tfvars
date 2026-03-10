@@ -417,6 +417,14 @@ dev_projects = {
           "chiu.oddyseus@gov.bc.ca",
           ]
       },
+      {
+        resource      = "projects/gtksf3-dev/serviceAccounts/sa-auth-db-standby-759@gtksf3-dev.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+        members       = [
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f28a5b83-97ff-4b15-83d4-5094e3f1f369"
+        ]
+      },
     ]
     instances = [
       {
