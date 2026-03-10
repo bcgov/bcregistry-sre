@@ -542,7 +542,7 @@ dev_projects = {
           project_id  = "bcrbk9-dev"
         },
         {
-          roles        = ["roles/iam.serviceAccountTokenCreator", "roles/run.invoker"]
+           roles        = ["roles/iam.serviceAccountTokenCreator", "roles/run.invoker"]
           project_id  = "a083gt-dev"
         }
       ]
@@ -811,6 +811,14 @@ dev_projects = {
           roles         = ["roles/storage.objectUser"]
           members       = ["andriy.bolyachevets@gov.bc.ca"]
         },
+        {
+          resource      = "projects/a083gt-dev/serviceAccounts/sa-lear-db-standby@a083gt-dev.iam.gserviceaccount.com"
+          resource_type = "sa_iam_member"
+          roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+          members       = [
+            "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f28a5b83-97ff-4b15-83d4-5094e3f1f369"
+          ]
+        },
       ]
       instances = [
         {
@@ -1063,6 +1071,14 @@ dev_projects = {
         resource_type = "artifact_registry"
         roles         = ["roles/artifactregistry.reader"]
         members       = ["bcregistry-sre@gov.bc.ca"]
+      },
+      {
+        resource      = "projects/eogruh-dev/serviceAccounts/sa-ppr-db-standby@eogruh-dev.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+        members       = [
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f28a5b83-97ff-4b15-83d4-5094e3f1f369"
+        ]
       },
     ]
     instances = [
