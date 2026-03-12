@@ -83,6 +83,17 @@ test_projects = {
         ]
       },
     ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/c4hnrd-test/serviceAccounts/sa-api@c4hnrd-test.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+        members       = [
+          # WIF OpenShift Namespace: cbaab0-test
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/67adac47-6e8c-41f8-85e5-516af6d08095"
+        ]
+      }
+    ]
     instances = [
       {
         instance = "common-db-test"
@@ -462,6 +473,17 @@ test_projects = {
         ]
       },
     ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/yfjq17-test/serviceAccounts/sa-solr-importer@yfjq17-test.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+        members       = [
+          # WIF OpenShift Namespace: cbaab0-test
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/67adac47-6e8c-41f8-85e5-516af6d08095"
+        ]
+      }
+    ]
     instances = [
       {
         instance = "bor-db-test"
@@ -643,6 +665,24 @@ test_projects = {
         members       = [
           # WIF OpenShift Namespace: d2b3d8-test
           "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f118a86e-a5d7-4ab5-a33b-854d943e0aac"
+        ]
+      },
+      {
+        resource      = "projects/a083gt-test/serviceAccounts/sa-solr-importer@a083gt-test.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+        members       = [
+          # WIF OpenShift Namespace: cbaab0-test
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/67adac47-6e8c-41f8-85e5-516af6d08095"
+        ]
+      },
+      {
+        resource      = "projects/a083gt-test/serviceAccounts/sa-job@a083gt-test.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+        members       = [
+          # WIF OpenShift Namespace: cbaab0-test
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/67adac47-6e8c-41f8-85e5-516af6d08095"
         ]
       }
     ]
