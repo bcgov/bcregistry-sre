@@ -296,6 +296,15 @@ test_projects = {
           "chiu.oddyseus@gov.bc.ca",
           ]
       },
+      {
+        resource      = "projects/gtksf3-test/serviceAccounts/sa-auth-db-standby@gtksf3-test.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+        members       = [
+          # WIF OpenShift Namespace: d2b3d8-test
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f118a86e-a5d7-4ab5-a33b-854d943e0aac"
+        ]
+      },
     ]
     
     instances = [
@@ -625,6 +634,17 @@ test_projects = {
           "vysakh.menon@gov.bc.ca",
         ]
       },
+    ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/a083gt-test/serviceAccounts/sa-lear-db-standby@a083gt-test.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+        members       = [
+          # WIF OpenShift Namespace: d2b3d8-test
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f118a86e-a5d7-4ab5-a33b-854d943e0aac"
+        ]
+      }
     ]
     instances = [
       {
