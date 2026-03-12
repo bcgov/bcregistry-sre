@@ -47,6 +47,16 @@ other_projects = {
         ]
       },
     ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/c4hnrd-sandbox/serviceAccounts/sa-api@c4hnrd-sandbox.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+        members       = [
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/9f393e88-0c5d-4d7e-aa28-fbd65172f563"
+        ]
+      }
+    ]
     instances = [
       {
         instance = "notify-db-sandbox"
@@ -841,6 +851,16 @@ other_projects = {
         role    = "roles/storage.objectUser"
         members = ["ketaki.deodhar@gov.bc.ca"]
       },
+    ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/a083gt-integration/serviceAccounts/sa-solr-importer@a083gt-integration.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+        members       = [
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/9f393e88-0c5d-4d7e-aa28-fbd65172f563"
+        ]
+      }
     ]
     instances = [
       {
