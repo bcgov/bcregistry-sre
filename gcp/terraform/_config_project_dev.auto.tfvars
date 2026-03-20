@@ -107,6 +107,7 @@ dev_projects = {
           "hrvoje.fekete@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
           "jia.xu@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
@@ -322,6 +323,7 @@ dev_projects = {
           "chiu.oddyseus@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "travis.semple@gov.bc.ca",
         ]
@@ -1301,6 +1303,7 @@ dev_projects = {
           "eve.deng@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
@@ -1432,6 +1435,7 @@ dev_projects = {
           "dietrich.wolpert@gov.bc.ca",
           "dima.kostenyuk@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -1471,7 +1475,7 @@ dev_projects = {
                  owner      = "strr"
                 database_role_assignment = {
                   readonly = ["sa-job"]
-                  readwrite = ["sa-api", "dima.kostenyuk@gov.bc.ca"]
+                  readwrite = ["sa-api", "dima.kostenyuk@gov.bc.ca", "jimmy.palelil@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                  }
               }

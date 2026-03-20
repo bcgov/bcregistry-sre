@@ -137,6 +137,7 @@ other_projects = {
           "eve.deng@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -613,6 +614,7 @@ other_projects = {
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
@@ -672,6 +674,7 @@ other_projects = {
         role    = "projects/bcrbk9-tools/roles/roledeveloper"
         members = [
           "dietrich.wolpert@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
         ]
       },
@@ -698,7 +701,7 @@ other_projects = {
                 owner      = "strr"
                 database_role_assignment = {
                   readonly = ["sa-job"]
-                  readwrite = ["sa-api"]
+                  readwrite = ["sa-api", "jimmy.palelil@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
               }
@@ -1021,6 +1024,7 @@ other_projects = {
           "eve.deng@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",

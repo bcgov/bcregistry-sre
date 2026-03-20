@@ -18,6 +18,7 @@ prod_projects = {
           "james.mcfarlane@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
           "jia.xu@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
           "john.a.m.lane@gov.bc.ca",
           "melissa.stanton@gov.bc.ca",
           "mike.huffman@gov.bc.ca",
@@ -98,7 +99,7 @@ prod_projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "pay"
                 database_role_assignment = {
-                  readonly = ["sa-notebook@c4hnrd-prod.iam.gserviceaccount.com", "sa-job@gtksf3-prod.iam.gserviceaccount.com", "758264625079-compute@developer.gserviceaccount.com", "vikas.singh@gov.bc.ca",  "severin.beauvais@gov.bc.ca", "darci.denis@gov.bc.ca", "jia.xu@gov.bc.ca", "vysakh.menon@gov.bc.ca", "tyson.graham@gov.bc.ca", "varek.boettcher@gov.bc.ca", "michelle.hohertz@gov.bc.ca", "david.draker@gov.bc.ca", "Brett.cassidy@gov.bc.ca", "jay.sharp@gov.bc.ca", "james.mcfarlane@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "john.a.m.lane@gov.bc.ca", "sa-strr-analytics@bcrbk9-prod.iam.gserviceaccount.com", "patty.stemkens@gov.bc.ca", "melissa.stanton@gov.bc.ca"]
+                  readonly = ["sa-notebook@c4hnrd-prod.iam.gserviceaccount.com", "sa-job@gtksf3-prod.iam.gserviceaccount.com", "758264625079-compute@developer.gserviceaccount.com", "vikas.singh@gov.bc.ca",  "severin.beauvais@gov.bc.ca", "darci.denis@gov.bc.ca", "jia.xu@gov.bc.ca", "vysakh.menon@gov.bc.ca", "tyson.graham@gov.bc.ca", "varek.boettcher@gov.bc.ca", "michelle.hohertz@gov.bc.ca", "david.draker@gov.bc.ca", "Brett.cassidy@gov.bc.ca", "jay.sharp@gov.bc.ca", "james.mcfarlane@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "john.a.m.lane@gov.bc.ca", "sa-strr-analytics@bcrbk9-prod.iam.gserviceaccount.com", "patty.stemkens@gov.bc.ca", "melissa.stanton@gov.bc.ca", "jimmy.palelil@gov.bc.ca"]
                   readwrite = ["mike.huffman@gov.bc.ca", "anushka.halder@gov.bc.ca"]
                   admin = []
                 }
@@ -113,7 +114,7 @@ prod_projects = {
                 roles      = ["readonly", "readwrite", "admin"]
                 owner      = "pay"
                 database_role_assignment = {
-                  readonly = ["sa-notebook@c4hnrd-prod.iam.gserviceaccount.com", "sa-job@gtksf3-prod.iam.gserviceaccount.com", "758264625079-compute@developer.gserviceaccount.com", "vikas.singh@gov.bc.ca", "severin.beauvais@gov.bc.ca", "darci.denis@gov.bc.ca", "jia.xu@gov.bc.ca", "vysakh.menon@gov.bc.ca", "tyson.graham@gov.bc.ca", "varek.boettcher@gov.bc.ca", "michelle.hohertz@gov.bc.ca", "david.draker@gov.bc.ca", "Brett.cassidy@gov.bc.ca", "jay.sharp@gov.bc.ca", "james.mcfarlane@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "john.a.m.lane@gov.bc.ca", "sa-strr-analytics@bcrbk9-prod.iam.gserviceaccount.com", "patty.stemkens@gov.bc.ca", "melissa.stanton@gov.bc.ca"]
+                  readonly = ["sa-notebook@c4hnrd-prod.iam.gserviceaccount.com", "sa-job@gtksf3-prod.iam.gserviceaccount.com", "758264625079-compute@developer.gserviceaccount.com", "vikas.singh@gov.bc.ca", "severin.beauvais@gov.bc.ca", "darci.denis@gov.bc.ca", "jia.xu@gov.bc.ca", "vysakh.menon@gov.bc.ca", "tyson.graham@gov.bc.ca", "varek.boettcher@gov.bc.ca", "michelle.hohertz@gov.bc.ca", "david.draker@gov.bc.ca", "Brett.cassidy@gov.bc.ca", "jay.sharp@gov.bc.ca", "james.mcfarlane@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "john.a.m.lane@gov.bc.ca", "sa-strr-analytics@bcrbk9-prod.iam.gserviceaccount.com", "patty.stemkens@gov.bc.ca", "melissa.stanton@gov.bc.ca", "jimmy.palelil@gov.bc.ca"]
                   readwrite = ["mike.huffman@gov.bc.ca", "anushka.halder@gov.bc.ca"]
                   admin = []
                 }
@@ -208,6 +209,7 @@ prod_projects = {
           "eve.deng@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "lucas.o'neil@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
@@ -461,6 +463,7 @@ prod_projects = {
           "eve.deng@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -1383,6 +1386,7 @@ prod_projects = {
           "Argus.1.Chiu@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -1463,6 +1467,7 @@ prod_projects = {
         members = [
           "anushka.halder@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "mike.huffman@gov.bc.ca",
@@ -1488,7 +1493,7 @@ prod_projects = {
                 owner      = "strr"
                 database_role_assignment = {
                   readonly = ["sa-job", "dietrich.wolpert@gov.bc.ca", "mike.huffman@gov.bc.ca", "anushka.halder@gov.bc.ca",  "sa-strr-analytics@bcrbk9-prod.iam.gserviceaccount.com"]
-                  readwrite = ["sa-api"]
+                  readwrite = ["sa-api", "jimmy.palelil@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
               }
