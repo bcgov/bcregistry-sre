@@ -45,10 +45,15 @@ steps:
           echo "🔄 Processing redeploy for $job_name"
 
           # Get existing environment variables from the job
-          gcloud run jobs describe "$job_name" \
+          if ! job_yaml=$(gcloud run jobs describe "$job_name" \
               --region="${_REGION}" \
               --project="${project_id}" \
-              --format=yaml | \
+              --format=yaml 2>/dev/null); then
+              echo "⚠️ Job $job_name does not exist, skipping..."
+              continue
+          fi
+
+          echo "$job_yaml" | \
               yq '.spec.template.spec.template.spec.containers[0].env[]' | \
               awk '/^name:/ { key = $2 } /^value:/ { print key "=" $2; key = "" }' > "./devops/vaults.${job_name}.old"
 
