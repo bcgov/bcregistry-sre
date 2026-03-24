@@ -61,7 +61,7 @@ steps:
           gcloud run jobs update "$job_name" \
             --region="${_REGION}" \
             --project="${project_id}" \
-            --env-vars-file="./devops/vaults.${_DEPLOYMENT_ENV}"
+            --env-vars-file="./devops/vaults.${_DEPLOYMENT_ENV}.new"
         done
 
         # Clean up temporary files
