@@ -65,7 +65,7 @@ steps:
         done
 
         # Clean up temporary files
-        rm ./devops/vaults.${_DEPLOYMENT_ENV}.*
+        rm -f ./devops/vaults.${_DEPLOYMENT_ENV}*
 
         exit 0
     else
