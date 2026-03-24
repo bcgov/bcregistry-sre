@@ -39,10 +39,31 @@ steps:
 
         # Update environment variables on Cloud Run
         echo "🚀 Updating environment variables for ${_APP_NAME}-${_DEPLOYMENT_ENV} in project ${project_id}."
-        gcloud run jobs update "${_APP_NAME}-${_DEPLOYMENT_ENV}" \
+
+        # Build list of job names
+        shopt -s nullglob
+        files=(run_*.sh)
+        job_names=()
+        if (( ${#files[@]} > 0 )); then
+          for f in "${files[@]}"; do
+            job_script_name="${f##*/}"
+            job_name=$(echo "${_APP_NAME}-${_DEPLOYMENT_ENV}-${job_script_name}" | cut -d'.' -f1 | tr "_" "-")
+            job_names+=("$job_name")
+          done
+        else
+          job_names+=("${_APP_NAME}-${_DEPLOYMENT_ENV}")
+        fi
+        shopt -u nullglob
+
+        # 🔥 loop added
+        for job_name in "${job_names[@]}"; do
+          echo "🔄 Updating $job_name"
+
+          gcloud run jobs update "$job_name" \
             --region="${_REGION}" \
             --project="${project_id}" \
-            --env-vars-file="./devops/vaults.${_DEPLOYMENT_ENV}.new" 2>/dev/null
+            --env-vars-file="./devops/vaults.${_DEPLOYMENT_ENV}"
+        done
 
         # Clean up temporary files
         rm ./devops/vaults.${_DEPLOYMENT_ENV}.*
