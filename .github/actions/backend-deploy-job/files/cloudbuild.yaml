@@ -55,7 +55,6 @@ steps:
         fi
         shopt -u nullglob
 
-        # 🔥 loop added
         for job_name in "${job_names[@]}"; do
           echo "🔄 Updating $job_name"
 
