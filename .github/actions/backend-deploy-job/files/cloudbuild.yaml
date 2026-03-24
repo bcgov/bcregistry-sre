@@ -22,23 +22,9 @@ steps:
     if [[ "${_REDEPLOY:-false}" == "true" ]]; then
         echo "🔄 Redeploying job with updated environment variables..."
 
-        # Generate secrets base on vault mapping file
+        # Generate secrets based on vault mapping file
         # This file should contain the mapping of secrets to environment variables
         generate_secrets_file "${_DEPLOYMENT_ENV}" "./devops/vaults.gcp.env"
-
-        # Get existing environment variables from the job
-        gcloud run jobs describe "${_APP_NAME}-${_DEPLOYMENT_ENV}" \
-            --region="${_REGION}" \
-            --project="${project_id}" \
-            --format=yaml | \
-            yq '.spec.template.spec.template.spec.containers[0].env[]' | \
-            awk '/^name:/ { key = $2 } /^value:/ { print key "=" $2; key = "" }' > ./devops/vaults.${_DEPLOYMENT_ENV}.old
-
-        # Merge the old and new environment variables
-        merge_vaults "./devops/vaults.${_DEPLOYMENT_ENV}.old" "./devops/vaults.${_DEPLOYMENT_ENV}" "./devops/vaults.${_DEPLOYMENT_ENV}.new"
-
-        # Update environment variables on Cloud Run
-        echo "🚀 Updating environment variables for ${_APP_NAME}-${_DEPLOYMENT_ENV} in project ${project_id}."
 
         # Build list of job names
         shopt -s nullglob
@@ -56,16 +42,29 @@ steps:
         shopt -u nullglob
 
         for job_name in "${job_names[@]}"; do
-          echo "🔄 Updating $job_name"
+          echo "🔄 Processing redeploy for $job_name"
 
+          # Get existing environment variables from the job
+          gcloud run jobs describe "$job_name" \
+              --region="${_REGION}" \
+              --project="${project_id}" \
+              --format=yaml | \
+              yq '.spec.template.spec.template.spec.containers[0].env[]' | \
+              awk '/^name:/ { key = $2 } /^value:/ { print key "=" $2; key = "" }' > "./devops/vaults.${job_name}.old"
+
+          # Merge the old and new environment variables
+          merge_vaults "./devops/vaults.${job_name}.old" "./devops/vaults.${_DEPLOYMENT_ENV}" "./devops/vaults.${job_name}.new"
+
+          # Update environment variables on Cloud Run
+          echo "🚀 Updating environment variables for $job_name in project ${project_id}."
           gcloud run jobs update "$job_name" \
-            --region="${_REGION}" \
-            --project="${project_id}" \
-            --env-vars-file="./devops/vaults.${_DEPLOYMENT_ENV}.new"
-        done
+              --region="${_REGION}" \
+              --project="${project_id}" \
+              --env-vars-file="./devops/vaults.${job_name}.new"
 
-        # Clean up temporary files
-        rm -f ./devops/vaults.${_DEPLOYMENT_ENV}*
+          # Clean up temporary files
+          rm -f "./devops/vaults.${job_name}.old" "./devops/vaults.${job_name}.new"
+        done
 
         exit 0
     else
