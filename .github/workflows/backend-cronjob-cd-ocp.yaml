@@ -57,7 +57,7 @@ jobs:
     steps:
       # Checkout code
       - name: Checkout out the code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup targets
         uses: bcgov/bcregistry-sre/.github/actions/setup-deployment-target@main
@@ -97,7 +97,7 @@ jobs:
       id-token: "write"
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       # Install 1password cli tool
       - name: Install 1password cli tool

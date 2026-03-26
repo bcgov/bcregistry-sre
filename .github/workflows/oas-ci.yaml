@@ -20,7 +20,7 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Copy spectral rule file (.spectral.yaml)
         uses: bcgov/bcregistry-sre/.github/actions/spectral-rule@main

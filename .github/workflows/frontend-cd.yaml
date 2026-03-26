@@ -56,7 +56,7 @@ jobs:
     steps:
       # Checkout code
       - name: Checkout out the code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup targets
         uses: bcgov/bcregistry-sre/.github/actions/setup-deployment-target@main
@@ -92,7 +92,7 @@ jobs:
     steps:
       # Checkout code
       - name: Checkout out the code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # Copy cloud build, Dockerfile, firebase files to the build
       - name: Copy deployment files
