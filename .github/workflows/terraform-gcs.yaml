@@ -55,16 +55,16 @@ jobs:
 
     - name: Authenticate to Google Cloud
       id: auth
-      uses: google-github-actions/auth@v2
+      uses: google-github-actions/auth@v3
       with:
         workload_identity_provider: ${{ secrets.TFC_GCP_WORKLOAD_PROVIDER_NAME }}
         service_account: ${{ secrets.TF_VAR_DB_ROLE_MANAGEMENT_SERVICE_ACCOUNT_EMAIL }}
 
     - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@v2
+      uses: google-github-actions/setup-gcloud@v3
 
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v2
+      uses: hashicorp/setup-terraform@v4
       with:
         terraform_version: 1.10.5
         terraform_wrapper: false
