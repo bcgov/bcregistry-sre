@@ -156,7 +156,7 @@ steps:
     set -euo pipefail  # Added for stricter error handling
 
     apk update
-    apk add jq
+    apk add jq python3 make g++
 
     echo "Step 2: Build application."
     
