@@ -1,6 +1,6 @@
 # Use a large Node.js base image to build the application and name it "build"
 ARG NODE_VERSION=24
-FROM node:${NODE_VERSION}-bookworm-slim
+FROM node:${NODE_VERSION}-alpine
 
 WORKDIR /app
 
