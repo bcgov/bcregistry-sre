@@ -8,7 +8,6 @@ other_projects = {
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
-          "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "hrvoje.fekete@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
@@ -19,6 +18,12 @@ other_projects = {
           "steven.chen@gov.bc.ca",
           "syed.riyazzudin@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/c4hnrd-sandbox/roles/SRE"
+        members = [
+          "doug.lovett@gov.bc.ca",
         ]
       },
       {
