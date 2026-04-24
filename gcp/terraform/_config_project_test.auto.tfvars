@@ -352,7 +352,32 @@ test_projects = {
               resource = "ftp-poller-test"
               roles    = ["roles/storage.legacyBucketWriter"]
               resource_type = "storage_bucket"
-            }
+            },
+            {
+              resource = "projects/gtksf3-test/topics/auth-event-test"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-test/topics/account-mailer-test"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-test/topics/namex-pay-test"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-test/topics/assets-pay-notification-test"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-test/topics/business-pay-test"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
         ]
       },
       sa-api = {
