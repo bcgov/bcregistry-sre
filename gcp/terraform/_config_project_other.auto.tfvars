@@ -9,14 +9,12 @@ other_projects = {
           "Argus.1.Chiu@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "steven.chen@gov.bc.ca",
-          "syed.riyazzudin@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
         ]
       },
@@ -34,7 +32,6 @@ other_projects = {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "eve.deng@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -45,7 +42,6 @@ other_projects = {
         role    = "roles/securitycenter.findingsViewer"
         members = [
           "eve.deng@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -170,7 +166,6 @@ other_projects = {
           "doug.lovett@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
         ]
       },
       {
@@ -181,7 +176,6 @@ other_projects = {
           "dietrich.wolpert@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "jimmy.palelil@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
@@ -190,10 +184,7 @@ other_projects = {
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
-          "syed.riyazzudin@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-          "vysakh.menon@gov.bc.ca",
         ]
       },
       {
@@ -212,14 +203,12 @@ other_projects = {
         members = [
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
         ]
       },
       {
@@ -227,14 +216,12 @@ other_projects = {
         members = [
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
         ]
       },
     ]
@@ -244,7 +231,6 @@ other_projects = {
         roles         = ["roles/iam.serviceAccountTokenCreator"]
         resource_type = "sa_iam_member"
         members       = [
-          "travis.semple@gov.bc.ca",
           "anish.batra@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -352,7 +338,6 @@ other_projects = {
         role    = "projects/yfjq17-tools/roles/roledeveloper"
         members = [
           "dietrich.wolpert@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
           "meng.dong@gov.bc.ca",
         ]
       },
@@ -360,13 +345,11 @@ other_projects = {
         role    = "roles/artifactregistry.repoAdmin"
         members = [
           "brandon.1.sharratt@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
         ]
       },
       {
         role    = "roles/securitycenter.assetsViewer"
         members = [
-          "hrvoje.fekete@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
         ]
@@ -374,7 +357,6 @@ other_projects = {
       {
         role    = "roles/securitycenter.findingsViewer"
         members = [
-          "hrvoje.fekete@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
         ]
@@ -443,9 +425,7 @@ other_projects = {
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "steven.chen@gov.bc.ca",
-          "syed.riyazzudin@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
         ]
       },
       {
@@ -457,8 +437,6 @@ other_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
-          "syed.riyazzudin@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
         ]
       },
       {
@@ -470,8 +448,6 @@ other_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
-          "syed.riyazzudin@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
         ]
       },
     ]
@@ -659,7 +635,6 @@ other_projects = {
           "Argus.1.Chiu@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
           "jimmy.palelil@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
@@ -668,7 +643,6 @@ other_projects = {
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "steven.chen@gov.bc.ca",
-          "syed.riyazzudin@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
         ]
       },
@@ -677,7 +651,6 @@ other_projects = {
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -689,7 +662,6 @@ other_projects = {
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -820,15 +792,13 @@ other_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "lucas.o'neil@gov.bc.ca",
+          "mark.ruffolo@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "steven.chen@gov.bc.ca",
-          "syed.riyazzudin@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-          "vysakh.menon@gov.bc.ca",
         ]
       },
       {
@@ -854,13 +824,6 @@ other_projects = {
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
-          "vysakh.menon@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/pubsub.admin"
-        members = [
-          "travis.semple@gov.bc.ca",
         ]
       },
       {
@@ -922,7 +885,7 @@ other_projects = {
                 owner      = "business_app"
                 database_role_assignment = {
                   readonly = ["sa-solr-importer"]
-                  readwrite = ["sa-job", "sa-api"]
+                  readwrite = ["sa-job", "sa-api", "mark.ruffolo@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
               }
@@ -1074,7 +1037,6 @@ other_projects = {
           "chiu.oddyseus@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "jimmy.palelil@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
@@ -1084,13 +1046,9 @@ other_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "severin.beauvais@gov.bc.ca",
           "steven.chen@gov.bc.ca",
-          "syed.riyazzudin@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
           "vishnu.preddy@gov.bc.ca",
-          "vysakh.menon@gov.bc.ca",
         ]
       },
       {
@@ -1098,8 +1056,6 @@ other_projects = {
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-          "vysakh.menon@gov.bc.ca",
         ]
       },
       {
@@ -1121,17 +1077,12 @@ other_projects = {
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "severin.beauvais@gov.bc.ca",
           "steven.chen@gov.bc.ca",
-          "syed.riyazzudin@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-          "vysakh.menon@gov.bc.ca",
         ]
       },
       {
@@ -1141,17 +1092,12 @@ other_projects = {
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "hrvoje.fekete@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "severin.beauvais@gov.bc.ca",
           "steven.chen@gov.bc.ca",
-          "syed.riyazzudin@gov.bc.ca",
-          "travis.semple@gov.bc.ca",
-          "vysakh.menon@gov.bc.ca",
         ]
       },
     ]
@@ -1160,7 +1106,7 @@ other_projects = {
         resource      = "projects/c4hnrd-tools/locations/us/repositories/gcr.io"
         resource_type = "artifact_registry"
         roles         = ["roles/artifactregistry.reader"]
-        members       = ["Chris.Gabel@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "dietrich.wolpert@gov.bc.ca", "eve.deng@gov.bc.ca", "hrvoje.fekete@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "megan.a.wong@gov.bc.ca", "meng.dong@gov.bc.ca", "omid.x.zamani@gov.bc.ca", "rajandeep.kaur@gov.bc.ca", "severin.beauvais@gov.bc.ca", "steven.chen@gov.bc.ca", "syed.riyazzudin@gov.bc.ca", "thayne.werdal@gov.bc.ca", "vishnu.preddy@gov.bc.ca"]
+        members       = ["Chris.Gabel@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "dietrich.wolpert@gov.bc.ca", "eve.deng@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "megan.a.wong@gov.bc.ca", "meng.dong@gov.bc.ca", "omid.x.zamani@gov.bc.ca", "rajandeep.kaur@gov.bc.ca", "steven.chen@gov.bc.ca", "thayne.werdal@gov.bc.ca", "vishnu.preddy@gov.bc.ca"]
       },
     ]
     custom_roles = {
