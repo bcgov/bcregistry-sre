@@ -340,7 +340,32 @@ prod_projects = {
             resource = "sre-buckets"
             roles    = ["roles/storage.objectUser"]
             resource_type = "storage_bucket"
-          }
+          },
+          {
+            resource = "projects/gtksf3-prod/topics/auth-event-prod"
+            roles    = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource = "projects/gtksf3-prod/topics/account-mailer-prod"
+            roles    = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource = "projects/gtksf3-prod/topics/namex-pay-prod"
+            roles    = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource = "projects/gtksf3-prod/topics/assets-pay-notification-prod"
+            roles    = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource = "projects/gtksf3-prod/topics/business-pay-prod"
+            roles    = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
         ]
       },
       sa-notebook = {
@@ -624,32 +649,7 @@ prod_projects = {
               resource = "ftp-poller-prod"
               roles    = ["roles/storage.legacyBucketWriter"]
               resource_type = "storage_bucket"
-            },
-            {
-              resource = "projects/gtksf3-prod/topics/auth-event-prod"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/gtksf3-prod/topics/account-mailer-prod"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/gtksf3-prod/topics/namex-pay-prod"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/gtksf3-prod/topics/assets-pay-notification-prod"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/gtksf3-prod/topics/business-pay-prod"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
+            }
         ]
       },
       sa-api = {
