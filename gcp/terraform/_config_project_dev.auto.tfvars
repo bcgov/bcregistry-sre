@@ -92,10 +92,12 @@ dev_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
+          "andrei.ivanov@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
         ]
       },
@@ -123,6 +125,7 @@ dev_projects = {
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
       {
@@ -140,6 +143,7 @@ dev_projects = {
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
     ]
@@ -148,7 +152,7 @@ dev_projects = {
         resource      = "projects/c4hnrd-dev/locations/us/repositories/gcr.io"
         resource_type = "artifact_registry"
         roles         = ["roles/artifactregistry.reader"]
-        members       = ["Argus.1.Chiu@gov.bc.ca", "Chris.Gabel@gov.bc.ca", "bcregistry-sre@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "jia.xu@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "omid.x.zamani@gov.bc.ca",]
+        members       = ["Argus.1.Chiu@gov.bc.ca", "Chris.Gabel@gov.bc.ca", "bcregistry-sre@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "jia.xu@gov.bc.ca", "sumesh.kariyil@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "omid.x.zamani@gov.bc.ca",]
       },
       {
         resource      = "projects/c4hnrd-dev/serviceAccounts/sa-api@c4hnrd-dev.iam.gserviceaccount.com"
@@ -290,6 +294,7 @@ dev_projects = {
           "jia.xu@gov.bc.ca",
           "jimmy.palelil@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
       {
@@ -310,11 +315,13 @@ dev_projects = {
           "lucas.o'neil@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
+          "andrei.ivanov@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
           "vishnu.preddy@gov.bc.ca",
         ]
@@ -324,6 +331,7 @@ dev_projects = {
         members = [
           "jia.xu@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
       {
@@ -350,6 +358,7 @@ dev_projects = {
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
       {
@@ -364,6 +373,7 @@ dev_projects = {
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
     ]
@@ -373,7 +383,8 @@ dev_projects = {
           resource_type = "storage_bucket"
           roles         = ["roles/storage.objectUser"]
           members       = [
-             "jia.xu@gov.bc.ca"
+             "jia.xu@gov.bc.ca",
+             "sumesh.kariyil@gov.bc.ca"
             ]
         },
       {
@@ -384,6 +395,7 @@ dev_projects = {
           "anish.batra@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
           ]
       },
       {
@@ -451,7 +463,37 @@ dev_projects = {
               resource = "ftp-poller-dev"
               roles    = ["roles/storage.legacyBucketWriter"]
               resource_type = "storage_bucket"
-            }
+            },
+                      {
+              resource = "projects/gtksf3-dev/topics/auth-event-dev"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-dev/topics/account-mailer-dev"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-dev/topics/namex-pay-dev"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-dev/topics/assets-pay-notification-dev"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-dev/topics/business-pay-dev"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-dev/topics/ftp-poller-payment-reconciliation-dev"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
         ]
       },
       sa-api = {
@@ -673,12 +715,14 @@ dev_projects = {
             "lucas.o'neil@gov.bc.ca",
             "mark.ruffolo@gov.bc.ca",
             "megan.a.wong@gov.bc.ca",
+            "andrei.ivanov@gov.bc.ca",
             "meng.dong@gov.bc.ca",
             "omid.x.zamani@gov.bc.ca",
             "paul.adeyinka@gov.bc.ca",
             "rajandeep.kaur@gov.bc.ca",
             "siddharth.chaturvedi@gov.bc.ca",
             "steven.chen@gov.bc.ca",
+            "sumesh.kariyil@gov.bc.ca",
             "thayne.werdal@gov.bc.ca",
             "vishnu.preddy@gov.bc.ca",
           ]
@@ -724,6 +768,7 @@ dev_projects = {
             "kial.jinnah@gov.bc.ca",
             "omid.x.zamani@gov.bc.ca",
             "steven.chen@gov.bc.ca",
+            "sumesh.kariyil@gov.bc.ca",
           ]
         },
         {
@@ -739,6 +784,7 @@ dev_projects = {
             "kial.jinnah@gov.bc.ca",
             "omid.x.zamani@gov.bc.ca",
             "steven.chen@gov.bc.ca",
+            "sumesh.kariyil@gov.bc.ca",
           ]
         },
       ]
@@ -1189,10 +1235,12 @@ dev_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
+          "andrei.ivanov@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
           "vishnu.preddy@gov.bc.ca",
         ]
@@ -1232,6 +1280,7 @@ dev_projects = {
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
       {
@@ -1248,6 +1297,7 @@ dev_projects = {
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
     ]
@@ -1263,9 +1313,11 @@ dev_projects = {
                         "jia.xu@gov.bc.ca", 
                         "karim.jazzar@gov.bc.ca", 
                         "ketaki.deodhar@gov.bc.ca", 
-                        "megan.a.wong@gov.bc.ca", 
+                        "megan.a.wong@gov.bc.ca",
+                        "andrei.ivanov@gov.bc.ca",
                         "meng.dong@gov.bc.ca", 
                         "rajandeep.kaur@gov.bc.ca", 
+                        "sumesh.kariyil@gov.bc.ca",
                         "thayne.werdal@gov.bc.ca", 
                         "vishnu.preddy@gov.bc.ca"]
       },

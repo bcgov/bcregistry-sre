@@ -6,6 +6,7 @@ test_projects = {
       {
         role    = "projects/c4hnrd-test/roles/roledeveloper"
         members = [
+          "andrei.ivanov@gov.bc.ca",
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
@@ -24,6 +25,7 @@ test_projects = {
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
         ]
       },
@@ -53,6 +55,7 @@ test_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
       {
@@ -68,6 +71,7 @@ test_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
     ]
@@ -189,6 +193,7 @@ test_projects = {
       {
         role    = "projects/gtksf3-test/roles/roledeveloper"
         members = [
+          "andrei.ivanov@gov.bc.ca",
           "Argus.1.Chiu@gov.bc.ca",
           "anish.batra@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
@@ -211,6 +216,7 @@ test_projects = {
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
         ]
       },
@@ -219,6 +225,7 @@ test_projects = {
         members = [
           "jia.xu@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
       {
@@ -227,7 +234,9 @@ test_projects = {
       },
       {
         role    = "roles/pubsub.admin"
-        members = ["jia.xu@gov.bc.ca"]
+        members = ["jia.xu@gov.bc.ca",
+                   "sumesh.kariyil@gov.bc.ca",
+        ]
       },
       {
         role    = "roles/pubsub.editor"
@@ -249,6 +258,7 @@ test_projects = {
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
       {
@@ -263,6 +273,7 @@ test_projects = {
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
     ]
@@ -272,7 +283,8 @@ test_projects = {
         resource_type = "storage_bucket"
         roles         = ["roles/storage.objectUser"]
         members       = [
-          "jia.xu@gov.bc.ca"
+          "jia.xu@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
           ]
       },
       {
@@ -283,6 +295,7 @@ test_projects = {
           "anish.batra@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
           ]
       },
       {
@@ -352,7 +365,37 @@ test_projects = {
               resource = "ftp-poller-test"
               roles    = ["roles/storage.legacyBucketWriter"]
               resource_type = "storage_bucket"
-            }
+            },
+                        {
+              resource = "projects/gtksf3-test/topics/auth-event-test"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-test/topics/account-mailer-test"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-test/topics/namex-pay-test"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-test/topics/assets-pay-notification-test"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-test/topics/business-pay-test"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
+            {
+              resource = "projects/gtksf3-test/topics/ftp-poller-payment-reconciliation-test"
+              roles    = ["roles/pubsub.publisher"]
+              resource_type = "pubsub_topic"
+            },
         ]
       },
       sa-api = {
@@ -531,6 +574,7 @@ test_projects = {
       {
         role    = "projects/a083gt-test/roles/roledeveloper"
         members = [
+          "andrei.ivanov@gov.bc.ca",
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
@@ -556,6 +600,7 @@ test_projects = {
           "rajandeep.kaur@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
           "vikas.singh@gov.bc.ca",
           "vishnu.preddy@gov.bc.ca",
@@ -607,6 +652,7 @@ test_projects = {
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
       {
@@ -622,6 +668,7 @@ test_projects = {
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
     ]
@@ -1053,6 +1100,7 @@ test_projects = {
       {
         role    = "projects/yfthig-test/roles/roledeveloper"
         members = [
+          "andrei.ivanov@gov.bc.ca",
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
@@ -1069,6 +1117,7 @@ test_projects = {
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
         ]
       },
@@ -1101,6 +1150,7 @@ test_projects = {
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
       {
@@ -1117,6 +1167,7 @@ test_projects = {
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
     ]
