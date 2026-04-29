@@ -448,6 +448,17 @@ test_projects = {
         description = "Service account used to backup auth db in OpenShift Gold Cluster, as part of disaster recovery plan."
       }
     }
+    resource_iam_bindings = [
+      {
+        resource      = "projects/gtksf3-test/serviceAccounts/sa-job@gtksf3-test.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+        members       = [
+          # WIF OpenShift Namespace: cbaab0-test
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/67adac47-6e8c-41f8-85e5-516af6d08095"
+        ]
+      }
+    ]
   },
   "bor-test" = {
     project_id = "yfjq17-test"
