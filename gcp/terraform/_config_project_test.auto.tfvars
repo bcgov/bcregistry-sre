@@ -290,6 +290,14 @@ test_projects = {
           ]
       },
       {
+          resource      = "ftp-poller-test"
+          resource_type = "storage_bucket"
+          roles         = ["roles/storage.objectUser"]
+          members       = [
+            "jia.xu@gov.bc.ca",
+            ]
+      },
+      {
         resource      = "projects/gtksf3-test/serviceAccounts/sa-pubsub@gtksf3-test.iam.gserviceaccount.com"
         roles         = ["roles/iam.serviceAccountTokenCreator"]
         resource_type = "sa_iam_member"

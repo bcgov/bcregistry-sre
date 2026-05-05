@@ -648,7 +648,7 @@ prod_projects = {
               roles    = ["roles/storage.legacyBucketWriter"]
               resource_type = "storage_bucket"
             },
-                        {
+            {
               resource = "projects/gtksf3-prod/topics/auth-event-prod"
               roles    = ["roles/pubsub.publisher"]
               resource_type = "pubsub_topic"
