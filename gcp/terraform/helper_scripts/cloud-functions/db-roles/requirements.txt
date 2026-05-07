@@ -17,5 +17,5 @@ pg8000==1.31.5
 # Runtime utilities
 cachetools==5.2.0
 pyasn1-modules==0.2.8
-rsa==4.9
+rsa==4.9.1
 
