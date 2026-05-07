@@ -538,9 +538,17 @@ environments = {
         title = "Role Developer"
         description = "Role for Developer."
         permissions = [
+          "cloudnotifications.activities.list",
+          "errorreporting.applications.list",
+          "errorreporting.errorEvents.list",
+          "errorreporting.groupMetadata.get",
+          "errorreporting.groups.list",
+          "logging.notificationRules.get",
+          "logging.notificationRules.list",
           "resourcemanager.projects.get",
           "serviceusage.services.get",
           "serviceusage.services.list",
+          "stackdriver.projects.get",
           "storage.managedFolders.get",
           "storage.objects.get",
           "storage.objects.list",
