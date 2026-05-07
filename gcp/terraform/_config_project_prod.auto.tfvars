@@ -590,7 +590,7 @@ prod_projects = {
                 owner      = "pay"
                 database_role_assignment = {
                   readonly = ["ketaki.deodhar@gov.bc.ca","dietrich.wolpert@gov.bc.ca", "vysakh.menon@gov.bc.ca", "jia.xu@gov.bc.ca", "sumesh.kariyil@gov.bc.ca", "megan.a.wong@gov.bc.ca", "andrei.ivanov@gov.bc.ca", "thayne.werdal@gov.bc.ca", "anushka.halder@gov.bc.ca","Argus.1.Chiu@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
-                  readwrite = ["sa-api", "steven.chen@gov.bc.ca", "meng.dong@gov.bc.ca", "omid.x.zamani@gov.bc.ca"]
+                  readwrite = ["sa-api", "sa-job", "steven.chen@gov.bc.ca", "meng.dong@gov.bc.ca", "omid.x.zamani@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
           }
@@ -640,7 +640,7 @@ prod_projects = {
           ]
       },
       sa-job = {
-        roles       = ["projects/gtksf3-prod/roles/rolejob"]
+        roles       = ["projects/gtksf3-prod/roles/rolejob", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
         resource_roles = [
             {
@@ -1532,6 +1532,10 @@ prod_projects = {
         role    = "roles/iap.httpsResourceAccessor"
         members = ["mike.huffman@gov.bc.ca"]
       },
+      {
+        role = "roles/bigquery.user"
+        members = ["jimmy.palelil@gov.bc.ca"]
+      }
     ]
     instances = [
       {

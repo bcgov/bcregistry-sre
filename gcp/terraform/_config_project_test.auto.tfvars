@@ -338,7 +338,7 @@ test_projects = {
                 owner      = "auth"
                 database_role_assignment = {
                   readonly = ["noor.nayeem@gov.bc.ca", "patty.stemkens@gov.bc.ca", "divya.chandupatla@gov.bc.ca"]
-                  readwrite = ["sa-api", "anish.batra@gov.bc.ca"]
+                  readwrite = ["sa-api", "sa-job", "anish.batra@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
               }
@@ -377,7 +377,7 @@ test_projects = {
         description = "Service Account for running db alembic migration job"
       },
       sa-job = {
-        roles       = ["projects/gtksf3-test/roles/rolejob"]
+        roles       = ["projects/gtksf3-test/roles/rolejob", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
         resource_roles = [
             {

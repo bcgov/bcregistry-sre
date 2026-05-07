@@ -271,7 +271,7 @@ other_projects = {
                 owner      = "postgres"
                 database_role_assignment = {
                   readonly = []
-                  readwrite = ["sa-api"]
+                  readwrite = ["sa-api", "sa-job"]
                   admin = ["sa-db-migrate"]
                 }
           }
@@ -288,7 +288,7 @@ other_projects = {
         description = "Service Account for running pubsub services"
       },
       sa-job = {
-        roles       = ["projects/gtksf3-tools/roles/rolejob"]
+        roles       = ["projects/gtksf3-tools/roles/rolejob", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
         resource_roles = [
             {

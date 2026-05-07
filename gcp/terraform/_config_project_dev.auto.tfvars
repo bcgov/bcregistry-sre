@@ -434,7 +434,7 @@ dev_projects = {
                 owner      = "pay"
                 database_role_assignment = {
                   readonly = ["noor.nayeem@gov.bc.ca"]
-                  readwrite = ["sa-api", "anish.batra@gov.bc.ca"]
+                  readwrite = ["sa-api", "sa-job", "anish.batra@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
           }
@@ -458,7 +458,7 @@ dev_projects = {
           ]
       },
       sa-job = {
-        roles       = ["projects/gtksf3-dev/roles/rolejob"]
+        roles       = ["projects/gtksf3-dev/roles/rolejob", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
         resource_roles = [
             {
