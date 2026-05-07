@@ -1,0 +1,24 @@
+[project]
+name = "bcregistry-sre-scripts"
+version = "0.1.0"
+description = "BC Registry SRE infrastructure scanning and reporting scripts"
+requires-python = ">=3.12"
+dependencies = [
+    # HTTP & auth
+    "requests",
+    "httpx",
+    "google-auth",
+    "google-auth-httplib2",
+    # GCP SDKs
+    "google-cloud-run",
+    "google-cloud-monitoring",
+    # Report templating
+    "jinja2",
+    # Web scraping
+    "beautifulsoup4",
+    # Env & utilities
+    "python-dotenv",
+]
+
+[dependency-groups]
+dev = []
