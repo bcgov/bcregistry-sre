@@ -267,6 +267,10 @@ prod_projects = {
         members = [
           "rajandeep.kaur@gov.bc.ca",]
       },
+      {
+        role = "roles/bigquery.user"
+        members = ["jimmy.palelil@gov.bc.ca"]
+      }
     ]
     resource_iam_bindings = [
       {
