@@ -285,6 +285,12 @@ prod_projects = {
         resource_type = "sa_iam_member"
         members       = ["andriy.bolyachevets@gov.bc.ca"]
       },
+      {
+        resource      = "pubsub_dlq_prod.strr-emailer-queue"
+        resource_type = "bigquery_table"
+        roles         = ["roles/bigquery.dataViewer"]
+        members       = ["jimmy.palelil@gov.bc.ca"]
+      },
     ]
     instances = [
       {

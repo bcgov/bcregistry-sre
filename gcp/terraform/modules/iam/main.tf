@@ -141,6 +141,35 @@ resource "google_pubsub_topic_iam_member" "resource_iam_members" {
 }
 
 
+resource "google_bigquery_dataset_iam_member" "resource_iam_members" {
+  for_each = {
+    for combo in local.resource_iam_bindings :
+    (combo.is_managed_sa ? "${combo.sa_name}-${combo.role}-${combo.resource}" : "${combo.member}-${combo.role}-${combo.resource}") => combo
+    if combo.resource_type == "bigquery_dataset"
+  }
+
+  project    = var.project_id
+  dataset_id = each.value.resource
+  role       = each.value.role
+  member     = each.value.is_managed_sa ? "serviceAccount:${google_service_account.sa[each.value.sa_name].email}" : each.value.member
+}
+
+
+resource "google_bigquery_table_iam_member" "resource_iam_members" {
+  for_each = {
+    for combo in local.resource_iam_bindings :
+    (combo.is_managed_sa ? "${combo.sa_name}-${combo.role}-${combo.resource}" : "${combo.member}-${combo.role}-${combo.resource}") => combo
+    if combo.resource_type == "bigquery_table"
+  }
+
+  project    = var.project_id
+  dataset_id = split(".", each.value.resource)[0]
+  table_id   = split(".", each.value.resource)[1]
+  role       = each.value.role
+  member     = each.value.is_managed_sa ? "serviceAccount:${google_service_account.sa[each.value.sa_name].email}" : each.value.member
+}
+
+
 resource "google_artifact_registry_repository_iam_member" "resource_iam_members" {
   for_each = {
     for combo in local.resource_iam_bindings :
