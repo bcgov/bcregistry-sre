@@ -629,11 +629,16 @@ test_projects = {
         ]
       },
       {
+        role    = "roles/databasecenter.viewer"
+        members = [
+                    "mark.ruffolo@gov.bc.ca"]
+        },
+      {
           role    = "roles/compute.osAdminLogin"
           members = [
                      "steven.chen@gov.bc.ca"]
         },
-        {
+      {
           role    = "roles/compute.viewer"
           members = [
                      "steven.chen@gov.bc.ca"]
