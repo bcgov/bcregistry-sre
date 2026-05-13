@@ -320,7 +320,6 @@ environments = {
       "kial.jinnah@gov.bc.ca",
       "lucas.o'neil@gov.bc.ca",
       "megan.a.wong@gov.bc.ca",
-      "andrei.ivanov@gov.bc.ca",
       "meng.dong@gov.bc.ca",
       "mike.huffman@gov.bc.ca",
       "omid.x.zamani@gov.bc.ca",
