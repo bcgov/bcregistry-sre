@@ -1375,7 +1375,6 @@ dev_projects = {
       {
         role    = "projects/bcrbk9-dev/roles/roledeveloper"
         members = [
-          "adam.ortiz@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "dima.kostenyuk@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
@@ -1417,7 +1416,7 @@ dev_projects = {
                  owner      = "strr"
                 database_role_assignment = {
                   readonly = ["sa-job"]
-                  readwrite = ["sa-api", "dima.kostenyuk@gov.bc.ca", "jimmy.palelil@gov.bc.ca", "adam.ortiz@gov.bc.ca"]
+                  readwrite = ["sa-api", "dima.kostenyuk@gov.bc.ca", "jimmy.palelil@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                  }
               }

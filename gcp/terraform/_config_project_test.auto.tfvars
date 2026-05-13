@@ -1234,7 +1234,6 @@ test_projects = {
       {
         role    = "projects/bcrbk9-test/roles/roledeveloper"
         members = [
-          "adam.ortiz@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
@@ -1273,7 +1272,7 @@ test_projects = {
                 owner      = "strr"
                 database_role_assignment = {
                   readonly = ["sa-job"]
-                  readwrite = ["sa-api", "jimmy.palelil@gov.bc.ca", "adam.ortiz@gov.bc.ca"]
+                  readwrite = ["sa-api", "jimmy.palelil@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
               }
