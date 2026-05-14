@@ -276,6 +276,18 @@ test_projects = {
           "sumesh.kariyil@gov.bc.ca",
         ]
       },
+      {
+        role    = "roles/monitoring.admin"
+        members = [
+          "sumesh.kariyil@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/logging.admin"
+        members = [
+          "sumesh.kariyil@gov.bc.ca",
+        ]
+      },
     ]
     resource_iam_bindings = [
       {
