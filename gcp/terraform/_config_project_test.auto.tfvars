@@ -1109,7 +1109,7 @@ test_projects = {
         description = "Service Account for running job services"
       },
       sa-api = {
-        roles       = ["projects/k973yf-test/roles/roleapi"]
+        roles       = ["projects/k973yf-test/roles/roleapi", "roles/cloudsql.instanceUser"]
         description = "Service Account for running api services"
       },
       sa-queue = {
