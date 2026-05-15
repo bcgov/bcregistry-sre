@@ -776,11 +776,11 @@ other_projects = {
         description = "Service Account for running db alembic migration job"
       },
       sa-job = {
-        roles       = ["projects/bcrbk9-tools/roles/rolejob"]
+        roles       = ["projects/bcrbk9-tools/roles/rolejob", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
       },
       sa-api = {
-        roles       = ["projects/bcrbk9-tools/roles/roleapi", "roles/storage.admin"]
+        roles       = ["projects/bcrbk9-tools/roles/roleapi", "roles/storage.admin", "roles/cloudsql.instanceUser"]
         description = "Service Account for running api services"
       },
       sa-queue = {

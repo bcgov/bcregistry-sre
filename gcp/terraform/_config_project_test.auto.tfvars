@@ -1298,11 +1298,11 @@ test_projects = {
         description = "Service Account for running db alembic migration job"
       },
       sa-job = {
-        roles       = ["projects/bcrbk9-test/roles/rolejob"]
+        roles       = ["projects/bcrbk9-test/roles/rolejob", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
       },
       sa-api = {
-        roles       = ["projects/bcrbk9-test/roles/roleapi", "roles/pubsub.publisher", "roles/storage.admin", "roles/storage.objectCreator"]
+        roles       = ["projects/bcrbk9-test/roles/roleapi", "roles/pubsub.publisher", "roles/storage.admin", "roles/storage.objectCreator", "roles/cloudsql.instanceUser"]
         description = "Service Account for running api services"
       },
       sa-queue = {
