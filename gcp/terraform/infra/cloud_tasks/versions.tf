@@ -2,12 +2,12 @@ terraform {
   required_providers {
     google = {
       source  = "hashicorp/google"
-      version = "6.21.0"
+      version = "6.50.0"
     }
     tfe = {
         source  = "hashicorp/tfe"
-        version = "~> 0.48.0" # Use the latest version
+        version = "~> 0.76.0" # Use the latest version
       }
   }
-  required_version = "= 1.10.5"
+  required_version = "1.15.2"
 }
