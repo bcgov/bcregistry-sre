@@ -758,6 +758,7 @@ prod_projects = {
         members = [
           "dietrich.wolpert@gov.bc.ca",
           "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "vysakh.menon@gov.bc.ca",
@@ -800,7 +801,7 @@ prod_projects = {
                 owner      = "prodUser"
                 database_role_assignment = {
                   readonly = ["dietrich.wolpert@gov.bc.ca", "vysakh.menon@gov.bc.ca","megan.a.wong@gov.bc.ca", "Argus.1.Chiu@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
-                  readwrite = ["sa-api"]
+                  readwrite = ["sa-api", "meng.dong@gov.bc.ca", "omid.x.zamani@gov.bc.ca", "steven.chen@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
               }
@@ -1351,6 +1352,14 @@ prod_projects = {
           "doug.lovett@gov.bc.ca",
         ]
       },
+      {
+        role    = "projects/k973yf-prod/roles/roledeveloper"
+        members = [
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
+        ]
+      },
     ]
     resource_iam_bindings = [
       {
@@ -1370,7 +1379,7 @@ prod_projects = {
                 owner      = "search_service"
                 database_role_assignment = {
                   readonly = ["Argus.1.Chiu@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
-                  readwrite = ["sa-api"]
+                  readwrite = ["sa-api", "meng.dong@gov.bc.ca", "omid.x.zamani@gov.bc.ca", "steven.chen@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
               }

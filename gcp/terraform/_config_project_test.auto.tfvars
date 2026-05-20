@@ -495,6 +495,8 @@ test_projects = {
           "dietrich.wolpert@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
           "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
           "vysakh.menon@gov.bc.ca",
         ]
       },
@@ -1072,6 +1074,14 @@ test_projects = {
         role    = "projects/k973yf-test/roles/SRE"
         members = [
           "kial.jinnah@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/k973yf-test/roles/roledeveloper"
+        members = [
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
         ]
       },
     ]
