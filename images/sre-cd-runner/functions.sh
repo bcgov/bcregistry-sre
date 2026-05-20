@@ -7,7 +7,7 @@ tag_exists() {
     local image_path="$2"
     local image_package_path="$3"
 
-    if [[ -z "$tag" ||-z "$image_path" || -z "$image_package_path" ]]; then
+    if [[ -z "$tag" || -z "$image_path" || -z "$image_package_path" ]]; then
         echo "❌ IMAGE_PATH or IMAGE_PACKAGE_PATH is not set." >&2
         return 1
     fi
@@ -156,7 +156,7 @@ generate_manifest() {
     export APP_ENV="${env_name}"
 
     if [[ -z "${service_type}" || -z "${env_name}" ]]; then
-        echo "❌ service_typ or env_name is not set." >&2
+        echo "❌ service_type or env_name is not set." >&2
         return 1
     fi
 

@@ -116,7 +116,7 @@ jobs:
 
           TARGET_FROM="${{ needs.setup.outputs.TARGET_FROM }}"
 
-          if [ -z ${{ needs.setup.outputs.TARGET_FROM }}]; then
+          if [ -z "$TARGET_FROM" ]; then
             TARGET_FROM="${{ needs.setup.outputs.TARGET }}"
           fi
 
