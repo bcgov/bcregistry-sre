@@ -496,6 +496,7 @@ test_projects = {
           "janis.rogers@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "vysakh.menon@gov.bc.ca",
         ]
@@ -542,7 +543,7 @@ test_projects = {
                 owner      = "testUser"
                 database_role_assignment = {
                   readonly = []
-                  readwrite = ["sa-api"]
+                  readwrite = ["sa-api", "paul.adeyinka@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
               }
@@ -1081,6 +1082,7 @@ test_projects = {
         members = [
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
           "steven.chen@gov.bc.ca",
         ]
       },
@@ -1095,7 +1097,7 @@ test_projects = {
                 owner      = "testUser"
                 database_role_assignment = {
                   readonly = []
-                  readwrite = ["sa-api"]
+                  readwrite = ["sa-api", "paul.adeyinka@gov.bc.ca"]
                   admin = ["sa-db-migrate"]
                 }
               }
