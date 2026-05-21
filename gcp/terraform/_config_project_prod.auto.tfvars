@@ -869,6 +869,7 @@ prod_projects = {
           "lucas.o'neil@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
+          "melissa.stanton@gov.bc.ca",
           "mihai.dinu@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
