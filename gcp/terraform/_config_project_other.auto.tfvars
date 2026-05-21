@@ -372,6 +372,8 @@ other_projects = {
         members = [
           "dietrich.wolpert@gov.bc.ca",
           "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
           "vysakh.menon@gov.bc.ca",
         ]
       },
@@ -606,6 +608,14 @@ other_projects = {
         role    = "projects/k973yf--tools/roles/SRE"
         members = [
           "kial.jinnah@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "projects/k973yf--tools/roles/roledeveloper"
+        members = [
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+          "steven.chen@gov.bc.ca",
         ]
       },
     ]
@@ -1077,6 +1087,7 @@ other_projects = {
           "brandon.1.sharratt@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "jimmy.palelil@gov.bc.ca",
