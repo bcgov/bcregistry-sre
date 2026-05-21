@@ -5,7 +5,17 @@ mpf_projects = {
     iam_bindings = [
       {
         role    = "projects/google-mpf-547144339658/roles/monitoring_reader"
-        members = ["andriy.bolyachevets@gov.bc.ca"]
+        members = [
+                    "andriy.bolyachevets@gov.bc.ca",
+                  "reema.sagpariya@gov.bc.ca",
+                  "gunasegaran.nagarajan@gov.bc.ca",
+                  "kial.jinnah@gov.bc.ca",
+                  "megan.a.wong@gov.bc.ca",
+                  "mark.ruffolo@gov.bc.ca",
+                  "mihai.dinu@gov.bc.ca",
+                  "vikas.singh@gov.bc.ca",
+                  "melissa.stanton@gov.bc.ca",
+                  ]
       }
     ]
     custom_roles = {
