@@ -286,7 +286,7 @@ prod_projects = {
         ]
         resource_type = "sa_iam_member"
         members       = [
-          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/474f9e39-bbab-44aa-ac88-a556ca56442b"
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/09b902fb-6ae5-4132-8167-dea5d0e7d165"
         ]
       },
       {
