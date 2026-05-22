@@ -279,6 +279,17 @@ prod_projects = {
         members       = ["patrick.wei@gov.bc.ca"]
       },
       {
+        resource      = "projects/c4hnrd-prod/serviceAccounts/sa-api@c4hnrd-prod.iam.gserviceaccount.com"
+        roles         = [
+          "roles/iam.workloadIdentityUser",
+          "roles/iam.serviceAccountTokenCreator"
+        ]
+        resource_type = "sa_iam_member"
+        members       = [
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/474f9e39-bbab-44aa-ac88-a556ca56442b"
+        ]
+      },
+      {
         resource      = "projects/c4hnrd-prod/serviceAccounts/sa-pam-function@c4hnrd-prod.iam.gserviceaccount.com"
         roles         = ["roles/iam.serviceAccountUser"]
         resource_type = "sa_iam_member"
