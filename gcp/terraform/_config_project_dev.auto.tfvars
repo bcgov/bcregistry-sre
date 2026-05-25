@@ -501,6 +501,11 @@ dev_projects = {
         description = "Service Account for running api services"
         resource_roles = [
             {
+              resource      = "ftp-poller-dev"
+              roles         = ["roles/storage.objectViewer", "roles/storage.legacyBucketReader"]
+              resource_type = "storage_bucket"
+            },
+            {
               resource = "auth-account-mailer-dev"
               roles    = ["roles/storage.objectViewer"]
               resource_type = "storage_bucket"
