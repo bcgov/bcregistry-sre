@@ -627,6 +627,7 @@ test_projects = {
           "mark.ruffolo@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
+          "mihai.dinu@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "paul.adeyinka@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
