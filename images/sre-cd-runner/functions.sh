@@ -86,7 +86,6 @@ build_and_push_image() {
     fi
 }
 
-# Function to merge two vault files and output a YAML-formatted file
 merge_vaults() {
     local origin_env="$1"
     local update_env="$2"
@@ -94,39 +93,52 @@ merge_vaults() {
 
     declare -A update_values
 
-    # Load update_env values into associative array
     while IFS='=' read -r key value; do
         [[ -z "$key" || "$key" =~ ^# ]] && continue
-        value="${value%\"}"  # Remove trailing quote
-        value="${value#\"}"  # Remove leading quote
         update_values["$key"]="$value"
     done < <(grep -v '^[[:space:]]*$' "$update_env")
 
+    # Remove surrounding quotes from values
+    for key in "${!update_values[@]}"; do
+        val="${update_values[$key]}"
+        val="${val#\'}"
+        val="${val%\'}"
+        val="${val#\"}"
+        val="${val%\"}"
+        update_values["$key"]="$val"
+    done
+
+    # Output as YAML format only
     {
-        # Process origin_env and apply updates
         while IFS='=' read -r key value; do
             [[ -z "$key" || "$key" =~ ^# ]] && continue
+            # Remove surrounding quotes
+            value="${value#\'}"
+            value="${value%\'}"
+            value="${value#\"}"
+            value="${value%\"}"
+
             if [[ -n "${update_values[$key]+_}" ]]; then
                 val="${update_values[$key]}"
+                unset update_values["$key"]
             else
                 val="$value"
             fi
-            val="${val%\"}"; val="${val#\"}"           # Strip surrounding quotes
-            val="${val//\"/\\\"}"                     # Escape internal quotes
-            echo "$key: \"$val\""
-            unset update_values["$key"]
+            # Escape for YAML
+            val="${val//\\/\\\\}"
+            val="${val//\"/\\\"}"
+            printf '%s: "%s"\n' "$key" "$val"
         done < <(grep -v '^[[:space:]]*$' "$origin_env")
 
-        # Add remaining new keys from update_env
         for key in "${!update_values[@]}"; do
             val="${update_values[$key]}"
-            val="${val%\"}"; val="${val#\"}"
+            val="${val//\\/\\\\}"
             val="${val//\"/\\\"}"
-            echo "$key: \"$val\""
+            printf '%s: "%s"\n' "$key" "$val"
         done
     } > "$output_env"
 
-    echo "🛠️ Updated values written to $output_env"
+    echo "🛠️ Updated values written to $output_env (YAML format)" >&2
 }
 
 # Generate secrets file
