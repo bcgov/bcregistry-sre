@@ -764,7 +764,8 @@ dev_projects = {
         },
         {
           role    = "roles/run.admin"
-          members = ["steven.chen@gov.bc.ca"]
+          members = ["steven.chen@gov.bc.ca",
+                     "paul.adeyinka@gov.bc.ca",]
         },
         {
           role    = "roles/securitycenter.assetsViewer"
