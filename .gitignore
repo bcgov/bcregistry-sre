@@ -118,3 +118,7 @@ venv.bak/
 
 # Misc backups
 *.bak
+
+/**/.agent
+/**/agents
+/**/output

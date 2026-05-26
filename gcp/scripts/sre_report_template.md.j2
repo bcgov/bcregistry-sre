@@ -1,0 +1,46 @@
+# Service SRE Report: `{{ service_name }}`
+
+**Project:** `{{ project_id }}`
+**Reporting Period:** `{{ start_time }}` to `{{ end_time }}`
+
+---
+
+## 1. Service Level Objectives (SLOs)
+{% if slos %}
+| Display Name | Target Goal | Actual Compliance |
+|:---|:---|:---|
+{% for s in slos %}
+| {{ s.display_name }} | {{ s.goal }} | {{ s.compliance }} {{ s.status }} |
+{% endfor %}
+{% else %}
+*No Service Level Objectives (SLOs) found.*
+{% endif %}
+
+## 2. Traffic & Performance Statistics
+
+### 2.1 Request Volume (`request_count`)
+- **Estimated Total Requests**: `{{ "{:,}".format(req_stats.sum|int) }}`
+- **Average Requests/Interval**: `{{ "%.2f"|format(req_stats.avg) }}`
+- **Peak Traffic**: `{{ "%.0f"|format(req_stats.max) }}`
+
+### 2.2 Request Latency (`request_latencies`)
+- **Average Latency**: `{{ "%.2f"|format(lat_stats.avg) }} ms`
+- **Max Latency Spike**: `{{ "%.2f"|format(lat_stats.max) }} ms`
+
+## 3. Incident & Error Review
+Top distinct exceptions thrown during this period (Severity >= ERROR).
+
+{% if errors %}
+{% for error in errors %}
+**Trace {{ loop.index }}**:
+```text
+{{ error[:1000] }}{% if error|length > 1000 %}...{% endif %}
+```
+
+{% endfor %}
+{% else %}
+*No severe errors logged during this period.*
+{% endif %}
+
+---
+*Report Generated Automatically.*
