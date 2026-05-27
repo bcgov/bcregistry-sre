@@ -1252,6 +1252,7 @@ test_projects = {
         role    = "projects/bcrbk9-test/roles/roledeveloper"
         members = [
           "dietrich.wolpert@gov.bc.ca",
+          "dima.kostenyuk@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
           "jimmy.palelil@gov.bc.ca",
