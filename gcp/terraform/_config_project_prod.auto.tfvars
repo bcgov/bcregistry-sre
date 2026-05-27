@@ -917,10 +917,6 @@ prod_projects = {
                 "steven.chen@gov.bc.ca"]
       },
       {
-        role    = "roles/run.admin"
-        members = ["steven.chen@gov.bc.ca"]
-      },
-      {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "eve.deng@gov.bc.ca",

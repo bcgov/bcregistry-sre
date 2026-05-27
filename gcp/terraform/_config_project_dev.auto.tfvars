@@ -752,11 +752,14 @@ dev_projects = {
         },
         {
           role    = "roles/compute.osAdminLogin"
-          members = ["steven.chen@gov.bc.ca"]
+          members = ["steven.chen@gov.bc.ca",
+                     "paul.adeyinka@gov.bc.ca"
+          ]
         },
         {
           role    = "roles/compute.viewer"
-          members = ["steven.chen@gov.bc.ca"]
+          members = ["steven.chen@gov.bc.ca",
+                    "paul.adeyinka@gov.bc.ca"]
         },
         {
           role    = "roles/pubsub.admin"

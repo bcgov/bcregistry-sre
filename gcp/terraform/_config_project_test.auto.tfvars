@@ -676,10 +676,6 @@ test_projects = {
         ]
       },
       {
-        role    = "roles/run.admin"
-        members = ["steven.chen@gov.bc.ca"]
-      },
-      {
         role    = "roles/securitycenter.assetsViewer"
         members = [
           "Chris.Gabel@gov.bc.ca",
