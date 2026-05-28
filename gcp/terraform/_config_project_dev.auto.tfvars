@@ -771,6 +771,11 @@ dev_projects = {
                      "paul.adeyinka@gov.bc.ca",]
         },
         {
+          role = "roles/cloudscheduler.admin"
+          members = ["paul.adeyinka@gov.bc.ca"
+          ]
+        },
+        {
           role    = "roles/securitycenter.assetsViewer"
           members = [
             "Chris.Gabel@gov.bc.ca",

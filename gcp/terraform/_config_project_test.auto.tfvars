@@ -655,7 +655,12 @@ test_projects = {
           role    = "roles/compute.viewer"
           members = [
                      "steven.chen@gov.bc.ca"]
-        },
+      },
+      {
+          role = "roles/cloudscheduler.admin"
+          members = ["paul.adeyinka@gov.bc.ca"
+          ]
+      },
       {
         role    = "roles/cloudsql.instanceUser"
         members = ["anish.patel@gov.bc.ca"]
@@ -1252,6 +1257,7 @@ test_projects = {
         role    = "projects/bcrbk9-test/roles/roledeveloper"
         members = [
           "dietrich.wolpert@gov.bc.ca",
+          "dima.kostenyuk@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
           "jimmy.palelil@gov.bc.ca",
