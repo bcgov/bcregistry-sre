@@ -1445,7 +1445,12 @@ other_projects = {
             resource = "projects/c4hnrd-tools/serviceAccounts/github-actions@c4hnrd-tools.iam.gserviceaccount.com"
             roles    = ["roles/cloudbuild.serviceAgent"]
             resource_type = "sa_iam_member"
-          }
+          },
+          {
+            resource = "fin-warehouse"
+            roles    = ["roles/storage.objectViewer"]
+            resource_type = "storage_bucket"
+          },
         ]
       }
     }

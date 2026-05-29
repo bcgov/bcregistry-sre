@@ -168,10 +168,6 @@ prod_projects = {
           }
         ]
       },
-      github-actions = {
-        roles       = ["roles/iam.serviceAccountUser", "roles/serviceusage.apiKeysViewer", "roles/storage.objectAdmin"]
-        description = " Data syncing between bcgov-registries/analytics sql files and data warehouse bucket"
-      },
       sa-analytics-fin-warehouse = {
         roles       = ["roles/cloudsql.client", "roles/cloudsql.viewer"]
         description = "fin_warehouse database access"
