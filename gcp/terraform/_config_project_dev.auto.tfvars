@@ -497,7 +497,7 @@ dev_projects = {
         ]
       },
       sa-api = {
-        roles       = ["projects/gtksf3-dev/roles/roleapi", "roles/iam.serviceAccountTokenCreator", "roles/cloudsql.instanceUser", "roles/serverless.serviceAgent"]
+        roles       = ["projects/gtksf3-dev/roles/roleapi", "roles/iam.serviceAccountTokenCreator", "roles/cloudsql.instanceUser", "roles/serverless.serviceAgent", "roles/cloudtrace.agent"]
         description = "Service Account for running api services"
         resource_roles = [
             {
