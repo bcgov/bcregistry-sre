@@ -1448,7 +1448,7 @@ other_projects = {
           },
           {
             resource = "fin-warehouse"
-            roles    = ["roles/storage.objectViewer"]
+            roles    = ["roles/storage.objectUser"]
             resource_type = "storage_bucket"
           },
         ]
