@@ -159,16 +159,18 @@ This configuration uses **Terraform workspaces** to separate state by environmen
 | `test` | `var.test_projects` | All test environment projects |
 | `prod` | `var.prod_projects` | All prod environment projects |
 | `other` | `var.other_projects` | Sandbox and tools projects |
+| `mpf` | `var.mpf_projects` | Management project (MPF) |
 | `default` | (none) | Shared resources only (SQL role scripts in GCS) |
 
 ### State Files
 
-State is stored in GCS bucket `common-tools-terraform-state` with prefix `iam`:
+State is stored in GCS bucket `common-tools-terraform-state` under the `iam/` prefix, one object per workspace:
 - `gs://common-tools-terraform-state/iam/default.tfstate` — default workspace
-- `gs://common-tools-terraform-state/iam/env:/dev/default.tfstate` — dev workspace
-- `gs://common-tools-terraform-state/iam/env:/test/default.tfstate` — test workspace
-- `gs://common-tools-terraform-state/iam/env:/prod/default.tfstate` — prod workspace
-- `gs://common-tools-terraform-state/iam/env:/other/default.tfstate` — other workspace
+- `gs://common-tools-terraform-state/iam/dev.tfstate` — dev workspace
+- `gs://common-tools-terraform-state/iam/test.tfstate` — test workspace
+- `gs://common-tools-terraform-state/iam/prod.tfstate` — prod workspace
+- `gs://common-tools-terraform-state/iam/other.tfstate` — other workspace
+- `gs://common-tools-terraform-state/iam/mpf.tfstate` — mpf workspace
 
 ### Using the tf.sh Helper Script
 
