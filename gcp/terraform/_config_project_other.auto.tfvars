@@ -70,8 +70,8 @@ other_projects = {
             owner   = "user4ca"
             database_role_assignment = {
               readonly  = []
-              readwrite = []
-              admin     = []
+              readwrite = ["sa-api"]
+              admin     = ["sa-db-migrate"]
             }
           }
         ]

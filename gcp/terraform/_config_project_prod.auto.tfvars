@@ -309,8 +309,8 @@ prod_projects = {
             owner   = "user4ca"
             database_role_assignment = {
               readonly  = ["dietrich.wolpert@gov.bc.ca", "vysakh.menon@gov.bc.ca", "megan.a.wong@gov.bc.ca", "lucas.o'neil@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "thayne.werdal@gov.bc.ca", "Argus.1.Chiu@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
-              readwrite = []
-              admin     = []
+              readwrite = ["sa-api"]
+              admin     = ["sa-db-migrate"]
             }
           }
         ]

@@ -94,6 +94,11 @@ test_projects = {
             db_name = "docs"
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "user4ca"
+            database_role_assignment = {
+              readonly  = []
+              readwrite = ["sa-api"]
+              admin     = ["sa-db-migrate"]
+            }
           }
         ]
       },
