@@ -1287,6 +1287,14 @@ dev_projects = {
         ]
       },
       {
+        role    = "roles/browser"
+        members = ["bcregistry-sre@gov.bc.ca"]
+      },
+      {
+        role    = "roles/cloudbuild.connectionAdmin"
+        members = ["bcregistry-sre@gov.bc.ca"]
+      },
+      {
         role = "roles/firebase.admin"
         members = [
           "eve.deng@gov.bc.ca",
