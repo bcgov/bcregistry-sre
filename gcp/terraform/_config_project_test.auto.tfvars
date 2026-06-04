@@ -192,7 +192,12 @@ test_projects = {
       },
       {
         role    = "roles/cloudtrace.user"
-        members = ["sumesh.kariyil@gov.bc.ca"]
+        members = [
+          "anish.batra@gov.bc.ca",
+          "chiu.oddyseus@gov.bc.ca",
+          "jia.xu@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
+        ]
       },
       {
         role    = "projects/gtksf3-test/roles/roledeveloper"
