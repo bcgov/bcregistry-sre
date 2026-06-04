@@ -1,44 +1,44 @@
 default_principals = ["user:andriy.bolyachevets@gov.bc.ca"]
 
 global_iam_bindings = [
-      {
-        role    = "roles/owner"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/securitycenter.assetsViewer"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "roles/securitycenter.findingsViewer"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "patrick.wei@gov.bc.ca",
-        ]
-      },
-      {
-        role    = "SRE"
-        members = [
-          "anish.patel@gov.bc.ca",
-          "jacky.pham@gov.bc.ca",
-        ]
-      }
+  {
+    role = "roles/owner"
+    members = [
+      "andriy.bolyachevets@gov.bc.ca",
+      "patrick.wei@gov.bc.ca",
+    ]
+  },
+  {
+    role = "roles/securitycenter.assetsViewer"
+    members = [
+      "andriy.bolyachevets@gov.bc.ca",
+      "patrick.wei@gov.bc.ca",
+    ]
+  },
+  {
+    role = "roles/securitycenter.findingsViewer"
+    members = [
+      "andriy.bolyachevets@gov.bc.ca",
+      "patrick.wei@gov.bc.ca",
+    ]
+  },
+  {
+    role = "SRE"
+    members = [
+      "anish.patel@gov.bc.ca",
+      "jacky.pham@gov.bc.ca",
+    ]
+  }
 ]
 
 global_database_role_assignment = {
-  readonly = []
+  readonly  = []
   readwrite = []
-  admin = ["andriy.bolyachevets@gov.bc.ca", "patrick.wei@gov.bc.ca"]
+  admin     = ["andriy.bolyachevets@gov.bc.ca", "patrick.wei@gov.bc.ca"]
 }
 global_custom_roles = {
   rolestore = {
-    title = "Role Store"
+    title       = "Role Store"
     description = "Role for Cloud Store services - can read/write and create signed URLs."
     permissions = [
       "storage.objects.get",
@@ -48,7 +48,7 @@ global_custom_roles = {
     ]
   },
   rolequeue = {
-    title = "Role Queue"
+    title       = "Role Queue"
     description = "Role for Queue services."
     permissions = [
       "cloudsql.instances.get",
@@ -75,7 +75,7 @@ global_custom_roles = {
     ]
   },
   rolejob = {
-    title = "Role Job"
+    title       = "Role Job"
     description = "Role for cloud run CD flow."
     permissions = [
       "resourcemanager.projects.get",
@@ -103,7 +103,7 @@ global_custom_roles = {
     ]
   },
   rolecdcloudrun = {
-    title = "CD Cloud Run"
+    title       = "CD Cloud Run"
     description = "Role for cloud run CD flow (new)."
     permissions = [
       "resourcemanager.projects.get",
@@ -145,7 +145,7 @@ global_custom_roles = {
     ]
   },
   roledbmigrate = {
-    title = "Role DB Migration"
+    title       = "Role DB Migration"
     description = "Role to run alembic db migrations."
     permissions = [
       "cloudsql.instances.connect",
@@ -161,7 +161,7 @@ global_custom_roles = {
     ]
   },
   roleapi = {
-    title = "Role API"
+    title       = "Role API"
     description = "Role for API services."
     permissions = [
       "resourcemanager.projects.get",
@@ -188,7 +188,7 @@ global_custom_roles = {
     ]
   },
   rolesolrimporter = {
-    title = "Role Solr importer"
+    title       = "Role Solr importer"
     description = "Role for Solr importer services."
     permissions = [
       "resourcemanager.projects.get",
@@ -214,9 +214,9 @@ global_custom_roles = {
       "cloudsql.instances.get",
       "cloudsql.instances.login"
     ]
-},
+  },
   SRE = {
-    title = "Role SRE"
+    title       = "Role SRE"
     description = "Role for SRE."
     permissions = [
       "compute.instances.get",

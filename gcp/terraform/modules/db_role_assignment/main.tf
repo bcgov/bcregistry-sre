@@ -31,15 +31,15 @@ locals {
             try(db.database_role_assignment.readonly, []),
             try(db.database_role_assignment.readwrite, []),
             try(db.database_role_assignment.admin, [])
-          )) : {
+            )) : {
             key = "${instance.instance}-${db.db_name}-${user}"
             msg = "User ${user} has multiple roles on ${db.db_name} (${instance.instance}) - Roles: ${join(", ", compact([
               for role in ["readonly", "readwrite", "admin"] :
               role if contains(try(db.database_role_assignment[role], []), user)
             ]))}"
-          } if length(compact([
-            for role in ["readonly", "readwrite", "admin"] :
-            role if contains(try(db.database_role_assignment[role], []), user)
+            } if length(compact([
+              for role in ["readonly", "readwrite", "admin"] :
+              role if contains(try(db.database_role_assignment[role], []), user)
           ])) > 1
         ]
       ]
@@ -47,50 +47,50 @@ locals {
   }
 
   # Combined role assignments (database-specific + global/env)
-role_assignments = merge(
-  # Database-specific assignments
-  {
-    for assignment in flatten([
-      for instance in var.instances : [
-        for db in try(instance.databases, []) : [
-          for role_type in ["readonly", "readwrite", "admin"] : [
-            for user in try(db.database_role_assignment[role_type], []) : {
-              key      = "db-${instance.instance}-${db.db_name}-${role_type}-${user}"
-              instance = instance.instance
-              db_name  = db.db_name
-              role     = role_type
-              user     = user
-            }
+  role_assignments = merge(
+    # Database-specific assignments
+    {
+      for assignment in flatten([
+        for instance in var.instances : [
+          for db in try(instance.databases, []) : [
+            for role_type in ["readonly", "readwrite", "admin"] : [
+              for user in try(db.database_role_assignment[role_type], []) : {
+                key      = "db-${instance.instance}-${db.db_name}-${role_type}-${user}"
+                instance = instance.instance
+                db_name  = db.db_name
+                role     = role_type
+                user     = user
+              }
+            ]
           ]
         ]
-      ]
-    ]) : assignment.key => assignment
-  },
-  # Global/env assignments applied to all databases
-  {
-    for assignment in flatten([
-      for instance in var.instances : [
-        for db in try(instance.databases, []) : [
-          for role_type in ["readonly", "readwrite", "admin"] : [
-            for user in local.global_env_users : {
-              key      = "globalenv-${instance.instance}-${db.db_name}-${role_type}-${user}"
-              instance = instance.instance
-              db_name  = db.db_name
-              role     = role_type
-              user     = user
-            } if contains(
-              concat(
-                try(var.global_assignments[role_type], []),
-                try(var.environment_assignments[role_type], [])
-              ),
-              user
-            )
+      ]) : assignment.key => assignment
+    },
+    # Global/env assignments applied to all databases
+    {
+      for assignment in flatten([
+        for instance in var.instances : [
+          for db in try(instance.databases, []) : [
+            for role_type in ["readonly", "readwrite", "admin"] : [
+              for user in local.global_env_users : {
+                key      = "globalenv-${instance.instance}-${db.db_name}-${role_type}-${user}"
+                instance = instance.instance
+                db_name  = db.db_name
+                role     = role_type
+                user     = user
+                } if contains(
+                concat(
+                  try(var.global_assignments[role_type], []),
+                  try(var.environment_assignments[role_type], [])
+                ),
+                user
+              )
+            ]
           ]
         ]
-      ]
-    ]) : assignment.key => assignment
-  }
-)
+      ]) : assignment.key => assignment
+    }
+  )
 
   # Unique instance-user combinations
   instance_user_combinations = {
@@ -124,7 +124,7 @@ resource "terraform_data" "validate_role_assignments" {
 }
 
 data "google_service_account_id_token" "invoker" {
-  target_audience = var.cloud_function_url
+  target_audience        = var.cloud_function_url
   target_service_account = var.service_account_email
 }
 
@@ -193,12 +193,12 @@ resource "null_resource" "db_role_assignments" {
       FULL_INSTANCE_NAME="$PROJECT_ID:$REGION:$INSTANCE"
       GCS_URI="gs://${var.bucket_name}"
       USER_EMAIL="${
-        endswith(each.value.user, ".gserviceaccount.com") ?
-        trimsuffix(each.value.user, ".gserviceaccount.com") :
-        contains(keys(var.all_service_account_emails), each.value.user) ?
-        trimsuffix(var.all_service_account_emails[each.value.user], ".gserviceaccount.com") :
-        each.value.user
-      }"
+    endswith(each.value.user, ".gserviceaccount.com") ?
+    trimsuffix(each.value.user, ".gserviceaccount.com") :
+    contains(keys(var.all_service_account_emails), each.value.user) ?
+    trimsuffix(var.all_service_account_emails[each.value.user], ".gserviceaccount.com") :
+    each.value.user
+  }"
       DB_NAME="${each.value.db_name}"
       ROLE_TYPE="${each.value.role}"
 
@@ -225,6 +225,6 @@ resource "null_resource" "db_role_assignments" {
 
       echo "Response: $RESPONSE"
     EOT
-  }
+}
 
 }

@@ -30,12 +30,12 @@ environments = {
         "steven.chen@gov.bc.ca",
         "thayne.werdal@gov.bc.ca",
         "thor.wolpert@gov.bc.ca"
-        ]
+      ]
       admin = []
     }
     environment_custom_roles = {
       roledeveloper = {
-        title = "Role Developer"
+        title       = "Role Developer"
         description = "Role for Developer."
         permissions = [
           "resourcemanager.projects.get",
@@ -148,19 +148,19 @@ environments = {
   }
   "dev" = {
     iam_bindings = [
-       {
-         role    = "roles/logging.viewer"
-         members = []
-       }
+      {
+        role    = "roles/logging.viewer"
+        members = []
+      }
     ]
     database_role_assignment = {
-      readonly = ["vikas.singh@gov.bc.ca", "mihai.dinu@gov.bc.ca", "janis.rogers@gov.bc.ca"]
-      readwrite = ["eve.deng@gov.bc.ca","Argus.1.Chiu@gov.bc.ca","brandon.1.sharratt@gov.bc.ca","chiu.oddyseus@gov.bc.ca","Chris.Gabel@gov.bc.ca","darci.denis@gov.bc.ca","david.li@gov.bc.ca","david.mckinnon@gov.bc.ca","dietrich.wolpert@gov.bc.ca","vysakh.menon@gov.bc.ca","doug.lovett@gov.bc.ca","felipe.moraes@gov.bc.ca","jia.xu@gov.bc.ca","sumesh.kariyil@gov.bc.ca","karim.jazzar@gov.bc.ca","ketaki.deodhar@gov.bc.ca","kial.jinnah@gov.bc.ca","lucas.o'neil@gov.bc.ca","megan.a.wong@gov.bc.ca","meng.dong@gov.bc.ca","mike.huffman@gov.bc.ca","omid.x.zamani@gov.bc.ca","rajandeep.kaur@gov.bc.ca","siddharth.chaturvedi@gov.bc.ca","steven.chen@gov.bc.ca","thayne.werdal@gov.bc.ca","thor.wolpert@gov.bc.ca"]
-      admin = ["jacky.pham@gov.bc.ca", "anish.patel@gov.bc.ca"]
+      readonly  = ["vikas.singh@gov.bc.ca", "mihai.dinu@gov.bc.ca", "janis.rogers@gov.bc.ca"]
+      readwrite = ["eve.deng@gov.bc.ca", "Argus.1.Chiu@gov.bc.ca", "brandon.1.sharratt@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "Chris.Gabel@gov.bc.ca", "darci.denis@gov.bc.ca", "david.li@gov.bc.ca", "david.mckinnon@gov.bc.ca", "dietrich.wolpert@gov.bc.ca", "vysakh.menon@gov.bc.ca", "doug.lovett@gov.bc.ca", "felipe.moraes@gov.bc.ca", "jia.xu@gov.bc.ca", "sumesh.kariyil@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "kial.jinnah@gov.bc.ca", "lucas.o'neil@gov.bc.ca", "megan.a.wong@gov.bc.ca", "meng.dong@gov.bc.ca", "mike.huffman@gov.bc.ca", "omid.x.zamani@gov.bc.ca", "rajandeep.kaur@gov.bc.ca", "siddharth.chaturvedi@gov.bc.ca", "steven.chen@gov.bc.ca", "thayne.werdal@gov.bc.ca", "thor.wolpert@gov.bc.ca"]
+      admin     = ["jacky.pham@gov.bc.ca", "anish.patel@gov.bc.ca"]
     }
     environment_custom_roles = {
       roledeveloper = {
-        title = "Role Developer"
+        title       = "Role Developer"
         description = "Role for Developer."
         permissions = [
           "resourcemanager.projects.get",
@@ -301,39 +301,39 @@ environments = {
     database_role_assignment = {
       readonly = ["vikas.singh@gov.bc.ca", "mihai.dinu@gov.bc.ca", "janis.rogers@gov.bc.ca"]
       readwrite = [
-      "eve.deng@gov.bc.ca",
-      "Argus.1.Chiu@gov.bc.ca",
-      "brandon.1.sharratt@gov.bc.ca",
-      "chiu.oddyseus@gov.bc.ca",
-      "Chris.Gabel@gov.bc.ca",
-      "darci.denis@gov.bc.ca",
-      "david.li@gov.bc.ca",
-      "david.mckinnon@gov.bc.ca",
-      "dietrich.wolpert@gov.bc.ca",
-      "vysakh.menon@gov.bc.ca",
-      "doug.lovett@gov.bc.ca",
-      "felipe.moraes@gov.bc.ca",
-      "jia.xu@gov.bc.ca",
-      "sumesh.kariyil@gov.bc.ca",
-      "karim.jazzar@gov.bc.ca",
-      "ketaki.deodhar@gov.bc.ca",
-      "kial.jinnah@gov.bc.ca",
-      "lucas.o'neil@gov.bc.ca",
-      "megan.a.wong@gov.bc.ca",
-      "meng.dong@gov.bc.ca",
-      "mike.huffman@gov.bc.ca",
-      "omid.x.zamani@gov.bc.ca",
-      "rajandeep.kaur@gov.bc.ca",
-      "siddharth.chaturvedi@gov.bc.ca",
-      "steven.chen@gov.bc.ca",
-      "thayne.werdal@gov.bc.ca",
-      "thor.wolpert@gov.bc.ca"
+        "eve.deng@gov.bc.ca",
+        "Argus.1.Chiu@gov.bc.ca",
+        "brandon.1.sharratt@gov.bc.ca",
+        "chiu.oddyseus@gov.bc.ca",
+        "Chris.Gabel@gov.bc.ca",
+        "darci.denis@gov.bc.ca",
+        "david.li@gov.bc.ca",
+        "david.mckinnon@gov.bc.ca",
+        "dietrich.wolpert@gov.bc.ca",
+        "vysakh.menon@gov.bc.ca",
+        "doug.lovett@gov.bc.ca",
+        "felipe.moraes@gov.bc.ca",
+        "jia.xu@gov.bc.ca",
+        "sumesh.kariyil@gov.bc.ca",
+        "karim.jazzar@gov.bc.ca",
+        "ketaki.deodhar@gov.bc.ca",
+        "kial.jinnah@gov.bc.ca",
+        "lucas.o'neil@gov.bc.ca",
+        "megan.a.wong@gov.bc.ca",
+        "meng.dong@gov.bc.ca",
+        "mike.huffman@gov.bc.ca",
+        "omid.x.zamani@gov.bc.ca",
+        "rajandeep.kaur@gov.bc.ca",
+        "siddharth.chaturvedi@gov.bc.ca",
+        "steven.chen@gov.bc.ca",
+        "thayne.werdal@gov.bc.ca",
+        "thor.wolpert@gov.bc.ca"
       ]
       admin = []
     }
     environment_custom_roles = {
       roledeveloper = {
-        title = "Role Developer"
+        title       = "Role Developer"
         description = "Role for Developer."
         permissions = [
           "resourcemanager.projects.get",
@@ -446,13 +446,13 @@ environments = {
   }
   "prod" = {
     database_role_assignment = {
-      readonly = ["siddharth.chaturvedi@gov.bc.ca"]
+      readonly  = ["siddharth.chaturvedi@gov.bc.ca"]
       readwrite = ["thor.wolpert@gov.bc.ca"]
-      admin = []
+      admin     = []
     }
     environment_custom_roles = {
       roleba = {
-        title = "Role BA"
+        title       = "Role BA"
         description = "Role for Business Analyst."
         permissions = [
           "resourcemanager.projects.get",
@@ -471,30 +471,30 @@ environments = {
         ]
       },
       rolepam = {
-        title = "Role PAM"
+        title       = "Role PAM"
         description = "Role for PAM entitlement grants and revocations."
         permissions = [
-            "resourcemanager.projects.getIamPolicy",
-            "resourcemanager.projects.setIamPolicy",
-            "cloudscheduler.jobs.create",
-            "cloudscheduler.jobs.get",
-            "cloudscheduler.jobs.delete",
-            "cloudscheduler.locations.list",
-            "cloudscheduler.locations.get",
-            "cloudsql.instances.get",
-            "cloudsql.users.create",
-            "cloudsql.users.delete",
-            "cloudsql.instances.connect",
-            "privilegedaccessmanager.entitlements.list",
-            "iam.roles.get",
-            "iam.serviceAccounts.actAs",
-            "serviceusage.services.get",
-            "serviceusage.services.list",
-            "pubsub.subscriptions.consume"
+          "resourcemanager.projects.getIamPolicy",
+          "resourcemanager.projects.setIamPolicy",
+          "cloudscheduler.jobs.create",
+          "cloudscheduler.jobs.get",
+          "cloudscheduler.jobs.delete",
+          "cloudscheduler.locations.list",
+          "cloudscheduler.locations.get",
+          "cloudsql.instances.get",
+          "cloudsql.users.create",
+          "cloudsql.users.delete",
+          "cloudsql.instances.connect",
+          "privilegedaccessmanager.entitlements.list",
+          "iam.roles.get",
+          "iam.serviceAccounts.actAs",
+          "serviceusage.services.get",
+          "serviceusage.services.list",
+          "pubsub.subscriptions.consume"
         ]
       },
       roleitops = {
-        title = "Role IT Ops"
+        title       = "Role IT Ops"
         description = "Role for IT Ops."
         permissions = [
           "resourcemanager.projects.get",
@@ -533,7 +533,7 @@ environments = {
         ]
       },
       roledeveloper = {
-        title = "Role Developer"
+        title       = "Role Developer"
         description = "Role for Developer."
         permissions = [
           "cloudnotifications.activities.list",
@@ -682,114 +682,114 @@ environments = {
   "tools" = {
     environment_custom_roles = {
       roledeveloper = {
-          title = "Role Developer"
-          description = "Role for Developer."
-          permissions = [
-            "resourcemanager.projects.get",
-            "serviceusage.services.get",
-            "serviceusage.services.list",
-            "storage.managedFolders.get",
-            "storage.objects.get",
-            "storage.objects.list",
-            "storage.buckets.get",
-            "storage.buckets.list",
-            "artifactregistry.repositories.get",
-            "artifactregistry.tags.get",
-            "run.locations.list",
-            "run.operations.get",
-            "run.operations.list",
-            "run.revisions.get",
-            "run.revisions.list",
-            "run.executions.get",
-            "run.executions.list",
-            "run.services.get",
-            "run.services.list",
-            "run.routes.get",
-            "run.routes.list",
-            "run.jobs.get",
-            "run.jobs.list",
-            "run.jobs.run",
-            "run.tasks.get",
-            "run.tasks.list",
-            "appengine.applications.get",
-            "cloudscheduler.jobs.enable",
-            "cloudscheduler.jobs.fullView",
-            "cloudscheduler.jobs.get",
-            "cloudscheduler.jobs.list",
-            "cloudscheduler.jobs.pause",
-            "cloudscheduler.jobs.run",
-            "cloudscheduler.locations.get",
-            "cloudscheduler.locations.list",
-            "pubsub.topics.get",
-            "pubsub.topics.list",
-            "pubsub.topics.publish",
-            "pubsub.subscriptions.list",
-            "pubsub.subscriptions.get",
-            "pubsub.snapshots.list",
-            "monitoring.dashboards.get",
-            "monitoring.timeSeries.list",
-            "logging.exclusions.get",
-            "logging.exclusions.list",
-            "logging.links.get",
-            "logging.links.list",
-            "logging.logEntries.list",
-            "logging.logMetrics.get",
-            "logging.logMetrics.list",
-            "logging.logs.list",
-            "logging.operations.get",
-            "logging.operations.list",
-            "logging.queries.create",
-            "logging.queries.delete",
-            "logging.queries.get",
-            "logging.queries.list",
-            "logging.queries.listShared",
-            "logging.queries.update",
-            "logging.views.get",
-            "logging.views.list",
-            "cloudsql.databases.get",
-            "cloudsql.databases.list",
-            "cloudsql.instances.get",
-            "cloudsql.instances.login",
-            "cloudsql.instances.list",
-            "cloudsql.instances.connect",
-            "cloudsql.instances.executeSql",
-            "cloudsql.users.get",
-            "cloudsql.users.list",
-            "cloudbuild.builds.get",
-            "cloudbuild.builds.list",
-            "cloudbuild.connections.list",
-            "cloudbuild.repositories.list",
-            "clouddeploy.config.get",
-            "clouddeploy.deliveryPipelines.get",
-            "clouddeploy.deliveryPipelines.list",
-            "clouddeploy.jobRuns.get",
-            "clouddeploy.jobRuns.list",
-            "clouddeploy.locations.get",
-            "clouddeploy.locations.list",
-            "clouddeploy.operations.get",
-            "clouddeploy.operations.list",
-            "clouddeploy.releases.get",
-            "clouddeploy.releases.list",
-            "clouddeploy.rollouts.get",
-            "clouddeploy.rollouts.list",
-            "clouddeploy.targets.get",
-            "clouddeploy.targets.list",
-            "firebase.clients.get",
-            "firebase.clients.list",
-            "firebase.projects.get",
-            "firebasehosting.sites.get",
-            "firebasehosting.sites.list",
-            "cloudconfig.configs.get",
-            "cloudconfig.configs.update",
-            "cloudtasks.cmekConfig.get",
-            "cloudtasks.locations.get",
-            "cloudtasks.locations.list",
-            "cloudtasks.queues.get",
-            "cloudtasks.queues.list",
-            "cloudtasks.tasks.fullView",
-            "cloudtasks.tasks.get",
-            "cloudtasks.tasks.list"
-          ]
+        title       = "Role Developer"
+        description = "Role for Developer."
+        permissions = [
+          "resourcemanager.projects.get",
+          "serviceusage.services.get",
+          "serviceusage.services.list",
+          "storage.managedFolders.get",
+          "storage.objects.get",
+          "storage.objects.list",
+          "storage.buckets.get",
+          "storage.buckets.list",
+          "artifactregistry.repositories.get",
+          "artifactregistry.tags.get",
+          "run.locations.list",
+          "run.operations.get",
+          "run.operations.list",
+          "run.revisions.get",
+          "run.revisions.list",
+          "run.executions.get",
+          "run.executions.list",
+          "run.services.get",
+          "run.services.list",
+          "run.routes.get",
+          "run.routes.list",
+          "run.jobs.get",
+          "run.jobs.list",
+          "run.jobs.run",
+          "run.tasks.get",
+          "run.tasks.list",
+          "appengine.applications.get",
+          "cloudscheduler.jobs.enable",
+          "cloudscheduler.jobs.fullView",
+          "cloudscheduler.jobs.get",
+          "cloudscheduler.jobs.list",
+          "cloudscheduler.jobs.pause",
+          "cloudscheduler.jobs.run",
+          "cloudscheduler.locations.get",
+          "cloudscheduler.locations.list",
+          "pubsub.topics.get",
+          "pubsub.topics.list",
+          "pubsub.topics.publish",
+          "pubsub.subscriptions.list",
+          "pubsub.subscriptions.get",
+          "pubsub.snapshots.list",
+          "monitoring.dashboards.get",
+          "monitoring.timeSeries.list",
+          "logging.exclusions.get",
+          "logging.exclusions.list",
+          "logging.links.get",
+          "logging.links.list",
+          "logging.logEntries.list",
+          "logging.logMetrics.get",
+          "logging.logMetrics.list",
+          "logging.logs.list",
+          "logging.operations.get",
+          "logging.operations.list",
+          "logging.queries.create",
+          "logging.queries.delete",
+          "logging.queries.get",
+          "logging.queries.list",
+          "logging.queries.listShared",
+          "logging.queries.update",
+          "logging.views.get",
+          "logging.views.list",
+          "cloudsql.databases.get",
+          "cloudsql.databases.list",
+          "cloudsql.instances.get",
+          "cloudsql.instances.login",
+          "cloudsql.instances.list",
+          "cloudsql.instances.connect",
+          "cloudsql.instances.executeSql",
+          "cloudsql.users.get",
+          "cloudsql.users.list",
+          "cloudbuild.builds.get",
+          "cloudbuild.builds.list",
+          "cloudbuild.connections.list",
+          "cloudbuild.repositories.list",
+          "clouddeploy.config.get",
+          "clouddeploy.deliveryPipelines.get",
+          "clouddeploy.deliveryPipelines.list",
+          "clouddeploy.jobRuns.get",
+          "clouddeploy.jobRuns.list",
+          "clouddeploy.locations.get",
+          "clouddeploy.locations.list",
+          "clouddeploy.operations.get",
+          "clouddeploy.operations.list",
+          "clouddeploy.releases.get",
+          "clouddeploy.releases.list",
+          "clouddeploy.rollouts.get",
+          "clouddeploy.rollouts.list",
+          "clouddeploy.targets.get",
+          "clouddeploy.targets.list",
+          "firebase.clients.get",
+          "firebase.clients.list",
+          "firebase.projects.get",
+          "firebasehosting.sites.get",
+          "firebasehosting.sites.list",
+          "cloudconfig.configs.get",
+          "cloudconfig.configs.update",
+          "cloudtasks.cmekConfig.get",
+          "cloudtasks.locations.get",
+          "cloudtasks.locations.list",
+          "cloudtasks.queues.get",
+          "cloudtasks.queues.list",
+          "cloudtasks.tasks.fullView",
+          "cloudtasks.tasks.get",
+          "cloudtasks.tasks.list"
+        ]
       }
     }
   }

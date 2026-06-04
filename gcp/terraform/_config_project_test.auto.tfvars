@@ -1,10 +1,10 @@
 test_projects = {
   "common-test" = {
     project_id = "c4hnrd-test"
-    env = "test"
+    env        = "test"
     iam_bindings = [
       {
-        role    = "projects/c4hnrd-test/roles/roledeveloper"
+        role = "projects/c4hnrd-test/roles/roledeveloper"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
@@ -30,20 +30,20 @@ test_projects = {
         ]
       },
       {
-        role    = "projects/c4hnrd-test/roles/SRE"
+        role = "projects/c4hnrd-test/roles/SRE"
         members = [
-            "eve.deng@gov.bc.ca",
-            "doug.lovett@gov.bc.ca",
+          "eve.deng@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
         ]
       },
       {
-        role    = "roles/run.admin"
+        role = "roles/run.admin"
         members = [
           "doug.lovett@gov.bc.ca",
-          "rajandeep.kaur@gov.bc.ca",]
+        "rajandeep.kaur@gov.bc.ca", ]
       },
       {
-        role    = "roles/securitycenter.assetsViewer"
+        role = "roles/securitycenter.assetsViewer"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
@@ -59,7 +59,7 @@ test_projects = {
         ]
       },
       {
-        role    = "roles/securitycenter.findingsViewer"
+        role = "roles/securitycenter.findingsViewer"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
@@ -80,7 +80,7 @@ test_projects = {
         resource      = "projects/c4hnrd-test/serviceAccounts/sa-api@c4hnrd-test.iam.gserviceaccount.com"
         resource_type = "sa_iam_member"
         roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
-        members       = [
+        members = [
           # WIF OpenShift Namespace: cbaab0-test
           "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/67adac47-6e8c-41f8-85e5-516af6d08095"
         ]
@@ -89,28 +89,28 @@ test_projects = {
     instances = [
       {
         instance = "common-db-test"
-        databases =  [
-              {
-                db_name    = "docs"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "user4ca"
-              }
-            ]
+        databases = [
+          {
+            db_name = "docs"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "user4ca"
+          }
+        ]
       },
       {
         instance = "notify-db-test"
-        databases =  [
-              {
-                db_name    = "notify"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "notifyuser"
-                database_role_assignment = {
-                  readonly = []
-                  readwrite = ["sa-api"]
-                  admin = ["sa-db-migrate"]
-                }
-              }
-            ]
+        databases = [
+          {
+            db_name = "notify"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "notifyuser"
+            database_role_assignment = {
+              readonly  = []
+              readwrite = ["sa-api"]
+              admin     = ["sa-db-migrate"]
+            }
+          }
+        ]
       }
     ]
     service_accounts = {
@@ -130,21 +130,21 @@ test_projects = {
         roles       = ["projects/c4hnrd-test/roles/roleapi", "roles/cloudsql.instanceUser", "roles/run.serviceAgent"]
         description = "Service Account for running api services"
         resource_roles = [
-            {
-              resource = "projects/c4hnrd-test/topics/notify-delivery-smtp-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/c4hnrd-test/topics/notify-delivery-gcnotify-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/c4hnrd-test/topics/notify-delivery-gcnotify-housing-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
+          {
+            resource      = "projects/c4hnrd-test/topics/notify-delivery-smtp-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/c4hnrd-test/topics/notify-delivery-gcnotify-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/c4hnrd-test/topics/notify-delivery-gcnotify-housing-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
         ]
       },
       sa-queue = {
@@ -155,23 +155,23 @@ test_projects = {
         description = "Document Services Service Account"
         resource_roles = [
           {
-            resource = "docs_ppr_test"
-            roles    = ["roles/storage.admin"]
+            resource      = "docs_ppr_test"
+            roles         = ["roles/storage.admin"]
             resource_type = "storage_bucket"
           },
           {
-            resource = "docs_nr_test"
-            roles    = ["roles/storage.admin"]
+            resource      = "docs_nr_test"
+            roles         = ["roles/storage.admin"]
             resource_type = "storage_bucket"
           },
           {
-            resource = "docs_mhr_test"
-            roles    = ["roles/storage.admin"]
+            resource      = "docs_mhr_test"
+            roles         = ["roles/storage.admin"]
             resource_type = "storage_bucket"
           },
           {
-            resource = "docs_business_test"
-            roles    = ["roles/storage.admin"]
+            resource      = "docs_business_test"
+            roles         = ["roles/storage.admin"]
             resource_type = "storage_bucket"
           }
         ]
@@ -180,10 +180,10 @@ test_projects = {
   },
   "connect-test" = {
     project_id = "gtksf3-test"
-    env = "test"
+    env        = "test"
     iam_bindings = [
       {
-        role    = "projects/gtksf3-test/roles/SRE"
+        role = "projects/gtksf3-test/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -191,7 +191,7 @@ test_projects = {
         ]
       },
       {
-        role    = "roles/cloudtrace.user"
+        role = "roles/cloudtrace.user"
         members = [
           "anish.batra@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -200,7 +200,7 @@ test_projects = {
         ]
       },
       {
-        role    = "projects/gtksf3-test/roles/roledeveloper"
+        role = "projects/gtksf3-test/roles/roledeveloper"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "anish.batra@gov.bc.ca",
@@ -230,7 +230,7 @@ test_projects = {
         ]
       },
       {
-        role    = "roles/cloudsql.admin"
+        role = "roles/cloudsql.admin"
         members = [
           "jia.xu@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
@@ -242,9 +242,9 @@ test_projects = {
         members = ["anish.batra@gov.bc.ca"]
       },
       {
-        role    = "roles/pubsub.admin"
+        role = "roles/pubsub.admin"
         members = ["jia.xu@gov.bc.ca",
-                   "sumesh.kariyil@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
       {
@@ -256,7 +256,7 @@ test_projects = {
         members = ["anish.batra@gov.bc.ca"]
       },
       {
-        role    = "roles/securitycenter.assetsViewer"
+        role = "roles/securitycenter.assetsViewer"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -271,7 +271,7 @@ test_projects = {
         ]
       },
       {
-        role    = "roles/securitycenter.findingsViewer"
+        role = "roles/securitycenter.findingsViewer"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -286,13 +286,13 @@ test_projects = {
         ]
       },
       {
-        role    = "roles/monitoring.admin"
+        role = "roles/monitoring.admin"
         members = [
           "sumesh.kariyil@gov.bc.ca",
         ]
       },
       {
-        role    = "roles/logging.admin"
+        role = "roles/logging.admin"
         members = [
           "sumesh.kariyil@gov.bc.ca",
         ]
@@ -303,35 +303,35 @@ test_projects = {
         resource      = "auth-static-resources-test"
         resource_type = "storage_bucket"
         roles         = ["roles/storage.objectUser"]
-        members       = [
+        members = [
           "jia.xu@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
-          ]
+        ]
       },
       {
-          resource      = "ftp-poller-test"
-          resource_type = "storage_bucket"
-          roles         = ["roles/storage.objectUser"]
-          members       = [
-            "jia.xu@gov.bc.ca",
-            ]
+        resource      = "ftp-poller-test"
+        resource_type = "storage_bucket"
+        roles         = ["roles/storage.objectUser"]
+        members = [
+          "jia.xu@gov.bc.ca",
+        ]
       },
       {
         resource      = "projects/gtksf3-test/serviceAccounts/sa-pubsub@gtksf3-test.iam.gserviceaccount.com"
         roles         = ["roles/iam.serviceAccountTokenCreator"]
         resource_type = "sa_iam_member"
-        members       = [
+        members = [
           "anish.batra@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
-          ]
+        ]
       },
       {
         resource      = "projects/gtksf3-test/serviceAccounts/sa-job@gtksf3-test.iam.gserviceaccount.com"
         resource_type = "sa_iam_member"
         roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
-        members       = [
+        members = [
           # WIF OpenShift Namespace: cbaab0-test
           "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/67adac47-6e8c-41f8-85e5-516af6d08095"
         ]
@@ -340,41 +340,41 @@ test_projects = {
         resource      = "projects/gtksf3-test/serviceAccounts/sa-auth-db-standby@gtksf3-test.iam.gserviceaccount.com"
         resource_type = "sa_iam_member"
         roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
-        members       = [
+        members = [
           # WIF OpenShift Namespace: d2b3d8-test
           "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f118a86e-a5d7-4ab5-a33b-854d943e0aac"
         ]
       },
     ]
-    
+
     instances = [
       {
         instance = "auth-db-test"
-        databases =  [
+        databases = [
           {
-                db_name    = "auth-db"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "auth"
-                database_role_assignment = {
-                  readonly = ["noor.nayeem@gov.bc.ca", "patty.stemkens@gov.bc.ca", "divya.chandupatla@gov.bc.ca"]
-                  readwrite = ["sa-api", "sa-job", "anish.batra@gov.bc.ca"]
-                  admin = ["sa-db-migrate"]
-                }
-              }
-            ]
+            db_name = "auth-db"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "auth"
+            database_role_assignment = {
+              readonly  = ["noor.nayeem@gov.bc.ca", "patty.stemkens@gov.bc.ca", "divya.chandupatla@gov.bc.ca"]
+              readwrite = ["sa-api", "sa-job", "anish.batra@gov.bc.ca"]
+              admin     = ["sa-db-migrate"]
+            }
+          }
+        ]
       },
       {
         instance = "pay-db-test"
-        databases =  [
+        databases = [
           {
-                db_name    = "pay-db"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "pay"
-                database_role_assignment = {
-                  readonly = ["noor.nayeem@gov.bc.ca", "patty.stemkens@gov.bc.ca"]
-                  readwrite = ["sa-api", "anish.batra@gov.bc.ca"]
-                  admin = ["sa-db-migrate"]
-                }
+            db_name = "pay-db"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "pay"
+            database_role_assignment = {
+              readonly  = ["noor.nayeem@gov.bc.ca", "patty.stemkens@gov.bc.ca"]
+              readwrite = ["sa-api", "anish.batra@gov.bc.ca"]
+              admin     = ["sa-db-migrate"]
+            }
           }
         ]
       }
@@ -384,12 +384,12 @@ test_projects = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
         description = "Service Account for running pubsub services"
         resource_roles = [
-            {
-              resource = "projects/a083gt-test/locations/northamerica-northeast1/services/namex-pay-test"
-              roles    = ["roles/run.invoker"]
-              resource_type = "cloud_run"
-            }
-          ]
+          {
+            resource      = "projects/a083gt-test/locations/northamerica-northeast1/services/namex-pay-test"
+            roles         = ["roles/run.invoker"]
+            resource_type = "cloud_run"
+          }
+        ]
       },
       sa-db-migrate = {
         roles       = ["projects/gtksf3-test/roles/roledbmigrate"]
@@ -399,82 +399,82 @@ test_projects = {
         roles       = ["projects/gtksf3-test/roles/rolejob", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
         resource_roles = [
-            {
-              resource = "ftp-poller-test"
-              roles    = ["roles/storage.legacyBucketWriter"]
-              resource_type = "storage_bucket"
-            },
-                        {
-              resource = "projects/gtksf3-test/topics/auth-event-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/gtksf3-test/topics/account-mailer-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/gtksf3-test/topics/namex-pay-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/gtksf3-test/topics/assets-pay-notification-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/gtksf3-test/topics/business-pay-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/gtksf3-test/topics/ftp-poller-payment-reconciliation-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
+          {
+            resource      = "ftp-poller-test"
+            roles         = ["roles/storage.legacyBucketWriter"]
+            resource_type = "storage_bucket"
+          },
+          {
+            resource      = "projects/gtksf3-test/topics/auth-event-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/gtksf3-test/topics/account-mailer-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/gtksf3-test/topics/namex-pay-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/gtksf3-test/topics/assets-pay-notification-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/gtksf3-test/topics/business-pay-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/gtksf3-test/topics/ftp-poller-payment-reconciliation-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
         ]
       },
       sa-api = {
         roles       = ["projects/gtksf3-test/roles/roleapi", "roles/cloudsql.client", "roles/iam.serviceAccountTokenCreator", "roles/cloudsql.instanceUser", "roles/serverless.serviceAgent", "roles/cloudtrace.agent"]
         description = "Service Account for running api services"
         resource_roles = [
-            {
-              resource = "auth-account-mailer-test"
-              roles    = ["roles/storage.objectViewer"]
-              resource_type = "storage_bucket"
-            },
-            {
-              resource = "auth-accounts-test"
-              roles    = ["projects/gtksf3-test/roles/rolestore"]
-              resource_type = "storage_bucket"
-            },
-            {
-              resource = "projects/gtksf3-test/topics/auth-event-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/gtksf3-test/topics/account-mailer-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/gtksf3-test/topics/namex-pay-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/gtksf3-test/topics/assets-pay-notification-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/gtksf3-test/topics/business-pay-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
+          {
+            resource      = "auth-account-mailer-test"
+            roles         = ["roles/storage.objectViewer"]
+            resource_type = "storage_bucket"
+          },
+          {
+            resource      = "auth-accounts-test"
+            roles         = ["projects/gtksf3-test/roles/rolestore"]
+            resource_type = "storage_bucket"
+          },
+          {
+            resource      = "projects/gtksf3-test/topics/auth-event-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/gtksf3-test/topics/account-mailer-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/gtksf3-test/topics/namex-pay-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/gtksf3-test/topics/assets-pay-notification-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/gtksf3-test/topics/business-pay-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
         ]
       },
       sa-queue = {
@@ -489,16 +489,16 @@ test_projects = {
   },
   "bor-test" = {
     project_id = "yfjq17-test"
-    env = "test"
+    env        = "test"
     iam_bindings = [
       {
-        role    = "projects/yfjq17-test/roles/rolecdcloudrun"
+        role = "projects/yfjq17-test/roles/rolecdcloudrun"
         members = [
           "brandon.1.sharratt@gov.bc.ca",
         ]
       },
       {
-        role    = "projects/yfjq17-test/roles/roledeveloper"
+        role = "projects/yfjq17-test/roles/roledeveloper"
         members = [
           "brandon.1.sharratt@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
@@ -511,20 +511,20 @@ test_projects = {
         ]
       },
       {
-        role    = "projects/yfjq17-test/roles/SRE"
+        role = "projects/yfjq17-test/roles/SRE"
         members = [
           "kial.jinnah@gov.bc.ca",
         ]
       },
       {
-        role    = "roles/securitycenter.assetsViewer"
+        role = "roles/securitycenter.assetsViewer"
         members = [
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
         ]
       },
       {
-        role    = "roles/securitycenter.findingsViewer"
+        role = "roles/securitycenter.findingsViewer"
         members = [
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
@@ -536,7 +536,7 @@ test_projects = {
         resource      = "projects/yfjq17-test/serviceAccounts/sa-solr-importer@yfjq17-test.iam.gserviceaccount.com"
         resource_type = "sa_iam_member"
         roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
-        members       = [
+        members = [
           # WIF OpenShift Namespace: cbaab0-test
           "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/67adac47-6e8c-41f8-85e5-516af6d08095"
         ]
@@ -545,33 +545,33 @@ test_projects = {
     instances = [
       {
         instance = "bor-db-test"
-        databases =  [
-              {
-                db_name    = "bor"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "testUser"
-                database_role_assignment = {
-                  readonly = []
-                  readwrite = ["sa-api", "paul.adeyinka@gov.bc.ca"]
-                  admin = ["sa-db-migrate"]
-                }
-              }
-            ]
+        databases = [
+          {
+            db_name = "bor"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "testUser"
+            database_role_assignment = {
+              readonly  = []
+              readwrite = ["sa-api", "paul.adeyinka@gov.bc.ca"]
+              admin     = ["sa-db-migrate"]
+            }
+          }
+        ]
       },
       {
         instance = "btr-db-test"
-        databases =  [
-              {
-                db_name    = "btr"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "testUser"
-                database_role_assignment = {
-                  readonly = ["sa-solr-importer"]
-                  readwrite = []
-                  admin = []
-                }
-              }
-            ]
+        databases = [
+          {
+            db_name = "btr"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "testUser"
+            database_role_assignment = {
+              readonly  = ["sa-solr-importer"]
+              readwrite = []
+              admin     = []
+            }
+          }
+        ]
       }
     ]
     service_accounts = {
@@ -603,10 +603,10 @@ test_projects = {
   },
   "bcr-businesses-test" = {
     project_id = "a083gt-test"
-    env = "test"
+    env        = "test"
     iam_bindings = [
       {
-        role    = "projects/a083gt-test/roles/SRE"
+        role = "projects/a083gt-test/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
           "Argus.1.Chiu@gov.bc.ca",
@@ -614,7 +614,7 @@ test_projects = {
         ]
       },
       {
-        role    = "projects/a083gt-test/roles/roledeveloper"
+        role = "projects/a083gt-test/roles/roledeveloper"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
@@ -651,24 +651,24 @@ test_projects = {
         ]
       },
       {
-        role    = "roles/databasecenter.viewer"
+        role = "roles/databasecenter.viewer"
         members = [
-                    "mark.ruffolo@gov.bc.ca"]
-        },
-      {
-          role    = "roles/compute.osAdminLogin"
-          members = [
-                     "steven.chen@gov.bc.ca"]
-        },
-      {
-          role    = "roles/compute.viewer"
-          members = [
-                     "steven.chen@gov.bc.ca"]
+        "mark.ruffolo@gov.bc.ca"]
       },
       {
-          role = "roles/cloudscheduler.admin"
-          members = ["paul.adeyinka@gov.bc.ca"
-          ]
+        role = "roles/compute.osAdminLogin"
+        members = [
+        "steven.chen@gov.bc.ca"]
+      },
+      {
+        role = "roles/compute.viewer"
+        members = [
+        "steven.chen@gov.bc.ca"]
+      },
+      {
+        role = "roles/cloudscheduler.admin"
+        members = ["paul.adeyinka@gov.bc.ca"
+        ]
       },
       {
         role    = "roles/cloudsql.instanceUser"
@@ -683,14 +683,14 @@ test_projects = {
         members = ["steven.chen@gov.bc.ca"]
       },
       {
-        role    = "roles/pubsub.admin"
+        role = "roles/pubsub.admin"
         members = [
           "brandon.1.sharratt@gov.bc.ca",
           "lucas.o'neil@gov.bc.ca",
         ]
       },
       {
-        role    = "roles/securitycenter.assetsViewer"
+        role = "roles/securitycenter.assetsViewer"
         members = [
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -706,7 +706,7 @@ test_projects = {
         ]
       },
       {
-        role    = "roles/securitycenter.findingsViewer"
+        role = "roles/securitycenter.findingsViewer"
         members = [
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -727,7 +727,7 @@ test_projects = {
         resource      = "projects/a083gt-test/serviceAccounts/sa-lear-db-standby@a083gt-test.iam.gserviceaccount.com"
         resource_type = "sa_iam_member"
         roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
-        members       = [
+        members = [
           # WIF OpenShift Namespace: d2b3d8-test
           "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f118a86e-a5d7-4ab5-a33b-854d943e0aac"
         ]
@@ -736,7 +736,7 @@ test_projects = {
         resource      = "projects/a083gt-test/serviceAccounts/sa-solr-importer@a083gt-test.iam.gserviceaccount.com"
         resource_type = "sa_iam_member"
         roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
-        members       = [
+        members = [
           # WIF OpenShift Namespace: cbaab0-test
           "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/67adac47-6e8c-41f8-85e5-516af6d08095"
         ]
@@ -745,7 +745,7 @@ test_projects = {
         resource      = "projects/a083gt-test/serviceAccounts/sa-job@a083gt-test.iam.gserviceaccount.com"
         resource_type = "sa_iam_member"
         roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
-        members       = [
+        members = [
           # WIF OpenShift Namespace: cbaab0-test
           "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/67adac47-6e8c-41f8-85e5-516af6d08095"
         ]
@@ -754,33 +754,33 @@ test_projects = {
     instances = [
       {
         instance = "businesses-db-test"
-        databases =  [
-              {
-                db_name    = "business"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "business-api"
-                database_role_assignment = {
-                  readonly = ["sa-solr-importer", "divya.chandupatla@gov.bc.ca"]
-                  readwrite = ["sa-job", "sa-api", "mark.ruffolo@gov.bc.ca", "gunasegaran.nagarajan@gov.bc.ca", "reema.sagpariya@gov.bc.ca"]
-                  admin = ["sa-db-migrate"]
-                }
-              }
-            ]
+        databases = [
+          {
+            db_name = "business"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "business-api"
+            database_role_assignment = {
+              readonly  = ["sa-solr-importer", "divya.chandupatla@gov.bc.ca"]
+              readwrite = ["sa-job", "sa-api", "mark.ruffolo@gov.bc.ca", "gunasegaran.nagarajan@gov.bc.ca", "reema.sagpariya@gov.bc.ca"]
+              admin     = ["sa-db-migrate"]
+            }
+          }
+        ]
       },
       {
         instance = "namex-db-test"
-        databases =  [
+        databases = [
           {
-                db_name    = "namex"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "userHQH"
-                database_role_assignment = {
-                  readonly = ["vishnu.preddy@gov.bc.ca", "sa-solr-importer"]
-                  readwrite = ["sa-api", "paul.adeyinka@gov.bc.ca", "gunasegaran.nagarajan@gov.bc.ca", "reema.sagpariya@gov.bc.ca"]
-                  admin = ["sa-db-migrate"]
-                }
-              }
-            ]
+            db_name = "namex"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "userHQH"
+            database_role_assignment = {
+              readonly  = ["vishnu.preddy@gov.bc.ca", "sa-solr-importer"]
+              readwrite = ["sa-api", "paul.adeyinka@gov.bc.ca", "gunasegaran.nagarajan@gov.bc.ca", "reema.sagpariya@gov.bc.ca"]
+              admin     = ["sa-db-migrate"]
+            }
+          }
+        ]
       }
     ]
     service_accounts = {
@@ -792,78 +792,78 @@ test_projects = {
         roles       = ["projects/a083gt-test/roles/rolejob", "roles/cloudsql.client", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
         resource_roles = [
-            {
-              resource = "projects/a083gt-test/topics/business-emailer-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/a083gt-test/topics/business-events-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/a083gt-test/topics/business-filer-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
+          {
+            resource      = "projects/a083gt-test/topics/business-emailer-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/a083gt-test/topics/business-events-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/a083gt-test/topics/business-filer-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
         ]
       },
       sa-api = {
         roles       = ["projects/a083gt-test/roles/roleapi", "roles/iam.serviceAccountTokenCreator", "roles/cloudtasks.enqueuer", "roles/cloudtasks.viewer", "roles/cloudtasks.taskDeleter", "roles/cloudsql.instanceUser", "roles/run.serviceAgent"]
         description = "Service Account for running api services"
         resource_roles = [
-            {
-              resource = "projects/a083gt-test/locations/northamerica-northeast1/services/namex-solr-synonyms-api-test"
-              roles    = ["roles/run.invoker"]
-              resource_type = "cloud_run"
-            },
-            {
-              resource = "projects/a083gt-test/locations/northamerica-northeast1/services/namex-api-test"
-              roles    = ["roles/run.invoker"]
-              resource_type = "cloud_run"
-            },
-            {
-              resource = "projects/a083gt-test/topics/namex-emailer-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-              resource = "projects/a083gt-test/topics/namex-nr-state-test"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            },
-            {
-                  resource = "projects/a083gt-test/topics/business-emailer-test"
-                  roles    = ["roles/pubsub.publisher"]
-                  resource_type = "pubsub_topic"
-              },
-              {
-                resource = "projects/a083gt-test/topics/business-events-test"
-                roles    = ["roles/pubsub.publisher"]
-                resource_type = "pubsub_topic"
-              },
-              {
-                resource = "projects/a083gt-test/topics/business-filer-test"
-                roles    = ["roles/pubsub.publisher"]
-                resource_type = "pubsub_topic"
-              },
-              {
-                resource = "projects/a083gt-test/topics/business-pay-test"
-                roles    = ["roles/pubsub.publisher"]
-                resource_type = "pubsub_topic"
-              },
-              {
-                resource = "projects/c4hnrd-test/topics/doc-api-app-create-record"
-                roles    = ["roles/pubsub.publisher"]
-                resource_type = "pubsub_topic"
-              },
-              {
-                resource = "projects/gtksf3-test/topics/namex-pay-test"
-                roles    = ["roles/pubsub.publisher"]
-                resource_type = "pubsub_topic"
-              }
-          ]
+          {
+            resource      = "projects/a083gt-test/locations/northamerica-northeast1/services/namex-solr-synonyms-api-test"
+            roles         = ["roles/run.invoker"]
+            resource_type = "cloud_run"
+          },
+          {
+            resource      = "projects/a083gt-test/locations/northamerica-northeast1/services/namex-api-test"
+            roles         = ["roles/run.invoker"]
+            resource_type = "cloud_run"
+          },
+          {
+            resource      = "projects/a083gt-test/topics/namex-emailer-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/a083gt-test/topics/namex-nr-state-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/a083gt-test/topics/business-emailer-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/a083gt-test/topics/business-events-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/a083gt-test/topics/business-filer-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/a083gt-test/topics/business-pay-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/c4hnrd-test/topics/doc-api-app-create-record"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          },
+          {
+            resource      = "projects/gtksf3-test/topics/namex-pay-test"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          }
+        ]
       },
       sa-queue = {
         roles       = ["projects/a083gt-test/roles/rolequeue"]
@@ -893,7 +893,7 @@ test_projects = {
   },
   "business-number-hub-test" = {
     project_id = "keee67-test"
-    env = "test"
+    env        = "test"
     iam_bindings = [
       {
         role    = "roles/secretmanager.secretAccessor"
@@ -904,7 +904,7 @@ test_projects = {
         members = ["patty.stemkens@gov.bc.ca"]
       },
       {
-        role    = "projects/keee67-test/roles/roledeveloper"
+        role = "projects/keee67-test/roles/roledeveloper"
         members = [
           "patty.stemkens@gov.bc.ca"
         ]
@@ -913,11 +913,11 @@ test_projects = {
     instances = [
       {
         instance = "bn-hub-test"
-        databases =  [
+        databases = [
           {
-                db_name    = "bni-hub"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "bni-hub"
+            db_name = "bni-hub"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "bni-hub"
           }
         ]
       }
@@ -932,8 +932,8 @@ test_projects = {
         description = ""
         resource_roles = [
           {
-            resource = "projects/keee67-test/serviceAccounts/bn-tasks-run-invoker-test@keee67-test.iam.gserviceaccount.com"
-            roles    = ["roles/iam.serviceAccountAdmin"]
+            resource      = "projects/keee67-test/serviceAccounts/bn-tasks-run-invoker-test@keee67-test.iam.gserviceaccount.com"
+            roles         = ["roles/iam.serviceAccountAdmin"]
             resource_type = "sa_iam_member"
           }
         ]
@@ -943,11 +943,11 @@ test_projects = {
         description = "Service Account to upload raw batch files to the BNI storage bucket"
       },
       pubsub-cloud-run-invoker-test = {
-      description = ""
-      resource_roles = [
+        description = ""
+        resource_roles = [
           {
-            resource = "projects/keee67-test/locations/northamerica-northeast1/services/bn-batch-parser"
-            roles    = ["roles/run.invoker"]
+            resource      = "projects/keee67-test/locations/northamerica-northeast1/services/bn-batch-parser"
+            roles         = ["roles/run.invoker"]
             resource_type = "cloud_run"
           }
         ]
@@ -956,10 +956,10 @@ test_projects = {
   },
   "ppr-test" = {
     project_id = "eogruh-test"
-    env = "test"
+    env        = "test"
     iam_bindings = [
       {
-        role    = "projects/eogruh-test/roles/roledeveloper"
+        role = "projects/eogruh-test/roles/roledeveloper"
         members = [
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
@@ -969,20 +969,20 @@ test_projects = {
         ]
       },
       {
-        role    = "projects/eogruh-test/roles/SRE"
+        role = "projects/eogruh-test/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
         ]
       },
       {
-        role    = "roles/securitycenter.assetsViewer"
-        members = [ 
+        role = "roles/securitycenter.assetsViewer"
+        members = [
           "doug.lovett@gov.bc.ca",
         ]
       },
       {
-        role    = "roles/securitycenter.findingsViewer"
-        members = [ 
+        role = "roles/securitycenter.findingsViewer"
+        members = [
           "doug.lovett@gov.bc.ca",
         ]
       },
@@ -990,26 +990,26 @@ test_projects = {
     instances = [
       {
         instance = "ppr-test-cloudsql"
-        databases =  [
+        databases = [
           {
-                db_name    = "ppr"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "user4ca"
-                database_role_assignment = {
-                  readonly = []
-                  readwrite = ["sa-api", "sa-job"]
-                  admin = ["sa-db-migrate"]
-                }
+            db_name = "ppr"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "user4ca"
+            database_role_assignment = {
+              readonly  = []
+              readwrite = ["sa-api", "sa-job"]
+              admin     = ["sa-db-migrate"]
+            }
           },
           {
-                db_name    = "notify"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "notifyuser"
+            db_name = "notify"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "notifyuser"
           },
           {
-                db_name    = "jobs"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "user4ca"
+            db_name = "jobs"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "user4ca"
           }
         ]
       }
@@ -1044,8 +1044,8 @@ test_projects = {
         description = ""
         resource_roles = [
           {
-            resource = "ppr_documents_test"
-            roles    = ["projects/eogruh-test/roles/ppr_document_storage_test"]
+            resource      = "ppr_documents_test"
+            roles         = ["projects/eogruh-test/roles/ppr_document_storage_test"]
             resource_type = "storage_bucket"
           }
         ]
@@ -1058,38 +1058,38 @@ test_projects = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.admin", "roles/storage.admin"]
         description = "Default service account for ppr cloud services"
         resource_roles = [
-            {
-              resource = "projects/eogruh-test/locations/northamerica-northeast1/services/gotenberg"
-              roles    = ["roles/run.invoker"]
-              resource_type = "cloud_run"
-            },
-            {
-              resource = "projects/c4hnrd-test/topics/doc-api-app-create-record"
-              roles    = ["roles/pubsub.publisher"]
-              resource_type = "pubsub_topic"
-            }
-          ]
+          {
+            resource      = "projects/eogruh-test/locations/northamerica-northeast1/services/gotenberg"
+            roles         = ["roles/run.invoker"]
+            resource_type = "cloud_run"
+          },
+          {
+            resource      = "projects/c4hnrd-test/topics/doc-api-app-create-record"
+            roles         = ["roles/pubsub.publisher"]
+            resource_type = "pubsub_topic"
+          }
+        ]
       }
     }
   },
   "search-test" = {
     project_id = "k973yf-test"
-    env = "test"
+    env        = "test"
     iam_bindings = [
       {
-        role    = "projects/k973yf-test/roles/roledeveloper"
+        role = "projects/k973yf-test/roles/roledeveloper"
         members = [
           "janis.rogers@gov.bc.ca",
         ]
       },
       {
-        role    = "projects/k973yf-test/roles/SRE"
+        role = "projects/k973yf-test/roles/SRE"
         members = [
           "kial.jinnah@gov.bc.ca",
         ]
       },
       {
-        role    = "projects/k973yf-test/roles/roledeveloper"
+        role = "projects/k973yf-test/roles/roledeveloper"
         members = [
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -1101,18 +1101,18 @@ test_projects = {
     instances = [
       {
         instance = "search-db-test"
-        databases =  [
-              {
-                db_name    = "search"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "testUser"
-                database_role_assignment = {
-                  readonly = []
-                  readwrite = ["sa-api", "paul.adeyinka@gov.bc.ca"]
-                  admin = ["sa-db-migrate"]
-                }
-              }
-            ]
+        databases = [
+          {
+            db_name = "search"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "testUser"
+            database_role_assignment = {
+              readonly  = []
+              readwrite = ["sa-api", "paul.adeyinka@gov.bc.ca"]
+              admin     = ["sa-db-migrate"]
+            }
+          }
+        ]
       }
     ]
     service_accounts = {
@@ -1120,16 +1120,16 @@ test_projects = {
         roles       = ["roles/compute.admin"]
         description = "Service account used by WIF POC"
         external_roles = [{
-          roles        = ["roles/compute.imageUser"]
-          project_id  = "k973yf-dev"
+          roles      = ["roles/compute.imageUser"]
+          project_id = "k973yf-dev"
         }]
         resource_roles = [
-            {
-              resource = "projects/k973yf-test/serviceAccounts/107836257140-compute@developer.gserviceaccount.com"
-              roles    = ["roles/iam.serviceAccountUser"]
-              resource_type = "sa_iam_member"
-            }
-          ]
+          {
+            resource      = "projects/k973yf-test/serviceAccounts/107836257140-compute@developer.gserviceaccount.com"
+            roles         = ["roles/iam.serviceAccountUser"]
+            resource_type = "sa_iam_member"
+          }
+        ]
       },
       sa-db-migrate = {
         roles       = ["projects/k973yf-test/roles/roledbmigrate"]
@@ -1155,10 +1155,10 @@ test_projects = {
   },
   "web-presence-test" = {
     project_id = "yfthig-test"
-    env = "test"
+    env        = "test"
     iam_bindings = [
       {
-        role    = "projects/yfthig-test/roles/roledeveloper"
+        role = "projects/yfthig-test/roles/roledeveloper"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
@@ -1182,7 +1182,7 @@ test_projects = {
         ]
       },
       {
-        role    = "projects/yfthig-test/roles/SRE"
+        role = "projects/yfthig-test/roles/SRE"
         members = [
           "omid.x.zamani@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
@@ -1190,14 +1190,14 @@ test_projects = {
         ]
       },
       {
-        role    = "roles/firebase.admin"
+        role = "roles/firebase.admin"
         members = [
           "eve.deng@gov.bc.ca",
           "steven.chen@gov.bc.ca",
         ]
       },
       {
-        role    = "roles/securitycenter.assetsViewer"
+        role = "roles/securitycenter.assetsViewer"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
@@ -1214,7 +1214,7 @@ test_projects = {
         ]
       },
       {
-        role    = "roles/securitycenter.findingsViewer"
+        role = "roles/securitycenter.findingsViewer"
         members = [
           "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
@@ -1260,10 +1260,10 @@ test_projects = {
   },
   "strr-test" = {
     project_id = "bcrbk9-test"
-    env = "test"
+    env        = "test"
     iam_bindings = [
       {
-        role    = "projects/bcrbk9-test/roles/roledeveloper"
+        role = "projects/bcrbk9-test/roles/roledeveloper"
         members = [
           "dietrich.wolpert@gov.bc.ca",
           "dima.kostenyuk@gov.bc.ca",
@@ -1280,14 +1280,14 @@ test_projects = {
         members = ["andriy.bolyachevets@gov.bc.ca"]
       },
       {
-        role    = "roles/securitycenter.assetsViewer"
+        role = "roles/securitycenter.assetsViewer"
         members = [
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
         ]
       },
       {
-        role    = "roles/securitycenter.findingsViewer"
+        role = "roles/securitycenter.findingsViewer"
         members = [
           "kial.jinnah@gov.bc.ca",
           "max.wardle@gov.bc.ca",
@@ -1297,18 +1297,18 @@ test_projects = {
     instances = [
       {
         instance = "strr-db-test"
-        databases =  [
+        databases = [
           {
-                db_name    = "strr-db"
-                roles      = ["readonly", "readwrite", "admin"]
-                owner      = "strr"
-                database_role_assignment = {
-                  readonly = ["sa-job"]
-                  readwrite = ["sa-api", "jimmy.palelil@gov.bc.ca"]
-                  admin = ["sa-db-migrate"]
-                }
-              }
-            ]
+            db_name = "strr-db"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "strr"
+            database_role_assignment = {
+              readonly  = ["sa-job"]
+              readwrite = ["sa-api", "jimmy.palelil@gov.bc.ca"]
+              admin     = ["sa-db-migrate"]
+            }
+          }
+        ]
       }
     ]
 
@@ -1337,16 +1337,16 @@ test_projects = {
   },
   "api-gateway-test" = {
     project_id = "okagqp-test"
-    env = "test"
+    env        = "test"
     iam_bindings = [
       {
-        role    = "projects/okagqp-test/roles/SRE"
+        role = "projects/okagqp-test/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
         ]
       },
       {
-        role    = "roles/apigee.admin"
+        role = "roles/apigee.admin"
         members = [
           "doug.lovett@gov.bc.ca",
         ]

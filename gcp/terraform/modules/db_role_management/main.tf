@@ -38,7 +38,7 @@ resource "google_storage_bucket_iam_member" "cloudsql_bucket_access" {
 }
 
 data "google_service_account_id_token" "invoker" {
-  target_audience = var.cloud_function_url
+  target_audience        = var.cloud_function_url
   target_service_account = var.service_account_email
 }
 
@@ -57,20 +57,20 @@ resource "null_resource" "apply_roles" {
       var.role_definitions[role].md5hash
     ]))
     instance_name = "${var.project_id}:${var.region}:${each.value.instance_name}"
-    db_name      = each.value.db_name
-    project_id   = var.project_id
-    gcs_uris     = jsonencode({
+    db_name       = each.value.db_name
+    project_id    = var.project_id
+    gcs_uris = jsonencode({
       for role in each.value.roles :
       role => var.role_definitions[role].gcs_uri
     })
     all_roles = join(",", each.value.roles)
   }
 
-provisioner "local-exec" {
-  when    = create
-  command = <<-EOT
+  provisioner "local-exec" {
+    when    = create
+    command = <<-EOT
     set -ex
-    %{ for role in split(",", self.triggers.all_roles) ~}
+    %{for role in split(",", self.triggers.all_roles)~}
     echo "Applying role: ${role}"
 
     PAYLOAD=$(jq -n \
@@ -95,9 +95,9 @@ provisioner "local-exec" {
       --fail 2>&1)
 
     echo "$OUTPUT"
-    %{ endfor ~}
+    %{endfor~}
   EOT
-}
+  }
 
   provisioner "local-exec" {
     when    = destroy

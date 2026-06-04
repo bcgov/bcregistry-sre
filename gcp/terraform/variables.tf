@@ -15,15 +15,15 @@ variable "default_principals" {
 
 variable "dev_projects" {
   type = map(object({
-    project_id       = string
-    env              = string
+    project_id = string
+    env        = string
     instances = optional(list(object({
       instance = string
       databases = list(object({
-        db_name    = string
-        roles      = list(string)
-        owner      = optional(string)
-        agent      = optional(string)
+        db_name = string
+        roles   = list(string)
+        owner   = optional(string)
+        agent   = optional(string)
         database_role_assignment = optional(object({
           readonly  = optional(list(string), [])
           readwrite = optional(list(string), [])
@@ -32,23 +32,23 @@ variable "dev_projects" {
       }))
     })), [])
     service_accounts = optional(map(object({
-      roles        = optional(list(string), [])
+      roles = optional(list(string), [])
       external_roles = optional(list(object({
-        roles        = list(string)
+        roles      = list(string)
         project_id = string
       })), [])
       resource_roles = optional(list(object({
-        resource = string
-        roles    = list(string)
+        resource      = string
+        roles         = list(string)
         resource_type = string
       })), [])
-      description  = optional(string, "Managed by Terraform")
+      description = optional(string, "Managed by Terraform")
     })), {})
 
     custom_roles = optional(map(object({
-      title = string
-      permissions  = list(string)
-      description  = optional(string, "Custom role managed by Terraform")
+      title       = string
+      permissions = list(string)
+      description = optional(string, "Custom role managed by Terraform")
     })), {})
 
     pam_bindings = optional(list(object({
@@ -63,9 +63,9 @@ variable "dev_projects" {
     })), [])
 
     resource_iam_bindings = optional(list(object({
-      resource = string
-      roles    = list(string)
-      members  = list(string)
+      resource      = string
+      roles         = list(string)
+      members       = list(string)
       resource_type = string
     })), [])
   }))
@@ -74,15 +74,15 @@ variable "dev_projects" {
 
 variable "test_projects" {
   type = map(object({
-    project_id       = string
-    env              = string
+    project_id = string
+    env        = string
     instances = optional(list(object({
       instance = string
       databases = list(object({
-        db_name    = string
-        roles      = list(string)
-        owner      = optional(string)
-        agent      = optional(string)
+        db_name = string
+        roles   = list(string)
+        owner   = optional(string)
+        agent   = optional(string)
         database_role_assignment = optional(object({
           readonly  = optional(list(string), [])
           readwrite = optional(list(string), [])
@@ -91,23 +91,23 @@ variable "test_projects" {
       }))
     })), [])
     service_accounts = optional(map(object({
-      roles        = optional(list(string), [])
+      roles = optional(list(string), [])
       external_roles = optional(list(object({
-        roles        = list(string)
+        roles      = list(string)
         project_id = string
       })), [])
       resource_roles = optional(list(object({
-        resource = string
-        roles    = list(string)
+        resource      = string
+        roles         = list(string)
         resource_type = string
       })), [])
-      description  = optional(string, "Managed by Terraform")
+      description = optional(string, "Managed by Terraform")
     })), {})
 
     custom_roles = optional(map(object({
-      title = string
-      permissions  = list(string)
-      description  = optional(string, "Custom role managed by Terraform")
+      title       = string
+      permissions = list(string)
+      description = optional(string, "Custom role managed by Terraform")
     })), {})
 
     pam_bindings = optional(list(object({
@@ -122,9 +122,9 @@ variable "test_projects" {
     })), [])
 
     resource_iam_bindings = optional(list(object({
-      resource = string
-      roles    = list(string)
-      members  = list(string)
+      resource      = string
+      roles         = list(string)
+      members       = list(string)
       resource_type = string
     })), [])
   }))
@@ -133,15 +133,15 @@ variable "test_projects" {
 
 variable "prod_projects" {
   type = map(object({
-    project_id       = string
-    env              = string
+    project_id = string
+    env        = string
     instances = optional(list(object({
       instance = string
       databases = list(object({
-        db_name    = string
-        roles      = list(string)
-        owner      = optional(string)
-        agent      = optional(string)
+        db_name = string
+        roles   = list(string)
+        owner   = optional(string)
+        agent   = optional(string)
         database_role_assignment = optional(object({
           readonly  = optional(list(string), [])
           readwrite = optional(list(string), [])
@@ -150,23 +150,23 @@ variable "prod_projects" {
       }))
     })), [])
     service_accounts = optional(map(object({
-      roles        = optional(list(string), [])
+      roles = optional(list(string), [])
       external_roles = optional(list(object({
-        roles        = list(string)
+        roles      = list(string)
         project_id = string
       })), [])
       resource_roles = optional(list(object({
-        resource = string
-        roles    = list(string)
+        resource      = string
+        roles         = list(string)
         resource_type = string
       })), [])
-      description  = optional(string, "Managed by Terraform")
+      description = optional(string, "Managed by Terraform")
     })), {})
 
     custom_roles = optional(map(object({
-      title = string
-      permissions  = list(string)
-      description  = optional(string, "Custom role managed by Terraform")
+      title       = string
+      permissions = list(string)
+      description = optional(string, "Custom role managed by Terraform")
     })), {})
 
     pam_bindings = optional(list(object({
@@ -181,9 +181,9 @@ variable "prod_projects" {
     })), [])
 
     resource_iam_bindings = optional(list(object({
-      resource = string
-      roles    = list(string)
-      members  = list(string)
+      resource      = string
+      roles         = list(string)
+      members       = list(string)
       resource_type = string
     })), [])
   }))
@@ -192,15 +192,15 @@ variable "prod_projects" {
 
 variable "other_projects" {
   type = map(object({
-    project_id       = string
-    env              = string
+    project_id = string
+    env        = string
     instances = optional(list(object({
       instance = string
       databases = list(object({
-        db_name    = string
-        roles      = list(string)
-        owner      = optional(string)
-        agent      = optional(string)
+        db_name = string
+        roles   = list(string)
+        owner   = optional(string)
+        agent   = optional(string)
         database_role_assignment = optional(object({
           readonly  = optional(list(string), [])
           readwrite = optional(list(string), [])
@@ -209,23 +209,23 @@ variable "other_projects" {
       }))
     })), [])
     service_accounts = optional(map(object({
-      roles        = optional(list(string), [])
+      roles = optional(list(string), [])
       external_roles = optional(list(object({
-        roles        = list(string)
+        roles      = list(string)
         project_id = string
       })), [])
       resource_roles = optional(list(object({
-        resource = string
-        roles    = list(string)
+        resource      = string
+        roles         = list(string)
         resource_type = string
       })), [])
-      description  = optional(string, "Managed by Terraform")
+      description = optional(string, "Managed by Terraform")
     })), {})
 
     custom_roles = optional(map(object({
-      title = string
-      permissions  = list(string)
-      description  = optional(string, "Custom role managed by Terraform")
+      title       = string
+      permissions = list(string)
+      description = optional(string, "Custom role managed by Terraform")
     })), {})
 
     pam_bindings = optional(list(object({
@@ -240,9 +240,9 @@ variable "other_projects" {
     })), [])
 
     resource_iam_bindings = optional(list(object({
-      resource = string
-      roles    = list(string)
-      members  = list(string)
+      resource      = string
+      roles         = list(string)
+      members       = list(string)
       resource_type = string
     })), [])
   }))
@@ -258,9 +258,9 @@ variable "mpf_projects" {
 
 variable "global_custom_roles" {
   type = map(object({
-    title = string
-    permissions  = list(string)
-    description  = optional(string, "Custom role managed by Terraform")
+    title       = string
+    permissions = list(string)
+    description = optional(string, "Custom role managed by Terraform")
   }))
   default = {}
 }
@@ -287,9 +287,9 @@ variable "environments" {
       admin     = optional(list(string), [])
     }), {})
     environment_custom_roles = optional(map(object({
-      title = string
-      permissions  = list(string)
-      description  = optional(string, "Custom role managed by Terraform")
+      title       = string
+      permissions = list(string)
+      description = optional(string, "Custom role managed by Terraform")
     })), {})
     pam_bindings = optional(list(object({
       role       = string
@@ -303,9 +303,9 @@ variable "environments" {
     })), [])
 
     resource_iam_bindings = optional(list(object({
-      resource = string
-      roles    = list(string)
-      members  = list(string)
+      resource      = string
+      roles         = list(string)
+      members       = list(string)
       resource_type = string
     })), [])
   }))
