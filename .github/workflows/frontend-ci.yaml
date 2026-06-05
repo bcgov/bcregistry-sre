@@ -58,7 +58,7 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
           version: ${{ matrix.pnpm-version }}
@@ -74,14 +74,14 @@ jobs:
         shell: bash
       - name: Use Node.js ${{ matrix.node-version }} (with cache)
         if: steps.check_pnpm_lock.outputs.exists == 'true'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
           cache-dependency-path: ${{ inputs.working_directory }}/pnpm-lock.yaml
       - name: Use Node.js ${{ matrix.node-version }} (no cache)
         if: steps.check_pnpm_lock.outputs.exists == 'false'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
@@ -116,7 +116,7 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
           version: ${{ matrix.pnpm-version }}
@@ -132,14 +132,14 @@ jobs:
         shell: bash
       - name: Use Node.js ${{ matrix.node-version }} (with cache)
         if: steps.check_pnpm_lock.outputs.exists == 'true'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
           cache-dependency-path: ${{ inputs.working_directory }}/pnpm-lock.yaml
       - name: Use Node.js ${{ matrix.node-version }} (no cache)
         if: steps.check_pnpm_lock.outputs.exists == 'false'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
       - name: Debug files
@@ -190,7 +190,7 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v4
         name: Install pnpm
         with:
           version: ${{ matrix.pnpm-version }}
@@ -206,14 +206,14 @@ jobs:
         shell: bash
       - name: Use Node.js ${{ matrix.node-version }} (with cache)
         if: steps.check_pnpm_lock.outputs.exists == 'true'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: "pnpm"
           cache-dependency-path: ${{ inputs.working_directory }}/pnpm-lock.yaml
       - name: Use Node.js ${{ matrix.node-version }} (no cache)
         if: steps.check_pnpm_lock.outputs.exists == 'false'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
       - name: Install dependencies
@@ -249,7 +249,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
@@ -275,7 +275,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
@@ -317,7 +317,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
