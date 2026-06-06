@@ -1262,6 +1262,26 @@ test_projects = {
         ]
       },
       {
+        role    = "roles/monitoring.viewer"
+        members = [
+          "dima.kostenyuk@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
+          "karim.jazzar@gov.bc.ca",
+          "mike.huffman@gov.bc.ca",
+          "olga.potiagalova@gov.bc.ca",
+        ]
+      },
+      {
+        role    = "roles/logging.viewer"
+        members = [
+          "dima.kostenyuk@gov.bc.ca",
+          "jimmy.palelil@gov.bc.ca",
+          "karim.jazzar@gov.bc.ca",
+          "mike.huffman@gov.bc.ca",
+          "olga.potiagalova@gov.bc.ca",
+        ]
+      },
+      {
         role    = "roles/cloudsql.instanceUser"
         members = ["andriy.bolyachevets@gov.bc.ca"]
       },
