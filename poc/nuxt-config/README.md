@@ -5,6 +5,10 @@ A starter template showcasing dynamic, environment-agnostic runtime configuratio
 Instead of embedding environment-specific values at build-time, the app retrieves and validates its configuration at startup from a central API endpoint, leveraging client-side caching (`localStorage`) and a shared Zod schema. This enables a **"build once, run anywhere"** workflow across development, staging, production, and native mobile (Capacitor) environments.
 
 ---
+### RFC
+The RFC for this POC is here https://github.com/bcgov/connect/discussions/3
+
+---
 
 ## Architecture & Bootstrapping Flow
 
