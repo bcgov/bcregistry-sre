@@ -404,13 +404,13 @@ dev_projects = {
         ]
       },
       {
-        resource      = "projects/gtksf3-dev/serviceAccounts/sa-auth-db-standby-759@gtksf3-dev.iam.gserviceaccount.com"
+        resource      = "projects/gtksf3-dev/serviceAccounts/sa-job@gtksf3-dev.iam.gserviceaccount.com"
         resource_type = "sa_iam_member"
         roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
         members = [
-          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f28a5b83-97ff-4b15-83d4-5094e3f1f369"
-        ]
-      },
+          # WIF OpenShift Namespace: gtksf3-dev
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f28a5b83-97ff-4b15-83d4-5094e3f1f369"        ]
+      }
     ]
     instances = [
       {
@@ -422,7 +422,7 @@ dev_projects = {
             owner   = "auth"
             database_role_assignment = {
               readonly  = ["noor.nayeem@gov.bc.ca", "divya.chandupatla@gov.bc.ca"]
-              readwrite = ["sa-api", "anish.batra@gov.bc.ca"]
+              readwrite = ["sa-api", "anish.batra@gov.bc.ca", "sa-job"]
               admin     = ["sa-db-migrate"]
             }
           }
@@ -461,7 +461,7 @@ dev_projects = {
         ]
       },
       sa-job = {
-        roles       = ["projects/gtksf3-dev/roles/rolejob", "roles/cloudsql.instanceUser"]
+        roles       = ["projects/gtksf3-dev/roles/rolejob", "roles/cloudsql.instanceUser", "roles/cloudsql.client"]
         description = "Service Account for running job services"
         resource_roles = [
           {
