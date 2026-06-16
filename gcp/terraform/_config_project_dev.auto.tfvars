@@ -104,9 +104,6 @@ dev_projects = {
       {
         role = "projects/c4hnrd-dev/roles/SRE"
         members = [
-          "eve.deng@gov.bc.ca",
-          "meng.dong@gov.bc.ca",
-          "steven.chen@gov.bc.ca",
           "doug.lovett@gov.bc.ca"
         ]
       },
