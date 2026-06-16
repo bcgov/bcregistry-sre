@@ -1,0 +1,26 @@
+# Ignore git directory
+.git
+.gitignore
+
+# Ignore python virtual environments and dependencies
+.venv
+venv
+env
+*.venv
+
+# Ignore python caches and compiled code
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore local scripts and documentation
+scripts/
+docs/
+spec/
+README.md
+
+# Ignore pytest caches
+.pytest_cache/
+.coverage
+htmlcov/

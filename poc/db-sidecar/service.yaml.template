@@ -1,0 +1,29 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: flask-fast-iam-service
+  namespace: ${PROJECT_ID}
+spec:
+  template:
+    spec:
+      # Ensure this Service Account has 'Cloud SQL Instance User' & 'Cloud SQL Client' roles
+      serviceAccountName: sa-cloud-run-db-user@${PROJECT_ID}.iam.gserviceaccount.com
+      containers:
+        # --- Container 1: The Ingress Flask App ---
+        - image: gcr.io/${PROJECT_ID}/flask-app:latest
+          name: flask-app
+          env:
+            - name: DB_URL
+              # Notice: Username is the SA prefix, no password, targets the proxy container on localhost
+              value: "postgresql+psycopg2://sa-cloud-run-db-user@${PROJECT_ID}.iam@127.0.0.1:5432/docs"
+          ports:
+            - containerPort: 8080
+
+        # --- Container 2: The High-Performance Auth Proxy Sidecar ---
+        - image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:latest
+          name: cloud-sql-proxy
+          args:
+            - "--address=0.0.0.0"
+            - "--port=5432"
+            - "--auto-iam-authn"  # Handles token acquisition and refresh automatically
+            - "${CONNECTION_NAME}"
