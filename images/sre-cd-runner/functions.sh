@@ -58,12 +58,14 @@ tag_image() {
     gcloud artifacts docker tags add "${image_path}:${source_tag}" "${image_path}:${target_tag}" 2>/dev/null
 }
 
-# Function to build and push Docker image
+# Function to build and push Docker image.
+# Optional 5th arg `build_target` selects a specific Dockerfile stage (multi-stage builds).
 build_and_push_image() {
     local image_path="$1"
     local image_package_path="$2"
     local short_sha="$3"
     local target_tag="$4"
+    local build_target="${5:-}"
 
     if [[ -z "${short_sha}" || -z "${image_path}" || -z "${image_package_path}" ]]; then
         echo "❌ short_sha, IMAGE_PATH or IMAGE_PACKAGE_PATH is not set." >&2
@@ -71,9 +73,32 @@ build_and_push_image() {
     fi
 
     if ! tag_exists "${short_sha}" "${image_path}" "${image_package_path}"; then
-        echo "🔨 Building and pushing Docker image: ${short_sha}"
+        echo "🔨 Building and pushing Docker image: ${short_sha}${build_target:+ (target=${build_target})}"
         docker --version
-        docker build -t "${image_path}:${short_sha}" --cache-from "${image_path}:latest" .
+        local -a base_args=(build -t "${image_path}:${short_sha}")
+        # Force target platform when DOCKER_BUILD_PLATFORM is set (e.g. linux/amd64
+        # when building from Apple Silicon for Cloud Build VMs).
+        [[ -n "${DOCKER_BUILD_PLATFORM:-}" ]] && base_args+=(--platform "${DOCKER_BUILD_PLATFORM}")
+        [[ -n "${build_target}" ]] && base_args+=(--target "${build_target}")
+
+        # Try with --cache-from when :latest exists in the registry. Some
+        # Docker-compatible CLIs (Apple `container`, certain Buildx-only
+        # wrappers) reject various --cache-from forms; fall back to a plain
+        # build in that case so the runner image can always be built.
+        local built=0
+        if tag_exists "latest" "${image_path}" "${image_package_path}"; then
+            if docker "${base_args[@]}" --cache-from "type=registry,ref=${image_path}:latest" .; then
+                built=1
+            elif docker "${base_args[@]}" --cache-from "${image_path}:latest" .; then
+                built=1
+            else
+                echo "⚠️  --cache-from not supported by this docker CLI, retrying without cache." >&2
+            fi
+        fi
+        if (( built == 0 )); then
+            docker "${base_args[@]}" .
+        fi
+
         docker push "${image_path}:${short_sha}"
         tag_image "${short_sha}" "latest" "${image_path}"
     else
@@ -84,6 +109,77 @@ build_and_push_image() {
     if [[ -n "${target_tag}" && "${short_sha}" != "${target_tag}" ]]; then
         tag_image "${short_sha}" "${target_tag}" "${image_path}"
     fi
+}
+
+# Run a fresh build OR promote an image from another environment, including
+# prod-tag archival. Mirrors the per-env handling previously inlined in
+# cloudbuild.yaml so it can be reused for the main app and any auxiliary images.
+build_or_promote_image() {
+    local image_path="$1"
+    local image_package_path="$2"
+    local short_sha="$3"
+    local deployment_env="$4"
+    local deployment_env_from="$5"
+    local build_target="${6:-}"
+
+    if [[ -z "${image_path}" || -z "${image_package_path}" || -z "${short_sha}" || -z "${deployment_env}" ]]; then
+        echo "❌ image_path, image_package_path, short_sha or deployment_env is not set." >&2
+        return 1
+    fi
+
+    # Archive the existing 'prod' tag with a dated alias before retagging.
+    if [[ "${deployment_env}" == "prod" ]] && tag_exists "prod" "${image_path}" "${image_package_path}"; then
+        tag_image "prod" "prod-$(date +%F)" "${image_path}"
+    fi
+
+    if [[ -z "${deployment_env_from}" || "${deployment_env_from}" == "${deployment_env}" ]]; then
+        build_and_push_image "${image_path}" "${image_package_path}" "${short_sha}" "${deployment_env}" "${build_target}"
+    else
+        tag_image "${deployment_env_from}" "${deployment_env}" "${image_path}"
+    fi
+}
+
+# Detect a multi-stage Dockerfile stage whose name contains 'migration'
+# (e.g. `FROM ... AS migration`, `AS db-migration`, `AS migration-runner`).
+# Echoes the first matching stage name, or nothing if none / not multi-stage.
+detect_migration_stage() {
+    local dockerfile="${1:-Dockerfile}"
+    [[ -f "${dockerfile}" ]] || return 0
+
+    local from_count
+    from_count=$(grep -cE '^[[:space:]]*FROM[[:space:]]' "${dockerfile}" || true)
+    (( from_count >= 2 )) || return 0
+
+    # Echo the first matching stage name, or nothing if none. The `|| true`
+    # is required because under `set -euo pipefail` a non-matching grep
+    # exits 1 and would kill the caller (and the entire build) silently.
+    grep -iE '^[[:space:]]*FROM[[:space:]].+[[:space:]]+AS[[:space:]]+[A-Za-z0-9_-]*migration[A-Za-z0-9_-]*' "${dockerfile}" \
+        | sed -E 's/.*[[:space:]]+[Aa][Ss][[:space:]]+([A-Za-z0-9_-]+).*/\1/' \
+        | head -n1 \
+        || true
+}
+
+# If the repo's Dockerfile is multi-stage and contains a stage whose name
+# contains 'migration', build/promote a parallel image at
+# <main-image>-migration following the same fresh-build / promote / prod-archive
+# pattern as the main image.
+build_and_push_migration_image_if_present() {
+    local image_path="$1"
+    local image_package_path="$2"
+    local short_sha="$3"
+    local deployment_env="$4"
+    local deployment_env_from="$5"
+
+    local stage
+    stage=$(detect_migration_stage "Dockerfile")
+    [[ -n "${stage}" ]] || return 0
+
+    local migration_image_path="${image_path}-migration"
+    local migration_image_package_path="${image_package_path}-migration"
+
+    echo "🧱 Detected migration stage '${stage}' — building $(basename "${migration_image_path}")"
+    build_or_promote_image "${migration_image_path}" "${migration_image_package_path}" \
+        "${short_sha}" "${deployment_env}" "${deployment_env_from}" "${stage}"
 }
 
 merge_vaults() {

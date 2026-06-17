@@ -22,6 +22,7 @@ Usage:
 import argparse
 import subprocess
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
 
@@ -78,8 +79,6 @@ GROUPS = sorted({t[0] for t in TASKS})
 def run_script(script_path: Path, extra_argv: list[str]) -> tuple[bool, float]:
     """Run a script as a subprocess, streaming its output. Returns (success, elapsed_s)."""
     cmd = [
-        sys.executable,
-        "-m",
         "uv",
         "run",
         "--project",

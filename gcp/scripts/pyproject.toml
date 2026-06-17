@@ -16,6 +16,8 @@ dependencies = [
     "jinja2",
     # Web scraping
     "beautifulsoup4",
+    # YAML parsing (pnpm-workspace.yaml etc.)
+    "pyyaml",
     # Env & utilities
     "python-dotenv",
 ]

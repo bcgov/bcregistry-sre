@@ -1,5 +1,5 @@
-FROM docker:28.1.1 as static-docker-source
-FROM google/cloud-sdk:556.0.0-alpine
+FROM docker:29.5.3 AS static-docker-source
+FROM google/cloud-sdk:572.0.0-alpine
 
 COPY --from=static-docker-source /usr/local/bin/docker /usr/local/bin/docker
 COPY --from=static-docker-source /usr/local/libexec/docker/cli-plugins/docker-buildx /usr/local/libexec/docker/cli-plugins/docker-buildx
@@ -13,8 +13,9 @@ RUN echo "https://downloads.1password.com/linux/alpinelinux/stable/" >> /etc/apk
     && apk add --no-cache 1password-cli \
     && op --version
 
-# Install yq
-RUN wget -q https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O /usr/local/bin/yq \
+# Install yq (pin for reproducible builds)
+ARG YQ_VERSION=v4.53.3
+RUN wget -q "https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64" -O /usr/local/bin/yq \
     && chmod +x /usr/local/bin/yq \
     && yq --version
 
