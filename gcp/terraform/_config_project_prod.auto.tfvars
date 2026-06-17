@@ -745,10 +745,6 @@ prod_projects = {
         roles       = ["roles/iam.serviceAccountUser", "roles/storage.objectAdmin", "roles/storage.objectCreator", "roles/storage.objectViewer"]
         description = "Service Account for syncing anon extension masking rule files to auth-db dump bucket"
       },
-      sa-auth-db-standby = {
-        roles       = ["roles/cloudsql.client", "roles/cloudsql.viewer"]
-        description = "Service account used to backup auth db in OpenShift Gold Cluster, as part of disaster recovery plan."
-      }
     }
     pam_bindings = [
       {
@@ -938,6 +934,15 @@ prod_projects = {
         roles         = ["roles/iam.serviceAccountUser"]
         resource_type = "sa_iam_member"
         members       = ["andriy.bolyachevets@gov.bc.ca"]
+      },
+      {
+        resource      = "projects/a083gt-prod/serviceAccounts/sa-job@a083gt-prod.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+        members = [
+          # WIF OpenShift Namespace: d2b3d8-prod
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/7126bc61-83b7-43b2-b7cb-a53243777654"
+        ]
       },
     ]
     instances = [
