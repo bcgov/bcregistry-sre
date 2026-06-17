@@ -1,6 +1,6 @@
 steps:
   # Step 0: Redeploy the service with the updated environment variables.
-  - name: "northamerica-northeast1-docker.pkg.dev/c4hnrd-tools/cicd-repo/sre-cd-runner:${_CD_RUNNER_VERSION}"
+  - name: "northamerica-northeast1-docker.pkg.dev/c4hnrd-tools/cicd-repo/sre-cd-runner:1.1.2"
     secretEnv: ["OP_CONNECT_HOST", "OP_CONNECT_TOKEN"]
     script: |
       #!/usr/bin/env bash
