@@ -405,7 +405,7 @@ dev_projects = {
         resource_type = "sa_iam_member"
         roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
         members = [
-          # WIF OpenShift Namespace: gtksf3-dev
+          # WIF OpenShift Namespace: d2b3d8-dev
           "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f28a5b83-97ff-4b15-83d4-5094e3f1f369"        ]
       }
     ]
@@ -565,10 +565,6 @@ dev_projects = {
           }
         ]
 
-      },
-      sa-auth-db-standby-759 = {
-        roles       = ["roles/cloudsql.client", "roles/cloudsql.viewer"]
-        description = "Service account used to backup auth db in OpenShift Gold Cluster, as part of disaster recovery plan."
       },
       sre-role-testing-account = {
         roles       = ["projects/gtksf3-dev/roles/SRE"]
@@ -830,10 +826,11 @@ dev_projects = {
         members       = ["andriy.bolyachevets@gov.bc.ca"]
       },
       {
-        resource      = "projects/a083gt-dev/serviceAccounts/sa-lear-db-standby@a083gt-dev.iam.gserviceaccount.com"
+        resource      = "projects/a083gt-dev/serviceAccounts/sa-job@a083gt-dev.iam.gserviceaccount.com"
         resource_type = "sa_iam_member"
         roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
         members = [
+          # WIF OpenShift Namespace: d2b3d8-dev
           "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f28a5b83-97ff-4b15-83d4-5094e3f1f369"
         ]
       },
@@ -992,10 +989,6 @@ dev_projects = {
         roles       = ["roles/run.invoker"]
         description = ""
       },
-      sa-lear-db-standby = {
-        roles       = ["roles/cloudsql.client", "roles/cloudsql.viewer"]
-        description = ""
-      },
       sa-bni-file-upload-dev = {
         roles       = ["roles/storage.objectCreator"]
         description = "Service Account to upload raw batch files to the BNI storage bucket"
@@ -1108,15 +1101,7 @@ dev_projects = {
         resource_type = "artifact_registry"
         roles         = ["roles/artifactregistry.reader"]
         members       = ["bcregistry-sre@gov.bc.ca"]
-      },
-      {
-        resource      = "projects/eogruh-dev/serviceAccounts/sa-ppr-db-standby@eogruh-dev.iam.gserviceaccount.com"
-        resource_type = "sa_iam_member"
-        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
-        members = [
-          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f28a5b83-97ff-4b15-83d4-5094e3f1f369"
-        ]
-      },
+      }
     ]
     instances = [
       {
@@ -1155,10 +1140,6 @@ dev_projects = {
       sa-queue = {
         roles       = ["projects/eogruh-dev/roles/rolequeue"]
         description = "Service Account for running queue services"
-      },
-      sa-ppr-db-standby = {
-        roles       = ["roles/cloudsql.client", "roles/cloudsql.viewer"]
-        description = ""
       },
       ppr-dev-sa = {
         roles       = ["roles/containerregistry.ServiceAgent", "roles/iam.serviceAccountTokenCreator", "roles/pubsub.admin", "roles/pubsub.serviceAgent", "roles/storage.admin", "roles/storage.objectCreator"]

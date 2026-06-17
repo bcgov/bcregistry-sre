@@ -342,7 +342,7 @@ test_projects = {
         ]
       },
       {
-        resource      = "projects/gtksf3-test/serviceAccounts/sa-auth-db-standby@gtksf3-test.iam.gserviceaccount.com"
+        resource      = "projects/gtksf3-test/serviceAccounts/sa-job@gtksf3-test.iam.gserviceaccount.com"
         resource_type = "sa_iam_member"
         roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
         members = [
@@ -401,7 +401,7 @@ test_projects = {
         description = "Service Account for running db alembic migration job"
       },
       sa-job = {
-        roles       = ["projects/gtksf3-test/roles/rolejob", "roles/cloudsql.instanceUser"]
+        roles       = ["projects/gtksf3-test/roles/rolejob", "roles/cloudsql.instanceUser", "roles/cloudsql.client"]
         description = "Service Account for running job services"
         resource_roles = [
           {
@@ -486,10 +486,6 @@ test_projects = {
         roles       = ["projects/gtksf3-test/roles/rolequeue"]
         description = "Service Account for running queue services"
       },
-      sa-auth-db-standby = {
-        roles       = ["roles/cloudsql.client", "roles/cloudsql.viewer"]
-        description = "Service account used to backup auth db in OpenShift Gold Cluster, as part of disaster recovery plan."
-      }
     }
   },
   "bor-test" = {
@@ -729,7 +725,7 @@ test_projects = {
     ]
     resource_iam_bindings = [
       {
-        resource      = "projects/a083gt-test/serviceAccounts/sa-lear-db-standby@a083gt-test.iam.gserviceaccount.com"
+        resource      = "projects/a083gt-test/serviceAccounts/sa-job@a083gt-test.iam.gserviceaccount.com"
         resource_type = "sa_iam_member"
         roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
         members = [
@@ -881,10 +877,6 @@ test_projects = {
       business-ar-job-proc-paid-test = {
         roles       = ["roles/run.invoker"]
         description = "submit AR back to the SOR"
-      },
-      sa-lear-db-standby = {
-        roles       = ["roles/cloudsql.client", "roles/cloudsql.viewer"]
-        description = ""
       },
       sa-db-migrate = {
         roles       = ["projects/a083gt-test/roles/roledbmigrate"]
