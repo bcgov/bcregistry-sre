@@ -314,7 +314,6 @@ dev_projects = {
           "janis.rogers@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
-          "lucas.o'neil@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -719,7 +718,6 @@ dev_projects = {
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
-          "lucas.o'neil@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -758,10 +756,6 @@ dev_projects = {
         role = "roles/compute.viewer"
         members = ["steven.chen@gov.bc.ca",
         "paul.adeyinka@gov.bc.ca"]
-      },
-      {
-        role    = "roles/pubsub.admin"
-        members = ["lucas.o'neil@gov.bc.ca"]
       },
       {
         role = "roles/run.admin"

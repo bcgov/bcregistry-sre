@@ -841,7 +841,6 @@ other_projects = {
           "eve.deng@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
-          "lucas.o'neil@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
