@@ -220,7 +220,6 @@ test_projects = {
           "jia.xu@gov.bc.ca",
           "jimmy.palelil@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
-          "lucas.o'neil@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -633,7 +632,6 @@ test_projects = {
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
-          "lucas.o'neil@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -686,8 +684,7 @@ test_projects = {
       {
         role = "roles/pubsub.admin"
         members = [
-          "brandon.1.sharratt@gov.bc.ca",
-          "lucas.o'neil@gov.bc.ca",
+          "brandon.1.sharratt@gov.bc.ca"
         ]
       },
       {
