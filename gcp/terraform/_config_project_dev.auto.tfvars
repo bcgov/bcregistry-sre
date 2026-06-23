@@ -758,6 +758,11 @@ dev_projects = {
         "paul.adeyinka@gov.bc.ca"]
       },
       {
+        role = "roles/iap.tunnelResourceAccessor"
+        members = ["steven.chen@gov.bc.ca",
+        "paul.adeyinka@gov.bc.ca"]
+      },
+      {
         role = "roles/run.admin"
         members = ["steven.chen@gov.bc.ca",
         "paul.adeyinka@gov.bc.ca", ]
