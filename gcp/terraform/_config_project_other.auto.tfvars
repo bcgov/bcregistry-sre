@@ -747,6 +747,12 @@ other_projects = {
         ]
       },
       {
+        role = "projects/bcrbk9-tools/roles/SRE"
+        members = [
+          "jimmy.palelil@gov.bc.ca",
+        ]
+      },
+      {
         role = "roles/securitycenter.assetsViewer"
         members = [
           "max.wardle@gov.bc.ca",

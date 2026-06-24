@@ -1401,6 +1401,7 @@ dev_projects = {
       {
         role = "projects/bcrbk9-dev/roles/SRE"
         members = [
+          "jimmy.palelil@gov.bc.ca",
           "kial.jinnah@gov.bc.ca"
         ]
       },

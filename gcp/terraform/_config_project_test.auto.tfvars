@@ -1270,6 +1270,12 @@ test_projects = {
         ]
       },
       {
+        role = "projects/bcrbk9-test/roles/SRE"
+        members = [
+          "jimmy.palelil@gov.bc.ca",
+        ]
+      },
+      {
         role    = "roles/cloudsql.instanceUser"
         members = ["andriy.bolyachevets@gov.bc.ca"]
       },
