@@ -58,7 +58,7 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
           version: ${{ matrix.pnpm-version }}
@@ -90,10 +90,10 @@ jobs:
           echo "PNPM version: ${PNPM_VER}"
 
           # Temporary fix for a known corepack issue:
-          # Activate corepack preparation if PNPM version is 10.0.0 or newer.
+          # Activate corepack preparation if PNPM version is 11.9.0 or newer.
           MIN_PNPM_VER="10.0.0"
           if [ "$(printf '%s\n%s' "${MIN_PNPM_VER}" "${PNPM_VER}" | sort -V | head -n1)" = "${MIN_PNPM_VER}" ]; then
-            corepack prepare pnpm@10.0.0 --activate
+            corepack prepare pnpm@11.9.0 --activate
             echo "corepack version: $(corepack --version || echo 'not installed')"
           fi
 
@@ -116,7 +116,7 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
           version: ${{ matrix.pnpm-version }}
@@ -158,10 +158,10 @@ jobs:
           echo "PNPM version: ${PNPM_VER}"
 
           # Temporary fix for a known corepack issue:
-          # Activate corepack preparation if PNPM version is 10.0.0 or newer.
+          # Activate corepack preparation if PNPM version is 11.9.0 or newer.
           MIN_PNPM_VER="10.0.0"
           if [ "$(printf '%s\n%s' "${MIN_PNPM_VER}" "${PNPM_VER}" | sort -V | head -n1)" = "${MIN_PNPM_VER}" ]; then
-            corepack prepare pnpm@10.0.0 --activate
+            corepack prepare pnpm@11.9.0 --activate
             echo "corepack version: $(corepack --version || echo 'not installed')"
           fi
 
@@ -190,7 +190,7 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
     steps:
       - uses: actions/checkout@v6
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
           version: ${{ matrix.pnpm-version }}
@@ -222,10 +222,10 @@ jobs:
           echo "PNPM version: ${PNPM_VER}"
 
           # Temporary fix for a known corepack issue:
-          # Activate corepack preparation if PNPM version is 10.0.0 or newer.
+          # Activate corepack preparation if PNPM version is 11.9.0 or newer.
           MIN_PNPM_VER="10.0.0"
           if [ "$(printf '%s\n%s' "${MIN_PNPM_VER}" "${PNPM_VER}" | sort -V | head -n1)" = "${MIN_PNPM_VER}" ]; then
-            corepack prepare pnpm@10.0.0 --activate
+            corepack prepare pnpm@11.9.0 --activate
             echo "corepack version: $(corepack --version || echo 'not installed')"
           fi
 
