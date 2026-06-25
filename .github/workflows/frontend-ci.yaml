@@ -89,13 +89,6 @@ jobs:
           PNPM_VER=$(pnpm --version)
           echo "PNPM version: ${PNPM_VER}"
 
-          # Temporary fix for a known corepack issue:
-          # Activate corepack preparation if PNPM version is 11.9.0 or newer.
-          MIN_PNPM_VER="10.0.0"
-          if [ "$(printf '%s\n%s' "${MIN_PNPM_VER}" "${PNPM_VER}" | sort -V | head -n1)" = "${MIN_PNPM_VER}" ]; then
-            corepack prepare pnpm@11.9.0 --activate
-            echo "corepack version: $(corepack --version || echo 'not installed')"
-          fi
 
           pnpm install
       - name: Linting
@@ -157,13 +150,6 @@ jobs:
           PNPM_VER=$(pnpm --version)
           echo "PNPM version: ${PNPM_VER}"
 
-          # Temporary fix for a known corepack issue:
-          # Activate corepack preparation if PNPM version is 11.9.0 or newer.
-          MIN_PNPM_VER="10.0.0"
-          if [ "$(printf '%s\n%s' "${MIN_PNPM_VER}" "${PNPM_VER}" | sort -V | head -n1)" = "${MIN_PNPM_VER}" ]; then
-            corepack prepare pnpm@11.9.0 --activate
-            echo "corepack version: $(corepack --version || echo 'not installed')"
-          fi
 
           pnpm install
       - name: Testing
@@ -221,13 +207,6 @@ jobs:
           PNPM_VER=$(pnpm --version)
           echo "PNPM version: ${PNPM_VER}"
 
-          # Temporary fix for a known corepack issue:
-          # Activate corepack preparation if PNPM version is 11.9.0 or newer.
-          MIN_PNPM_VER="10.0.0"
-          if [ "$(printf '%s\n%s' "${MIN_PNPM_VER}" "${PNPM_VER}" | sort -V | head -n1)" = "${MIN_PNPM_VER}" ]; then
-            corepack prepare pnpm@11.9.0 --activate
-            echo "corepack version: $(corepack --version || echo 'not installed')"
-          fi
 
           pnpm install
       - name: Verify build
