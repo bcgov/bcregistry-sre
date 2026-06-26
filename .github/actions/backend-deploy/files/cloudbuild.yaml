@@ -1,6 +1,6 @@
 steps:
   # Step 0: Redeploy the service with the updated environment variables.
-  - name: "northamerica-northeast1-docker.pkg.dev/c4hnrd-tools/cicd-repo/sre-cd-runner:1.1.2"
+  - name: "northamerica-northeast1-docker.pkg.dev/c4hnrd-tools/cicd-repo/sre-cd-runner:${_CD_RUNNER_VERSION}"
     secretEnv: ["OP_CONNECT_HOST", "OP_CONNECT_TOKEN"]
     script: |
       #!/usr/bin/env bash
@@ -87,15 +87,20 @@ steps:
         # Handle image building and tagging based on environment
         case "${_DEPLOYMENT_ENV}" in
           dev|test|uat|sandbox|prod)
-            # Main app image (fresh build or promote from _DEPLOYMENT_ENV_FROM,
-            # with prod tag archived to prod-YYYY-MM-DD when applicable).
-            build_or_promote_image "${image_path}" "${image_package_path}" \
-              "${tag_sha}" "${_DEPLOYMENT_ENV}" "${_DEPLOYMENT_ENV_FROM}"
-
-            # If the Dockerfile is multi-stage and contains a stage named '*migration*',
-            # build/promote a parallel ${_APP_NAME}-migration image alongside it.
-            build_and_push_migration_image_if_present "${image_path}" "${image_package_path}" \
-              "${tag_sha}" "${_DEPLOYMENT_ENV}" "${_DEPLOYMENT_ENV_FROM}"
+            # Main app image. Prefer build_or_promote_image when the sourced
+            # functions.sh provides it (newer sre-cd-runner images: promote
+            # from _DEPLOYMENT_ENV_FROM, archive the prod tag to prod-YYYY-MM-DD,
+            # and build a parallel ${_APP_NAME}-migration image when the
+            # Dockerfile has a '*migration*' stage). Fall back to
+            # build_and_push_image for older runner images that predate it so
+            # this pipeline keeps working regardless of _CD_RUNNER_VERSION.
+            if declare -F build_or_promote_image >/dev/null 2>&1; then
+              build_or_promote_image "${image_path}" "${image_package_path}" \
+                "${tag_sha}" "${_DEPLOYMENT_ENV}" "${_DEPLOYMENT_ENV_FROM}"
+            else
+              build_and_push_image "${image_path}" "${image_package_path}" \
+                "${tag_sha}" "${_DEPLOYMENT_ENV}"
+            fi
 
             # Get the SHA tag associated with the environment tag
             tag_sha=$(tag_sha "${_DEPLOYMENT_ENV}" "${image_path}" "${image_package_path}" "${_DEPLOY_FULL_DEPLOYMENT_ENVS}")
@@ -266,7 +271,7 @@ options:
   automapSubstitutions: true
   substitutionOption: "ALLOW_LOOSE"
 substitutions:
-  _CD_RUNNER_VERSION: "1.1.2"
+  _CD_RUNNER_VERSION: "1.2.1"
   _APP_NAME: ${_APP_NAME}
   _SHORT_SHA: ${_SHORT_SHA}
   _DEPLOY_FULL_DEPLOYMENT_ENVS: "dev test uat sandbox prod"
