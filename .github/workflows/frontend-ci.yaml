@@ -90,7 +90,7 @@ jobs:
           echo "PNPM version: ${PNPM_VER}"
 
 
-          pnpm install --no-frozen-lockfile
+          pnpm install --no-frozen-lockfile --ignore-scripts
       - name: Linting
         run: |
           pnpm run lint
@@ -151,7 +151,7 @@ jobs:
           echo "PNPM version: ${PNPM_VER}"
 
 
-          pnpm install --no-frozen-lockfile
+          pnpm install --no-frozen-lockfile --ignore-scripts
       - name: Testing
         run: |
           pnpm run test
@@ -208,7 +208,7 @@ jobs:
           echo "PNPM version: ${PNPM_VER}"
 
 
-          pnpm install --no-frozen-lockfile
+          pnpm install --no-frozen-lockfile --ignore-scripts
       - name: Verify build
         run: |
           pnpm run build-check
