@@ -11,7 +11,7 @@ on:
         type: string
       cd_runner_version:
         type: string
-        default: "1.0.1"
+        default: "1.2.1"
       working_directory:
         type: string
         default: "."
