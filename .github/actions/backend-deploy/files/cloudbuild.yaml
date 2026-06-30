@@ -63,6 +63,28 @@ steps:
             echo "🛠️ Updating Cloud Deploy manifest for pipeline: ${_DEPLOYMENT_PIPELINE}"
             yq e '.metadata.name = env(_DEPLOYMENT_PIPELINE)' -i "./devops/gcp/clouddeploy.yaml"
 
+            # The Cloud SQL Auth Proxy sidecar lives in service.template.yaml and
+            # is only understood by sre-cd-runner >= 1.2.1, whose generate_manifest
+            # keeps it on opt-in (CLOUD_SQL_PROXY_SIDECAR=yes) and strips it
+            # otherwise. Older runners have no sidecar logic and would let it
+            # through unconditionally, so remove it from the template up-front
+            # when the pinned runner predates 1.2.1 — it must not be created there.
+            _version_lt() {  # true when $1 < $2 (X.Y.Z; non-numeric => treated as newest)
+                local IFS=.; local -a a=($1) b=($2); local i x y
+                for ((i=0; i<3; i++)); do
+                    x=${a[i]:-0}; y=${b[i]:-0}
+                    [[ "$x" =~ ^[0-9]+$ ]] || x=999999
+                    [[ "$y" =~ ^[0-9]+$ ]] || y=999999
+                    (( x < y )) && return 0
+                    (( x > y )) && return 1
+                done
+                return 1
+            }
+            if _version_lt "${_CD_RUNNER_VERSION}" "1.2.1"; then
+                echo "⚠️ Runner ${_CD_RUNNER_VERSION:-<unset>} < 1.2.1: removing Cloud SQL Auth Proxy sidecar from service template (unsupported on this runner)."
+                yq e 'del(.spec.template.spec.containers[] | select(.name == "cloud-sql-proxy"))' -i "./devops/gcp/k8s/service.template.yaml"
+            fi
+
             for env_name in "${targets[@]}"; do
                 generate_manifest "service" "${env_name}"
             done
