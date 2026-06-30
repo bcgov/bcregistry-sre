@@ -57,6 +57,22 @@ spec:
           failureThreshold: 1
           tcpSocket:
             port: 8080
+      # Optional Cloud SQL Auth Proxy sidecar. It is stripped at manifest
+      # generation time unless the service sets CLOUD_SQL_PROXY_SIDECAR=yes in
+      # its vault. The instance connection name is supplied by the
+      # ${cloudsql-instances} Cloud Deploy parameter (the same value used by the
+      # run.googleapis.com/cloudsql-instances annotation above).
+      - name: cloud-sql-proxy
+        image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:latest
+        args:
+        - --address=0.0.0.0
+        - --port=5432
+        - --auto-iam-authn
+        - valuePlaceHolder # from-param: ${cloudsql-instances}
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512M
       #  volumeMounts:
       #  - mountPath: /devops/oas
       #    name: oas_proxy

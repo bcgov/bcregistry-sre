@@ -1,280 +1,279 @@
 steps:
+  # Step 0: Redeploy the job with the updated environment variables.
+  - name: "northamerica-northeast1-docker.pkg.dev/c4hnrd-tools/cicd-repo/sre-cd-runner:${_CD_RUNNER_VERSION}"
+    secretEnv: ["OP_CONNECT_HOST", "OP_CONNECT_TOKEN"]
+    script: |
+      #!/usr/bin/env bash
+      set -euo pipefail
 
-# Step 0: Redeploy the job with the updated environment variables.
-- name: 'northamerica-northeast1-docker.pkg.dev/c4hnrd-tools/cicd-repo/sre-cd-runner:${_CD_RUNNER_VERSION}'
-  secretEnv: ['OP_CONNECT_HOST', 'OP_CONNECT_TOKEN']
-  script: |
-    #!/usr/bin/env bash
-    set -euo pipefail
+      # Load functions from container
+      # this file located in images/gcp-sre
+      source /app/functions.sh
 
-    # Load functions from container
-    # this file located in images/gcp-sre
-    source /app/functions.sh
+      # Fetch project ID from 1Password
+      project_id=$(op read -n "op://CD/${_DEPLOYMENT_ENV}/${_APP_NAME}/DEPLOY_PROJECT_ID") || {
+          echo "❌ Error: Failed to retrieve project ID." >&2
+          exit 1
+      }
+      project_name="${project_id%%-*}"
 
-    # Fetch project ID from 1Password
-    project_id=$(op read -n "op://CD/${_DEPLOYMENT_ENV}/${_APP_NAME}/DEPLOY_PROJECT_ID") || {
-        echo "❌ Error: Failed to retrieve project ID." >&2
-        exit 1
-    }
-    project_name="${project_id%%-*}"
+      # Redeploy job if flag is set and value is true
+      if [[ "${_REDEPLOY:-false}" == "true" ]]; then
+          echo "🔄 Redeploying job with updated environment variables..."
 
-    # Redeploy job if flag is set and value is true
-    if [[ "${_REDEPLOY:-false}" == "true" ]]; then
-        echo "🔄 Redeploying job with updated environment variables..."
+          # Generate secrets based on vault mapping file
+          # This file should contain the mapping of secrets to environment variables
+          generate_secrets_file "${_DEPLOYMENT_ENV}" "./devops/vaults.gcp.env"
 
-        # Generate secrets based on vault mapping file
-        # This file should contain the mapping of secrets to environment variables
-        generate_secrets_file "${_DEPLOYMENT_ENV}" "./devops/vaults.gcp.env"
+          # Build list of job names
+          shopt -s nullglob
+          files=(run_*.sh)
+          job_names=()
+          if (( ${#files[@]} > 0 )); then
+            for f in "${files[@]}"; do
+              job_script_name="${f##*/}"
+              job_name=$(echo "${_APP_NAME}-${_DEPLOYMENT_ENV}-${job_script_name}" | cut -d'.' -f1 | tr "_" "-")
+              job_names+=("$job_name")
+            done
+          else
+            job_names+=("${_APP_NAME}-${_DEPLOYMENT_ENV}")
+          fi
+          shopt -u nullglob
 
-        # Build list of job names
-        shopt -s nullglob
-        files=(run_*.sh)
-        job_names=()
-        if (( ${#files[@]} > 0 )); then
-          for f in "${files[@]}"; do
-            job_script_name="${f##*/}"
-            job_name=$(echo "${_APP_NAME}-${_DEPLOYMENT_ENV}-${job_script_name}" | cut -d'.' -f1 | tr "_" "-")
-            job_names+=("$job_name")
+          for job_name in "${job_names[@]}"; do
+            echo "🔄 Processing redeploy for $job_name"
+
+            # Get existing environment variables from the job
+            if ! job_yaml=$(gcloud run jobs describe "$job_name" \
+                --region="${_REGION}" \
+                --project="${project_id}" \
+                --format=yaml 2>/dev/null); then
+                echo "⚠️ Job $job_name does not exist, skipping..."
+                continue
+            fi
+
+            echo "$job_yaml" | \
+                yq '.spec.template.spec.template.spec.containers[0].env[]' | \
+                awk '/^name:/ { key = $2 } /^value:/ { print key "=" $2; key = "" }' > "./devops/vaults.${job_name}.old"
+
+            # Merge the old and new environment variables
+            merge_vaults "./devops/vaults.${job_name}.old" "./devops/vaults.${_DEPLOYMENT_ENV}" "./devops/vaults.${job_name}.new"
+
+            # Update environment variables on Cloud Run
+            echo "🚀 Updating environment variables for $job_name in project ${project_id}."
+            gcloud run jobs update "$job_name" \
+                --region="${_REGION}" \
+                --project="${project_id}" \
+                --env-vars-file="./devops/vaults.${job_name}.new"
+
+            # Clean up temporary files
+            rm -f "./devops/vaults.${job_name}.old" "./devops/vaults.${job_name}.new"
           done
-        else
-          job_names+=("${_APP_NAME}-${_DEPLOYMENT_ENV}")
-        fi
-        shopt -u nullglob
 
-        for job_name in "${job_names[@]}"; do
-          echo "🔄 Processing redeploy for $job_name"
+          exit 0
+      else
+          echo "🔄 Preparing and setting up jobs and Cloud Deploy manifest files..."
 
-          # Get existing environment variables from the job
-          if ! job_yaml=$(gcloud run jobs describe "$job_name" \
-              --region="${_REGION}" \
-              --project="${project_id}" \
-              --format=yaml 2>/dev/null); then
-              echo "⚠️ Job $job_name does not exist, skipping..."
-              continue
+          # Update Cloud Deploy manifest and generate manifests if needed
+          targets=(${_DEPLOYMENT_ENVS})
+          if [[ -z "${_DEPLOYMENT_ENV_FROM:-}" || "${_DEPLOYMENT_ENV}" == "${targets[0]}" ]]; then
+              echo "🛠️ Updating Cloud Deploy manifest for pipeline: ${_DEPLOYMENT_PIPELINE}"
+              yq e '.metadata.name = env(_DEPLOYMENT_PIPELINE)' -i "./devops/gcp/clouddeploy.yaml"
+
+              for env_name in "${targets[@]}"; do
+                  generate_manifest "job" "${env_name}"
+              done
+
+              remove_unused_deployments "${_DEPLOY_FULL_DEPLOYMENT_ENVS}" "${_DEPLOYMENT_ENVS}" "${project_name}"
           fi
 
-          echo "$job_yaml" | \
-              yq '.spec.template.spec.template.spec.containers[0].env[]' | \
-              awk '/^name:/ { key = $2 } /^value:/ { print key "=" $2; key = "" }' > "./devops/vaults.${job_name}.old"
-
-          # Merge the old and new environment variables
-          merge_vaults "./devops/vaults.${job_name}.old" "./devops/vaults.${_DEPLOYMENT_ENV}" "./devops/vaults.${job_name}.new"
-
-          # Update environment variables on Cloud Run
-          echo "🚀 Updating environment variables for $job_name in project ${project_id}."
-          gcloud run jobs update "$job_name" \
+          # Apply Cloud Deploy configuration
+          echo "🚀 Applying Cloud Deploy configuration..."
+          gcloud deploy apply --file=./devops/gcp/clouddeploy.yaml \
               --region="${_REGION}" \
-              --project="${project_id}" \
-              --env-vars-file="./devops/vaults.${job_name}.new"
+              --project="${_BUILD_PROJECT}"
 
-          # Clean up temporary files
-          rm -f "./devops/vaults.${job_name}.old" "./devops/vaults.${job_name}.new"
-        done
+          echo "🔄 Build and deploy the application"
 
-        exit 0
-    else
-        echo "🔄 Preparing and setting up jobs and Cloud Deploy manifest files..."
+          # Set up variables
+          tag_sha="${_SHORT_SHA}"
+          target="${project_name}-${_DEPLOYMENT_ENV}"
+          image_path="${_REGION}-docker.pkg.dev/${_BUILD_PROJECT}/cloud-run-repo/${_APP_NAME}"
+          image_package_path="projects/${_BUILD_PROJECT}/locations/${_REGION}/repositories/cloud-run-repo/packages/${_APP_NAME}"
 
-        # Update Cloud Deploy manifest and generate manifests if needed
-        targets=(${_DEPLOYMENT_ENVS})
-        if [[ -z "${_DEPLOYMENT_ENV_FROM:-}" || "${_DEPLOYMENT_ENV}" == "${targets[0]}" ]]; then
-            echo "🛠️ Updating Cloud Deploy manifest for pipeline: ${_DEPLOYMENT_PIPELINE}"
-            yq e '.metadata.name = env(_DEPLOYMENT_PIPELINE)' -i "./devops/gcp/clouddeploy.yaml"
+          # Handle image building and tagging based on environment
+          case "${_DEPLOYMENT_ENV}" in
+            dev|test|uat|sandbox|prod)
+              # Indicate the previous production image
+              [[ "${_DEPLOYMENT_ENV}" == "prod" && $(tag_exists "prod" "${image_path}" "${image_package_path}") ]] && tag_image "prod" "prod-$(date +%F)" "${image_path}"
 
-            for env_name in "${targets[@]}"; do
-                generate_manifest "job" "${env_name}"
-            done
+              if [[ -z "${_DEPLOYMENT_ENV_FROM}" || "${_DEPLOYMENT_ENV_FROM}" == "${_DEPLOYMENT_ENV}" ]]; then
+                build_and_push_image "${image_path}" "${image_package_path}" "${tag_sha}" "${_DEPLOYMENT_ENV}"
+              else
+                tag_image "${_DEPLOYMENT_ENV_FROM}" "${_DEPLOYMENT_ENV}" "${image_path}"
+              fi
 
-            remove_unused_deployments "${_DEPLOY_FULL_DEPLOYMENT_ENVS}" "${_DEPLOYMENT_ENVS}" "${project_name}"
-        fi
+              # Get the SHA tag associated with the environment tag
+              tag_sha=$(tag_sha "${_DEPLOYMENT_ENV}" "${image_path}" "${image_package_path}" "${_DEPLOY_FULL_DEPLOYMENT_ENVS}")
+              ;;
+            *)
+              echo "❌ Invalid environment: '${_DEPLOYMENT_ENV}'. Allowed: dev, test, uat, sandbox, prod." >&2
+              exit 1
+              ;;
+          esac
 
-        # Apply Cloud Deploy configuration
-        echo "🚀 Applying Cloud Deploy configuration..."
-        gcloud deploy apply --file=./devops/gcp/clouddeploy.yaml \
-            --region="${_REGION}" \
-            --project="${_BUILD_PROJECT}"
+          echo "🔍 Image sha tag: ${tag_sha}"
 
-        echo "🔄 Build and deploy the application"
+          # Navigate to deployment directory
+          cd ./devops/gcp
 
-        # Set up variables
-        tag_sha="${_SHORT_SHA}"
-        target="${project_name}-${_DEPLOYMENT_ENV}"
-        image_path="${_REGION}-docker.pkg.dev/${_BUILD_PROJECT}/cloud-run-repo/${_APP_NAME}"
-        image_package_path="projects/${_BUILD_PROJECT}/locations/${_REGION}/repositories/cloud-run-repo/packages/${_APP_NAME}"
+          # 📦 Prepare new release
+          release_name="v-${tag_sha}-$(date '+%Y%m%d%H%M')"
 
-        # Handle image building and tagging based on environment
-        case "${_DEPLOYMENT_ENV}" in
-          dev|test|uat|sandbox|prod)
-            # Indicate the previous production image
-            [[ "${_DEPLOYMENT_ENV}" == "prod" && $(tag_exists "prod" "${image_path}" "${image_package_path}") ]] && tag_image "prod" "prod-$(date +%F)" "${image_path}"
+          # Create or promote release
+          if [ -z "${_DEPLOYMENT_ENV_FROM}" ] || [ "${_DEPLOYMENT_ENV_FROM}" = "${_DEPLOYMENT_ENV}" ] || [[ "${_DEPLOYMENT_ENV}" =~ ^(uat|sandbox)$ ]]; then
+              echo "🚀 Create a new release."
 
-            if [[ -z "${_DEPLOYMENT_ENV_FROM}" || "${_DEPLOYMENT_ENV_FROM}" == "${_DEPLOYMENT_ENV}" ]]; then
-              build_and_push_image "${image_path}" "${image_package_path}" "${tag_sha}" "${_DEPLOYMENT_ENV}"
-            else
-              tag_image "${_DEPLOYMENT_ENV_FROM}" "${_DEPLOYMENT_ENV}" "${image_path}"
-            fi
+              # UAT/Sandbox environments use the same image tag as the deployment environment
+              # while other environments use the SHA tag
+              image_tag="${tag_sha}"
+              [[ "${_DEPLOYMENT_ENV}" =~ ^(uat|sandbox)$ ]] && image_tag="${_DEPLOYMENT_ENV}"
 
-            # Get the SHA tag associated with the environment tag
-            tag_sha=$(tag_sha "${_DEPLOYMENT_ENV}" "${image_path}" "${image_package_path}" "${_DEPLOY_FULL_DEPLOYMENT_ENVS}")
-            ;;
-          *)
-            echo "❌ Invalid environment: '${_DEPLOYMENT_ENV}'. Allowed: dev, test, uat, sandbox, prod." >&2
-            exit 1
-            ;;
-        esac
+              gcloud deploy releases create "${release_name}" \
+                --delivery-pipeline="${_DEPLOYMENT_PIPELINE}" \
+                --region="${_REGION}" \
+                --to-target="${target}" \
+                --images="image-placeholder=${image_path}:${image_tag}"
+          else
+              release_name=$(gcloud deploy targets describe "${project_name}-${_DEPLOYMENT_ENV_FROM}" \
+                --delivery-pipeline="${_DEPLOYMENT_PIPELINE}" \
+                --region="${_REGION}" \
+                --format="value('Latest release')")
 
-        echo "🔍 Image sha tag: ${tag_sha}"
+              echo "🚀 Promote existing release ${release_name}."
 
-        # Navigate to deployment directory
-        cd ./devops/gcp
+              gcloud deploy releases promote --release="${release_name}" \
+                --delivery-pipeline="${_DEPLOYMENT_PIPELINE}" \
+                --region="${_REGION}" \
+                --to-target="${target}"
+          fi
 
-        # 📦 Prepare new release
-        release_name="v-${tag_sha}-$(date '+%Y%m%d%H%M')"
+          release_name="${release_name##*/}"
 
-        # Create or promote release
-        if [ -z "${_DEPLOYMENT_ENV_FROM}" ] || [ "${_DEPLOYMENT_ENV_FROM}" = "${_DEPLOYMENT_ENV}" ] || [[ "${_DEPLOYMENT_ENV}" =~ ^(uat|sandbox)$ ]]; then
-            echo "🚀 Create a new release."
+          echo "⏳ Waiting for the release ${release_name} to complete..."
+          deploy_release_name=""
+          max_retries=10
+          retry_interval=30
+          retry_count=0
 
-            # UAT/Sandbox environments use the same image tag as the deployment environment
-            # while other environments use the SHA tag
-            image_tag="${tag_sha}"
-            [[ "${_DEPLOYMENT_ENV}" =~ ^(uat|sandbox)$ ]] && image_tag="${_DEPLOYMENT_ENV}"
+          while [ $retry_count -lt $max_retries ]; do
+              if gcloud run jobs describe "${_APP_NAME}-${_DEPLOYMENT_ENV}" --region="${_REGION}" --project="$project_id" --format="value(metadata.name)" 2> /dev/null ; then
+                  deploy_release_name=$(gcloud run jobs describe "${_APP_NAME}-${_DEPLOYMENT_ENV}" --region="${_REGION}" --project="$project_id" --format="value(metadata.labels.release-id)" 2> /dev/null)
+                  echo "🚀 Deploy Release name: $deploy_release_name"
+                  if [ "${deploy_release_name}" = "${release_name}" ]; then
+                      echo "✅ Release ${release_name} completed successfully."
+                      break
+                  fi
+              fi
+              echo "🔄 Release ${release_name} is still in progress."
+              retry_count=$((retry_count + 1))
+              sleep $retry_interval
+          done
 
-            gcloud deploy releases create "${release_name}" \
-              --delivery-pipeline="${_DEPLOYMENT_PIPELINE}" \
-              --region="${_REGION}" \
-              --to-target="${target}" \
-              --images="image-placeholder=${image_path}:${image_tag}"
-        else
-            release_name=$(gcloud deploy targets describe "${project_name}-${_DEPLOYMENT_ENV_FROM}" \
-              --delivery-pipeline="${_DEPLOYMENT_PIPELINE}" \
-              --region="${_REGION}" \
-              --format="value('Latest release')")
+          # Navigate to home directory
+          cd /workspace
 
-            echo "🚀 Promote existing release ${release_name}."
+          # Function to validate cron expressions
+          validate_cron_expression() {
+              local cron_expression="$1"
 
-            gcloud deploy releases promote --release="${release_name}" \
-              --delivery-pipeline="${_DEPLOYMENT_PIPELINE}" \
-              --region="${_REGION}" \
-              --to-target="${target}"
-        fi
+              # Skip lines that are comments
+              [[ "$cron_expression" =~ ^[[:space:]]*# ]] && return 1
 
-        release_name="${release_name##*/}"
+              return 0
+          }
 
-        echo "⏳ Waiting for the release ${release_name} to complete..."
-        deploy_release_name=""
-        max_retries=10
-        retry_interval=30
-        retry_count=0
+          # Create or update Cloud Schedulers
+          create_schedulers() {
+              local cronfile_name="$1" job_name="$2" job_project="$3"
+              local cron_file="./schedules/${cronfile_name}.${_DEPLOYMENT_ENV}.cron"
 
-        while [ $retry_count -lt $max_retries ]; do
-            if gcloud run jobs describe "${_APP_NAME}-${_DEPLOYMENT_ENV}" --region="${_REGION}" --project="$project_id" --format="value(metadata.name)" 2> /dev/null ; then
-                deploy_release_name=$(gcloud run jobs describe "${_APP_NAME}-${_DEPLOYMENT_ENV}" --region="${_REGION}" --project="$project_id" --format="value(metadata.labels.release-id)" 2> /dev/null)
-                echo "🚀 Deploy Release name: $deploy_release_name"
-                if [ "${deploy_release_name}" = "${release_name}" ]; then
-                    echo "✅ Release ${release_name} completed successfully."
-                    break
+              [[ ! -f "$cron_file" ]] && cron_file="./schedules/${cronfile_name}.cron"
+              [[ ! -f "$cron_file" ]] && return  # Exit if no cron file exists
+
+              # Remove existing schedulers
+              gcloud scheduler jobs list --project="${job_project}" --location "${_REGION}" --format="value(name)" | \
+                grep "${job_name}-scheduler" | \
+                xargs -I {} gcloud scheduler jobs delete "{}" --quiet --project="${job_project}" --location "${_REGION}" || true
+
+              # Create new schedulers
+              mapfile -t cron_lines < "$cron_file"
+              local schedule_id=0
+              for line in "${cron_lines[@]}"; do
+                echo "🗓️ Processing cron line: $line"
+                if validate_cron_expression "$line"; then
+                  echo "✅ Valid cron expression: $line"
+                  gcloud scheduler jobs create http "${job_name}-scheduler-trigger-$((++schedule_id))" \
+                    --project="${job_project}" --location="${_REGION}" --time-zone="America/Vancouver" --schedule="${line}" \
+                    --uri="https://${_REGION}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${job_project}/jobs/${job_name}:run" \
+                    --http-method POST --oauth-service-account-email "sa-job@${job_project}.iam.gserviceaccount.com"
                 fi
-            fi
-            echo "🔄 Release ${release_name} is still in progress."
-            retry_count=$((retry_count + 1))
-            sleep $retry_interval
-        done
+              done
+          }
 
-        # Navigate to home directory
-        cd /workspace
+          # Handle multiple jobs
+          if [[ -n "$(ls run_*.sh 2> /dev/null)" ]]; then
+              echo "🚀 Multiple jobs detected. Processing each job..."
+              # Extract job configuration
+              gcloud run jobs describe "${_APP_NAME}-${_DEPLOYMENT_ENV}" --format=yaml --project="${project_id}" --region="${_REGION}" > ./devops/gcp/k8s/job.${_DEPLOYMENT_ENV}.yaml
+              yq -i 'del(.status, .metadata.generation, .metadata.creationTimestamp, .metadata.namespace, .metadata.resourceVersion, .metadata.selfLink, .metadata.uid)' ./devops/gcp/k8s/job.${_DEPLOYMENT_ENV}.yaml
 
-        # Function to validate cron expressions
-        validate_cron_expression() {
-            local cron_expression="$1"
+              # Iterate through job scripts and create/update jobs
+              for file in run_*sh; do
+                job_script_name="${file##*/}"
+                export JOB_NAME=$(echo ${_APP_NAME}-${_DEPLOYMENT_ENV}-${job_script_name} | cut -d'.' -f 1 | tr "_" "-")
+                export COMMAND="./${job_script_name}"
 
-            # Skip lines that are comments
-            [[ "$cron_expression" =~ ^[[:space:]]*# ]] && return 1
+                echo "🚀 Processing job: ${JOB_NAME}"
 
-            return 0
-        }
+                yq e '.metadata.name = env(JOB_NAME) | .spec.template.spec.template.spec.containers[0].command = env(COMMAND)' \
+                  ./devops/gcp/k8s/job.${_DEPLOYMENT_ENV}.yaml > ./devops/gcp/k8s/${JOB_NAME}.yaml
 
-        # Create or update Cloud Schedulers
-        create_schedulers() {
-            local cronfile_name="$1" job_name="$2" job_project="$3"
-            local cron_file="./schedules/${cronfile_name}.${_DEPLOYMENT_ENV}.cron"
+                # Create job if it doesn't exist
+                if ! gcloud run jobs describe "${JOB_NAME}" --project="${project_id}" --region="${_REGION}" &>/dev/null; then
+                  echo "🚀 Creating your job..."
+                  gcloud run jobs create "${JOB_NAME}" --project="${project_id}" --region="${_REGION}" --image="${image_path}:${_DEPLOYMENT_ENV}"
+                fi
 
-            [[ ! -f "$cron_file" ]] && cron_file="./schedules/${cronfile_name}.cron"
-            [[ ! -f "$cron_file" ]] && return  # Exit if no cron file exists
+                # Update job
+                gcloud run jobs replace ./devops/gcp/k8s/${JOB_NAME}.yaml --project="${project_id}" --region="${_REGION}"
+                create_schedulers "$(echo ${job_script_name} | cut -d'.' -f 1 | tr "_" "-")" "${JOB_NAME}" "${project_id}"
+              done
+          fi
 
-            # Remove existing schedulers
-            gcloud scheduler jobs list --project="${job_project}" --location "${_REGION}" --format="value(name)" | \
-              grep "${job_name}-scheduler" | \
-              xargs -I {} gcloud scheduler jobs delete "{}" --quiet --project="${job_project}" --location "${_REGION}" || true
+          # Handle main job scheduler
+          if [[ -n "$(ls run.sh 2> /dev/null)" ]]; then
+              echo "🚀 Main job detected. Processing main job..."
+              create_schedulers "run" "${_APP_NAME}-${_DEPLOYMENT_ENV}" "${project_id}"
+          fi
 
-            # Create new schedulers
-            mapfile -t cron_lines < "$cron_file"
-            local schedule_id=0
-            for line in "${cron_lines[@]}"; do
-              echo "🗓️ Processing cron line: $line"
-              if validate_cron_expression "$line"; then
-                echo "✅ Valid cron expression: $line"
-                gcloud scheduler jobs create http "${job_name}-scheduler-trigger-$((++schedule_id))" \
-                  --project="${job_project}" --location="${_REGION}" --time-zone="America/Vancouver" --schedule="${line}" \
-                  --uri="https://${_REGION}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${job_project}/jobs/${job_name}:run" \
-                  --http-method POST --oauth-service-account-email "sa-job@${job_project}.iam.gserviceaccount.com"
-              fi
-            done
-        }
-
-        # Handle multiple jobs
-        if [[ -n "$(ls run_*.sh 2> /dev/null)" ]]; then
-            echo "🚀 Multiple jobs detected. Processing each job..."
-            # Extract job configuration
-            gcloud run jobs describe "${_APP_NAME}-${_DEPLOYMENT_ENV}" --format=yaml --project="${project_id}" --region="${_REGION}" > ./devops/gcp/k8s/job.${_DEPLOYMENT_ENV}.yaml
-            yq -i 'del(.status, .metadata.generation, .metadata.creationTimestamp, .metadata.namespace, .metadata.resourceVersion, .metadata.selfLink, .metadata.uid)' ./devops/gcp/k8s/job.${_DEPLOYMENT_ENV}.yaml
-
-            # Iterate through job scripts and create/update jobs
-            for file in run_*sh; do
-              job_script_name="${file##*/}"
-              export JOB_NAME=$(echo ${_APP_NAME}-${_DEPLOYMENT_ENV}-${job_script_name} | cut -d'.' -f 1 | tr "_" "-")
-              export COMMAND="./${job_script_name}"
-
-              echo "🚀 Processing job: ${JOB_NAME}"
-
-              yq e '.metadata.name = env(JOB_NAME) | .spec.template.spec.template.spec.containers[0].command = env(COMMAND)' \
-                ./devops/gcp/k8s/job.${_DEPLOYMENT_ENV}.yaml > ./devops/gcp/k8s/${JOB_NAME}.yaml
-
-              # Create job if it doesn't exist
-              if ! gcloud run jobs describe "${JOB_NAME}" --project="${project_id}" --region="${_REGION}" &>/dev/null; then
-                echo "🚀 Creating your job..."
-                gcloud run jobs create "${JOB_NAME}" --project="${project_id}" --region="${_REGION}" --image="${image_path}:${_DEPLOYMENT_ENV}"
-              fi
-
-              # Update job
-              gcloud run jobs replace ./devops/gcp/k8s/${JOB_NAME}.yaml --project="${project_id}" --region="${_REGION}"
-              create_schedulers "$(echo ${job_script_name} | cut -d'.' -f 1 | tr "_" "-")" "${JOB_NAME}" "${project_id}"
-            done
-        fi
-
-        # Handle main job scheduler
-        if [[ -n "$(ls run.sh 2> /dev/null)" ]]; then
-            echo "🚀 Main job detected. Processing main job..."
-            create_schedulers "run" "${_APP_NAME}-${_DEPLOYMENT_ENV}" "${project_id}"
-        fi
-
-        echo "🏁 ${_DEPLOYMENT_ENV} deployment finalized successfully."
-    fi
+          echo "🏁 ${_DEPLOYMENT_ENV} deployment finalized successfully."
+      fi
 
 # Secret management
 availableSecrets:
   secretManager:
-  - versionName: projects/331250273634/secrets/OP_CONNECT_HOST/versions/latest
-    env: 'OP_CONNECT_HOST'
-  - versionName: projects/331250273634/secrets/OP_CONNECT_TOKEN/versions/latest
-    env: 'OP_CONNECT_TOKEN'
+    - versionName: projects/331250273634/secrets/OP_CONNECT_HOST/versions/latest
+      env: "OP_CONNECT_HOST"
+    - versionName: projects/331250273634/secrets/OP_CONNECT_TOKEN/versions/latest
+      env: "OP_CONNECT_TOKEN"
 
 # Build options and substitutions
 options:
   automapSubstitutions: true
-  substitutionOption: 'ALLOW_LOOSE'
+  substitutionOption: "ALLOW_LOOSE"
 substitutions:
-  _CD_RUNNER_VERSION: '1.0.1'
+  _CD_RUNNER_VERSION: "1.2.1"
   _APP_NAME: ${_APP_NAME}
   _SHORT_SHA: ${_SHORT_SHA}
   _DEPLOY_FULL_DEPLOYMENT_ENVS: "dev test uat sandbox prod"
@@ -286,6 +285,6 @@ substitutions:
   _REDEPLOY: "false"
   _REGION: "northamerica-northeast1"
 
-logsBucket: 'gs://github-actions-cloudbuild/history'
+logsBucket: "gs://github-actions-cloudbuild/history"
 
 timeout: 3600s

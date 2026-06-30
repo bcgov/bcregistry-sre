@@ -114,6 +114,8 @@ build_and_push_image() {
 # Run a fresh build OR promote an image from another environment, including
 # prod-tag archival. Mirrors the per-env handling previously inlined in
 # cloudbuild.yaml so it can be reused for the main app and any auxiliary images.
+# When invoked for a main image (no build_target), it also builds a parallel
+# <image>-migration image if the Dockerfile exposes a 'migration' stage.
 build_or_promote_image() {
     local image_path="$1"
     local image_package_path="$2"
@@ -136,6 +138,15 @@ build_or_promote_image() {
         build_and_push_image "${image_path}" "${image_package_path}" "${short_sha}" "${deployment_env}" "${build_target}"
     else
         tag_image "${deployment_env_from}" "${deployment_env}" "${image_path}"
+    fi
+
+    # When building a main image (no explicit build_target), also build a
+    # parallel <image>-migration image if the Dockerfile exposes a 'migration'
+    # stage. The build_target guard prevents infinite recursion: the migration
+    # build re-enters this function with a non-empty target and is skipped here.
+    if [[ -z "${build_target}" ]]; then
+        build_and_push_migration_image_if_present "${image_path}" "${image_package_path}" \
+            "${short_sha}" "${deployment_env}" "${deployment_env_from}"
     fi
 }
 
@@ -274,13 +285,27 @@ generate_manifest() {
     # This file should contain the mapping of secrets to environment variables
     generate_secrets_file "${env_name}" "./devops/vaults.gcp.env"
 
-    # Extract VPC connector and environment variables
-    export VPC_CONNECTOR
-    VPC_CONNECTOR=$(awk -F= '/^VPC_CONNECTOR/ {print $2}' "./devops/vaults.${env_name}")
-    export VAL
+    # Extract VPC settings and container environment variables.
+    # ROUTE_ALL_TO_VPC selects the Serverless VPC Access connector (all egress
+    # routed to the VPC); otherwise the revision uses Direct VPC egress to
+    # SUBNETWORK (+ optional NETWORK / NETWORK_TAGS), private ranges only.
+    export VPC_CONNECTOR SUBNETWORK NETWORK NETWORK_TAGS ROUTE_ALL_TO_VPC CLOUD_SQL_PROXY_SIDECAR VAL
+    # Read KEY=value from the vault file, stripping surrounding whitespace and
+    # quotes. Vault files often quote values (e.g. CLOUD_SQL_PROXY_SIDECAR="yes"),
+    # and the raw quotes would otherwise break equality checks and annotations.
+    _vault_value() {
+        awk -F= -v k="$1" '$1==k{sub(/^[^=]*=/,""); print}' "$2" \
+            | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' \
+                  -e 's/^"\(.*\)"$/\1/' -e "s/^'\(.*\)'\$/\1/"
+    }
+    ROUTE_ALL_TO_VPC=$(_vault_value "ROUTE_ALL_TO_VPC" "./devops/vaults.${env_name}")
+    VPC_CONNECTOR=$(_vault_value "VPC_CONNECTOR" "./devops/vaults.${env_name}")
+    CLOUD_SQL_PROXY_SIDECAR=$(_vault_value "CLOUD_SQL_PROXY_SIDECAR" "./devops/vaults.${env_name}")
+    NETWORK=$(op read -n "op://CD/${_DEPLOYMENT_ENV}/base/EGRESS_NETWORK" 2>/dev/null || true)
+    SUBNETWORK=$(op read -n "op://CD/${_DEPLOYMENT_ENV}/base/EGRESS_SUBNETWORK" 2>/dev/null || true)
+    NETWORK_TAGS=$(op read -n "op://CD/${_DEPLOYMENT_ENV}/base/EGRESS_NETWORK_TAGS" 2>/dev/null || true)
+
     VAL=$(awk '{f1=f2=$0; sub(/=.*/,"",f1); sub(/[^=]+=/,"",f2); printf "- name: %s\n  value: %s\n",f1,f2}' "./devops/vaults.${env_name}")
-    export ROUTE_ALL_TO_VPC
-    ROUTE_ALL_TO_VPC=$(awk -F= '/^ROUTE_ALL_TO_VPC/ {print $2}' "./devops/vaults.${env_name}")
 
     local template_file="./devops/gcp/k8s/${service_type}.template.yaml"
     local temp_file="./devops/gcp/k8s/temp-${service_type}.${env_name}.yaml"
@@ -288,24 +313,71 @@ generate_manifest() {
 
     cp "${template_file}" "${temp_file}"
 
-    if [[ -n "${VPC_CONNECTOR}" ]]; then
-        echo "🌐 Adding VPC connector configuration..."
-        if [[ -n "${ROUTE_ALL_TO_VPC}" ]]; then
-            echo "Routing all traffic to VPC"
-            yq e '.spec.template.metadata.annotations += {"run.googleapis.com/vpc-access-egress": "all-traffic", "run.googleapis.com/vpc-access-connector": env(VPC_CONNECTOR)}' -i "${temp_file}"
-        else
-            echo "Routing internal traffic to VPC"
-            yq e '.spec.template.metadata.annotations += {"run.googleapis.com/vpc-access-egress": "private-ranges-only", "run.googleapis.com/vpc-access-connector": env(VPC_CONNECTOR)}' -i "${temp_file}"
-        fi
+    # Debug: surface the resolved VPC / egress / sidecar inputs so this step is
+    # visible in the build log even when none of the branches below fire.
+    # (VAL is intentionally not printed as it may contain secret env values.)
+    # Network identifiers (connector/network/subnetwork/tags) come from the
+    # vault, so report presence only ("set"/"<empty>") rather than the literal
+    # topology values. The plain flags below are non-sensitive yes/empty toggles.
+    _present() { if [[ -n "${1:-}" ]]; then echo "set"; else echo "<empty>"; fi; }
+    echo "🔎 Manifest inputs for ${service_type}/${env_name}:"
+    echo "    ROUTE_ALL_TO_VPC=${ROUTE_ALL_TO_VPC:-<empty>}"
+    echo "    VPC_CONNECTOR=$(_present "${VPC_CONNECTOR}")"
+    echo "    NETWORK=$(_present "${NETWORK}")"
+    echo "    SUBNETWORK=$(_present "${SUBNETWORK}")"
+    echo "    NETWORK_TAGS=$(_present "${NETWORK_TAGS}")"
+    echo "    CLOUD_SQL_PROXY_SIDECAR=${CLOUD_SQL_PROXY_SIDECAR:-<empty>}"
+
+    # Configure VPC egress for Cloud Run.
+    # When ROUTE_ALL_TO_VPC is set, route all egress through the Serverless VPC
+    # Access connector. Otherwise attach the revision directly to a subnetwork
+    # via Direct VPC egress (run.googleapis.com/network-interfaces).
+    if [[ -n "${ROUTE_ALL_TO_VPC}" ]]; then
+        # Route all traffic through the legacy Serverless VPC Access connector.
+        echo "🔌 VPC connector (all-traffic) → $(_present "${VPC_CONNECTOR}")"
+        export EGRESS_MODE="all-traffic" VPC_CONNECTOR
+        yq e '.spec.template.metadata.annotations += {"run.googleapis.com/vpc-access-egress": strenv(EGRESS_MODE), "run.googleapis.com/vpc-access-connector": strenv(VPC_CONNECTOR)}' -i "${temp_file}"
+        # Drop any stale Direct VPC egress annotation so the two modes never coexist.
+        yq e 'del(.spec.template.metadata.annotations."run.googleapis.com/network-interfaces")' -i "${temp_file}"
+    elif [[ -n "${SUBNETWORK}" ]]; then
+        # Direct VPC egress: build the network-interfaces JSON (network and
+        # tags are optional) and store it as a string annotation.
+        export NETWORK_INTERFACES
+        NETWORK_INTERFACES=$(NETWORK="${NETWORK}" SUBNETWORK="${SUBNETWORK}" NETWORK_TAGS="${NETWORK_TAGS}" yq -n -o=json -I=0 \
+            '({"network": strenv(NETWORK), "subnetwork": strenv(SUBNETWORK)} | with_entries(select(.value != ""))) as $base | (strenv(NETWORK_TAGS) | select(. != "") | {"tags": (split(",") | map(sub("^ +| +$"; "")))}) as $tags | [ $base * ($tags // {}) ]')
+        echo "🌐 Direct VPC egress (private-ranges-only) → subnetwork: $(_present "${SUBNETWORK}")${NETWORK:+, network: set}"
+        export EGRESS_MODE="private-ranges-only"
+        yq e '.spec.template.metadata.annotations += {"run.googleapis.com/vpc-access-egress": strenv(EGRESS_MODE), "run.googleapis.com/network-interfaces": strenv(NETWORK_INTERFACES)}' -i "${temp_file}"
+        # Drop any stale connector annotation so the two modes never coexist.
+        yq e 'del(.spec.template.metadata.annotations."run.googleapis.com/vpc-access-connector")' -i "${temp_file}"
+    else
+        echo "🚫 No VPC egress configured (ROUTE_ALL_TO_VPC and SUBNETWORK are empty)."
     fi
 
+    echo "🧩 Injecting environment variables into ${service_type} container[0]..."
     if [[ "${service_type}" == "service" ]]; then
         yq e '.spec.template.spec.containers[0].env += env(VAL)' -i "${temp_file}"
     else
         yq e '.spec.template.spec.template.spec.containers[0].env += env(VAL)' -i "${temp_file}"
     fi
 
+    # The Cloud SQL Auth Proxy sidecar is defined directly in the service
+    # template. Keep it only when the service opts in with CLOUD_SQL_PROXY_SIDECAR=yes
+    # (set in ./devops/vaults.${env_name}); otherwise strip it from the manifest.
+    # Its instance connection name comes from the ${cloudsql-instances} Cloud
+    # Deploy parameter, so it stays correct across environments.
+    if [[ "${CLOUD_SQL_PROXY_SIDECAR:-}" == [Yy][Ee][Ss] ]]; then
+        echo "🛞️ Keeping Cloud SQL Auth Proxy sidecar."
+    elif [[ "${service_type}" == "service" ]]; then
+        echo "🧹 Removing Cloud SQL Auth Proxy sidecar (CLOUD_SQL_PROXY_SIDECAR != yes)."
+        yq e 'del(.spec.template.spec.containers[] | select(.name == "cloud-sql-proxy"))' -i "${temp_file}"
+    else
+        echo "🧹 Removing Cloud SQL Auth Proxy sidecar (CLOUD_SQL_PROXY_SIDECAR != yes)."
+        yq e 'del(.spec.template.spec.template.spec.containers[] | select(.name == "cloud-sql-proxy"))' -i "${temp_file}"
+    fi
+
     mv "${temp_file}" "${output_file}"
+    echo "✅ Wrote ${service_type} manifest: ${output_file}"
 }
 
 # Remove unused targets from Cloud Deploy manifest
