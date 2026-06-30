@@ -218,6 +218,9 @@ jobs:
       - name: Nuxt Prepare
         run: pnpm exec nuxt prepare 2>/dev/null || true
         continue-on-error: true
+      - name: Rebuild native addons
+        run: pnpm rebuild better-sqlite3 2>/dev/null || true
+        continue-on-error: true
       - name: Verify build
         run: |
           pnpm run build-check
