@@ -223,7 +223,7 @@ jobs:
           BSQ_DIR=$(ls -d node_modules/.pnpm/better-sqlite3@*/node_modules/better-sqlite3 2>/dev/null | head -1 || true)
           if [ -n "$BSQ_DIR" ]; then
             echo "Compiling native addon in: $BSQ_DIR"
-            (cd "$BSQ_DIR" && node-gyp rebuild --release 2>&1) && echo "better-sqlite3 compiled" || echo "Compilation failed (non-fatal)"
+            (cd "$BSQ_DIR" && npx --yes node-gyp rebuild --release 2>&1) && echo "better-sqlite3 compiled" || echo "Compilation failed (non-fatal)"
           else
             echo "better-sqlite3 not found in .pnpm, skipping"
           fi
