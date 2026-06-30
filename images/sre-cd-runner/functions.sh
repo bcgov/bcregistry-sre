@@ -1,6 +1,17 @@
 #!/bin/bash
 
 
+# Returns success when the argument is a recognized truthy token used by
+# opt-in vault flags: true / yes / 1 / on (case-insensitive). Anything else,
+# including empty/unset, is treated as falsey. Kept portable (tr + case) so it
+# works under the macOS bash 3.2 used for local builds.
+_is_truthy() {
+    case "$(printf '%s' "${1:-}" | tr '[:upper:]' '[:lower:]')" in
+        true | yes | 1 | on) return 0 ;;
+        *) return 1 ;;
+    esac
+}
+
 # Function to check if a Docker tag exists
 tag_exists() {
     local tag="$1"
@@ -332,7 +343,7 @@ generate_manifest() {
     # When ROUTE_ALL_TO_VPC is set, route all egress through the Serverless VPC
     # Access connector. Otherwise attach the revision directly to a subnetwork
     # via Direct VPC egress (run.googleapis.com/network-interfaces).
-    if [[ -n "${ROUTE_ALL_TO_VPC}" ]]; then
+    if _is_truthy "${ROUTE_ALL_TO_VPC}"; then
         # Route all traffic through the legacy Serverless VPC Access connector.
         echo "🔌 VPC connector (all-traffic) → $(_present "${VPC_CONNECTOR}")"
         export EGRESS_MODE="all-traffic" VPC_CONNECTOR
@@ -362,17 +373,18 @@ generate_manifest() {
     fi
 
     # The Cloud SQL Auth Proxy sidecar is defined directly in the service
-    # template. Keep it only when the service opts in with CLOUD_SQL_PROXY_SIDECAR=yes
-    # (set in ./devops/vaults.${env_name}); otherwise strip it from the manifest.
+    # template. Keep it only when the service opts in with a truthy
+    # CLOUD_SQL_PROXY_SIDECAR value (true/yes/1/on, case-insensitive; set in
+    # ./devops/vaults.${env_name}); otherwise strip it from the manifest.
     # Its instance connection name comes from the ${cloudsql-instances} Cloud
     # Deploy parameter, so it stays correct across environments.
-    if [[ "${CLOUD_SQL_PROXY_SIDECAR:-}" == [Yy][Ee][Ss] ]]; then
+    if _is_truthy "${CLOUD_SQL_PROXY_SIDECAR:-}"; then
         echo "🛞️ Keeping Cloud SQL Auth Proxy sidecar."
     elif [[ "${service_type}" == "service" ]]; then
-        echo "🧹 Removing Cloud SQL Auth Proxy sidecar (CLOUD_SQL_PROXY_SIDECAR != yes)."
+        echo "🧹 Removing Cloud SQL Auth Proxy sidecar (CLOUD_SQL_PROXY_SIDECAR not truthy)."
         yq e 'del(.spec.template.spec.containers[] | select(.name == "cloud-sql-proxy"))' -i "${temp_file}"
     else
-        echo "🧹 Removing Cloud SQL Auth Proxy sidecar (CLOUD_SQL_PROXY_SIDECAR != yes)."
+        echo "🧹 Removing Cloud SQL Auth Proxy sidecar (CLOUD_SQL_PROXY_SIDECAR not truthy)."
         yq e 'del(.spec.template.spec.template.spec.containers[] | select(.name == "cloud-sql-proxy"))' -i "${temp_file}"
     fi
 
