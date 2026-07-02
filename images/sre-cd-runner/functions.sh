@@ -312,9 +312,9 @@ generate_manifest() {
     ROUTE_ALL_TO_VPC=$(_vault_value "ROUTE_ALL_TO_VPC" "./devops/vaults.${env_name}")
     VPC_CONNECTOR=$(_vault_value "VPC_CONNECTOR" "./devops/vaults.${env_name}")
     CLOUD_SQL_PROXY_SIDECAR=$(_vault_value "CLOUD_SQL_PROXY_SIDECAR" "./devops/vaults.${env_name}")
-    NETWORK=$(op read -n "op://CD/${_DEPLOYMENT_ENV}/base/EGRESS_NETWORK" 2>/dev/null || true)
-    SUBNETWORK=$(op read -n "op://CD/${_DEPLOYMENT_ENV}/base/EGRESS_SUBNETWORK" 2>/dev/null || true)
-    NETWORK_TAGS=$(op read -n "op://CD/${_DEPLOYMENT_ENV}/base/EGRESS_NETWORK_TAGS" 2>/dev/null || true)
+    NETWORK=$(op read -n "op://CD/${env_name}/base/EGRESS_NETWORK" 2>/dev/null || true)
+    SUBNETWORK=$(op read -n "op://CD/${env_name}/base/EGRESS_SUBNETWORK" 2>/dev/null || true)
+    NETWORK_TAGS=$(op read -n "op://CD/${env_name}/base/EGRESS_NETWORK_TAGS" 2>/dev/null || true)
 
     VAL=$(awk '{f1=f2=$0; sub(/=.*/,"",f1); sub(/[^=]+=/,"",f2); printf "- name: %s\n  value: %s\n",f1,f2}' "./devops/vaults.${env_name}")
 
