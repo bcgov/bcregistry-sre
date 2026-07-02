@@ -1,4 +1,4 @@
-FROM docker:29.5.3 AS static-docker-source
+FROM docker:29.6.0 AS static-docker-source
 FROM google/cloud-sdk:572.0.0-alpine
 
 COPY --from=static-docker-source /usr/local/bin/docker /usr/local/bin/docker
