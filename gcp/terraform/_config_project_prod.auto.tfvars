@@ -85,6 +85,12 @@ prod_projects = {
           "varek.boettcher@gov.bc.ca",
         ]
       },
+      {
+        role = "roles/oauthconfig.viewer"
+        members = [
+          "adam.bush@gov.bc.ca",
+        ]
+      }
     ]
     resource_iam_bindings = [
       {
