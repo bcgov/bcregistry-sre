@@ -31,6 +31,7 @@ jobs:
         working-directory: ${{ inputs.working_directory }}
     outputs:
       PNPM: ${{ steps.check.outputs.PNPM }}
+      PNPM_VERSION: ${{ steps.check.outputs.PNPM_VERSION }}
     steps:
       - uses: actions/checkout@v6
 
@@ -43,6 +44,18 @@ jobs:
             echo "PNPM=no" >> "$GITHUB_OUTPUT"
           fi
 
+          # Prefer the version pinned in package.json's packageManager field
+          # (if present) over the pnpm_version input, since pnpm/action-setup@v6
+          # hard-errors when an explicit version conflicts with packageManager.
+          PM_FIELD=$(jq -r '.packageManager // ""' package.json 2>/dev/null || echo "")
+          if [[ "$PM_FIELD" == pnpm@* ]]; then
+            PM_VERSION="${PM_FIELD#pnpm@}"
+            PM_VERSION="${PM_VERSION%%+*}"
+            echo "PNPM_VERSION=${PM_VERSION}" >> "$GITHUB_OUTPUT"
+          else
+            echo "PNPM_VERSION=${{ inputs.pnpm_version }}" >> "$GITHUB_OUTPUT"
+          fi
+
   linting-pnpm:
     needs: detemine-package-manager
     if: ${{ needs.detemine-package-manager.outputs.PNPM == 'yes' }}
@@ -50,7 +63,7 @@ jobs:
       fail-fast: true
       matrix:
         node-version: ["${{ inputs.node_version }}"]
-        pnpm-version: ["${{ inputs.pnpm_version }}"]
+        pnpm-version: ["${{ needs.detemine-package-manager.outputs.PNPM_VERSION }}"]
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -99,12 +112,12 @@ jobs:
           pnpm run lint
 
   unit-testing-pnpm:
-    needs: linting-pnpm
+    needs: [linting-pnpm, detemine-package-manager]
     strategy:
       fail-fast: true
       matrix:
         node-version: ["${{ inputs.node_version }}"]
-        pnpm-version: ["${{ inputs.pnpm_version }}"]
+        pnpm-version: ["${{ needs.detemine-package-manager.outputs.PNPM_VERSION }}"]
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -169,12 +182,12 @@ jobs:
           path: tests/coverage
 
   verify-build:
-    needs: linting-pnpm
+    needs: [linting-pnpm, detemine-package-manager]
     strategy:
       fail-fast: true
       matrix:
         node-version: ["${{ inputs.node_version }}"]
-        pnpm-version: ["${{ inputs.pnpm_version }}"]
+        pnpm-version: ["${{ needs.detemine-package-manager.outputs.PNPM_VERSION }}"]
     runs-on: ubuntu-latest
     defaults:
       run:
