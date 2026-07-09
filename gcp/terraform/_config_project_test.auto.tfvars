@@ -665,6 +665,10 @@ test_projects = {
         "steven.chen@gov.bc.ca"]
       },
       {
+        role = "roles/iap.tunnelResourceAccessor"
+        members = ["steven.chen@gov.bc.ca"]
+      },
+      {
         role = "roles/cloudscheduler.admin"
         members = ["paul.adeyinka@gov.bc.ca"
         ]
