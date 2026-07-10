@@ -876,6 +876,7 @@ prod_projects = {
         members = [
           "david.li@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
+          "dima.kostenyuk@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "felipe.moraes@gov.bc.ca",
@@ -888,6 +889,7 @@ prod_projects = {
           "melissa.stanton@gov.bc.ca",
           "mihai.dinu@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
+          "karim.jazzar@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "reema.sagpariya@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
@@ -973,7 +975,21 @@ prod_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "business-api"
             database_role_assignment = {
-              readonly  = ["sa-lear-db-standby", "sa-solr-importer", "sa-notebook", "vikas.singh@gov.bc.ca", "thayne.werdal@gov.bc.ca", "david.li@gov.bc.ca", "dietrich.wolpert@gov.bc.ca", "megan.a.wong@gov.bc.ca", "kial.jinnah@gov.bc.ca", "eve.deng@gov.bc.ca", "david.mckinnon@gov.bc.ca", "mihai.dinu@gov.bc.ca", "paul.adeyinka@gov.bc.ca"]
+              readonly  = ["sa-lear-db-standby",
+                           "sa-solr-importer",
+                           "sa-notebook",
+                           "vikas.singh@gov.bc.ca",
+                           "dima.kostenyuk@gov.bc.ca",
+                           "karim.jazzar@gov.bc.ca",
+                           "thayne.werdal@gov.bc.ca",
+                           "david.li@gov.bc.ca",
+                           "dietrich.wolpert@gov.bc.ca",
+                           "megan.a.wong@gov.bc.ca",
+                           "kial.jinnah@gov.bc.ca",
+                           "eve.deng@gov.bc.ca",
+                           "david.mckinnon@gov.bc.ca",
+                           "mihai.dinu@gov.bc.ca",
+                           "paul.adeyinka@gov.bc.ca"]
               readwrite = ["sa-job", "sa-api", "omid.x.zamani@gov.bc.ca", "steven.chen@gov.bc.ca", "meng.dong@gov.bc.ca", "doug.lovett@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "vysakh.menon@gov.bc.ca", "Argus.1.Chiu@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }

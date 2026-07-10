@@ -843,6 +843,7 @@ other_projects = {
           "chiu.oddyseus@gov.bc.ca",
           "david.mckinnon@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
+          "dima.kostenyuk@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
@@ -950,7 +951,10 @@ other_projects = {
             owner   = "business_app"
             database_role_assignment = {
               readonly  = ["sa-solr-importer"]
-              readwrite = ["sa-job", "sa-api", "mark.ruffolo@gov.bc.ca"]
+              readwrite = ["sa-job",
+                           "sa-api",
+                           "dima.kostenyuk@gov.bc.ca",
+                           "mark.ruffolo@gov.bc.ca"]
               admin     = ["sa-db-migrate",  "sa-db-migrate@a083gt-prod.iam.gserviceaccount.com"]
             }
           }
