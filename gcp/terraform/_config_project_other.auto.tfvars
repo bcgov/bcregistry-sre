@@ -858,8 +858,17 @@ other_projects = {
         ]
       },
       {
-        role    = "roles/cloudsql.client"
-        members = ["john.a.m.lane@gov.bc.ca"]
+        role = "roles/cloudsql.client"
+        members = [
+          "john.a.m.lane@gov.bc.ca",
+          "serviceAccount:sa-db-migrate@a083gt-prod.iam.gserviceaccount.com",
+        ]
+      },
+      {
+        role = "roles/cloudsql.admin"
+        members = [
+          "serviceAccount:sa-db-migrate@a083gt-prod.iam.gserviceaccount.com",
+        ]
       },
       {
         role    = "roles/cloudsql.viewer"
@@ -942,7 +951,7 @@ other_projects = {
             database_role_assignment = {
               readonly  = ["sa-solr-importer"]
               readwrite = ["sa-job", "sa-api", "mark.ruffolo@gov.bc.ca"]
-              admin     = ["sa-db-migrate"]
+              admin     = ["sa-db-migrate",  "sa-db-migrate@a083gt-prod.iam.gserviceaccount.com"]
             }
           }
         ]

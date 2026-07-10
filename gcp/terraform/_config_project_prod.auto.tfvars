@@ -955,6 +955,14 @@ prod_projects = {
           "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/7126bc61-83b7-43b2-b7cb-a53243777654"
         ]
       },
+      {
+        resource      = "businesses-db-dump-prod"
+        resource_type = "storage_bucket"
+        roles         = ["roles/storage.objectUser"]
+        members = [
+          "serviceAccount:sa-db-migrate@a083gt-prod.iam.gserviceaccount.com",
+        ]
+      },
     ]
     instances = [
       {
