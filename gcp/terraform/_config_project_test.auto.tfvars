@@ -666,7 +666,7 @@ test_projects = {
         "steven.chen@gov.bc.ca"]
       },
       {
-        role = "roles/iap.tunnelResourceAccessor"
+        role    = "roles/iap.tunnelResourceAccessor"
         members = ["steven.chen@gov.bc.ca"]
       },
       {
@@ -763,14 +763,14 @@ test_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "business-api"
             database_role_assignment = {
-              readonly  = ["sa-solr-importer", "divya.chandupatla@gov.bc.ca"]
+              readonly = ["sa-solr-importer", "divya.chandupatla@gov.bc.ca"]
               readwrite = ["sa-job",
-                           "sa-api",
-                           "dima.kostenyuk@gov.bc.ca",
-                           "mark.ruffolo@gov.bc.ca",
-                           "gunasegaran.nagarajan@gov.bc.ca",
-                           "reema.sagpariya@gov.bc.ca"]
-              admin     = ["sa-db-migrate"]
+                "sa-api",
+                "dima.kostenyuk@gov.bc.ca",
+                "mark.ruffolo@gov.bc.ca",
+                "gunasegaran.nagarajan@gov.bc.ca",
+              "reema.sagpariya@gov.bc.ca"]
+              admin = ["sa-db-migrate"]
             }
           }
         ]

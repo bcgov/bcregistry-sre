@@ -405,7 +405,7 @@ dev_projects = {
         roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
         members = [
           # WIF OpenShift Namespace: d2b3d8-dev
-          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f28a5b83-97ff-4b15-83d4-5094e3f1f369"        ]
+        "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/f28a5b83-97ff-4b15-83d4-5094e3f1f369"]
       }
     ]
     instances = [
@@ -862,14 +862,14 @@ dev_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "business-api"
             database_role_assignment = {
-              readonly  = ["sa-solr-importer", "siddharth.chaturvedi@gov.bc.ca", "divya.chandupatla@gov.bc.ca"]
+              readonly = ["sa-solr-importer", "siddharth.chaturvedi@gov.bc.ca", "divya.chandupatla@gov.bc.ca"]
               readwrite = ["sa-job",
-                           "sa-api",
-                           "dima.kostenyuk@gov.bc.ca",
-                           "mark.ruffolo@gov.bc.ca",
-                           "gunasegaran.nagarajan@gov.bc.ca",
-                           "reema.sagpariya@gov.bc.ca"]
-              admin     = ["sa-db-migrate"]
+                "sa-api",
+                "dima.kostenyuk@gov.bc.ca",
+                "mark.ruffolo@gov.bc.ca",
+                "gunasegaran.nagarajan@gov.bc.ca",
+              "reema.sagpariya@gov.bc.ca"]
+              admin = ["sa-db-migrate"]
             }
           }
         ]

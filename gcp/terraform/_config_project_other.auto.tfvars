@@ -950,12 +950,12 @@ other_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "business_app"
             database_role_assignment = {
-              readonly  = ["sa-solr-importer"]
+              readonly = ["sa-solr-importer"]
               readwrite = ["sa-job",
-                           "sa-api",
-                           "dima.kostenyuk@gov.bc.ca",
-                           "mark.ruffolo@gov.bc.ca"]
-              admin     = ["sa-db-migrate",  "sa-db-migrate@a083gt-prod.iam.gserviceaccount.com"]
+                "sa-api",
+                "dima.kostenyuk@gov.bc.ca",
+              "mark.ruffolo@gov.bc.ca"]
+              admin = ["sa-db-migrate", "sa-db-migrate@a083gt-prod.iam.gserviceaccount.com"]
             }
           }
         ]
