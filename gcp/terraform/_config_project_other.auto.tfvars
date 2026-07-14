@@ -853,6 +853,7 @@ other_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
           "vysakh.menon@gov.bc.ca",
@@ -954,7 +955,7 @@ other_projects = {
               readwrite = ["sa-job",
                 "sa-api",
                 "dima.kostenyuk@gov.bc.ca",
-              "mark.ruffolo@gov.bc.ca"]
+                "mark.ruffolo@gov.bc.ca"]
               admin = ["sa-db-migrate", "sa-db-migrate@a083gt-prod.iam.gserviceaccount.com"]
             }
           }
@@ -969,7 +970,9 @@ other_projects = {
             owner   = "userHQH"
             database_role_assignment = {
               readonly  = []
-              readwrite = ["sa-api"]
+              readwrite = ["sa-api",
+                            "paul.adeyinka@gov.bc.ca",
+              ]
               admin     = ["sa-db-migrate"]
             }
           }
