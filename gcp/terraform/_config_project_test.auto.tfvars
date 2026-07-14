@@ -231,6 +231,7 @@ test_projects = {
           "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
           "vysakh.menon@gov.bc.ca",
+          "yogesh.manni@gov.bc.ca",
         ]
       },
       {
@@ -360,7 +361,7 @@ test_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "auth"
             database_role_assignment = {
-              readonly  = ["noor.nayeem@gov.bc.ca", "patty.stemkens@gov.bc.ca", "divya.chandupatla@gov.bc.ca"]
+              readonly  = ["noor.nayeem@gov.bc.ca", "patty.stemkens@gov.bc.ca", "divya.chandupatla@gov.bc.ca", "yogesh.manni@gov.bc.ca"]
               readwrite = ["sa-api", "sa-job", "anish.batra@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }
@@ -648,6 +649,7 @@ test_projects = {
           "vikas.singh@gov.bc.ca",
           "vishnu.preddy@gov.bc.ca",
           "vysakh.menon@gov.bc.ca",
+          "yogesh.manni@gov.bc.ca",
         ]
       },
       {
@@ -769,7 +771,8 @@ test_projects = {
                 "dima.kostenyuk@gov.bc.ca",
                 "mark.ruffolo@gov.bc.ca",
                 "gunasegaran.nagarajan@gov.bc.ca",
-              "reema.sagpariya@gov.bc.ca"]
+                "yogesh.manni@gov.bc.ca",
+                "reema.sagpariya@gov.bc.ca"]
               admin = ["sa-db-migrate"]
             }
           }

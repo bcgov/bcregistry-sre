@@ -325,6 +325,7 @@ dev_projects = {
           "thayne.werdal@gov.bc.ca",
           "vishnu.preddy@gov.bc.ca",
           "vysakh.menon@gov.bc.ca",
+          "yogesh.manni@gov.bc.ca",
         ]
       },
       {
@@ -418,7 +419,7 @@ dev_projects = {
             owner   = "auth"
             database_role_assignment = {
               readonly  = ["noor.nayeem@gov.bc.ca", "divya.chandupatla@gov.bc.ca"]
-              readwrite = ["sa-api", "anish.batra@gov.bc.ca", "sa-job"]
+              readwrite = ["sa-api", "anish.batra@gov.bc.ca", "sa-job", "yogesh.manni@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }
           }
@@ -733,6 +734,7 @@ dev_projects = {
           "thayne.werdal@gov.bc.ca",
           "vishnu.preddy@gov.bc.ca",
           "vysakh.menon@gov.bc.ca",
+          "yogesh.manni@gov.bc.ca",
         ]
       },
       {
@@ -783,6 +785,7 @@ dev_projects = {
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
+          "yogesh.manni@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -799,6 +802,7 @@ dev_projects = {
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
+          "yogesh.manni@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -868,7 +872,8 @@ dev_projects = {
                 "dima.kostenyuk@gov.bc.ca",
                 "mark.ruffolo@gov.bc.ca",
                 "gunasegaran.nagarajan@gov.bc.ca",
-              "reema.sagpariya@gov.bc.ca"]
+                "yogesh.manni@gov.bc.ca",
+                "reema.sagpariya@gov.bc.ca"]
               admin = ["sa-db-migrate"]
             }
           }
