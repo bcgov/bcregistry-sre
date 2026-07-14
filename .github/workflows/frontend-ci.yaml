@@ -23,7 +23,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  detemine-package-manager:
+  determine-package-manager:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -57,13 +57,13 @@ jobs:
           fi
 
   linting-pnpm:
-    needs: detemine-package-manager
-    if: ${{ needs.detemine-package-manager.outputs.PNPM == 'yes' }}
+    needs: determine-package-manager
+    if: ${{ needs.determine-package-manager.outputs.PNPM == 'yes' }}
     strategy:
       fail-fast: true
       matrix:
         node-version: ["${{ inputs.node_version }}"]
-        pnpm-version: ["${{ needs.detemine-package-manager.outputs.PNPM_VERSION }}"]
+        pnpm-version: ["${{ needs.determine-package-manager.outputs.PNPM_VERSION }}"]
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -103,7 +103,7 @@ jobs:
           echo "PNPM version: ${PNPM_VER}"
 
 
-          pnpm install --no-frozen-lockfile --ignore-scripts
+          pnpm install --ignore-scripts
       - name: Nuxt Prepare
         run: pnpm exec nuxt prepare 2>/dev/null || true
         continue-on-error: true
@@ -112,12 +112,12 @@ jobs:
           pnpm run lint
 
   unit-testing-pnpm:
-    needs: [linting-pnpm, detemine-package-manager]
+    needs: [linting-pnpm, determine-package-manager]
     strategy:
       fail-fast: true
       matrix:
         node-version: ["${{ inputs.node_version }}"]
-        pnpm-version: ["${{ needs.detemine-package-manager.outputs.PNPM_VERSION }}"]
+        pnpm-version: ["${{ needs.determine-package-manager.outputs.PNPM_VERSION }}"]
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -167,7 +167,7 @@ jobs:
           echo "PNPM version: ${PNPM_VER}"
 
 
-          pnpm install --no-frozen-lockfile --ignore-scripts
+          pnpm install --ignore-scripts
       - name: Nuxt Prepare
         run: pnpm exec nuxt prepare 2>/dev/null || true
         continue-on-error: true
@@ -182,12 +182,12 @@ jobs:
           path: tests/coverage
 
   verify-build:
-    needs: [linting-pnpm, detemine-package-manager]
+    needs: [linting-pnpm, determine-package-manager]
     strategy:
       fail-fast: true
       matrix:
         node-version: ["${{ inputs.node_version }}"]
-        pnpm-version: ["${{ needs.detemine-package-manager.outputs.PNPM_VERSION }}"]
+        pnpm-version: ["${{ needs.determine-package-manager.outputs.PNPM_VERSION }}"]
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -227,7 +227,7 @@ jobs:
           echo "PNPM version: ${PNPM_VER}"
 
 
-          pnpm install --no-frozen-lockfile --ignore-scripts
+          pnpm install --ignore-scripts
       - name: Nuxt Prepare
         run: pnpm exec nuxt prepare 2>/dev/null || true
         continue-on-error: true
@@ -246,8 +246,8 @@ jobs:
           pnpm run build-check
 
   linting-npm:
-    needs: detemine-package-manager
-    if: ${{ needs.detemine-package-manager.outputs.PNPM == 'no' }}
+    needs: determine-package-manager
+    if: ${{ needs.determine-package-manager.outputs.PNPM == 'no' }}
     strategy:
       fail-fast: true
       matrix:
@@ -269,7 +269,7 @@ jobs:
         run: |
           npm ci
       - name: Nuxt Prepare
-        run: pnpm exec nuxt prepare 2>/dev/null || true
+        run: npx nuxt prepare 2>/dev/null || true
         continue-on-error: true
       - name: Linting
         run: |
@@ -308,7 +308,7 @@ jobs:
         run: |
           npm ci
       - name: Nuxt Prepare
-        run: pnpm exec nuxt prepare 2>/dev/null || true
+        run: npx nuxt prepare 2>/dev/null || true
         continue-on-error: true
       - name: Testing
         run: |
@@ -343,7 +343,7 @@ jobs:
         run: |
           npm ci
       - name: Nuxt Prepare
-        run: pnpm exec nuxt prepare 2>/dev/null || true
+        run: npx nuxt prepare 2>/dev/null || true
         continue-on-error: true
       - name: Verify build
         run: |
