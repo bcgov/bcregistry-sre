@@ -891,6 +891,16 @@ dev_projects = {
               readwrite = ["sa-api", "paul.adeyinka@gov.bc.ca", "gunasegaran.nagarajan@gov.bc.ca", "reema.sagpariya@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }
+          },
+          {
+            db_name = "namex_solr"
+            roles   = ["readonly", "readwrite", "admin"]
+            owner   = "userHQH"
+            database_role_assignment = {
+              readonly  = []
+              readwrite = ["sa-api", "steven.chen@gov.bc.ca", "eve.deng@gov.bc.ca", "omid.x.zamani@gov.bc.ca", "meng.dong@gov.bc.ca", "paul.adeyinka@gov.bc.ca"]
+              admin     = ["sa-db-migrate"]
+            }
           }
         ]
       }
