@@ -698,6 +698,7 @@ dev_projects = {
           "kial.jinnah@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "eve.deng@gov.bc.ca",
+          "vysakh.menon@gov.bc.ca"
         ]
       },
       {
@@ -768,7 +769,8 @@ dev_projects = {
       {
         role = "roles/run.admin"
         members = ["steven.chen@gov.bc.ca",
-        "paul.adeyinka@gov.bc.ca", ]
+          "paul.adeyinka@gov.bc.ca"
+        ]
       },
       {
         role = "roles/cloudscheduler.admin"
@@ -855,6 +857,12 @@ dev_projects = {
           # WIF OpenShift Namespace: cbaab0-dev
           "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/6abd9000-7b9e-48ad-9fd5-8cbb382c742e"
         ]
+      },
+      {
+        resource      = "projects/a083gt-dev/serviceAccounts/sa-db-migrate@a083gt-dev.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.serviceAccountTokenCreator"]
+        members       = ["andriy.bolyachevets@gov.bc.ca"]
       }
     ]
     instances = [
@@ -873,7 +881,8 @@ dev_projects = {
                 "mark.ruffolo@gov.bc.ca",
                 "gunasegaran.nagarajan@gov.bc.ca",
                 "yogesh.manni@gov.bc.ca",
-                "reema.sagpariya@gov.bc.ca"]
+                "reema.sagpariya@gov.bc.ca"
+                ]
               admin = ["sa-db-migrate"]
             }
           }

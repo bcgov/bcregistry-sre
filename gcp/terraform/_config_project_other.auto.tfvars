@@ -1140,6 +1140,7 @@ other_projects = {
           "brandon.1.sharratt@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
+          "vysakh.menon@gov.bc.ca",
         ]
       },
       {
