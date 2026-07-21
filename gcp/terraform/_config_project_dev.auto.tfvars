@@ -753,7 +753,15 @@ dev_projects = {
       },
       {
         role    = "roles/iam.serviceAccountUser"
-        members = ["steven.chen@gov.bc.ca"]
+        members = ["steven.chen@gov.bc.ca", "paul.adeyinka@gov.bc.ca"]
+      },
+      {
+        role    = "roles/compute.instanceAdmin.v1"
+        members = ["paul.adeyinka@gov.bc.ca"]
+      },
+      {
+        role    = "roles/compute.loadBalancerAdmin"
+        members = ["paul.adeyinka@gov.bc.ca"]
       },
       {
         role = "roles/compute.osAdminLogin"
