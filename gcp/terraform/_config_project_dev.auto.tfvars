@@ -4,6 +4,10 @@ dev_projects = {
     env        = "dev"
     iam_bindings = [
       {
+        role = "projects/mvnjri-dev/roles/SRE"
+        members=["sumesh.kariyil@gov.bc.ca"]
+      },
+      {
         role    = "projects/mvnjri-dev/roles/roledeveloper"
         members = ["Argus.1.Chiu@gov.bc.ca"]
       },
