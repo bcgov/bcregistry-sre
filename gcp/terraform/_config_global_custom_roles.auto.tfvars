@@ -221,6 +221,7 @@ global_custom_roles = {
     permissions = [
       "compute.instances.get",
       "compute.instances.list",
+      "compute.instances.create",
       "apigee.apiproductattributes.createOrUpdateAll",
       "apigee.apiproductattributes.delete",
       "apigee.apiproductattributes.get",
