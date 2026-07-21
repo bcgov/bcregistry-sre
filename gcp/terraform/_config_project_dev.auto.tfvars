@@ -147,6 +147,10 @@ dev_projects = {
           "sumesh.kariyil@gov.bc.ca",
         ]
       },
+      {
+        role    = "roles/compute.networkUser"
+        members = ["paul.adeyinka@gov.bc.ca"]
+      },
     ]
     resource_iam_bindings = [
       {
