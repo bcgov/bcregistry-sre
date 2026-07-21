@@ -1118,6 +1118,7 @@ other_projects = {
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
