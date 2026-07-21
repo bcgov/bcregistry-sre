@@ -1070,7 +1070,7 @@ prod_projects = {
         description = "Service Account for running api services"
         resource_roles = [
           {
-            resource      = "projects/a083gt-prod/locations/northamerica-northeast1/services/namex-solr-synonyms-api-prod"
+            resource      = "projects/a083gt-prod/locations/northamerica-northeast1/services/namex-solr-syn-api-prod"
             roles         = ["roles/run.invoker"]
             resource_type = "cloud_run"
           },

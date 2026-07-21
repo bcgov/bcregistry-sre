@@ -698,6 +698,7 @@ dev_projects = {
           "kial.jinnah@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "eve.deng@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
           "vysakh.menon@gov.bc.ca"
         ]
       },
@@ -959,7 +960,7 @@ dev_projects = {
         description = "Service Account for running api services"
         resource_roles = [
           {
-            resource      = "projects/a083gt-dev/locations/northamerica-northeast1/services/namex-solr-synonyms-api-dev"
+            resource      = "projects/a083gt-dev/locations/northamerica-northeast1/services/namex-solr-syn-api-dev"
             roles         = ["roles/run.invoker"]
             resource_type = "cloud_run"
           },
