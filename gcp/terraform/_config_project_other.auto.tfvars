@@ -786,6 +786,13 @@ other_projects = {
       sa-pubsub = {
         roles       = ["roles/iam.serviceAccountTokenCreator", "roles/pubsub.publisher", "roles/pubsub.subscriber"]
         description = "Service Account for running pubsub services"
+        resource_roles = [
+          {
+            resource      = "projects/bcrbk9-tools/locations/northamerica-northeast1/services/batch-permit-listener-sandbox"
+            roles         = ["roles/run.invoker"]
+            resource_type = "cloud_run"
+          }
+        ]
       },
       sa-db-migrate = {
         roles       = ["projects/bcrbk9-tools/roles/roledbmigrate"]
