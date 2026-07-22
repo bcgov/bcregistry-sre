@@ -955,7 +955,7 @@ other_projects = {
               readwrite = ["sa-job",
                 "sa-api",
                 "dima.kostenyuk@gov.bc.ca",
-                "mark.ruffolo@gov.bc.ca"]
+              "mark.ruffolo@gov.bc.ca"]
               admin = ["sa-db-migrate", "sa-db-migrate@a083gt-prod.iam.gserviceaccount.com"]
             }
           }
@@ -969,11 +969,11 @@ other_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "userHQH"
             database_role_assignment = {
-              readonly  = []
+              readonly = []
               readwrite = ["sa-api",
-                            "paul.adeyinka@gov.bc.ca",
+                "paul.adeyinka@gov.bc.ca",
               ]
-              admin     = ["sa-db-migrate"]
+              admin = ["sa-db-migrate"]
             }
           }
         ]

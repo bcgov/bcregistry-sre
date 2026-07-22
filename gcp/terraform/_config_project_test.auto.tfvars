@@ -772,7 +772,7 @@ test_projects = {
                 "mark.ruffolo@gov.bc.ca",
                 "gunasegaran.nagarajan@gov.bc.ca",
                 "yogesh.manni@gov.bc.ca",
-                "reema.sagpariya@gov.bc.ca"]
+              "reema.sagpariya@gov.bc.ca"]
               admin = ["sa-db-migrate"]
             }
           }

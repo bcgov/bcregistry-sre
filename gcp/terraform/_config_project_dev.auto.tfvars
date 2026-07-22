@@ -4,8 +4,8 @@ dev_projects = {
     env        = "dev"
     iam_bindings = [
       {
-        role = "projects/mvnjri-dev/roles/SRE"
-        members=["sumesh.kariyil@gov.bc.ca"]
+        role    = "projects/mvnjri-dev/roles/SRE"
+        members = ["sumesh.kariyil@gov.bc.ca"]
       },
       {
         role    = "projects/mvnjri-dev/roles/roledeveloper"
@@ -899,7 +899,7 @@ dev_projects = {
                 "gunasegaran.nagarajan@gov.bc.ca",
                 "yogesh.manni@gov.bc.ca",
                 "reema.sagpariya@gov.bc.ca"
-                ]
+              ]
               admin = ["sa-db-migrate"]
             }
           }
