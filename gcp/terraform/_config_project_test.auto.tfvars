@@ -244,7 +244,7 @@ test_projects = {
       },
       {
         role    = "roles/iam.serviceAccountUser"
-        members = ["anish.batra@gov.bc.ca"]
+        members = ["anish.batra@gov.bc.ca", "sumesh.kariyil@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", ]
       },
       {
         role = "roles/pubsub.admin"
@@ -258,7 +258,7 @@ test_projects = {
       },
       {
         role    = "roles/run.admin"
-        members = ["anish.batra@gov.bc.ca"]
+        members = ["anish.batra@gov.bc.ca", "sumesh.kariyil@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", ]
       },
       {
         role = "roles/securitycenter.assetsViewer"
@@ -656,6 +656,14 @@ test_projects = {
         role = "roles/databasecenter.viewer"
         members = [
         "mark.ruffolo@gov.bc.ca"]
+      },
+      {
+        role    = "roles/compute.instanceAdmin.v1"
+        members = ["steven.chen@gov.bc.ca"]
+      },
+      {
+        role    = "roles/compute.loadBalancerAdmin"
+        members = ["steven.chen@gov.bc.ca"]
       },
       {
         role = "roles/compute.osAdminLogin"

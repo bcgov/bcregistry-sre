@@ -915,12 +915,25 @@ prod_projects = {
         members = ["kial.jinnah@gov.bc.ca"]
       },
       {
+        role    = "roles/compute.instanceAdmin.v1"
+        members = ["steven.chen@gov.bc.ca"]
+      },
+      {
+        role    = "roles/compute.loadBalancerAdmin"
+        members = ["steven.chen@gov.bc.ca"]
+      },
+      {
         role = "roles/compute.osAdminLogin"
         members = [
         "steven.chen@gov.bc.ca"]
       },
       {
         role = "roles/compute.viewer"
+        members = [
+        "steven.chen@gov.bc.ca"]
+      },
+      {
+        role = "roles/iap.tunnelResourceAccessor"
         members = [
         "steven.chen@gov.bc.ca"]
       },
