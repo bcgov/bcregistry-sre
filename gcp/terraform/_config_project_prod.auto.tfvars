@@ -893,6 +893,7 @@ prod_projects = {
           "omid.x.zamani@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
+          "david.mckinnon@gov.bc.ca",
           "reema.sagpariya@gov.bc.ca",
           "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
