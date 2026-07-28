@@ -74,6 +74,12 @@ test_projects = {
           "sumesh.kariyil@gov.bc.ca",
         ]
       },
+      {
+        role = "roles/pubsub.publisher"
+        members = [
+          "sumesh.kariyil@gov.bc.ca",
+        ]
+      }
     ]
     resource_iam_bindings = [
       {
