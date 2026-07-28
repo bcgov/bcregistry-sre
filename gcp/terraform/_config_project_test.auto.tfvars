@@ -325,6 +325,7 @@ test_projects = {
         roles         = ["roles/storage.objectUser"]
         members = [
           "jia.xu@gov.bc.ca",
+          "sumesh.kariyil@gov.bc.ca",
         ]
       },
       {
