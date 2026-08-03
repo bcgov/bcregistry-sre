@@ -14,7 +14,7 @@ on:
         default: "1.0.1"
       pnpm_version:
         type: string
-        default: "latest-9"
+        default: "11.9.0"
       app_name:
         required: true
         type: string
