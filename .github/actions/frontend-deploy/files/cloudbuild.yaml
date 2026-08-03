@@ -169,8 +169,15 @@ steps:
     if [ -f "pnpm-lock.yaml" ] || ([ -f "package.json" ] && [[ "$(jq -r '.packageManager // ""' package.json)" == "pnpm"* ]]); then
 
       # PNPM-specific build process
-      # Install pnpm using the specified version or default to "11.9.0" if _PNPM_VERSION is not set.
-      npm install --global pnpm@${_PNPM_VERSION:-11.9.0}
+      # Install pnpm using the specified version, or default to "11.9.0" if _PNPM_VERSION is not set.
+      # Substitution is resolved into its own variable first -- combining Cloud Build's
+      # ${_VAR} substitution with bash's ${VAR:-default} syntax in one token is ambiguous
+      # and silently installs the wrong pnpm version.
+      PNPM_VERSION_TO_INSTALL="${_PNPM_VERSION}"
+      if [ -z "$PNPM_VERSION_TO_INSTALL" ]; then
+        PNPM_VERSION_TO_INSTALL="11.9.0"
+      fi
+      npm install --global pnpm@${PNPM_VERSION_TO_INSTALL}
 
       PNPM_VER=$(pnpm --version)
       echo "PNPM version: ${PNPM_VER}"
