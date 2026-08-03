@@ -171,24 +171,25 @@ steps:
       # PNPM-specific build process
       # Install pnpm using the specified version, or default to "11.9.0" if _PNPM_VERSION is not set.
       # Substitution is resolved into its own variable first -- combining Cloud Build's
-      # ${_VAR} substitution with bash's ${VAR:-default} syntax in one token is ambiguous
-      # and silently installs the wrong pnpm version.
+      # ${_VAR} substitution with bash's ${VAR:-default} syntax in one token is ambiguous.
       PNPM_VERSION_TO_INSTALL="${_PNPM_VERSION}"
       if [ -z "$PNPM_VERSION_TO_INSTALL" ]; then
         PNPM_VERSION_TO_INSTALL="11.9.0"
       fi
-      npm install --global pnpm@${PNPM_VERSION_TO_INSTALL}
+
+      # Use corepack (not `npm install --global pnpm@X`) as the source of truth for which
+      # pnpm binary actually runs. In this build image `pnpm` resolves to a corepack shim
+      # that takes PATH precedence over whatever npm's global install links -- confirmed by
+      # a real deploy where `npm install --global pnpm@11.9.0` "succeeded" but `pnpm --version`
+      # still reported an unrelated 10.x. Activating via corepack directly controls that shim.
+      echo "which pnpm (before activation): $(which pnpm || echo 'not found')"
+      corepack enable
+      corepack prepare "pnpm@${PNPM_VERSION_TO_INSTALL}" --activate
+      echo "corepack version: $(corepack --version || echo 'not installed')"
+      echo "which pnpm (after activation): $(which pnpm || echo 'not found')"
 
       PNPM_VER=$(pnpm --version)
       echo "PNPM version: ${PNPM_VER}"
-
-      # Temporary fix for a known corepack issue:
-      # Activate corepack preparation if PNPM version is 10.0.0 or newer.
-      MIN_PNPM_VER="10.0.0"
-      if [ "$(printf '%s\n%s' "${MIN_PNPM_VER}" "${PNPM_VER}" | sort -V | head -n1)" = "${MIN_PNPM_VER}" ]; then
-        corepack prepare pnpm@10.0.0 --activate
-        echo "corepack version: $(corepack --version || echo 'not installed')"
-      fi
 
       if [ -f "pnpm-lock.yaml" ]; then
         pnpm install --frozen-lockfile --prefer-offline
