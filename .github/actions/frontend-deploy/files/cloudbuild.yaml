@@ -169,8 +169,8 @@ steps:
     if [ -f "pnpm-lock.yaml" ] || ([ -f "package.json" ] && [[ "$(jq -r '.packageManager // ""' package.json)" == "pnpm"* ]]); then
 
       # PNPM-specific build process
-      # Install pnpm using the specified version or default to "latest-9" if _PNPM_VERSION is not set.
-      npm install --global pnpm@${_PNPM_VERSION:-latest-9}
+      # Install pnpm using the specified version or default to "11.9.0" if _PNPM_VERSION is not set.
+      npm install --global pnpm@${_PNPM_VERSION:-11.9.0}
 
       PNPM_VER=$(pnpm --version)
       echo "PNPM version: ${PNPM_VER}"
