@@ -761,7 +761,7 @@ dev_projects = {
       },
       {
         role    = "roles/compute.instanceAdmin.v1"
-        members = ["paul.adeyinka@gov.bc.ca"]
+        members = ["steven.chen@gov.bc.ca", "paul.adeyinka@gov.bc.ca"]
       },
       {
         role    = "roles/compute.loadBalancerAdmin"
@@ -785,13 +785,18 @@ dev_projects = {
       },
       {
         role = "roles/run.admin"
-        members = ["steven.chen@gov.bc.ca",
+        members = [
+          "steven.chen@gov.bc.ca",
           "paul.adeyinka@gov.bc.ca"
         ]
       },
       {
         role = "roles/cloudscheduler.admin"
-        members = ["paul.adeyinka@gov.bc.ca"
+        members = [
+          "steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
         ]
       },
       {
@@ -1324,6 +1329,7 @@ dev_projects = {
           "eve.deng@gov.bc.ca",
           "patrick.wei@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
         ]
       },
       {

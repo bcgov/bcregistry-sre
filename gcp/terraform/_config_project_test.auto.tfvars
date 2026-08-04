@@ -666,7 +666,7 @@ test_projects = {
       },
       {
         role    = "roles/compute.instanceAdmin.v1"
-        members = ["steven.chen@gov.bc.ca"]
+        members = ["steven.chen@gov.bc.ca", "paul.adeyinka@gov.bc.ca"]
       },
       {
         role    = "roles/compute.loadBalancerAdmin"
@@ -675,12 +675,20 @@ test_projects = {
       {
         role = "roles/compute.osAdminLogin"
         members = [
-        "steven.chen@gov.bc.ca"]
+          "steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+        ]
       },
       {
         role = "roles/compute.viewer"
         members = [
-        "steven.chen@gov.bc.ca"]
+          "steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+        ]
       },
       {
         role    = "roles/iap.tunnelResourceAccessor"
@@ -688,7 +696,11 @@ test_projects = {
       },
       {
         role = "roles/cloudscheduler.admin"
-        members = ["paul.adeyinka@gov.bc.ca"
+        members = [
+          "steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
         ]
       },
       {
@@ -700,8 +712,12 @@ test_projects = {
         members = ["felipe.moraes@gov.bc.ca"]
       },
       {
-        role    = "roles/iam.serviceAccountUser"
-        members = ["steven.chen@gov.bc.ca"]
+        role = "roles/iam.serviceAccountUser"
+        members = ["steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+        ]
       },
       {
         role = "roles/pubsub.admin"
@@ -739,6 +755,13 @@ test_projects = {
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
+        ]
+      },
+      {
+        role = "roles/run.admin"
+        members = [
+          "paul.adeyinka@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
         ]
       },
     ]
@@ -1226,6 +1249,7 @@ test_projects = {
         members = [
           "eve.deng@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
         ]
       },
       {

@@ -908,8 +908,12 @@ prod_projects = {
         members = ["doug.lovett@gov.bc.ca"]
       },
       {
-        role    = "roles/iam.serviceAccountUser"
-        members = ["steven.chen@gov.bc.ca"]
+        role = "roles/iam.serviceAccountUser"
+        members = ["steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+        ]
       },
       {
         role    = "roles/pubsub.admin"
@@ -917,7 +921,7 @@ prod_projects = {
       },
       {
         role    = "roles/compute.instanceAdmin.v1"
-        members = ["steven.chen@gov.bc.ca"]
+        members = ["steven.chen@gov.bc.ca", "paul.adeyinka@gov.bc.ca"]
       },
       {
         role    = "roles/compute.loadBalancerAdmin"
@@ -926,17 +930,29 @@ prod_projects = {
       {
         role = "roles/compute.osAdminLogin"
         members = [
-        "steven.chen@gov.bc.ca"]
+          "steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+        ]
       },
       {
         role = "roles/compute.viewer"
         members = [
-        "steven.chen@gov.bc.ca"]
+          "steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+        ]
       },
       {
         role = "roles/iap.tunnelResourceAccessor"
         members = [
-        "steven.chen@gov.bc.ca"]
+          "steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+        ]
       },
       {
         role = "roles/securitycenter.assetsViewer"
@@ -954,6 +970,22 @@ prod_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+        ]
+      },
+      {
+        role = "roles/cloudscheduler.admin"
+        members = [
+          "steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+        ]
+      },
+      {
+        role = "roles/run.admin"
+        members = [
+          "paul.adeyinka@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
         ]
       },
     ]
@@ -1539,6 +1571,7 @@ prod_projects = {
         members = [
           "eve.deng@gov.bc.ca",
           "steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
         ]
       },
       {
