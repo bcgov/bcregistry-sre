@@ -6,7 +6,6 @@ test_projects = {
       {
         role = "projects/c4hnrd-test/roles/roledeveloper"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -45,7 +44,6 @@ test_projects = {
       {
         role = "roles/securitycenter.assetsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
@@ -61,7 +59,6 @@ test_projects = {
       {
         role = "roles/securitycenter.findingsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
@@ -213,7 +210,6 @@ test_projects = {
       {
         role = "projects/gtksf3-test/roles/roledeveloper"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "anish.batra@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -269,7 +265,6 @@ test_projects = {
       {
         role = "roles/securitycenter.assetsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "jia.xu@gov.bc.ca",
@@ -284,7 +279,6 @@ test_projects = {
       {
         role = "roles/securitycenter.findingsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "jia.xu@gov.bc.ca",
@@ -617,14 +611,12 @@ test_projects = {
         role = "projects/a083gt-test/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
-          "Argus.1.Chiu@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
         ]
       },
       {
         role = "projects/a083gt-test/roles/roledeveloper"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -1215,7 +1207,6 @@ test_projects = {
       {
         role = "projects/yfthig-test/roles/roledeveloper"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -1255,7 +1246,6 @@ test_projects = {
       {
         role = "roles/securitycenter.assetsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
@@ -1272,7 +1262,6 @@ test_projects = {
       {
         role = "roles/securitycenter.findingsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",

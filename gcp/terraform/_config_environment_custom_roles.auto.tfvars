@@ -4,7 +4,6 @@ environments = {
       readonly = ["vikas.singh@gov.bc.ca", "mihai.dinu@gov.bc.ca"]
       readwrite = [
         "eve.deng@gov.bc.ca",
-        "Argus.1.Chiu@gov.bc.ca",
         "brandon.1.sharratt@gov.bc.ca",
         "chiu.oddyseus@gov.bc.ca",
         "Chris.Gabel@gov.bc.ca",
@@ -155,7 +154,6 @@ environments = {
     database_role_assignment = {
       readonly = ["vikas.singh@gov.bc.ca", "mihai.dinu@gov.bc.ca", "janis.rogers@gov.bc.ca"]
       readwrite = ["eve.deng@gov.bc.ca",
-        "Argus.1.Chiu@gov.bc.ca",
         "brandon.1.sharratt@gov.bc.ca",
         "chiu.oddyseus@gov.bc.ca",
         "Chris.Gabel@gov.bc.ca",
@@ -326,7 +324,6 @@ environments = {
       readonly = ["vikas.singh@gov.bc.ca", "mihai.dinu@gov.bc.ca", "janis.rogers@gov.bc.ca"]
       readwrite = [
         "eve.deng@gov.bc.ca",
-        "Argus.1.Chiu@gov.bc.ca",
         "brandon.1.sharratt@gov.bc.ca",
         "chiu.oddyseus@gov.bc.ca",
         "Chris.Gabel@gov.bc.ca",

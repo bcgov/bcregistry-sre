@@ -8,10 +8,6 @@ dev_projects = {
         members = ["sumesh.kariyil@gov.bc.ca"]
       },
       {
-        role    = "projects/mvnjri-dev/roles/roledeveloper"
-        members = ["Argus.1.Chiu@gov.bc.ca"]
-      },
-      {
         role = "projects/mvnjri-dev/roles/roleitops"
         members = [
           "Brett.cassidy@gov.bc.ca",
@@ -83,7 +79,6 @@ dev_projects = {
       {
         role = "projects/c4hnrd-dev/roles/roledeveloper"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -114,7 +109,6 @@ dev_projects = {
       {
         role = "roles/securitycenter.assetsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
@@ -132,7 +126,6 @@ dev_projects = {
       {
         role = "roles/securitycenter.findingsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
@@ -157,7 +150,7 @@ dev_projects = {
         resource      = "projects/c4hnrd-dev/locations/us/repositories/gcr.io"
         resource_type = "artifact_registry"
         roles         = ["roles/artifactregistry.reader"]
-        members       = ["Argus.1.Chiu@gov.bc.ca", "Chris.Gabel@gov.bc.ca", "bcregistry-sre@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "jia.xu@gov.bc.ca", "sumesh.kariyil@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "omid.x.zamani@gov.bc.ca", ]
+        members       = ["Chris.Gabel@gov.bc.ca", "bcregistry-sre@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "jia.xu@gov.bc.ca", "sumesh.kariyil@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "omid.x.zamani@gov.bc.ca", ]
       },
       {
         resource      = "projects/c4hnrd-dev/serviceAccounts/sa-api@c4hnrd-dev.iam.gserviceaccount.com"
@@ -310,7 +303,6 @@ dev_projects = {
       {
         role = "projects/gtksf3-dev/roles/roledeveloper"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "anish.batra@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -359,7 +351,6 @@ dev_projects = {
       {
         role = "roles/securitycenter.assetsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "jia.xu@gov.bc.ca",
@@ -374,7 +365,6 @@ dev_projects = {
       {
         role = "roles/securitycenter.findingsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "jia.xu@gov.bc.ca",
@@ -702,7 +692,6 @@ dev_projects = {
         role = "projects/a083gt-dev/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
-          "Argus.1.Chiu@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "eve.deng@gov.bc.ca",
@@ -713,7 +702,6 @@ dev_projects = {
       {
         role = "projects/a083gt-dev/roles/roledeveloper"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -1292,7 +1280,6 @@ dev_projects = {
       {
         role = "projects/yfthig-dev/roles/roledeveloper"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -1349,7 +1336,6 @@ dev_projects = {
       {
         role = "roles/securitycenter.assetsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
@@ -1366,7 +1352,6 @@ dev_projects = {
       {
         role = "roles/securitycenter.findingsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
@@ -1386,7 +1371,7 @@ dev_projects = {
         resource      = "projects/yfthig-dev/locations/us/repositories/gcr.io"
         resource_type = "artifact_registry"
         roles         = ["roles/artifactregistry.reader"]
-        members = ["Argus.1.Chiu@gov.bc.ca",
+        members = [
           "Chris.Gabel@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",

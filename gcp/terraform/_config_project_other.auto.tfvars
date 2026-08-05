@@ -6,7 +6,6 @@ other_projects = {
       {
         role = "projects/c4hnrd-sandbox/roles/roledeveloper"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
@@ -173,7 +172,6 @@ other_projects = {
       {
         role = "projects/gtksf3-tools/roles/roledeveloper"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
@@ -443,13 +441,11 @@ other_projects = {
         role = "projects/a083gt-tools/roles/SRE"
         members = [
           "doug.lovett@gov.bc.ca",
-          "Argus.1.Chiu@gov.bc.ca",
         ]
       },
       {
         role = "projects/a083gt-tools/roles/roledeveloper"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
@@ -681,7 +677,6 @@ other_projects = {
       {
         role = "projects/yfthig-tools/roles/roledeveloper"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "jimmy.palelil@gov.bc.ca",
@@ -699,7 +694,6 @@ other_projects = {
       {
         role = "roles/securitycenter.assetsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
@@ -710,7 +704,6 @@ other_projects = {
       {
         role = "roles/securitycenter.findingsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "eve.deng@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
@@ -889,7 +882,6 @@ other_projects = {
       {
         role = "projects/a083gt-integration/roles/SRE"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
         ]
       },
@@ -1103,7 +1095,6 @@ other_projects = {
       {
         role = "projects/c4hnrd-tools/roles/roledeveloper"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "brandon.1.sharratt@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
@@ -1130,7 +1121,6 @@ other_projects = {
       {
         role = "roles/artifactregistry.admin"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
         ]
       },
@@ -1152,7 +1142,6 @@ other_projects = {
       {
         role = "roles/securitycenter.assetsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
@@ -1168,7 +1157,6 @@ other_projects = {
       {
         role = "roles/securitycenter.findingsViewer"
         members = [
-          "Argus.1.Chiu@gov.bc.ca",
           "Chris.Gabel@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "eve.deng@gov.bc.ca",
