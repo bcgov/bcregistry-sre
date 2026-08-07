@@ -1,0 +1,74 @@
+# =============================================================================
+# masking.yaml.example — Data masking configuration
+# =============================================================================
+# Copy to masking.yaml (local or upload to gs://<GCS_BUCKET>/scripts/masking.yaml)
+# and configure MASKING_YAML env var to point to it.
+#
+# Masking is applied by mask.sh using the PostgreSQL anon extension.
+# Each rule generates a bulk UPDATE statement on the specified table/column.
+#
+# Supported rule types:
+#   anon.fake_email()             - Realistic fake email address
+#   anon.fake_first_name()        - Realistic fake first name
+#   anon.fake_last_name()         - Realistic fake last name
+#   anon.fake_phone_number()      - Realistic fake phone number
+#   anon.fake_address()           - Realistic fake street address
+#   anon.hash(column)             - SHA-256 hash (irreversible, deterministic)
+#   anon.partial(col, 'XXX-', 4) - Partial masking (keep last 4 chars)
+#   NULL                          - Replace with NULL (full redaction)
+#
+# See https://postgresql-anonymizer.readthedocs.io/ for full function reference.
+# =============================================================================
+
+tables:
+
+  # ---------------------------------------------------------------------------
+  # Users / accounts table
+  # ---------------------------------------------------------------------------
+  users:
+    # Fake but realistic email — preserves format for application testing
+    email: "anon.fake_email()"
+    # Fake names — allows realistic UI testing without exposing real identities
+    first_name: "anon.fake_first_name()"
+    last_name: "anon.fake_last_name()"
+    # Phone: keep area code format but randomize digits
+    phone: "anon.fake_phone_number()"
+    # SSN / SIN: full redaction — no value in sandbox
+    sin: "NULL"
+    ssn: "NULL"
+    # Passwords: already hashed in prod, but hash again for extra safety
+    password_hash: "anon.hash(password_hash)"
+    # Address: fake but realistic
+    street_address: "anon.fake_address()"
+
+  # ---------------------------------------------------------------------------
+  # Financial / payment data
+  # ---------------------------------------------------------------------------
+  payment_methods:
+    # Hash card numbers — deterministic so joins still work
+    card_number: "anon.hash(card_number)"
+    # Partial CVV masking — always redact fully
+    cvv: "NULL"
+    # Keep expiry month/year (not sensitive on its own)
+    # expiry_month: keep
+    # expiry_year: keep
+
+  transactions:
+    # Hash card reference — keep referential integrity
+    card_number_ref: "anon.hash(card_number_ref)"
+
+  # ---------------------------------------------------------------------------
+  # Business contact data
+  # ---------------------------------------------------------------------------
+  organizations:
+    # Keep organization name for realistic testing
+    # contact_email: obfuscate
+    contact_email: "anon.fake_email()"
+    billing_email: "anon.fake_email()"
+
+  # ---------------------------------------------------------------------------
+  # Audit / activity logs — redact personal identifiers
+  # ---------------------------------------------------------------------------
+  audit_logs:
+    ip_address: "anon.fake_ip_address()"
+    user_agent: "NULL"

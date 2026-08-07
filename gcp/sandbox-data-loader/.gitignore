@@ -1,0 +1,27 @@
+# =============================================================================
+# .gitignore — GCP Sandbox Database Loader
+# =============================================================================
+
+# Local environment (NEVER commit — contains real project IDs and config)
+.env
+
+# Local masking config with real schema details
+masking.yaml
+grant.sql
+
+# Temporary dump and working files
+/tmp/
+*.sql.gz
+dump_*.sql
+
+# Docker build artifacts
+*.tar
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

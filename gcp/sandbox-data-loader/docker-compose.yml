@@ -1,0 +1,40 @@
+# =============================================================================
+# Docker Compose — Local PostgreSQL for testing
+# =============================================================================
+# Usage:
+#   docker compose up -d
+#   set -a; source .env.test; set +a; ./scripts/entrypoint.sh
+#   docker compose down -v
+# =============================================================================
+
+services:
+  source-db:
+    image: postgres:17-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: business
+      POSTGRES_USER: loader
+      POSTGRES_PASSWORD: testpass
+    volumes:
+      - ./test/seed-source.sql:/docker-entrypoint-initdb.d/01-schema.sql
+      - ./test/seed-data.sql:/docker-entrypoint-initdb.d/02-data.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U loader -d business"]
+      interval: 2s
+      timeout: 5s
+      retries: 10
+
+  target-db:
+    image: postgres:17-alpine
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_DB: business
+      POSTGRES_USER: loader
+      POSTGRES_PASSWORD: testpass
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U loader -d business"]
+      interval: 2s
+      timeout: 5s
+      retries: 10
