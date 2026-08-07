@@ -188,7 +188,7 @@ if [[ "$GRANT_IAM" != "true" ]]; then
                 done < <(sort -u "$ERRORS_FILE")
             } > "$ERRORS_CSV"
 
-            if gsutil cp "$ERRORS_CSV" "gs://${REPORT_BUCKET}/${ERRORS_REPORT}" 2>/dev/null; then
+            if gcloud storage cp "$ERRORS_CSV" "gs://${REPORT_BUCKET}/${ERRORS_REPORT}" 2>/dev/null; then
                 echo "  ✓ Non-ENTRA users report uploaded: gs://${REPORT_BUCKET}/${ERRORS_REPORT}"
             else
                 echo "  ⚠️ Failed to upload Non-ENTRA users report"
