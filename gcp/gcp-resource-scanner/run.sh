@@ -159,7 +159,7 @@ do
 
                 # Special check for ALL Cloud Storage buckets (both multi-regional and regional)
                 echo "  Checking for Cloud Storage buckets..."
-                buckets=$(timeout 20 gsutil ls -p ${PROJECT_ID} 2>/dev/null)
+                buckets=$(timeout 20 gcloud storage ls --project=${PROJECT_ID} 2>/dev/null)
 
                 if [[ ! -z "$buckets" ]]; then
                     while read -r bucket; do
@@ -171,27 +171,18 @@ do
                         bucket_name=${bucket_name%/}
 
                         # Get bucket location information with reduced timeout
-                        bucket_info=$(timeout 10 gsutil ls -L -b "$bucket" 2>/dev/null | head -20 | grep -E "Location constraint:|LocationType:")
-                        location_constraint=$(echo "$bucket_info" | grep "Location constraint:" | awk '{print $3}')
-                        location_type=$(echo "$bucket_info" | grep "LocationType:" | awk '{print $2}')
-                        # Fallback: if location info is empty, try alternative method
+                        bucket_info=$(timeout 10 gcloud storage buckets describe "$bucket" --format="value(location,locationType)" 2>/dev/null)
+                        location_constraint=$(echo "$bucket_info" | awk '{print $1}')
+                        location_type=$(echo "$bucket_info" | awk '{print $2}')
+                        # Fallback: if location info is empty (describe failed/no access)
                         if [[ -z "$location_constraint" && -z "$location_type" ]]; then
-                            echo "    Debug: No location info from gsutil ls -L, trying alternative method for bucket: $bucket_name"
-                            # Try using gsutil stat command as fallback
-                            bucket_stat=$(timeout 10 gsutil stat "$bucket" 2>/dev/null | grep -E "Location constraint:|LocationType:")
-                            if [[ ! -z "$bucket_stat" ]]; then
-                                location_constraint=$(echo "$bucket_stat" | grep "Location constraint:" | awk '{print $3}')
-                                location_type=$(echo "$bucket_stat" | grep "LocationType:" | awk '{print $2}')
-                                echo "    Debug: Alternative method found location: $location_constraint, type: $location_type"
+                            # For Cloud Deploy and similar service buckets, they're often in us-central1
+                            if [[ "$bucket_name" == *"_clouddeploy"* ]] || [[ "$bucket_name" == *"gcf-"* ]]; then
+                                echo "    Debug: Service bucket detected, likely us-central1: $bucket_name"
+                                location_constraint="us-central1"
+                                location_type="regional"
                             else
-                                # For Cloud Deploy and similar service buckets, they're often in us-central1
-                                if [[ "$bucket_name" == *"_clouddeploy"* ]] || [[ "$bucket_name" == *"gcf-"* ]]; then
-                                    echo "    Debug: Service bucket detected, likely us-central1: $bucket_name"
-                                    location_constraint="us-central1"
-                                    location_type="regional"
-                                else
-                                    echo "    Warning: Unable to determine location for bucket: $bucket_name"
-                                fi
+                                echo "    Warning: Unable to determine location for bucket: $bucket_name"
                             fi
                         fi
 
@@ -854,7 +845,7 @@ if [[ "$GRANT_IAM" != "true" ]]; then
                 done < "$ERRORS_FILE"
             } > "$ERRORS_CSV"
             
-            if gsutil cp "$ERRORS_CSV" "gs://${REPORT_BUCKET}/${ERRORS_REPORT}" 2>/dev/null; then
+            if gcloud storage cp "$ERRORS_CSV" "gs://${REPORT_BUCKET}/${ERRORS_REPORT}" 2>/dev/null; then
                 echo "  ✓ Non-compliant resources report uploaded: gs://${REPORT_BUCKET}/${ERRORS_REPORT}"
                 echo "Non-compliant resources saved to bucket: gs://${REPORT_BUCKET}/"
             else

@@ -148,9 +148,11 @@ do
 
                 SERVICE_ACCOUNT=$(gcloud sql instances describe "${DB_INSTANCE_NAME}" --format="value(serviceAccountEmailAddress)")
 
-                gsutil iam ch "serviceAccount:${SERVICE_ACCOUNT}:roles/storage.objectViewer" "${BUCKET}"
+                gcloud storage buckets add-iam-policy-binding "${BUCKET}" \
+                    --member="serviceAccount:${SERVICE_ACCOUNT}" \
+                    --role="roles/storage.objectViewer"
 
-                for file in $(gsutil ls "${DB_ROLES_BUCKET}" | grep -v "/$"); do
+                for file in $(gcloud storage ls "${DB_ROLES_BUCKET}" | grep -v "/$"); do
                     echo "Importing ${file} into database ${DB_NAME}..."
                     gcloud --quiet sql import sql "${DB_INSTANCE_NAME}" "${file}" --database="${DB_NAME}" --user="${DB_USER}"
                     if [[ $? -ne 0 ]]; then
