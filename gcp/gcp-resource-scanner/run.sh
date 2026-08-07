@@ -176,9 +176,19 @@ do
                         location_type=$(echo "$bucket_info" | awk '{print $2}')
                         # Fallback: if location info is empty (describe failed/no access)
                         if [[ -z "$location_constraint" && -z "$location_type" ]]; then
-                            # For Cloud Deploy and similar service buckets, they're often in us-central1
-                            if [[ "$bucket_name" == *"_clouddeploy"* ]] || [[ "$bucket_name" == *"gcf-"* ]]; then
-                                echo "    Debug: Service bucket detected, likely us-central1: $bucket_name"
+                            if [[ "$bucket_name" == *"gcf-"* ]] && [[ "$bucket_name" =~ (northamerica|southamerica|us|europe|asia|australia|me|africa)-[a-z]+[0-9]+ ]]; then
+                                # Cloud Functions source/upload buckets encode their real region in the
+                                # name itself (e.g. gcf-v2-sources-<project_number>-<region>) - use that
+                                # instead of guessing, since it isn't always us-central1.
+                                echo "    Debug: Parsed region from bucket name: ${BASH_REMATCH[0]} ($bucket_name)"
+                                location_constraint="${BASH_REMATCH[0]}"
+                                location_type="regional"
+                            elif [[ "$bucket_name" == *"_clouddeploy"* ]] || [[ "$bucket_name" == *"gcf-"* ]]; then
+                                # Cloud Deploy staging buckets (<project>_clouddeploy) don't encode a region
+                                # in their name at all, and gcf- buckets that didn't match the pattern above
+                                # are an unrecognized/older naming scheme - fall back to the org's observed
+                                # default region rather than leaving location blank.
+                                echo "    Debug: Service bucket detected, region not in name, assuming us-central1: $bucket_name"
                                 location_constraint="us-central1"
                                 location_type="regional"
                             else
