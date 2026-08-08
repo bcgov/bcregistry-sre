@@ -220,10 +220,22 @@ steps:
         # Get the new deployed revision
         deployed_revision=$(gcloud run revisions list \
           --service="${_APP_NAME}-${_DEPLOYMENT_ENV}" \
-          --filter="status.conditions.type=Active AND -status.conditions.status=False" \
+          --filter="metadata.labels.release-id:${release_name}" \
           --format="value(metadata.name)" \
+          --sort-by=~metadata.creationTimestamp \
+          --limit=1 \
           --region="${_REGION}" \
-          --project="${project_id}")
+          --project="${project_id}") || deployed_revision=""
+
+        if [[ -z "${deployed_revision}" ]]; then
+          echo "⚠️ No revision found for release ${release_name}; falling back to the active revision."
+          deployed_revision=$(gcloud run revisions list \
+            --service="${_APP_NAME}-${_DEPLOYMENT_ENV}" \
+            --filter="status.conditions.type=Active AND -status.conditions.status=False" \
+            --format="value(metadata.name)" \
+            --region="${_REGION}" \
+            --project="${project_id}") || deployed_revision=""
+        fi
 
         echo "🆕 Deployed Revision: ${deployed_revision}"
 
@@ -271,6 +283,10 @@ steps:
         fi
 
         # Update traffic to 100% for the new revision
+        if [[ -z "${deployed_revision}" ]]; then
+          echo "❌ Could not determine the deployed revision for release ${release_name}. Aborting traffic update." >&2
+          exit 1
+        fi
         echo "🔄 Updating traffic to 100% for revision: ${deployed_revision}"
         gcloud run services update-traffic "${_APP_NAME}-${_DEPLOYMENT_ENV}" \
           --region="${_REGION}" \
