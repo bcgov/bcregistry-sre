@@ -220,7 +220,7 @@ steps:
         # Get the new deployed revision
         deployed_revision=$(gcloud run revisions list \
           --service="${_APP_NAME}-${_DEPLOYMENT_ENV}" \
-          --filter="metadata.labels.release-id:${release_name}" \
+          --filter="metadata.labels.release-id=${release_name}" \
           --format="value(metadata.name)" \
           --sort-by=~metadata.creationTimestamp \
           --limit=1 \
