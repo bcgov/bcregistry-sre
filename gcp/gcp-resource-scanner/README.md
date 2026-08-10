@@ -80,8 +80,7 @@ set -a && source .env && set +a && ./run.sh
 
 ## Requirements
 
-- Google Cloud SDK (`gcloud`)
-- `gsutil` command line tool
+- Google Cloud SDK (`gcloud`, including the `gcloud storage` component)
 - Appropriate permissions to scan resources and grant IAM roles
 
 ## Notes
