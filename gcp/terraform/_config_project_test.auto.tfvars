@@ -217,7 +217,6 @@ test_projects = {
           "doug.lovett@gov.bc.ca",
           "divya.chandupatla@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "felipe.moraes@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "jimmy.palelil@gov.bc.ca",
@@ -627,7 +626,6 @@ test_projects = {
           "dima.kostenyuk@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "felipe.moraes@gov.bc.ca",
           "gunasegaran.nagarajan@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
           "jia.xu@gov.bc.ca",
@@ -698,10 +696,6 @@ test_projects = {
       {
         role    = "roles/cloudsql.instanceUser"
         members = ["anish.patel@gov.bc.ca"]
-      },
-      {
-        role    = "roles/cloudtasks.viewer"
-        members = ["felipe.moraes@gov.bc.ca"]
       },
       {
         role = "roles/iam.serviceAccountUser"

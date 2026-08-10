@@ -868,7 +868,6 @@ prod_projects = {
           "dima.kostenyuk@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
-          "felipe.moraes@gov.bc.ca",
           "gunasegaran.nagarajan@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
