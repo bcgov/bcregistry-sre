@@ -992,6 +992,15 @@ prod_projects = {
         ]
       },
       {
+        resource      = "projects/a083gt-prod/serviceAccounts/sa-job@a083gt-prod.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser", "roles/iam.serviceAccountTokenCreator"]
+        members = [
+          # WIF OpenShift Namespace: cbaab0-prod
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/09b902fb-6ae5-4132-8167-dea5d0e7d165"
+        ]
+      },
+      {
         resource      = "businesses-db-dump-prod"
         resource_type = "storage_bucket"
         roles         = ["roles/storage.objectUser"]
