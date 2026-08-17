@@ -899,6 +899,7 @@ prod_projects = {
           "paul.adeyinka@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
         ]
       },
       {
@@ -906,8 +907,12 @@ prod_projects = {
         members = ["kial.jinnah@gov.bc.ca"]
       },
       {
-        role    = "roles/compute.instanceAdmin.v1"
-        members = ["steven.chen@gov.bc.ca", "paul.adeyinka@gov.bc.ca"]
+        role = "roles/compute.instanceAdmin.v1"
+        members = ["steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+        "kial.jinnah@gov.bc.ca", ]
       },
       {
         role    = "roles/compute.loadBalancerAdmin"
@@ -920,6 +925,7 @@ prod_projects = {
           "paul.adeyinka@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
         ]
       },
       {
@@ -929,6 +935,7 @@ prod_projects = {
           "paul.adeyinka@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
         ]
       },
       {
@@ -938,6 +945,7 @@ prod_projects = {
           "paul.adeyinka@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
+          "kial.jinnah@gov.bc.ca",
         ]
       },
       {

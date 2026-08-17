@@ -755,8 +755,11 @@ dev_projects = {
       },
       {
         role = "roles/compute.osAdminLogin"
-        members = ["steven.chen@gov.bc.ca",
-          "paul.adeyinka@gov.bc.ca"
+        members = [
+          "steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
         ]
       },
       {
@@ -766,8 +769,12 @@ dev_projects = {
       },
       {
         role = "roles/iap.tunnelResourceAccessor"
-        members = ["steven.chen@gov.bc.ca",
-        "paul.adeyinka@gov.bc.ca"]
+        members = [
+          "steven.chen@gov.bc.ca",
+          "paul.adeyinka@gov.bc.ca",
+          "meng.dong@gov.bc.ca",
+          "omid.x.zamani@gov.bc.ca",
+        ]
       },
       {
         role = "roles/run.admin"
