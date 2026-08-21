@@ -1,4 +1,4 @@
-FROM nginx:1.27.1
+FROM nginx:1.31.3
 
 ARG VCS_REF="missing"
 ARG BUILD_DATE="missing"
