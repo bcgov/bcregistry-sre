@@ -89,6 +89,7 @@ dev_projects = {
           "jimmy.palelil@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
+          "hansen.philip@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -116,6 +117,7 @@ dev_projects = {
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
+          "hansen.philip@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
@@ -133,6 +135,7 @@ dev_projects = {
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
+          "hansen.philip@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
@@ -150,7 +153,7 @@ dev_projects = {
         resource      = "projects/c4hnrd-dev/locations/us/repositories/gcr.io"
         resource_type = "artifact_registry"
         roles         = ["roles/artifactregistry.reader"]
-        members       = ["Chris.Gabel@gov.bc.ca", "bcregistry-sre@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "jia.xu@gov.bc.ca", "sumesh.kariyil@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "omid.x.zamani@gov.bc.ca", ]
+        members       = ["Chris.Gabel@gov.bc.ca", "bcregistry-sre@gov.bc.ca", "chiu.oddyseus@gov.bc.ca", "jia.xu@gov.bc.ca", "sumesh.kariyil@gov.bc.ca", "karim.jazzar@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "hansen.philip@gov.bc.ca", "omid.x.zamani@gov.bc.ca", ]
       },
       {
         resource      = "projects/c4hnrd-dev/serviceAccounts/sa-api@c4hnrd-dev.iam.gserviceaccount.com"
@@ -716,6 +719,7 @@ dev_projects = {
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
+          "hansen.philip@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -802,6 +806,7 @@ dev_projects = {
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
+          "hansen.philip@gov.bc.ca",
           "yogesh.manni@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -819,6 +824,7 @@ dev_projects = {
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
+          "hansen.philip@gov.bc.ca",
           "yogesh.manni@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
@@ -832,7 +838,7 @@ dev_projects = {
         resource      = "colin_extracts"
         resource_type = "storage_bucket"
         roles         = ["roles/storage.objectUser"]
-        members       = ["ketaki.deodhar@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
+        members       = ["ketaki.deodhar@gov.bc.ca", "hansen.philip@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
       },
       {
         resource      = "namex-db-dump-dev"
@@ -893,6 +899,7 @@ dev_projects = {
               readwrite = ["sa-job",
                 "sa-api",
                 "dima.kostenyuk@gov.bc.ca",
+                "hansen.philip@gov.bc.ca",
                 "mark.ruffolo@gov.bc.ca",
                 "gunasegaran.nagarajan@gov.bc.ca",
                 "yogesh.manni@gov.bc.ca",
@@ -1295,6 +1302,7 @@ dev_projects = {
           "jimmy.palelil@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
+          "hansen.philip@gov.bc.ca",
           "mark.ruffolo@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -1348,6 +1356,7 @@ dev_projects = {
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
+          "hansen.philip@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -1364,6 +1373,7 @@ dev_projects = {
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
+          "hansen.philip@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "steven.chen@gov.bc.ca",
@@ -1383,6 +1393,7 @@ dev_projects = {
           "jia.xu@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
+          "hansen.philip@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
