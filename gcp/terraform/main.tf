@@ -122,3 +122,19 @@ module "sql_iam_users" {
     module.iam
   ]
 }
+
+# Partner event topics + DLQs. Only fires for projects that opt in by declaring
+# a non-empty `partners` map — every other project (including those with an
+# empty `partners = {}`) is untouched.
+module "partner_pubsub" {
+  for_each = {
+    for k, v in local.standard_projects :
+    k => v if try(length(v.partners), 0) > 0
+  }
+
+  source            = "./modules/partner_pubsub"
+  project_id        = each.value.project_id
+  env_suffix        = each.value.env
+  partners          = each.value.partners
+  publisher_members = try(each.value.publisher_members, [])
+}

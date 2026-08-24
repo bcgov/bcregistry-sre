@@ -71,6 +71,32 @@ dev_projects = {
         description = "Service Account for running queue services"
       }
     }
+    
+    # Partner payment event topics (POC on mvnjri-dev). Add one entry to `partners`
+    # per onboarding — the map key is the partner's code (lowercase),
+    # which drives the topic name via the naming convention
+    # `pay-events-<key>-<env_suffix>`
+    #
+    # `subscriber_members` is empty by default — populate it only when a real
+    # partner has an identity in a real GCP project that will pull from the
+    # topic. Leaving it empty means only sbc-pay publishes; nobody consumes yet.
+    partners = {
+      # First POC partner. Topic will be provisioned as `pay-events-sites-dev` +
+      # `pay-events-sites-dev-dlq` in mvnjri-dev.
+      # Add the partner's consumer service account to `subscriber_members` once
+      # they've stood one up in their GCP project — until then only sbc-pay
+      # publishes; no consumer.
+      sites = {
+        subscriber_members = [
+          # "serviceAccount:<consumer-sa>@<partner-gcp-project>.iam.gserviceaccount.com",
+        ]
+      }
+    }
+    publisher_members = [
+      "serviceAccount:sa-api@gtksf3-dev.iam.gserviceaccount.com",
+      "serviceAccount:sa-job@gtksf3-dev.iam.gserviceaccount.com",
+      "serviceAccount:sa-pubsub@gtksf3-dev.iam.gserviceaccount.com",
+    ]
   },
   "common-dev" = {
     project_id = "c4hnrd-dev"
