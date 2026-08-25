@@ -67,3 +67,4 @@ Bypassing the hook with `git commit --no-verify` is not acceptable for working a
 - **Hook did not run:** you likely cloned without running `npm install`. Run it, then re-check the hook path above.
 - **Hook still missing:** run `npx lefthook install`.
 - **First commit is slow:** Gitleaks is downloading its binary once; later runs are fast.
+- **`npm: command not found` when committing from VS Code or another git GUI:** GUI clients run hooks from a bare shell that never sources your shell profile, so version managers like nvm are invisible. [.lefthookrc](.lefthookrc) restores Node for the common ones. If your setup still is not found, add its bin directory there.

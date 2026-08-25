@@ -1,0 +1,21 @@
+# Puts Node on PATH for GUI git clients (VS Code, Fork, etc.), which run hooks
+# from a bare shell that never sources your shell profile.
+
+if ! command -v npm >/dev/null 2>&1; then
+  if [ -s "$HOME/.nvm/nvm.sh" ]; then
+    . "$HOME/.nvm/nvm.sh" >/dev/null 2>&1
+  elif [ -s "$HOME/.asdf/asdf.sh" ]; then
+    . "$HOME/.asdf/asdf.sh" >/dev/null 2>&1
+  fi
+fi
+
+if ! command -v npm >/dev/null 2>&1; then
+  for _dir in "$HOME/.volta/bin" "$HOME/.local/share/fnm" /opt/homebrew/bin /usr/local/bin; do
+    if [ -x "$_dir/npm" ]; then
+      PATH="$_dir:$PATH"
+      export PATH
+      break
+    fi
+  done
+  unset _dir
+fi

@@ -1,4 +1,6 @@
 # lefthook.yml
+rc: .lefthookrc
+
 pre-commit:
   parallel: true
   commands:
