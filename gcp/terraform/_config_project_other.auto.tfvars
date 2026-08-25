@@ -758,6 +758,32 @@ other_projects = {
         ]
       },
     ]
+    resource_iam_bindings = [
+      {
+        resource      = "projects/bcrbk9-tools/serviceAccounts/sa-strr-infra@bcrbk9-tools.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.workloadIdentityUser"]
+        members = [
+          "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/github-actions-pool/subject/repo:bcgov/STRR:environment:dev"
+        ]
+      },
+      {
+        resource      = "projects/bcrbk9-dev/serviceAccounts/sa-eventarc@bcrbk9-dev.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.serviceAccountUser"]
+        members = [
+          "serviceAccount:sa-strr-infra@bcrbk9-tools.iam.gserviceaccount.com"
+        ]
+      },
+      {
+        resource      = "projects/bcrbk9-dev/serviceAccounts/sa-pubsub@bcrbk9-dev.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.serviceAccountUser"]
+        members = [
+          "serviceAccount:sa-strr-infra@bcrbk9-tools.iam.gserviceaccount.com"
+        ]
+      },
+    ]
     instances = [
       {
         instance = "strr-db-sandbox"
