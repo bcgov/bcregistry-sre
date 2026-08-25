@@ -795,6 +795,47 @@ other_projects = {
       sa-queue = {
         roles       = ["projects/bcrbk9-tools/roles/rolequeue"]
         description = "Service Account for running queue services"
+      },
+      sa-strr-infra = {
+        roles       = ["roles/eventarc.admin", "roles/pubsub.admin"]
+        description = "Service Account for managing strr infrastructure (Pub/Sub, BigQuery)"
+        external_roles = [
+          {
+            roles      = ["roles/eventarc.admin", "roles/pubsub.admin"]
+            project_id = "bcrbk9-dev"
+          },
+          {
+            roles      = ["roles/eventarc.admin", "roles/pubsub.admin"]
+            project_id = "bcrbk9-test"
+          },
+          {
+            roles      = ["roles/eventarc.admin", "roles/pubsub.admin"]
+            project_id = "bcrbk9-prod"
+          },
+          {
+            roles      = ["roles/bigquery.dataOwner", "roles/bigquery.jobUser"]
+            project_id = "c4hnrd-dev"
+          },
+          {
+            roles      = ["roles/bigquery.dataOwner", "roles/bigquery.jobUser"]
+            project_id = "c4hnrd-test"
+          },
+          {
+            roles      = ["roles/bigquery.dataOwner", "roles/bigquery.jobUser"]
+            project_id = "c4hnrd-prod"
+          },
+          {
+            roles      = ["roles/bigquery.dataOwner", "roles/bigquery.jobUser"]
+            project_id = "c4hnrd-sandbox"
+          },
+        ]
+        resource_roles = [
+          {
+            resource      = "strr-tools-terraform-state"
+            roles         = ["roles/storage.objectAdmin"]
+            resource_type = "storage_bucket"
+          },
+        ]
       }
     }
   },
