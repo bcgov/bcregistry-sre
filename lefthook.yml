@@ -1,0 +1,7 @@
+# lefthook.yml
+pre-commit:
+  parallel: true
+  commands:
+    secret-scan:
+      tags: [security]
+      run: npm run gitleaks:staged

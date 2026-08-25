@@ -2,4 +2,4 @@
 # precedence, will be requested for review when someone opens a pull request.
 
 
-* @pwei1018 @bolyachevets @josekudiyirippil @ahamood1
+* @pwei1018 @bolyachevets

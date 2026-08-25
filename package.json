@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "prepare": "lefthook install",
+    "gitleaks:staged": "gitleaks-secret-scanner --diff-mode staged --verbose",
+    "gitleaks:repo": "gitleaks-secret-scanner --diff-mode all --verbose"
+  },
+  "devDependencies": {
+    "gitleaks-secret-scanner": "^1.0.0",
+    "lefthook": "^1.6.0",
+    "lint-staged": "^15.0.0"
+  }
+}

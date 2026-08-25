@@ -1,0 +1,11 @@
+[extend]
+# Required: without this no rules load and every scan silently passes.
+useDefault = true
+
+[allowlist]
+description = "Documentation placeholders, not real secrets"
+stopwords = [
+  "YOUR_API_KEY",
+  "YOUR_ACCESS_TOKEN",
+  "YOUR_CLIENT_SECRET",
+]
