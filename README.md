@@ -12,10 +12,10 @@ TBD.
 To work with this repo:
 ```gh repo fork https://github.com/bcgov/bcregistry-sre```
 
-Then install the secret-scanning pre-commit hook:
+Then install the secret-scanning pre-commit hook, which blocks commits containing credentials:
 ```npm install```
 
-See [CONTRIBUTING](CONTRIBUTING.md#local-setup-secret-scanning-pre-commit-hook) for details.
+Requires Node.js 18+. See [CONTRIBUTING](CONTRIBUTING.md#local-setup-secret-scanning-pre-commit-hook) for verification steps, scan commands, and troubleshooting.
 
 ## Getting Help or Reporting an Issue
 

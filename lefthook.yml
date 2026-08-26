@@ -5,5 +5,5 @@ pre-commit:
   parallel: true
   commands:
     secret-scan:
-      tags: [security]
-      run: npm run gitleaks:staged
+      tags: [security, secrets]
+      run: npx --yes gitleaks-secret-scanner@latest

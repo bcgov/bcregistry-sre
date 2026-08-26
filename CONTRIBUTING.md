@@ -18,7 +18,7 @@ Run this once after cloning:
 npm install
 ```
 
-That is the whole setup. The `prepare` script installs the git hook automatically, and the Gitleaks binary is downloaded on first use — nothing needs to be installed manually.
+That is the whole setup. The `prepare` script installs the git hook automatically. The scanner itself is fetched by `npx` on first use, so nothing needs to be installed manually.
 
 Requires Node.js 18 or newer.
 
@@ -28,10 +28,10 @@ Requires Node.js 18 or newer.
 git rev-parse --git-path hooks/pre-commit | xargs ls -l
 ```
 
-To confirm scanning runs against your staged changes:
+To scan your staged changes the same way the hook does:
 
 ```bash
-npm run gitleaks:staged
+npx --yes gitleaks-secret-scanner@latest
 ```
 
 ### What you will see when a secret is caught
@@ -53,18 +53,34 @@ Remove the secret from the file, then re-stage and commit. Move real values into
 
 | Command | Purpose |
 | --- | --- |
-| `npm run gitleaks:staged` | Scan staged changes (what the hook runs) |
-| `npm run gitleaks:repo` | Scan all uncommitted work, including untracked files |
+| `npx --yes gitleaks-secret-scanner@latest` | Scan staged changes (what the hook runs) |
+| `npx --yes gitleaks-secret-scanner@latest --diff-mode all` | Scan all uncommitted work, including untracked files |
+| `npx --yes gitleaks-secret-scanner@latest --diff-mode history` | Audit the full commit history |
+
+The hook pins nothing: `@latest` means each run uses the newest published scanner.
+
+### What gets flagged
+
+Two layers, both configured in [.gitleaks.toml](.gitleaks.toml):
+
+- **Gitleaks default rules** — known credential formats (`ghp_…`, `AKIA…`, private keys) and high-entropy strings near words like `secret` or `token`.
+- **A custom `hardcoded-password` rule** — catches weak passwords the default rules miss, because short human-chosen values fall below the entropy threshold. It triggers on a literal assignment to a `password` / `passwd` / `pwd` name.
+
+Values containing markers such as `fake`, `dummy`, `example`, `placeholder` or `changeme` are treated as placeholders and allowed. Environment lookups (`os.environ`, `process.env`) and interpolations (`"${var.secret}"`) never match.
 
 ### If a finding is a false positive
 
-Do not disable the hook. Either add an inline `gitleaks:allow` comment on the offending line, or add a placeholder token to `stopwords` in [.gitleaks.toml](.gitleaks.toml). Mention the change in your PR so it gets reviewed.
+Do not disable the hook. Pick one of:
 
-Bypassing the hook with `git commit --no-verify` is not acceptable for working around a real finding.
+- add an inline `gitleaks:allow` comment on the offending line
+- name the value so it reads as a placeholder, for example `fake-password-123`
+- add a pattern to the relevant allowlist in [.gitleaks.toml](.gitleaks.toml)
+
+Mention the change in your PR so it gets reviewed. Bypassing the hook with `git commit --no-verify` is not acceptable for working around a real finding.
 
 ### Troubleshooting
 
 - **Hook did not run:** you likely cloned without running `npm install`. Run it, then re-check the hook path above.
 - **Hook still missing:** run `npx lefthook install`.
-- **First commit is slow:** Gitleaks is downloading its binary once; later runs are fast.
+- **First commit is slow, or hangs on a slow network:** `npx` is downloading the scanner. It is cached afterwards, but the first run needs network access.
 - **`npm: command not found` when committing from VS Code or another git GUI:** GUI clients run hooks from a bare shell that never sources your shell profile, so version managers like nvm are invisible. [.lefthookrc](.lefthookrc) restores Node for the common ones. If your setup still is not found, add its bin directory there.
