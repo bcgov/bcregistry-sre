@@ -1,0 +1,31 @@
+[extend]
+# Required: without this no rules load and every scan silently passes.
+useDefault = true
+
+[allowlist]
+description = "Documentation placeholders, not real secrets"
+stopwords = [
+  "YOUR_API_KEY",
+  "YOUR_ACCESS_TOKEN",
+  "YOUR_CLIENT_SECRET",
+]
+
+# Catches weak passwords the default rules miss: they are literal assignments with
+# entropy below the generic-api-key threshold.
+[[rules]]
+id = "hardcoded-password"
+description = "Possible hardcoded password"
+regex = '''(?i)[\w.-]*(?:pass(?:word|wd)?|pwd)\s*[:=]\s*["']([^"'\s${}<>]{6,60})["']'''
+keywords = ["password", "passwd", "pwd"]
+
+[rules.allowlist]
+regexTarget = "match"
+regexes = [
+  # Obvious placeholder markers, allowed anywhere in the value.
+  '''(?i)["'][^"']*(?:change[_-]?me|placeholder|example|redacted|sample|dummy|fake|not[_-]?real|todo|xxx+|\*{3,}|\.{3,})[^"']*["']''',
+  # Generic words that are only placeholders when they are the whole value.
+  '''(?i)["'](?:test(?:ing)?|none|null|true|false|unset|secret|password|pwd|value|string)["']''',
+  '''(?i)(?:os\.environ|getenv|process\.env|vault|secret_manager)''',
+  # Throwaway credentials for ephemeral CI service containers.
+  '''(?i)["'](?:postgres|mysql|root|admin|guest)["']''',
+]

@@ -1,6 +1,7 @@
 [![img](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
 
 ---
+
 BC Registries and Online Services SRE team's application
 ---
 
@@ -10,6 +11,11 @@ TBD.
 
 To work with this repo:
 ```gh repo fork https://github.com/bcgov/bcregistry-sre```
+
+Then install the secret-scanning pre-commit hook, which blocks commits containing credentials:
+```npm install```
+
+Requires Node.js 18+. See [CONTRIBUTING](CONTRIBUTING.md#local-setup-secret-scanning-pre-commit-hook) for verification steps, scan commands, and troubleshooting.
 
 ## Getting Help or Reporting an Issue
 
@@ -23,6 +29,7 @@ Please note that this project is released with a [Contributor Code of Conduct](C
 By participating in this project you agree to abide by its terms.
 
 ## Issues/Suggestions
+
 Make Suggestions/Issues [here!](https://github.com/bcgov/bcregistry-sre/issues/new)
 Issues are [markdown supported](https://guides.github.com/features/mastering-markdown/).
 

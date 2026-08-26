@@ -1,0 +1,9 @@
+# lefthook.yml
+rc: .lefthookrc
+
+pre-commit:
+  parallel: true
+  commands:
+    secret-scan:
+      tags: [security, secrets]
+      run: npx --yes gitleaks-secret-scanner@latest

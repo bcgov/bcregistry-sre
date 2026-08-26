@@ -1,0 +1,59 @@
+# Puts Node on PATH for GUI git clients (VS Code, Fork, etc.), which run hooks
+# from a bare shell that never sources your shell profile.
+
+# Common install locations, checked before falling back to version managers.
+# The /c/... entries are Git Bash paths on Windows.
+for _dir in \
+  /opt/homebrew/bin \
+  /usr/local/bin \
+  "$HOME/.volta/bin" \
+  "$HOME/.local/share/fnm/aliases/default/bin" \
+  "$HOME/.local/bin" \
+  "/c/Program Files/nodejs" \
+  "$APPDATA/npm"
+do
+  if [ -x "$_dir/npx" ] && ! command -v npx >/dev/null 2>&1; then
+    PATH="$_dir:$PATH"
+    export PATH
+  fi
+done
+unset _dir
+
+if ! command -v npx >/dev/null 2>&1; then
+  if [ -s "${NVM_DIR:-$HOME/.nvm}/nvm.sh" ]; then
+    . "${NVM_DIR:-$HOME/.nvm}/nvm.sh" >/dev/null 2>&1
+  elif [ -s "$HOME/.asdf/asdf.sh" ]; then
+    . "$HOME/.asdf/asdf.sh" >/dev/null 2>&1
+  elif command -v fnm >/dev/null 2>&1; then
+    eval "$(fnm env)" >/dev/null 2>&1
+  fi
+fi
+
+# Fail loudly with instructions rather than letting the hook die on a bare
+# "npx: command not found", which tells a new contributor nothing.
+if ! command -v npx >/dev/null 2>&1; then
+  echo "" >&2
+  echo "pre-commit secret scan cannot run: Node.js (npx) was not found." >&2
+  echo "" >&2
+  echo "  This repo scans staged changes for secrets before every commit." >&2
+  echo "  Install Node.js 18 or newer, then run 'npm install' in the repo." >&2
+  echo "    macOS:  brew install node" >&2
+  echo "    nvm:    nvm install --lts" >&2
+  echo "" >&2
+  echo "  Already have Node in your terminal but not here? Your GUI git client" >&2
+  echo "  does not load your shell profile. Add your Node bin directory to" >&2
+  echo "  .lefthookrc, or launch the client from a terminal." >&2
+  echo "" >&2
+  exit 1
+fi
+
+_node_major=$(node -p 'process.versions.node.split(".")[0]' 2>/dev/null || echo 0)
+if [ "$_node_major" -lt 18 ] 2>/dev/null; then
+  echo "" >&2
+  echo "pre-commit secret scan needs Node.js 18 or newer (found $(node -v 2>/dev/null))." >&2
+  echo "Upgrade Node, then commit again." >&2
+  echo "" >&2
+  unset _node_major
+  exit 1
+fi
+unset _node_major
