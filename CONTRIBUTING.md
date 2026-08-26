@@ -96,7 +96,8 @@ git add --renormalize .
 ### Troubleshooting
 
 - **Hook did not run:** you likely cloned without running `npm install`. Run it, then re-check the hook path above.
-- **Hook still missing:** run `npx lefthook install`.
+- **Hook still missing:** run `npx lefthook install --force`.
+- **`npx: command not found`, exit status 127, scan finishes in ~0.01s:** your installed hook is stale. `.git/hooks/` is not version controlled, so it does not pick up changes to [lefthook.yml](lefthook.yml) on its own. Run `npx lefthook install --force`.
 - **First commit is slow, or hangs on a slow network:** `npx` is downloading the scanner. It is cached afterwards, but the first run needs network access.
-- **`npx` or Node not found:** the hook stops with install instructions. GUI git clients run hooks from a bare shell that never sources your shell profile, so version managers like nvm are invisible to them. [.lefthookrc](.lefthookrc) restores Node for the common ones — if yours is missed, add its bin directory there.
+- **`npx` or Node not found, with install instructions printed:** GUI git clients run hooks from a bare shell that never sources your shell profile, so version managers like nvm are invisible to them. [.lefthookrc](.lefthookrc) restores Node for the common ones — if yours is missed, add its bin directory there.
 - **`syntax error near unexpected token` on Windows:** CRLF line endings. See the re-normalize command above.
