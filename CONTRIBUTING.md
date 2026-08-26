@@ -78,9 +78,25 @@ Do not disable the hook. Pick one of:
 
 Mention the change in your PR so it gets reviewed. Bypassing the hook with `git commit --no-verify` is not acceptable for working around a real finding.
 
+### Windows and WSL
+
+Both work, with no extra setup:
+
+- **WSL (recommended):** open the repo with VS Code's WSL remote and follow the steps above. Hooks run inside Linux, so it behaves like macOS.
+- **Windows without WSL:** hooks run under the Git Bash shell that ships with Git for Windows. Node installed via the official installer or nvm-windows is already on `PATH`.
+
+Clone the repo rather than copying files in. [.gitattributes](.gitattributes) keeps shell scripts and [.lefthookrc](.lefthookrc) as LF, because Git Bash and WSL cannot parse CRLF scripts and the hook fails with `syntax error near unexpected token`.
+
+If you cloned before `.gitattributes` was added and see that error, re-normalize your working copy:
+
+```bash
+git add --renormalize .
+```
+
 ### Troubleshooting
 
 - **Hook did not run:** you likely cloned without running `npm install`. Run it, then re-check the hook path above.
 - **Hook still missing:** run `npx lefthook install`.
 - **First commit is slow, or hangs on a slow network:** `npx` is downloading the scanner. It is cached afterwards, but the first run needs network access.
-- **`npm: command not found` when committing from VS Code or another git GUI:** GUI clients run hooks from a bare shell that never sources your shell profile, so version managers like nvm are invisible. [.lefthookrc](.lefthookrc) restores Node for the common ones. If your setup still is not found, add its bin directory there.
+- **`npx` or Node not found:** the hook stops with install instructions. GUI git clients run hooks from a bare shell that never sources your shell profile, so version managers like nvm are invisible to them. [.lefthookrc](.lefthookrc) restores Node for the common ones — if yours is missed, add its bin directory there.
+- **`syntax error near unexpected token` on Windows:** CRLF line endings. See the re-normalize command above.

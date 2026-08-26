@@ -1,0 +1,6 @@
+# Git Bash and WSL cannot parse CRLF shell scripts, so keep these LF even when
+# checked out on Windows.
+*.sh        text eol=lf
+*.bash      text eol=lf
+.lefthookrc text eol=lf
+lefthook.yml text eol=lf
