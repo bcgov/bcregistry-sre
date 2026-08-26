@@ -15,14 +15,14 @@ echo "Setting up notifications in project: $PROJECT_ID"
 
 # 1. Create Notification Channels
 for EMAIL in "${EMAILS[@]}"; do
-  EXISTING_CHANNEL=$(gcloud beta monitoring channels list \
+  EXISTING_CHANNEL=$(gcloud monitoring channels list \
     --project="$PROJECT_ID" \
     --filter="type=\"email\" AND labels.email_address=\"$EMAIL\"" \
     --format="value(name)" | head -n 1)
 
   if [ -z "$EXISTING_CHANNEL" ]; then
     echo "Creating notification channel for $EMAIL..."
-    CHANNEL_NAME=$(gcloud beta monitoring channels create \
+    CHANNEL_NAME=$(gcloud monitoring channels create \
       --project="$PROJECT_ID" \
       --display-name="Email to $EMAIL" \
       --type=email \
@@ -110,7 +110,7 @@ for i in "${!METRIC_NAMES[@]}"; do
 EOF
 
   echo "Creating alert policy for $METRIC..."
-  gcloud alpha monitoring policies create --policy-from-file="$POLICY_FILE" --project="$PROJECT_ID" || true
+  gcloud monitoring policies create --policy-from-file="$POLICY_FILE" --project="$PROJECT_ID" || true
 done
 
 echo "========================================"
