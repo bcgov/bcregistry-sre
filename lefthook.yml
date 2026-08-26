@@ -1,5 +1,5 @@
 # lefthook.yml
-rc: .lefthookrc
+rc: ./.lefthookrc
 
 pre-commit:
   parallel: true
