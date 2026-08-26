@@ -1189,6 +1189,14 @@ prod_projects = {
       business-ar-job-proc-paid-prod = {
         roles       = ["roles/run.invoker"]
         description = "submit AR back to the SOR"
+      },
+      sa-solr-vm = {
+        roles       = ["roles/logging.logWriter", "roles/monitoring.metricWriter"]
+        description = "Service Account for Solr VM operations"
+        external_roles = [{
+          roles      = ["roles/artifactregistry.reader"]
+          project_id = "c4hnrd-tools"
+        }]
       }
     }
     pam_bindings = [
