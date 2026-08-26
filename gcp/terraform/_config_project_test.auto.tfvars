@@ -941,6 +941,14 @@ test_projects = {
       sa-solr-importer = {
         roles       = ["projects/a083gt-test/roles/rolesolrimporter"]
         description = "Service Account for solr importer services"
+      },
+      sa-solr-vm = {
+        roles       = ["roles/logging.logWriter", "roles/monitoring.metricWriter"]
+        description = "Service Account for Solr VM operations"
+        external_roles = [{
+          roles      = ["roles/artifactregistry.reader"]
+          project_id = "c4hnrd-tools"
+        }]
       }
     }
   },
