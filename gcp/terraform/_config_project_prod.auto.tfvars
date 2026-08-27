@@ -1658,6 +1658,10 @@ prod_projects = {
         members = ["jimmy.palelil@gov.bc.ca"]
       },
       {
+        role    = "roles/eventarc.admin"
+        members = ["jimmy.palelil@gov.bc.ca"]
+      },
+      {
         role    = "roles/iap.httpsResourceAccessor"
         members = ["mike.huffman@gov.bc.ca"]
       },
