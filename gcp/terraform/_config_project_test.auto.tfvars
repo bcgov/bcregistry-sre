@@ -1344,6 +1344,12 @@ test_projects = {
         ]
       },
       {
+        role = "roles/eventarc.admin"
+        members = [
+          "jimmy.palelil@gov.bc.ca"
+        ]
+      },
+      {
         role    = "roles/cloudsql.instanceUser"
         members = ["andriy.bolyachevets@gov.bc.ca"]
       },

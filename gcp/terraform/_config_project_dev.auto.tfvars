@@ -1468,6 +1468,12 @@ dev_projects = {
         ]
       },
       {
+        role = "roles/eventarc.admin"
+        members = [
+          "jimmy.palelil@gov.bc.ca"
+        ]
+      },
+      {
         role = "roles/securitycenter.assetsViewer"
         members = [
           "kial.jinnah@gov.bc.ca",

@@ -746,6 +746,12 @@ other_projects = {
         ]
       },
       {
+        role = "roles/eventarc.admin"
+        members = [
+          "jimmy.palelil@gov.bc.ca"
+        ]
+      },
+      {
         role = "roles/securitycenter.assetsViewer"
         members = [
           "max.wardle@gov.bc.ca",
