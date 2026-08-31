@@ -215,6 +215,7 @@ prod_projects = {
           "jimmy.palelil@gov.bc.ca",
           "ketaki.deodhar@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
+          "mark.ruffolo@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
@@ -315,7 +316,7 @@ prod_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "user4ca"
             database_role_assignment = {
-              readonly  = ["dietrich.wolpert@gov.bc.ca", "vysakh.menon@gov.bc.ca", "megan.a.wong@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "thayne.werdal@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
+              readonly  = ["dietrich.wolpert@gov.bc.ca", "vysakh.menon@gov.bc.ca", "megan.a.wong@gov.bc.ca", "mark.ruffolo@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "thayne.werdal@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
               readwrite = ["sa-api"]
               admin     = ["sa-db-migrate"]
             }
@@ -330,7 +331,7 @@ prod_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "notifyuser"
             database_role_assignment = {
-              readonly  = ["dietrich.wolpert@gov.bc.ca", "megan.a.wong@gov.bc.ca", "vysakh.menon@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "thayne.werdal@gov.bc.ca", "steven.chen@gov.bc.ca", "paul.adeyinka@gov.bc.ca", "eve.deng@gov.bc.ca", "omid.x.zamani@gov.bc.ca", "meng.dong@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
+              readonly  = ["dietrich.wolpert@gov.bc.ca", "megan.a.wong@gov.bc.ca", "mark.ruffolo@gov.bc.ca", "vysakh.menon@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "mark.ruffolo@gov.bc.ca", "thayne.werdal@gov.bc.ca", "steven.chen@gov.bc.ca", "paul.adeyinka@gov.bc.ca", "eve.deng@gov.bc.ca", "omid.x.zamani@gov.bc.ca", "meng.dong@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
               readwrite = ["sa-api"]
               admin     = ["sa-db-migrate"]
             }
@@ -491,6 +492,7 @@ prod_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
           "megan.a.wong@gov.bc.ca",
+          "mark.ruffolo@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
@@ -596,7 +598,7 @@ prod_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "auth"
             database_role_assignment = {
-              readonly  = ["ketaki.deodhar@gov.bc.ca", "dietrich.wolpert@gov.bc.ca", "vysakh.menon@gov.bc.ca", "jia.xu@gov.bc.ca", "sumesh.kariyil@gov.bc.ca", "megan.a.wong@gov.bc.ca", "thayne.werdal@gov.bc.ca", "anushka.halder@gov.bc.ca", "rajandeep.kaur@gov.bc.ca", "paul.adeyinka@gov.bc.ca", "eve.deng@gov.bc.ca", "kial.jinnah@gov.bc.ca"]
+              readonly  = ["ketaki.deodhar@gov.bc.ca", "dietrich.wolpert@gov.bc.ca", "vysakh.menon@gov.bc.ca", "jia.xu@gov.bc.ca", "sumesh.kariyil@gov.bc.ca", "megan.a.wong@gov.bc.ca", "mark.ruffolo@gov.bc.ca","thayne.werdal@gov.bc.ca", "anushka.halder@gov.bc.ca", "rajandeep.kaur@gov.bc.ca", "paul.adeyinka@gov.bc.ca", "eve.deng@gov.bc.ca", "kial.jinnah@gov.bc.ca"]
               readwrite = ["sa-api", "omid.x.zamani@gov.bc.ca", "steven.chen@gov.bc.ca", "meng.dong@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }
@@ -611,7 +613,7 @@ prod_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "pay"
             database_role_assignment = {
-              readonly  = ["ketaki.deodhar@gov.bc.ca", "dietrich.wolpert@gov.bc.ca", "vysakh.menon@gov.bc.ca", "jia.xu@gov.bc.ca", "sumesh.kariyil@gov.bc.ca", "megan.a.wong@gov.bc.ca", "thayne.werdal@gov.bc.ca", "anushka.halder@gov.bc.ca", "rajandeep.kaur@gov.bc.ca", "paul.adeyinka@gov.bc.ca"]
+              readonly  = ["ketaki.deodhar@gov.bc.ca", "dietrich.wolpert@gov.bc.ca", "vysakh.menon@gov.bc.ca", "jia.xu@gov.bc.ca", "sumesh.kariyil@gov.bc.ca", "megan.a.wong@gov.bc.ca", "mark.ruffolo@gov.bc.ca", "thayne.werdal@gov.bc.ca", "anushka.halder@gov.bc.ca", "rajandeep.kaur@gov.bc.ca", "paul.adeyinka@gov.bc.ca"]
               readwrite = ["sa-api", "sa-job", "steven.chen@gov.bc.ca", "meng.dong@gov.bc.ca", "omid.x.zamani@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }
@@ -1036,6 +1038,7 @@ prod_projects = {
                 "david.li@gov.bc.ca",
                 "dietrich.wolpert@gov.bc.ca",
                 "megan.a.wong@gov.bc.ca",
+                "mark.ruffolo@gov.bc.ca",
                 "kial.jinnah@gov.bc.ca",
                 "eve.deng@gov.bc.ca",
                 "david.mckinnon@gov.bc.ca",
