@@ -1725,6 +1725,11 @@ prod_projects = {
       sa-job = {
         roles       = ["projects/bcrbk9-prod/roles/rolejob", "roles/pubsub.publisher", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
+        resource_roles = [{
+          resource      = "projects/bcrbk9-prod/serviceAccounts/sa-job@bcrbk9-prod.iam.gserviceaccount.com"
+          roles         = ["roles/iam.serviceAccountTokenCreator"]
+          resource_type = "sa_iam_member"
+        }]
       },
       sa-api = {
         roles       = ["projects/bcrbk9-prod/roles/roleapi", "roles/pubsub.publisher", "roles/storage.admin", "roles/storage.objectCreator", "roles/cloudsql.instanceUser"]
