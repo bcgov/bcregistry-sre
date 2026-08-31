@@ -819,6 +819,11 @@ other_projects = {
       sa-job = {
         roles       = ["projects/bcrbk9-tools/roles/rolejob", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
+        resource_roles = [{
+          resource      = "projects/bcrbk9-tools/serviceAccounts/sa-job@bcrbk9-tools.iam.gserviceaccount.com"
+          roles         = ["roles/iam.serviceAccountTokenCreator"]
+          resource_type = "sa_iam_member"
+        }]
       },
       sa-api = {
         roles       = ["projects/bcrbk9-tools/roles/roleapi", "roles/storage.admin", "roles/cloudsql.instanceUser"]

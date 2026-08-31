@@ -1398,6 +1398,11 @@ test_projects = {
       sa-job = {
         roles       = ["projects/bcrbk9-test/roles/rolejob", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
+        resource_roles = [{
+          resource      = "projects/bcrbk9-test/serviceAccounts/sa-job@bcrbk9-test.iam.gserviceaccount.com"
+          roles         = ["roles/iam.serviceAccountTokenCreator"]
+          resource_type = "sa_iam_member"
+        }]
       },
       sa-api = {
         roles       = ["projects/bcrbk9-test/roles/roleapi", "roles/pubsub.publisher", "roles/storage.admin", "roles/storage.objectCreator", "roles/cloudsql.instanceUser"]
