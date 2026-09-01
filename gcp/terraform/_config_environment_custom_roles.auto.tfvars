@@ -463,8 +463,8 @@ environments = {
   }
   "prod" = {
     database_role_assignment = {
-      readonly  = ["siddharth.chaturvedi@gov.bc.ca"]
-      readwrite = ["thor.wolpert@gov.bc.ca"]
+      readonly  = []
+      readwrite = ["thor.wolpert@gov.bc.ca", "siddharth.chaturvedi@gov.bc.ca"]
       admin     = []
     }
     environment_custom_roles = {
