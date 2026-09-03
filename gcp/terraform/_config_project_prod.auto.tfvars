@@ -1661,6 +1661,14 @@ prod_projects = {
         ]
       },
       {
+        role    = "roles/monitoring.cloudConsoleIncidentViewer"
+        members = ["pam.sherwood@gov.bc.ca"]
+      },
+      {
+        role    = "roles/stackdriver.accounts.viewer"
+        members = ["pam.sherwood@gov.bc.ca"]
+      },
+      {
         role    = "projects/bcrbk9-prod/roles/serviceuser"
         members = ["mike.huffman@gov.bc.ca"]
       },
