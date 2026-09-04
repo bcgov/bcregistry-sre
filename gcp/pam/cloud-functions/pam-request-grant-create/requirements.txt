@@ -1,16 +1,16 @@
-functions-framework==3.8.2
+functions-framework==3.10.2
 
 # Core Google auth + APIs
-google-api-python-client==2.155.0
-google-cloud-secret-manager==2.23.0
-google-cloud-privilegedaccessmanager==0.1.5
-google-cloud-resource-manager==1.14.0
-google-cloud-scheduler==2.15.0
+google-api-python-client==2.199.0
+google-cloud-secret-manager==2.30.0
+google-cloud-privilegedaccessmanager==0.4.1
+google-cloud-resource-manager==1.18.0
+google-cloud-scheduler==2.20.0
 
 # Database
-cloud-sql-python-connector==1.15.0
+cloud-sql-python-connector==1.22.0
 pg8000==1.31.5
 sqlalchemy==2.0.36
 
 # HTTP (only if you explicitly use requests)
-requests==2.33.0
+requests==2.34.2
