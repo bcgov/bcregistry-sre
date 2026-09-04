@@ -1338,6 +1338,14 @@ test_projects = {
         ]
       },
       {
+        role    = "roles/monitoring.cloudConsoleIncidentViewer"
+        members = ["pam.sherwood@gov.bc.ca"]
+      },
+      {
+        role    = "roles/stackdriver.accounts.viewer"
+        members = ["pam.sherwood@gov.bc.ca"]
+      },
+      {
         role = "projects/bcrbk9-test/roles/SRE"
         members = [
           "jimmy.palelil@gov.bc.ca",
