@@ -10,6 +10,7 @@ BC Registry Application Inventory & Tech Stack Scanner
 
 Generates a consolidated table of all applications across managed bcgov repos.
 Includes app type detection, Python version from Dockerfile, dependency tracking,
+EOL base-image detection (Debian/Ubuntu/Alpine suites, Python & Node runtimes),
 and EOL warnings for both app-level inventory and per-package detail reports.
 
 Usage:
@@ -104,6 +105,38 @@ EOL_VERSIONS = {
 
 # Python versions EOL as of 2026 (3.9 went EOL Oct 2025)
 PYTHON_EOL_MAX = (3, 9)
+
+# Debian suite EOL dates (release -> date). None = still active.
+DEBIAN_EOL = {
+    "stretch": "2022-06-30",
+    "buster": "2024-06-30",
+    "bullseye": "2026-08-31",
+    "bookworm": "2028-06-30",
+    "trixie": None,
+}
+
+# Ubuntu codename EOL dates (release -> date). None = still active.
+UBUNTU_EOL = {
+    "bionic": "2023-05-31",
+    "focal": "2025-05-29",
+    "jammy": "2027-06-01",
+    "noble": "2029-05-31",
+}
+
+# Alpine EOL dates (2-year support window, version -> date). None = still active.
+ALPINE_EOL = {
+    "3.15": "2022-11-01",
+    "3.16": "2023-05-23",
+    "3.17": "2023-11-22",
+    "3.18": "2025-05-09",
+    "3.19": "2025-11-01",
+    "3.20": "2026-05-01",
+    "3.21": None,
+    "3.22": None,
+}
+
+DEBIAN_SUITES = set(DEBIAN_EOL) | {"sid"}
+UBUNTU_CODENAMES = set(UBUNTU_EOL)
 
 # Key Python packages to track in the detail report
 PYTHON_KEY_DEPS = [
@@ -213,6 +246,44 @@ def check_eol(package: str, version_str: str) -> tuple[bool, str]:
             if pkg_major <= eol_major:
                 return True, note
     return False, ""
+
+
+def check_image_eol(img: dict) -> list[tuple[str, str]]:
+    """Check a parsed base image for EOL conditions.
+
+    Returns a list of (version_label, note) pairs — one per EOL issue, so an
+    image like python:3.9-bullseye can report both the expired OS base and the
+    EOL Python runtime.
+    """
+    rows: list[tuple[str, str]] = []
+    today = TODAY
+
+    distro_map = {"debian": (DEBIAN_EOL, "Debian"), "ubuntu": (UBUNTU_EOL, "Ubuntu")}
+    os_kind, os_ver = img.get("os_kind"), img.get("os")
+    if os_kind in distro_map:
+        eol_map, family = distro_map[os_kind]
+        date = eol_map.get(os_ver)  # type: ignore[index]
+        if date and today >= date:
+            rows.append((os_ver or "", f"{family} {os_ver} EOL {date} — expired base image"))
+    elif os_kind == "alpine" and os_ver:
+        date = ALPINE_EOL.get(os_ver)
+        if date and today >= date:
+            rows.append((os_ver, f"Alpine {os_ver} EOL {date} — expired base image"))
+
+    repo, ver = img.get("repo"), img.get("version")
+    if repo == "python" and ver:
+        mm = extract_major_minor(ver)
+        if mm and (mm[0] < PYTHON_EOL_MAX[0] or (
+            mm[0] == PYTHON_EOL_MAX[0]
+            and (mm[1] is None or mm[1] <= PYTHON_EOL_MAX[1])
+        )):
+            rows.append((ver, f"Python runtime {ver} EOL — pin a supported base image"))
+    if repo == "node" and ver:
+        is_eol, note = check_eol("node", ver)
+        if is_eol:
+            rows.append((ver, note))
+
+    return rows
 
 
 # ── GitHub API helpers ────────────────────────────────────────────────────────
@@ -473,6 +544,79 @@ def parse_dockerfile(content: str) -> str | None:
     return None
 
 
+def parse_dockerfile_images(content: str) -> list[dict]:
+    """Parse every FROM line in a Dockerfile into structured base-image info.
+
+    Handles versioned tags (python:3.13-bullseye-slim, node:18-bookworm, ...),
+    bare distro images (debian:bookworm, ubuntu:jammy), alpine tags
+    (alpine:3.20, python:alpine3.20), --platform= args and multi-stage
+    `FROM image AS name` aliases.
+
+    Returns a list of dicts with keys:
+      image   — the full image reference (e.g. "python:3.13-bullseye-slim")
+      repo    — basename of the image repo (e.g. "python", "node", "debian")
+      version — leading version token from the tag (e.g. "3.13", "18", "1.25")
+      os_kind — "debian" | "ubuntu" | "alpine" | None
+      os      — distro codename (e.g. "bullseye", "jammy") or alpine version
+      variant — e.g. "slim"
+    """
+    parsed = []
+    for raw in content.splitlines():
+        line = raw.strip()
+        if not line.upper().startswith("FROM "):
+            continue
+        tokens = [t for t in line.split()[1:] if not t.startswith("--")]
+        if not tokens:
+            continue
+        image = tokens[0]
+        if "${" in image or image.lower() in ("scratch", "busybox"):
+            continue
+
+        name, _, tag = image.lower().rpartition(":")
+        if not tag:
+            name, tag = image.lower(), "latest"
+        repo = name.split("/")[-1]
+        tokens = tag.split("-") if tag != "latest" else []
+
+        version = next(
+            (t for t in tokens if re.match(r"^\d+(\.\d+)*$", t)),
+            None,
+        )
+        os_kind, os_ver, variant = None, None, None
+        for token in tokens:
+            if token in DEBIAN_SUITES and os_kind in (None, "debian"):
+                os_kind, os_ver = "debian", token
+            elif token in UBUNTU_CODENAMES and os_kind in (None, "ubuntu"):
+                os_kind, os_ver = "ubuntu", token
+            elif token.startswith("alpine"):
+                m = re.search(r"(\d+(?:\.\d+)*)", token)
+                os_kind, os_ver = "alpine", (m.group(1) if m else token)
+            elif token == "slim":
+                variant = "slim"
+
+        # Bare distro images, e.g. debian:bullseye / ubuntu:jammy / alpine:3.20
+        if os_kind is None and repo in ("debian", "ubuntu"):
+            if tag in DEBIAN_SUITES:
+                os_kind, os_ver = "debian", tag
+            elif tag in UBUNTU_CODENAMES:
+                os_kind, os_ver = "ubuntu", tag
+        if os_kind is None and repo == "alpine":
+            m = re.search(r"(\d+(?:\.\d+)*)", tag)
+            os_kind, os_ver = "alpine", (m.group(1) if m else tag)
+
+        parsed.append(
+            {
+                "image": image,
+                "repo": repo,
+                "version": version,
+                "os_kind": os_kind,
+                "os": os_ver,
+                "variant": variant,
+            }
+        )
+    return parsed
+
+
 def parse_workflow_node_version(content: str) -> str | None:
     """Extract a Node.js version hint from a CI workflow YAML.
 
@@ -532,7 +676,9 @@ def detect_app_type(path: str, deps: dict) -> str:
     return "service"
 
 
-def format_tech_stack(deps: dict, python_version: str | None = None) -> str:
+def format_tech_stack(
+    deps: dict, python_version: str | None = None, images: list[dict] | None = None
+) -> str:
     found = []
     is_node = any(
         k in deps for k in ["nuxt", "vue", "react", "next", "typescript", "vite"]
@@ -608,6 +754,11 @@ def format_tech_stack(deps: dict, python_version: str | None = None) -> str:
             else f"{pkg.capitalize()}"
         )
         found.append(f"**{label} (EOL)**" if is_eol else label)
+
+    for img in images or []:
+        if check_image_eol(img):
+            img_ref = img.get("image", "")
+            found.append(f"**{img_ref} (EOL)**")
 
     return ", ".join(found)
 
@@ -731,10 +882,14 @@ def scan_repo(owner: str, repo: str) -> list[dict]:
         elif basename == "Dockerfile" or re.match(r"Dockerfile\.\w+", basename):
             content = get_file_content(owner, repo, path)
             if content:
+                images = parse_dockerfile_images(content)
                 py_ver = parse_dockerfile(content)
-                if py_ver:
+                if images or py_ver:
                     if sp not in subprojects:
                         subprojects[sp] = {}
+                if images:
+                    subprojects[sp]["__images__"] = images
+                if py_ver:
                     subprojects[sp]["__python_version__"] = py_ver
 
     def lookup_catalog(sp: str) -> dict:
@@ -765,6 +920,7 @@ def scan_repo(owner: str, repo: str) -> list[dict]:
         if should_exclude(repo, sp):
             continue
         python_version = deps.pop("__python_version__", None)
+        images = deps.pop("__images__", [])
         # Fall back to pyproject.toml requires-python if no Dockerfile was found
         python_requires = deps.pop("__python_requires__", None)
         if not python_version and python_requires:
@@ -777,7 +933,9 @@ def scan_repo(owner: str, repo: str) -> list[dict]:
             if node_fallback:
                 deps = {**deps, "node": node_fallback}
         app_type = detect_app_type(sp, deps)
-        tech_stack = format_tech_stack(deps, python_version=python_version)
+        tech_stack = format_tech_stack(
+            deps, python_version=python_version, images=images
+        )
         github_link = (
             f"https://github.com/{owner}/{repo}/tree/HEAD/{sp}"
             if sp != "(root)"
@@ -794,6 +952,7 @@ def scan_repo(owner: str, repo: str) -> list[dict]:
                 "type": app_type,
                 "tech_stack": tech_stack,
                 "key_deps": key_deps,
+                "images": images,
                 "link": github_link,
                 "folder": sp,
             }
@@ -817,6 +976,17 @@ def write_markdown(all_apps: list[dict], filepath: str):
                         "repo": app["repo_name"],
                         "app": app["app_name"],
                         "package": pkg,
+                        "version": ver,
+                        "note": note,
+                    }
+                )
+        for img in app.get("images", []):
+            for ver, note in check_image_eol(img):
+                eol_rows.append(
+                    {
+                        "repo": app["repo_name"],
+                        "app": app["app_name"],
+                        "package": f"base image {img.get('image', '')}",
                         "version": ver,
                         "note": note,
                     }
@@ -857,7 +1027,7 @@ def write_markdown(all_apps: list[dict], filepath: str):
         repos = sorted(set(a["repo_name"] for a in all_apps))
         for repo in repos:
             repo_apps = [a for a in all_apps if a["repo_name"] == repo]
-            # Only include apps that have at least one EOL package
+            # Only include apps that have at least one EOL package or image
             apps_with_eol = []
             for app in sorted(repo_apps, key=lambda x: x["app_name"]):
                 eol_pkgs = {
@@ -865,23 +1035,32 @@ def write_markdown(all_apps: list[dict], filepath: str):
                     for pkg, ver in app["key_deps"].items()
                     if check_eol(pkg, ver)[0]
                 }
-                if eol_pkgs:
-                    apps_with_eol.append((app, eol_pkgs))
+                eol_imgs = [
+                    (img.get("image", ""), ver, note)
+                    for img in app.get("images", [])
+                    for ver, note in check_image_eol(img)
+                ]
+                if eol_pkgs or eol_imgs:
+                    apps_with_eol.append((app, eol_pkgs, eol_imgs))
 
             if not apps_with_eol:
                 continue
 
-            eol_count = sum(len(pkgs) for _, pkgs in apps_with_eol)
+            eol_count = sum(
+                len(pkgs) + len(imgs) for _, pkgs, imgs in apps_with_eol
+            )
             f.write(
                 f"### [{repo}](https://github.com/bcgov/{repo}) — ⛔ {eol_count} EOL\n\n"
             )
-            for app, eol_pkgs in apps_with_eol:
+            for app, eol_pkgs, eol_imgs in apps_with_eol:
                 f.write(f"**[{app['app_name']}]({app['link']})** ({app['type']})\n\n")
                 f.write("| Package | Version | Note |\n")
                 f.write("|:--------|:--------|:-----|\n")
                 for pkg, ver in sorted(eol_pkgs.items()):
                     _, note = check_eol(pkg, ver)
                     f.write(f"| {pkg} | `{ver}` | {note} |\n")
+                for img, ver, note in eol_imgs:
+                    f.write(f"| base image **{img}** | `{ver}` | {note} |\n")
                 f.write("\n")
 
 
@@ -914,6 +1093,17 @@ def write_eol_csv(all_apps: list[dict], filepath: str):
                         "repo": app["repo_name"],
                         "app": app["app_name"],
                         "package": pkg,
+                        "version": ver,
+                        "note": note,
+                    }
+                )
+        for img in app.get("images", []):
+            for ver, note in check_image_eol(img):
+                rows.append(
+                    {
+                        "repo": app["repo_name"],
+                        "app": app["app_name"],
+                        "package": f"base image {img.get('image', '')}",
                         "version": ver,
                         "note": note,
                     }
@@ -974,6 +1164,11 @@ def main():
         for a in all_apps
         for pkg, ver in a["key_deps"].items()
         if check_eol(pkg, ver)[0]
+    ) + sum(
+        1
+        for a in all_apps
+        for img in a.get("images", [])
+        if check_image_eol(img)
     )
     print(f"Done!")
     print(f"  Apps found       : {len(all_apps)}")
