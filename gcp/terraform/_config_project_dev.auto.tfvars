@@ -1446,6 +1446,36 @@ dev_projects = {
   "strr-dev" = {
     project_id = "bcrbk9-dev"
     env        = "dev"
+    custom_roles = {
+      rolestrrbucketmetadata = {
+        title       = "STRR Bucket Metadata Manager"
+        description = "Manage metadata of existing STRR buckets through Terraform."
+        permissions = [
+          "storage.buckets.get",
+          "storage.buckets.update",
+        ]
+      }
+    }
+    resource_iam_bindings = [
+      {
+        resource      = "strr_registration_documents_dev"
+        resource_type = "storage_bucket"
+        roles         = ["projects/bcrbk9-dev/roles/rolestrrbucketmetadata"]
+        members       = ["serviceAccount:sa-strr-infra@bcrbk9-tools.iam.gserviceaccount.com"]
+      },
+      {
+        resource      = "strr_bulk_validation_requests_dev"
+        resource_type = "storage_bucket"
+        roles         = ["projects/bcrbk9-dev/roles/rolestrrbucketmetadata"]
+        members       = ["serviceAccount:sa-strr-infra@bcrbk9-tools.iam.gserviceaccount.com"]
+      },
+      {
+        resource      = "strr_bulk_validation_responses_dev"
+        resource_type = "storage_bucket"
+        roles         = ["projects/bcrbk9-dev/roles/rolestrrbucketmetadata"]
+        members       = ["serviceAccount:sa-strr-infra@bcrbk9-tools.iam.gserviceaccount.com"]
+      },
+    ]
     iam_bindings = [
       {
         role = "projects/bcrbk9-dev/roles/roledeveloper"
