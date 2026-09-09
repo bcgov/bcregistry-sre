@@ -1,0 +1,56 @@
+name: Frontend deployment source tests
+
+on:
+  pull_request:
+    paths:
+      - ".github/actions/frontend-deploy/**"
+      - ".github/workflows/frontend-cd.yaml"
+      - ".github/workflows/frontend-deploy-ci.yaml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shared-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Create app directories
+        run: mkdir -p "$RUNNER_TEMP/legacy" "$RUNNER_TEMP/bundled" "$RUNNER_TEMP/missing"
+      - name: Package an app without shared source
+        uses: ./.github/actions/frontend-deploy
+        with:
+          working-directory: ${{ runner.temp }}/legacy
+      - name: Verify existing app layout
+        run: |
+          test ! -e "$RUNNER_TEMP/legacy/.frontend-shared-source.tar"
+          sh .github/actions/frontend-deploy/files/restore-shared-source.sh "$RUNNER_TEMP/legacy"
+          test -f "$RUNNER_TEMP/legacy/Dockerfile-build"
+      - name: Package shared source
+        uses: ./.github/actions/frontend-deploy
+        with:
+          working-directory: ${{ runner.temp }}/bundled
+          shared-source-directory: .github/actions/frontend-deploy
+      - name: Verify restoration uses the bundled commit
+        run: |
+          source_file=.github/actions/frontend-deploy/files/Dockerfile-build
+          git show "HEAD:$source_file" > "$RUNNER_TEMP/expected"
+          echo 'changed after packaging' > "$source_file"
+          sh .github/actions/frontend-deploy/files/restore-shared-source.sh "$RUNNER_TEMP/bundled"
+          cmp "$RUNNER_TEMP/expected" "$RUNNER_TEMP/$source_file"
+          echo 'invalid archive' > "$RUNNER_TEMP/bundled/.frontend-shared-source.tar"
+          if sh .github/actions/frontend-deploy/files/restore-shared-source.sh "$RUNNER_TEMP/bundled"; then
+            echo 'A corrupt shared-source archive must fail the build'
+            exit 1
+          fi
+      - name: Reject missing shared source
+        id: missing
+        continue-on-error: true
+        uses: ./.github/actions/frontend-deploy
+        with:
+          working-directory: ${{ runner.temp }}/missing
+          shared-source-directory: missing-shared-source
+      - name: Verify missing source failed
+        if: steps.missing.outcome != 'failure'
+        run: exit 1
