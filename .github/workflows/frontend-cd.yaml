@@ -21,6 +21,10 @@ on:
       working_directory:
         type: string
         default: "."
+      shared_source_directory:
+        description: "Repository-relative directory to bundle from the same commit as the app"
+        type: string
+        default: ""
       redeploy:
         type: string
         default: "false"
@@ -99,6 +103,7 @@ jobs:
         uses: bcgov/bcregistry-sre/.github/actions/frontend-deploy@main
         with:
           working-directory: ${{ inputs.working_directory }}
+          shared-source-directory: ${{ inputs.shared_source_directory }}
 
       # GCP authentication
       - name: "Authenticate to Google Cloud"

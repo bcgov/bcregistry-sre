@@ -92,6 +92,9 @@ steps:
     docker create --name "${_APP_NAME}" "${IMAGE_PATH}:${_DEPLOYMENT_ENV}"
     docker cp "${_APP_NAME}:/app/." /workspace/app
 
+    # Restore shared source from the selected image, including promotions/redeploys.
+    sh restore-shared-source.sh /workspace/app
+
     # Copy Firebase config to base image content
     cp firebase-*.json /workspace/app
 

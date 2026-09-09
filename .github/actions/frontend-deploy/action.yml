@@ -1,10 +1,14 @@
 name: "Frontend application deployment files"
-description: ""
+description: "Copy deployment files and optionally bundle shared source from the checked-out commit"
 
 inputs:
   working-directory:
     required: false
     default: "."
+  shared-source-directory:
+    description: "Repository-relative directory to bundle from the checked-out commit"
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -16,3 +20,12 @@ runs:
         ls -l ${{ github.action_path }}/files
         cp  ${{ github.action_path }}/files/* ${{ inputs.working-directory }}
         ls -l ${{ inputs.working-directory }}
+    - name: Bundle shared source
+      if: inputs.shared-source-directory != ''
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        WORKING_DIRECTORY: ${{ inputs.working-directory }}
+        SHARED_SOURCE_DIRECTORY: ${{ inputs.shared-source-directory }}
+      run: |
+        git archive --format=tar HEAD -- "$SHARED_SOURCE_DIRECTORY" > "$WORKING_DIRECTORY/.frontend-shared-source.tar"
