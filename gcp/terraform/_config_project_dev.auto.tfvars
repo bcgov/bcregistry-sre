@@ -760,6 +760,7 @@ dev_projects = {
       {
         role = "roles/compute.osAdminLogin"
         members = [
+          "kial.jinnah@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "paul.adeyinka@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -774,6 +775,7 @@ dev_projects = {
       {
         role = "roles/iap.tunnelResourceAccessor"
         members = [
+          "kial.jinnah@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "paul.adeyinka@gov.bc.ca",
           "meng.dong@gov.bc.ca",
