@@ -10,7 +10,7 @@ google-cloud-scheduler==2.15.0
 # Database
 cloud-sql-python-connector==1.15.0
 pg8000==1.31.5
-sqlalchemy==2.0.36
+sqlalchemy==2.0.52
 
 # HTTP (only if you explicitly use requests)
 requests==2.33.0
