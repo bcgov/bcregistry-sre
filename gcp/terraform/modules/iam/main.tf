@@ -113,6 +113,9 @@ resource "google_storage_bucket_iam_member" "resource_iam_members" {
   bucket = each.value.resource
   role   = each.value.role
   member = each.value.is_managed_sa ? "serviceAccount:${google_service_account.sa[each.value.sa_name].email}" : each.value.member
+
+  # Custom role names arrive as strings in tfvars, so their creation needs an explicit dependency.
+  depends_on = [google_project_iam_custom_role.custom_roles]
 }
 
 resource "google_secret_manager_secret_iam_member" "resource_iam_members" {
