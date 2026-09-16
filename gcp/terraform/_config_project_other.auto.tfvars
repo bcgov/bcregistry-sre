@@ -430,6 +430,14 @@ other_projects = {
       sa-solr-importer = {
         roles       = ["projects/yfjq17-tools/roles/rolesolrimporter"]
         description = "Service Account for solr importer services"
+      },
+      sa-solr-vm = {
+        roles       = ["roles/logging.logWriter", "roles/monitoring.metricWriter"]
+        description = "Service Account for Solr VM operations"
+        external_roles = [{
+          roles      = ["roles/artifactregistry.reader"]
+          project_id = "c4hnrd-tools"
+        }]
       }
     }
   },
@@ -667,6 +675,14 @@ other_projects = {
             resource_type = "sa_iam_member"
           }
         ]
+      },
+      sa-solr-vm = {
+        roles       = ["roles/logging.logWriter", "roles/monitoring.metricWriter"]
+        description = "Service Account for Solr VM operations"
+        external_roles = [{
+          roles      = ["roles/artifactregistry.reader"]
+          project_id = "c4hnrd-tools"
+        }]
       }
     }
   },
