@@ -403,7 +403,7 @@ jobs:
 
     services:
       postgres:
-        image: ghcr.io/bcgov/postgres15-postgis-anon
+        image: ghcr.io/bcgov/postgres18-postgis-anon
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
