@@ -602,6 +602,14 @@ test_projects = {
       sa-solr-importer = {
         roles       = ["projects/yfjq17-test/roles/rolesolrimporter"]
         description = "Service Account for solr importer services"
+      },
+      sa-solr-vm = {
+        roles       = ["roles/logging.logWriter", "roles/monitoring.metricWriter"]
+        description = "Service Account for Solr VM operations"
+        external_roles = [{
+          roles      = ["roles/artifactregistry.reader"]
+          project_id = "c4hnrd-tools"
+        }]
       }
     }
   },
@@ -669,6 +677,7 @@ test_projects = {
       {
         role = "roles/compute.osAdminLogin"
         members = [
+          "kial.jinnah@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "paul.adeyinka@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -687,6 +696,7 @@ test_projects = {
       {
         role = "roles/iap.tunnelResourceAccessor"
         members = [
+          "kial.jinnah@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "paul.adeyinka@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -1211,6 +1221,14 @@ test_projects = {
       sa-queue = {
         roles       = ["projects/k973yf-test/roles/rolequeue"]
         description = "Service Account for running queue services"
+      },
+      sa-solr-vm = {
+        roles       = ["roles/logging.logWriter", "roles/monitoring.metricWriter"]
+        description = "Service Account for Solr VM operations"
+        external_roles = [{
+          roles      = ["roles/artifactregistry.reader"]
+          project_id = "c4hnrd-tools"
+        }]
       }
     }
   },
