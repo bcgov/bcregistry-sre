@@ -1,0 +1,30 @@
+name: Publish PostgreSQL CI image (temporary)
+
+on:
+  push:
+    branches:
+      - postgres-18-ci
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: images/postgres-ci
+          push: true
+          tags: ghcr.io/bcgov/postgres18-postgis-anon:latest
