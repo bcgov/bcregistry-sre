@@ -683,6 +683,14 @@ dev_projects = {
       sa-solr-importer = {
         roles       = ["projects/yfjq17-dev/roles/rolesolrimporter"]
         description = "Service Account for solr importer services"
+      },
+      sa-solr-vm = {
+        roles       = ["roles/logging.logWriter", "roles/monitoring.metricWriter"]
+        description = "Service Account for Solr VM operations"
+        external_roles = [{
+          roles      = ["roles/artifactregistry.reader"]
+          project_id = "c4hnrd-tools"
+        }]
       }
     }
   },
@@ -760,6 +768,7 @@ dev_projects = {
       {
         role = "roles/compute.osAdminLogin"
         members = [
+          "kial.jinnah@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "paul.adeyinka@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -774,6 +783,7 @@ dev_projects = {
       {
         role = "roles/iap.tunnelResourceAccessor"
         members = [
+          "kial.jinnah@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "paul.adeyinka@gov.bc.ca",
           "meng.dong@gov.bc.ca",
@@ -1290,6 +1300,14 @@ dev_projects = {
       sa-queue = {
         roles       = ["projects/k973yf-dev/roles/rolequeue"]
         description = "Service Account for running queue services"
+      },
+      sa-solr-vm = {
+        roles       = ["roles/logging.logWriter", "roles/monitoring.metricWriter"]
+        description = "Service Account for Solr VM operations"
+        external_roles = [{
+          roles      = ["roles/artifactregistry.reader"]
+          project_id = "c4hnrd-tools"
+        }]
       }
     }
   },
@@ -1446,6 +1464,36 @@ dev_projects = {
   "strr-dev" = {
     project_id = "bcrbk9-dev"
     env        = "dev"
+    custom_roles = {
+      rolestrrbucketmetadata = {
+        title       = "STRR Bucket Metadata Manager"
+        description = "Manage metadata of existing STRR buckets through Terraform."
+        permissions = [
+          "storage.buckets.get",
+          "storage.buckets.update",
+        ]
+      }
+    }
+    resource_iam_bindings = [
+      {
+        resource      = "strr_registration_documents_dev"
+        resource_type = "storage_bucket"
+        roles         = ["projects/bcrbk9-dev/roles/rolestrrbucketmetadata"]
+        members       = ["serviceAccount:sa-strr-infra@bcrbk9-tools.iam.gserviceaccount.com"]
+      },
+      {
+        resource      = "strr_bulk_validation_requests_dev"
+        resource_type = "storage_bucket"
+        roles         = ["projects/bcrbk9-dev/roles/rolestrrbucketmetadata"]
+        members       = ["serviceAccount:sa-strr-infra@bcrbk9-tools.iam.gserviceaccount.com"]
+      },
+      {
+        resource      = "strr_bulk_validation_responses_dev"
+        resource_type = "storage_bucket"
+        roles         = ["projects/bcrbk9-dev/roles/rolestrrbucketmetadata"]
+        members       = ["serviceAccount:sa-strr-infra@bcrbk9-tools.iam.gserviceaccount.com"]
+      },
+    ]
     iam_bindings = [
       {
         role = "projects/bcrbk9-dev/roles/roledeveloper"

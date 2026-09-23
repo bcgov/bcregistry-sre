@@ -220,6 +220,28 @@ Changes to these files affect resources in multiple workspaces. After modifying 
 ./tf.sh apply all
 ```
 
+## STRR DEV bucket adoption (REGBACKLOG-336)
+
+The `strr-dev` configuration grants `sa-strr-infra@bcrbk9-tools.iam.gserviceaccount.com`
+the project custom role `rolestrrbucketmetadata` on these existing buckets only:
+
+- `strr_registration_documents_dev`
+- `strr_bulk_validation_requests_dev`
+- `strr_bulk_validation_responses_dev`
+
+The role contains `storage.buckets.get` and `storage.buckets.update`, allowing Terraform
+to import, refresh, and update bucket metadata. It grants no object permissions,
+bucket creation/deletion, or bucket IAM management. Metadata updates include lifecycle
+and notification configuration; see [Cloud Storage permissions](https://cloud.google.com/storage/docs/access-control/iam-permissions).
+The [Google provider v6.50.0 bucket resource](https://github.com/hashicorp/terraform-provider-google/blob/v6.50.0/google/services/storage/resource_storage_bucket.go)
+uses bucket GET for refresh and PATCH for ordinary metadata updates.
+
+Review and deploy this dependency through the SRE `dev` workspace before STRR bucket
+adoption runs. The SRE deployment identity creates the custom role and updates bucket
+IAM; these administrative permissions are not granted to the STRR identity. No bucket
+metadata or objects are changed by this SRE configuration. Other environments require
+separate grants when promoted.
+
 ## Applying Changes
 
 4. After merging the new branch into main you can manually run [Terraform-GCS](https://github.com/bcgov/bcregistry-sre/blob/main/.github/workflows/terraform-gcs.yaml) github action
