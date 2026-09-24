@@ -1174,7 +1174,7 @@ dev_projects = {
     ]
     instances = [
       {
-        instance = "ppr-dev-cloudsql"
+        instance = "ppr-dev"
         databases = [
           {
             db_name = "ppr"
