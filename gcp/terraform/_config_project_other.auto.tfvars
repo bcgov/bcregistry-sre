@@ -815,8 +815,8 @@ other_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "strr"
             database_role_assignment = {
-              readonly  = ["sa-job"]
-              readwrite = ["sa-api", "jimmy.palelil@gov.bc.ca"]
+              readonly  = []
+              readwrite = ["sa-job", "sa-api", "jimmy.palelil@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }
           }
