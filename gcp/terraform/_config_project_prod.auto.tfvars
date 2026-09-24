@@ -184,8 +184,8 @@ prod_projects = {
         description = "fin_warehouse database access"
       },
       client-sql-proxy-service-accnt = {
-        roles       = ["roles/cloudsql.admin", "roles/cloudsql.client", "roles/cloudsql.editor"]
-        description = ""
+        roles       = ["roles/cloudsql.client"]
+        description = "DEPRECATED: legacy key-based cloud-sql-proxy access to fin-warehouse-prod. Owner: data warehouse platform team, managed by SRE. Retire after migration to IAM DB auth."
       }
     }
     pam_bindings = [
