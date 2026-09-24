@@ -1720,9 +1720,8 @@ prod_projects = {
                 "mike.huffman@gov.bc.ca",
                 "monica.mow@gov.bc.ca",
                 "pam.sherwood@gov.bc.ca",
-                "sa-job",
-              "sa-strr-analytics@bcrbk9-prod.iam.gserviceaccount.com"]
-              readwrite = ["sa-api", "jimmy.palelil@gov.bc.ca"]
+                "sa-strr-analytics@bcrbk9-prod.iam.gserviceaccount.com"]
+              readwrite = ["sa-job", "sa-api", "jimmy.palelil@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }
           }
