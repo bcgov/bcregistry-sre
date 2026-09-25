@@ -1060,7 +1060,7 @@ test_projects = {
     ]
     instances = [
       {
-        instance = "ppr-test-cloudsql"
+        instance = "ppr-test"
         databases = [
           {
             db_name = "ppr"
