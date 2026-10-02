@@ -320,6 +320,7 @@ test_projects = {
         resource_type = "storage_bucket"
         roles         = ["roles/storage.objectUser"]
         members = [
+          "anish.batra@gov.bc.ca",
           "jia.xu@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
         ]

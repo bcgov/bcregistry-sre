@@ -390,6 +390,14 @@ dev_projects = {
         ]
       },
       {
+        resource      = "ftp-poller-dev"
+        resource_type = "storage_bucket"
+        roles         = ["roles/storage.objectUser"]
+        members = [
+          "anish.batra@gov.bc.ca",
+        ]
+      },
+      {
         resource      = "projects/gtksf3-dev/serviceAccounts/sa-pubsub@gtksf3-dev.iam.gserviceaccount.com"
         roles         = ["roles/iam.serviceAccountTokenCreator"]
         resource_type = "sa_iam_member"
