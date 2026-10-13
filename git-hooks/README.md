@@ -41,7 +41,9 @@ regexes = [
 ]
 ```
 
-Then `pnpm install` / `npm install` (or `npx lefthook install`) once. lefthook downloads this repo into `.git/info/lefthook-remotes/` and refreshes it every 24h.
+Then run `pnpm install` / `npm install` (or `npx lefthook install`) once. lefthook downloads this repo into `.git/info/lefthook-remotes/` and refreshes it every 24h.
+
+When switching a repo over, scan its existing files with the shared rules once installed (`npx gitleaks-secret-scanner --diff-mode history` - this covers the whole git history, so it also lists secrets in old commits that have since been removed) and add allowlist entries for anything that isn't a real secret, typically test fixtures and vendored third-party JS (`libs/`, generated docs). The hook only checks changed lines, but whoever next edits one of those lines would get blocked.
 
 ### Why the `if [ ! -f ... ]` check matters
 
@@ -52,6 +54,7 @@ gitleaks can't load a config from a URL, so the shared file has to be downloaded
 - Windows: run `git config --global core.longpaths true` once. lefthook downloads all of bcregistry-sre, and some of its paths go past the 260-character Windows limit when the repo lives in a deep folder. The download then stops partway, and the check above blocks commits until it's fixed.
 - Don't put `"` inside a lefthook `run:` command. On Windows lefthook runs it as `sh -c "<run>"`, so inner double quotes break it.
 - Don't put `: ` (colon + space) in an unquoted `run:` value. It makes the whole `lefthook.yml` invalid and every commit fails.
+- Git worktrees aren't supported. In a worktree `.git` is a file, so the `.git/info/...` paths above don't exist and commits there get blocked by the check (it fails safe, it doesn't skip the scan).
 - Don't set `useDefault = true` in the repo's `.gitleaks.toml`. The shared file already does, and gitleaks errors if `path` and `useDefault` are both set.
 - If a commit is blocked by a false positive, add an allowlist entry rather than committing with `--no-verify`. If the false positive would hit other repos too, fix it here.
 
