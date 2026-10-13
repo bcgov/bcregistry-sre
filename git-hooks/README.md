@@ -49,6 +49,7 @@ gitleaks can't load a config from a URL, so the shared file has to be downloaded
 
 ### Gotchas
 
+- Windows: run `git config --global core.longpaths true` once. lefthook downloads all of bcregistry-sre, and some of its paths go past the 260-character Windows limit when the repo lives in a deep folder. The download then stops partway, and the check above blocks commits until it's fixed.
 - Don't put `"` inside a lefthook `run:` command. On Windows lefthook runs it as `sh -c "<run>"`, so inner double quotes break it.
 - Don't put `: ` (colon + space) in an unquoted `run:` value. It makes the whole `lefthook.yml` invalid and every commit fails.
 - Don't set `useDefault = true` in the repo's `.gitleaks.toml`. The shared file already does, and gitleaks errors if `path` and `useDefault` are both set.
