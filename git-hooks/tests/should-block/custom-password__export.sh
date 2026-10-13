@@ -1,0 +1,1 @@
+export DATABASE_PASSWORD=Kq9mZ2xLp4Wv

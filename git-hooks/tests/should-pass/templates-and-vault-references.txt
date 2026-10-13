@@ -1,0 +1,6 @@
+NRO_PASSWORD=[PASSWORD]
+export DATABASE_PASSWORD="<password>"
+"raw": "grant_type=password&username={{userid}}&password={{password}}"
+PG_PASSWORD="op://vault/item/password"
+ORACLE_PASSWORD=op://vault/oracle/password
+DB_PASSWORD=${DATABASE_PASSWORD}
