@@ -1,0 +1,63 @@
+# Shared git hook rules
+
+One place to maintain the [gitleaks](https://github.com/gitleaks/gitleaks) rules used by the bcregistry repos' pre-commit hooks (Git Hooks RFC, bcgov/entity#34619). Change a rule here and every repo using it picks it up within a day, with no PR in each repo.
+
+| File | Purpose |
+|---|---|
+| `gitleaks-base.toml` | Shared rules: gitleaks defaults plus the `hardcoded-password` and `custom-password` rules, and common allowlists (lockfiles, placeholders). |
+| `lefthook-remote.yml` | Empty on purpose. Repos point lefthook `remotes` at it so this repo gets fetched without merging bcregistry-sre's own `lefthook.yml` into theirs. |
+| `tests/` | Samples that must be blocked / must pass. CI runs them on every change here (`.github/workflows/gitleaks-base-test.yaml`). |
+
+## Using it in a repo (lefthook)
+
+`lefthook.yml`:
+
+```yaml
+pre-commit:
+  commands:
+    secret-scan:
+      tags: [security]
+      run: if [ ! -f .git/info/lefthook-remotes/bcregistry-sre-main/git-hooks/gitleaks-base.toml ]; then echo Shared gitleaks rules missing - run npx lefthook install; exit 1; fi; npx --yes gitleaks-secret-scanner
+
+remotes:
+  - git_url: https://github.com/bcgov/bcregistry-sre
+    ref: main
+    refetch_frequency: 24h
+    configs:
+      - git-hooks/lefthook-remote.yml
+```
+
+`.gitleaks.toml` (only the repo's own exceptions go here):
+
+```toml
+[extend]
+path = ".git/info/lefthook-remotes/bcregistry-sre-main/git-hooks/gitleaks-base.toml"
+
+[allowlist]
+description = "Repo-specific false positives"
+regexes = [
+  # e.g. document storage keys in fixtures
+  '''[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\.pdf''',
+]
+```
+
+Then `pnpm install` / `npm install` (or `npx lefthook install`) once. lefthook downloads this repo into `.git/info/lefthook-remotes/` and refreshes it every 24h.
+
+### Why the `if [ ! -f ... ]` check matters
+
+gitleaks can't load a config from a URL, so the shared file has to be downloaded first. If it isn't there (fresh clone with no network yet), the repo's `.gitleaks.toml` extends a missing file, gitleaks loads **no rules at all**, and every commit "passes". The check blocks the commit with a message instead. Keep it, and keep the secret-scan command in the repo's own `lefthook.yml` rather than in a remote config, for the same reason: if the remote isn't downloaded, a remote-only hook doesn't exist and nothing gets scanned.
+
+### Gotchas
+
+- Don't put `"` inside a lefthook `run:` command. On Windows lefthook runs it as `sh -c "<run>"`, so inner double quotes break it.
+- Don't put `: ` (colon + space) in an unquoted `run:` value. It makes the whole `lefthook.yml` invalid and every commit fails.
+- Don't set `useDefault = true` in the repo's `.gitleaks.toml`. The shared file already does, and gitleaks errors if `path` and `useDefault` are both set.
+- If a commit is blocked by a false positive, add an allowlist entry rather than committing with `--no-verify`. If the false positive would hit other repos too, fix it here.
+
+## Changing the shared rules
+
+1. Edit `gitleaks-base.toml`.
+2. Add a sample to `tests/should-block/` (named `<rule-id>__<anything>`, so the test checks the right rule fires) or `tests/should-pass/`.
+3. Open a PR. The test workflow must pass. Remember this reaches every repo using it.
+
+Repos using the `pre-commit` framework instead of lefthook (e.g. sbc-pay, the schema repos) aren't covered by this yet.

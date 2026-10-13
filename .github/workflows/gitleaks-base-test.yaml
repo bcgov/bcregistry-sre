@@ -1,0 +1,58 @@
+name: Shared gitleaks rules test
+
+on:
+  pull_request:
+    paths:
+      - "git-hooks/**"
+      - ".github/workflows/gitleaks-base-test.yaml"
+  push:
+    branches: [main]
+    paths:
+      - "git-hooks/**"
+      - ".github/workflows/gitleaks-base-test.yaml"
+
+permissions:
+  contents: read
+
+env:
+  # Keep in step with the version gitleaks-secret-scanner runs in repo hooks.
+  GITLEAKS_VERSION: "8.30.1"
+  GITLEAKS_SHA256: "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install gitleaks
+        run: |
+          tarball="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -sSfL -o "$tarball" "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/${tarball}"
+          echo "${GITLEAKS_SHA256}  ${tarball}" | sha256sum -c -
+          tar -xzf "$tarball" gitleaks
+          sudo mv gitleaks /usr/local/bin/
+
+      # Each file in should-block/ must be flagged by the rule named before "__"
+      # in its filename; each file in should-pass/ must produce no findings.
+      - name: Run samples against git-hooks/gitleaks-base.toml
+        run: |
+          failed=0
+          for f in git-hooks/tests/should-block/*; do
+            rule="$(basename "$f")"; rule="${rule%%__*}"
+            gitleaks dir "$f" -c git-hooks/gitleaks-base.toml --no-banner \
+              --report-format json --report-path report.json >/dev/null 2>&1 || true
+            if jq -e --arg r "$rule" 'any(.[]; .RuleID == $r)' report.json >/dev/null; then
+              echo "ok    blocked by $rule: $f"
+            else
+              echo "FAIL  expected $rule to block: $f"; failed=1
+            fi
+          done
+          for f in git-hooks/tests/should-pass/*; do
+            if gitleaks dir "$f" -c git-hooks/gitleaks-base.toml --no-banner >/dev/null 2>&1; then
+              echo "ok    passed: $f"
+            else
+              echo "FAIL  expected no findings: $f"; failed=1
+            fi
+          done
+          exit "$failed"

@@ -1,0 +1,5 @@
+# Intentionally empty. Repos list this file under lefthook `remotes: configs:` so
+# lefthook fetches this repo (and git-hooks/gitleaks-base.toml with it) without
+# merging bcregistry-sre's own root lefthook.yml into theirs. The secret-scan
+# command itself stays in each repo's lefthook.yml - see git-hooks/README.md.
+{}

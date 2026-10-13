@@ -4,6 +4,10 @@ useDefault = true
 
 [allowlist]
 description = "Documentation placeholders, not real secrets"
+paths = [
+  # Sample secrets used to test git-hooks/gitleaks-base.toml
+  '''(^|/)git-hooks/tests/''',
+]
 stopwords = [
   "YOUR_API_KEY",
   "YOUR_ACCESS_TOKEN",
