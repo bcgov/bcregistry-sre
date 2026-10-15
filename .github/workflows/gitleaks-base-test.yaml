@@ -1,10 +1,11 @@
 name: Shared gitleaks rules test
 
 on:
+  # Every PR, not just git-hooks/ ones, so this can be a required check on main
+  # (a path-filtered required check never reports on other PRs and blocks them).
+  # A broken or emptied gitleaks-base.toml makes the hook pass every commit in
+  # every repo, so it must not merge without this passing.
   pull_request:
-    paths:
-      - "git-hooks/**"
-      - ".github/workflows/gitleaks-base-test.yaml"
   push:
     branches: [main]
     paths:

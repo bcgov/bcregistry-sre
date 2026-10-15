@@ -51,7 +51,8 @@ gitleaks can't load a config from a URL, so the shared file has to be downloaded
 
 ### Gotchas
 
-- Windows: run `git config --global core.longpaths true` once. lefthook downloads all of bcregistry-sre, and some of its paths go past the 260-character Windows limit when the repo lives in a deep folder. The download then stops partway, and the check above blocks commits until it's fixed.
+- Windows: run `git config --global core.longpaths true` once. lefthook downloads all of bcregistry-sre, and some of its paths go past the 260-character Windows limit when the repo lives in a deep folder (roughly, a repo folder path longer than 125 characters). The download then stops partway, and the check above blocks commits until it's fixed.
+- If commits keep failing with "Shared gitleaks rules missing" after running `npx lefthook install` (it prints "Couldn't sync" and leaves a partial download behind), set `core.longpaths` as above, delete `.git/info/lefthook-remotes`, then run `npx lefthook install` again.
 - Don't put `"` inside a lefthook `run:` command. On Windows lefthook runs it as `sh -c "<run>"`, so inner double quotes break it.
 - Don't put `: ` (colon + space) in an unquoted `run:` value. It makes the whole `lefthook.yml` invalid and every commit fails.
 - Git worktrees aren't supported. In a worktree `.git` is a file, so the `.git/info/...` paths above don't exist and commits there get blocked by the check (it fails safe, it doesn't skip the scan).
@@ -62,6 +63,6 @@ gitleaks can't load a config from a URL, so the shared file has to be downloaded
 
 1. Edit `gitleaks-base.toml`.
 2. Add a sample to `tests/should-block/` (named `<rule-id>__<anything>`, so the test checks the right rule fires) or `tests/should-pass/`.
-3. Open a PR. The test workflow must pass. Remember this reaches every repo using it.
+3. Open a PR. The test workflow must pass, and a code owner (`.github/CODEOWNERS`) must approve. Remember this reaches every repo using it: if `gitleaks-base.toml` is broken or emptied, the hook in every repo passes every commit without scanning.
 
 Repos using the `pre-commit` framework instead of lefthook (e.g. sbc-pay, the schema repos) aren't covered by this yet.
