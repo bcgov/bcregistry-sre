@@ -63,6 +63,6 @@ gitleaks can't load a config from a URL, so the shared file has to be downloaded
 
 1. Edit `gitleaks-base.toml`.
 2. Add a sample to `tests/should-block/` (named `<rule-id>__<anything>`, so the test checks the right rule fires) or `tests/should-pass/`.
-3. Open a PR. The test workflow must pass, and a code owner (`.github/CODEOWNERS`) must approve. Remember this reaches every repo using it: if `gitleaks-base.toml` is broken or emptied, the hook in every repo passes every commit without scanning.
+3. Open a PR. The test workflow must pass. Remember this reaches every repo using it: if `gitleaks-base.toml` is broken or emptied, the hook in every repo passes every commit without scanning.
 
 Repos using the `pre-commit` framework instead of lefthook (e.g. sbc-pay, the schema repos) aren't covered by this yet.
