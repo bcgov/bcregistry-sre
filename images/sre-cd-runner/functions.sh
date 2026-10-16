@@ -299,8 +299,9 @@ generate_manifest() {
     # Extract VPC settings and container environment variables.
     # ROUTE_ALL_TO_VPC selects the Serverless VPC Access connector (all egress
     # routed to the VPC); otherwise the revision uses Direct VPC egress to
-    # SUBNETWORK (+ optional NETWORK / NETWORK_TAGS), private ranges only.
-    export VPC_CONNECTOR SUBNETWORK NETWORK NETWORK_TAGS ROUTE_ALL_TO_VPC CLOUD_SQL_PROXY_SIDECAR VAL
+    # SUBNETWORK (+ optional NETWORK / NETWORK_TAGS); VPC_EGRESS sets the egress
+    # mode (default private-ranges-only).
+    export VPC_CONNECTOR SUBNETWORK NETWORK NETWORK_TAGS ROUTE_ALL_TO_VPC VPC_EGRESS CLOUD_SQL_PROXY_SIDECAR VAL
     # Read KEY=value from the vault file, stripping surrounding whitespace and
     # quotes. Vault files often quote values (e.g. CLOUD_SQL_PROXY_SIDECAR="yes"),
     # and the raw quotes would otherwise break equality checks and annotations.
@@ -310,11 +311,16 @@ generate_manifest() {
                   -e 's/^"\(.*\)"$/\1/' -e "s/^'\(.*\)'\$/\1/"
     }
     ROUTE_ALL_TO_VPC=$(_vault_value "ROUTE_ALL_TO_VPC" "./devops/vaults.${env_name}")
+    VPC_EGRESS=$(_vault_value "VPC_EGRESS" "./devops/vaults.${env_name}")
     VPC_CONNECTOR=$(_vault_value "VPC_CONNECTOR" "./devops/vaults.${env_name}")
     CLOUD_SQL_PROXY_SIDECAR=$(_vault_value "CLOUD_SQL_PROXY_SIDECAR" "./devops/vaults.${env_name}")
-    NETWORK=$(op read -n "op://CD/${env_name}/base/EGRESS_NETWORK" 2>/dev/null || true)
-    SUBNETWORK=$(op read -n "op://CD/${env_name}/base/EGRESS_SUBNETWORK" 2>/dev/null || true)
-    NETWORK_TAGS=$(op read -n "op://CD/${env_name}/base/EGRESS_NETWORK_TAGS" 2>/dev/null || true)
+    # Per-service EGRESS_* values in the service vault override the shared base ones.
+    NETWORK=$(_vault_value "EGRESS_NETWORK" "./devops/vaults.${env_name}")
+    SUBNETWORK=$(_vault_value "EGRESS_SUBNETWORK" "./devops/vaults.${env_name}")
+    NETWORK_TAGS=$(_vault_value "EGRESS_NETWORK_TAGS" "./devops/vaults.${env_name}")
+    [[ -n "${NETWORK}" ]] || NETWORK=$(op read -n "op://CD/${env_name}/base/EGRESS_NETWORK" 2>/dev/null || true)
+    [[ -n "${SUBNETWORK}" ]] || SUBNETWORK=$(op read -n "op://CD/${env_name}/base/EGRESS_SUBNETWORK" 2>/dev/null || true)
+    [[ -n "${NETWORK_TAGS}" ]] || NETWORK_TAGS=$(op read -n "op://CD/${env_name}/base/EGRESS_NETWORK_TAGS" 2>/dev/null || true)
 
     VAL=$(awk '{f1=f2=$0; sub(/=.*/,"",f1); sub(/[^=]+=/,"",f2); printf "- name: %s\n  value: %s\n",f1,f2}' "./devops/vaults.${env_name}")
 
@@ -333,6 +339,7 @@ generate_manifest() {
     _present() { if [[ -n "${1:-}" ]]; then echo "set"; else echo "<empty>"; fi; }
     echo "🔎 Manifest inputs for ${service_type}/${env_name}:"
     echo "    ROUTE_ALL_TO_VPC=${ROUTE_ALL_TO_VPC:-<empty>}"
+    echo "    VPC_EGRESS=${VPC_EGRESS:-<empty>}"
     echo "    VPC_CONNECTOR=$(_present "${VPC_CONNECTOR}")"
     echo "    NETWORK=$(_present "${NETWORK}")"
     echo "    SUBNETWORK=$(_present "${SUBNETWORK}")"
@@ -356,8 +363,8 @@ generate_manifest() {
         export NETWORK_INTERFACES
         NETWORK_INTERFACES=$(NETWORK="${NETWORK}" SUBNETWORK="${SUBNETWORK}" NETWORK_TAGS="${NETWORK_TAGS}" yq -n -o=json -I=0 \
             '({"network": strenv(NETWORK), "subnetwork": strenv(SUBNETWORK)} | with_entries(select(.value != ""))) as $base | (strenv(NETWORK_TAGS) | select(. != "") | {"tags": (split(",") | map(sub("^ +| +$"; "")))}) as $tags | [ $base * ($tags // {}) ]')
-        echo "🌐 Direct VPC egress (private-ranges-only) → subnetwork: $(_present "${SUBNETWORK}")${NETWORK:+, network: set}"
-        export EGRESS_MODE="private-ranges-only"
+        export EGRESS_MODE="${VPC_EGRESS:-private-ranges-only}"
+        echo "🌐 Direct VPC egress (${EGRESS_MODE}) → subnetwork: $(_present "${SUBNETWORK}")${NETWORK:+, network: set}"
         yq e '.spec.template.metadata.annotations += {"run.googleapis.com/vpc-access-egress": strenv(EGRESS_MODE), "run.googleapis.com/network-interfaces": strenv(NETWORK_INTERFACES)}' -i "${temp_file}"
         # Drop any stale connector annotation so the two modes never coexist.
         yq e 'del(.spec.template.metadata.annotations."run.googleapis.com/vpc-access-connector")' -i "${temp_file}"
