@@ -9,4 +9,4 @@ image_package_path="projects/c4hnrd-tools/locations/northamerica-northeast1/repo
 # regardless of the host architecture (e.g. Apple Silicon).
 export DOCKER_BUILD_PLATFORM="linux/amd64"
 
-build_and_push_image "$image_path" "$image_package_path" "1.2.3"
+build_and_push_image "$image_path" "$image_package_path" "1.2.2"
