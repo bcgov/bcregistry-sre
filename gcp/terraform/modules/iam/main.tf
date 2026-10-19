@@ -44,6 +44,7 @@ resource "google_service_account" "sa" {
   account_id   = each.key
   display_name = each.key
   description  = each.value.description
+  disabled     = each.value.disabled
 }
 
 resource "google_project_iam_member" "iam_members" {

@@ -15,6 +15,7 @@ variable "service_accounts" {
       resource_type = string
     })), [])
     description = optional(string, "Managed by Terraform")
+    disabled    = optional(bool, false)
   }))
 }
 

@@ -43,6 +43,7 @@ variable "dev_projects" {
         resource_type = string
       })), [])
       description = optional(string, "Managed by Terraform")
+      disabled    = optional(bool, false)
     })), {})
 
     custom_roles = optional(map(object({
@@ -102,6 +103,7 @@ variable "test_projects" {
         resource_type = string
       })), [])
       description = optional(string, "Managed by Terraform")
+      disabled    = optional(bool, false)
     })), {})
 
     custom_roles = optional(map(object({
@@ -161,6 +163,7 @@ variable "prod_projects" {
         resource_type = string
       })), [])
       description = optional(string, "Managed by Terraform")
+      disabled    = optional(bool, false)
     })), {})
 
     custom_roles = optional(map(object({
@@ -220,6 +223,7 @@ variable "other_projects" {
         resource_type = string
       })), [])
       description = optional(string, "Managed by Terraform")
+      disabled    = optional(bool, false)
     })), {})
 
     custom_roles = optional(map(object({
