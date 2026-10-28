@@ -29,6 +29,7 @@ spec:
         run.googleapis.com/startup-cpu-boost: 'true'
         run.googleapis.com/client-name: cloud-console
         run.googleapis.com/cloudsql-instances: valuePlaceHolder # from-param: ${cloudsql-instances}
+        autoscaling.knative.dev/minScale: 0 # from-param: ${min-scale}
         autoscaling.knative.dev/maxScale: 7 # from-param: ${max-scale}
     spec:
       containerConcurrency: 7 # from-param: ${container-concurrency}
