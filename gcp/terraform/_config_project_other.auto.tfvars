@@ -44,14 +44,9 @@ other_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
-        ]
-      },
-      {
-        role = "projects/c4hnrd-sandbox/roles/SRE"
-        members = [
-          "doug.lovett@gov.bc.ca",
         ]
       },
       {
@@ -65,6 +60,7 @@ other_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
           "steven.chen@gov.bc.ca",
         ]
       },
@@ -75,6 +71,7 @@ other_projects = {
           "ketaki.deodhar@gov.bc.ca",
           "max.wardle@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
+          "doug.lovett@gov.bc.ca",
           "steven.chen@gov.bc.ca",
         ]
       },
