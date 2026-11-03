@@ -262,7 +262,9 @@ prod_projects = {
       },
       {
         role    = "roles/monitoring.admin"
-        members = ["anish.patel@gov.bc.ca"]
+        members = [
+          "anish.patel@gov.bc.ca"
+          ]
       },
       {
         role = "roles/securitycenter.assetsViewer"
@@ -287,10 +289,6 @@ prod_projects = {
       {
         role    = "roles/storage.admin"
         members = ["anish.patel@gov.bc.ca"]
-      },
-      {
-        role    = "roles/storage.objectAdmin"
-        members = ["doug.lovett@gov.bc.ca"]
       },
       {
         role = "roles/run.admin"
