@@ -277,7 +277,6 @@ test_projects = {
           "omid.x.zamani@gov.bc.ca",
           "patty.stemkens@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
@@ -288,7 +287,6 @@ test_projects = {
         role = "roles/cloudsql.admin"
         members = [
           "jia.xu@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
         ]
       },
@@ -319,7 +317,6 @@ test_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
         ]
@@ -333,7 +330,6 @@ test_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
         ]
@@ -698,7 +694,6 @@ test_projects = {
           "paul.adeyinka@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "reema.sagpariya@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",

@@ -57,21 +57,12 @@ dev_projects = {
         ]
       },
       {
-        role    = "roles/cloudsql.client"
-        members = ["siddharth.chaturvedi@gov.bc.ca"]
-      },
-      {
-        role    = "roles/cloudsql.viewer"
-        members = ["siddharth.chaturvedi@gov.bc.ca"]
-      },
-      {
         role = "roles/securitycenter.assetsViewer"
         members = [
           "Brett.cassidy@gov.bc.ca",
           "david.draker@gov.bc.ca",
           "jay.sharp@gov.bc.ca",
           "michelle.hohertz@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "tyson.graham@gov.bc.ca",
           "varek.boettcher@gov.bc.ca",
@@ -84,7 +75,6 @@ dev_projects = {
           "david.draker@gov.bc.ca",
           "jay.sharp@gov.bc.ca",
           "michelle.hohertz@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "tyson.graham@gov.bc.ca",
           "varek.boettcher@gov.bc.ca",
@@ -359,7 +349,6 @@ dev_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
@@ -371,7 +360,6 @@ dev_projects = {
         role = "roles/cloudsql.admin"
         members = [
           "jia.xu@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
         ]
       },
@@ -396,7 +384,6 @@ dev_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
         ]
@@ -410,7 +397,6 @@ dev_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
         ]
@@ -780,7 +766,6 @@ dev_projects = {
           "paul.adeyinka@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
           "reema.sagpariya@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
@@ -954,7 +939,7 @@ dev_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "business-api"
             database_role_assignment = {
-              readonly = ["sa-solr-importer", "siddharth.chaturvedi@gov.bc.ca", "divya.chandupatla@gov.bc.ca", "vishnu.preddy@gov.bc.ca"]
+              readonly = ["sa-solr-importer", "divya.chandupatla@gov.bc.ca", "vishnu.preddy@gov.bc.ca"]
               readwrite = ["sa-job",
                 "sa-api",
                 "dima.kostenyuk@gov.bc.ca",

@@ -22,7 +22,6 @@ environments = {
         "mike.huffman@gov.bc.ca",
         "omid.x.zamani@gov.bc.ca",
         "rajandeep.kaur@gov.bc.ca",
-        "siddharth.chaturvedi@gov.bc.ca",
         "steven.chen@gov.bc.ca",
         "thayne.werdal@gov.bc.ca",
         "thor.wolpert@gov.bc.ca"
@@ -174,7 +173,6 @@ environments = {
         "mike.huffman@gov.bc.ca",
         "omid.x.zamani@gov.bc.ca",
         "rajandeep.kaur@gov.bc.ca",
-        "siddharth.chaturvedi@gov.bc.ca",
         "steven.chen@gov.bc.ca",
         "thayne.werdal@gov.bc.ca",
       "thor.wolpert@gov.bc.ca"]
@@ -346,7 +344,6 @@ environments = {
         "mike.huffman@gov.bc.ca",
         "omid.x.zamani@gov.bc.ca",
         "rajandeep.kaur@gov.bc.ca",
-        "siddharth.chaturvedi@gov.bc.ca",
         "steven.chen@gov.bc.ca",
         "thayne.werdal@gov.bc.ca",
         "thor.wolpert@gov.bc.ca"
@@ -473,7 +470,7 @@ environments = {
   "prod" = {
     database_role_assignment = {
       readonly  = []
-      readwrite = ["thor.wolpert@gov.bc.ca", "siddharth.chaturvedi@gov.bc.ca"]
+      readwrite = ["thor.wolpert@gov.bc.ca"]
       admin     = []
     }
     environment_custom_roles = {

@@ -58,7 +58,6 @@ prod_projects = {
           "omid.x.zamani@gov.bc.ca",
           "pam.sherwood@gov.bc.ca",
           "patty.stemkens@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
           "vikas.singh@gov.bc.ca",
         ]
@@ -92,7 +91,6 @@ prod_projects = {
           "kial.jinnah@gov.bc.ca",
           "michelle.hohertz@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
           "tyson.graham@gov.bc.ca",
           "varek.boettcher@gov.bc.ca",
@@ -109,7 +107,6 @@ prod_projects = {
           "kial.jinnah@gov.bc.ca",
           "michelle.hohertz@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
           "tyson.graham@gov.bc.ca",
           "varek.boettcher@gov.bc.ca",
@@ -246,7 +243,6 @@ prod_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "paul.adeyinka@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
@@ -262,6 +258,12 @@ prod_projects = {
       },
       {
         role = "roles/run.admin"
+        members = [
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
+      {
+        role = "roles/iam.serviceAccountUser"
         members = [
           "doug.lovett@gov.bc.ca",
         ]
@@ -526,7 +528,6 @@ prod_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "paul.adeyinka@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
@@ -544,13 +545,6 @@ prod_projects = {
         members = ["doug.lovett@gov.bc.ca"]
       },
       {
-        role = "roles/cloudsql.admin"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
-        ]
-      },
-      {
         role = "roles/securitycenter.assetsViewer"
         members = [
           "eve.deng@gov.bc.ca",
@@ -558,7 +552,6 @@ prod_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
         ]
@@ -571,7 +564,6 @@ prod_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
         ]
@@ -800,7 +792,6 @@ prod_projects = {
           "dietrich.wolpert@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
         ]
       },
@@ -920,7 +911,6 @@ prod_projects = {
           "rajandeep.kaur@gov.bc.ca",
           "david.mckinnon@gov.bc.ca",
           "reema.sagpariya@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "paul.adeyinka@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
@@ -1334,7 +1324,6 @@ prod_projects = {
           "eve.deng@gov.bc.ca",
           "leo.1.dube@gov.bc.ca",
           "meng.dong@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
         ]
       },
@@ -1491,12 +1480,6 @@ prod_projects = {
     project_id = "k973yf-prod"
     env        = "prod"
     iam_bindings = [
-      {
-        role = "projects/k973yf-prod/roles/roledeveloper"
-        members = [
-          "siddharth.chaturvedi@gov.bc.ca",
-        ]
-      },
       {
         role = "projects/k973yf-prod/roles/SRE"
         members = [
@@ -1708,7 +1691,6 @@ prod_projects = {
           "mike.huffman@gov.bc.ca",
           "monica.mow@gov.bc.ca",
           "pam.sherwood@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
         ]
       },
       {

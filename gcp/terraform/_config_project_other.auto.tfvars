@@ -209,17 +209,9 @@ other_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
-        ]
-      },
-      {
-        role = "roles/cloudsql.admin"
-        members = [
-          "andriy.bolyachevets@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
         ]
       },
       {
@@ -235,7 +227,6 @@ other_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
         ]
@@ -249,7 +240,6 @@ other_projects = {
           "meng.dong@gov.bc.ca",
           "omid.x.zamani@gov.bc.ca",
           "rajandeep.kaur@gov.bc.ca",
-          "siddharth.chaturvedi@gov.bc.ca",
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
         ]
