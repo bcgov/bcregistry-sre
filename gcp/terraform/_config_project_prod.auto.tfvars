@@ -261,6 +261,12 @@ prod_projects = {
         ]
       },
       {
+        role = "roles/run.admin"
+        members = [
+          "doug.lovett@gov.bc.ca",
+        ]
+      },
+      {
         role    = "roles/monitoring.admin"
         members = [
           "anish.patel@gov.bc.ca"
