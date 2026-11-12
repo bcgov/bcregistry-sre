@@ -2,7 +2,7 @@ dev_projects = {
   "express-dev" = {
     project_id = "et79zi-dev"
     env        = "dev"
-        iam_bindings = [
+    iam_bindings = [
       {
         role = "projects/et79zi-dev/roles/SRE"
         members = [
@@ -227,6 +227,20 @@ dev_projects = {
       }
     ]
     service_accounts = {
+      sa-cloudsql-vm = {
+        roles       = ["roles/logging.logWriter", "roles/monitoring.metricWriter"]
+        description = "Service Account for Solr VM operations"
+        external_roles = [
+          {
+            roles      = ["roles/artifactregistry.reader"]
+            project_id = "c4hnrd-tools"
+          },
+          {
+            roles      = ["roles/cloudsql.client"]
+            project_id = "a083gt-dev"
+          }
+        ]
+      },
       sa-db-migrate = {
         roles       = ["projects/c4hnrd-dev/roles/roledbmigrate"]
         description = "Service Account for running db alembic migration job"
@@ -940,7 +954,7 @@ dev_projects = {
             owner   = "business-api"
             database_role_assignment = {
               readonly = ["sa-solr-importer", "divya.chandupatla@gov.bc.ca", "vishnu.preddy@gov.bc.ca"]
-              readwrite = ["sa-job",
+              readwrite = [
                 "sa-api",
                 "dima.kostenyuk@gov.bc.ca",
                 "hansen.philip@gov.bc.ca",
@@ -950,7 +964,7 @@ dev_projects = {
                 "yogesh.manni@gov.bc.ca",
                 "reema.sagpariya@gov.bc.ca"
               ]
-              admin = ["sa-db-migrate"]
+              admin = ["sa-db-migrate", "sa-job"]
             }
           }
         ]
