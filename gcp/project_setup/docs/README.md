@@ -30,11 +30,11 @@ Another mechanism through which some parameters might enter the template is via 
 
 ![cloudbuild.yaml](./images/cloudbuild_yaml.png)
 
-For example, VPC_CONNECTOR variable can be defined in 1password and devops/vaults.gcp.env file.
+For example, the Direct VPC egress variables EGRESS_NETWORK, EGRESS_SUBNETWORK, EGRESS_NETWORK_TAGS and VPC_EGRESS can be defined in 1password and devops/vaults.gcp.env file. EGRESS_* values set in a service's own vault override the shared ones from the `base` item.
 
 ![cloudbuild.yaml](./images/vaultsgcpenv.png)
 
-VPC Connector enables CloudRun to use Shared Virtual Private Cloud networks defined in Registries' Common-... projects. You can read more about the function of VPC Connector in [GCP docs](https://cloud.google.com/vpc/docs/serverless-vpc-access)
+Direct VPC egress enables CloudRun to use Shared Virtual Private Cloud networks defined in Registries' Common-... projects. When EGRESS_SUBNETWORK is set, the revision is attached to that subnetwork; VPC_EGRESS sets the egress mode (`private-ranges-only` by default, or `all-traffic`). The Serverless VPC Access connector (VPC_CONNECTOR / ROUTE_ALL_TO_VPC) is no longer supported. You can read more in the [GCP docs](https://cloud.google.com/run/docs/configuring/vpc-direct-vpc)
 
 
 ***gcloud scripts***
