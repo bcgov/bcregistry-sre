@@ -227,20 +227,6 @@ dev_projects = {
       }
     ]
     service_accounts = {
-      sa-cloudsql-vm = {
-        roles       = ["roles/logging.logWriter", "roles/monitoring.metricWriter"]
-        description = "Service Account for Solr VM operations"
-        external_roles = [
-          {
-            roles      = ["roles/artifactregistry.reader"]
-            project_id = "c4hnrd-tools"
-          },
-          {
-            roles      = ["roles/cloudsql.client"]
-            project_id = "a083gt-dev"
-          }
-        ]
-      },
       sa-db-migrate = {
         roles       = ["projects/c4hnrd-dev/roles/roledbmigrate"]
         description = "Service Account for running db alembic migration job"
