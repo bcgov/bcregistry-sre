@@ -875,8 +875,8 @@ test_projects = {
             owner   = "userHQH"
             database_role_assignment = {
               readonly  = ["vishnu.preddy@gov.bc.ca", "sa-solr-importer"]
-              readwrite = ["sa-api", "gunasegaran.nagarajan@gov.bc.ca", "reema.sagpariya@gov.bc.ca", "mark.ruffolo@gov.bc.ca", "yogesh.manni@gov.bc.ca"]
-              admin     = ["sa-db-migrate", "paul.adeyinka@gov.bc.ca" ]
+              readwrite = ["sa-api", "gunasegaran.nagarajan@gov.bc.ca", "reema.sagpariya@gov.bc.ca", "mark.ruffolo@gov.bc.ca", "yogesh.manni@gov.bc.ca", "paul.adeyinka@gov.bc.ca"]
+              admin     = ["sa-db-migrate"]
             }
           },
           {
