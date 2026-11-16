@@ -1071,8 +1071,8 @@ prod_projects = {
                 "david.mckinnon@gov.bc.ca",
                 "mihai.dinu@gov.bc.ca",
               "paul.adeyinka@gov.bc.ca"]
-              readwrite = ["sa-job", "sa-api", "omid.x.zamani@gov.bc.ca", "steven.chen@gov.bc.ca", "meng.dong@gov.bc.ca", "doug.lovett@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
-              admin     = ["sa-db-migrate"]
+              readwrite = ["sa-api", "omid.x.zamani@gov.bc.ca", "steven.chen@gov.bc.ca", "meng.dong@gov.bc.ca", "doug.lovett@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
+              admin     = ["sa-job", "sa-db-migrate"]
             }
           }
         ]
