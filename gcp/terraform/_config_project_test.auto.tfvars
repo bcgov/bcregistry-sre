@@ -1392,6 +1392,7 @@ test_projects = {
           "mark.ruffolo@gov.bc.ca",
           "janis.rogers@gov.bc.ca",
           "jimmy.palelil@gov.bc.ca",
+          "severin.beauvais@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "kial.jinnah@gov.bc.ca",
         ]
@@ -1453,7 +1454,7 @@ test_projects = {
             owner   = "strr"
             database_role_assignment = {
               readonly  = []
-              readwrite = ["sa-job", "sa-api", "jimmy.palelil@gov.bc.ca"]
+              readwrite = ["sa-job", "sa-api", "jimmy.palelil@gov.bc.ca", "severin.beauvais@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }
           }

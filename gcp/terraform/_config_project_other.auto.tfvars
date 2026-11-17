@@ -772,6 +772,7 @@ other_projects = {
         role = "projects/bcrbk9-tools/roles/SRE"
         members = [
           "jimmy.palelil@gov.bc.ca",
+          "severin.beauvais@gov.bc.ca",
         ]
       },
       {
@@ -835,7 +836,7 @@ other_projects = {
             owner   = "strr"
             database_role_assignment = {
               readonly  = []
-              readwrite = ["sa-job", "sa-api", "jimmy.palelil@gov.bc.ca"]
+              readwrite = ["sa-job", "sa-api", "jimmy.palelil@gov.bc.ca", "severin.beauvais@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }
           }

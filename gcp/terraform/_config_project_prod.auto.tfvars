@@ -1686,6 +1686,7 @@ prod_projects = {
           "dietrich.wolpert@gov.bc.ca",
           "james.mcfarlane@gov.bc.ca",
           "jimmy.palelil@gov.bc.ca",
+          "severin.beauvais@gov.bc.ca",
           "karim.jazzar@gov.bc.ca",
           "meng.dong@gov.bc.ca",
           "mike.huffman@gov.bc.ca",
@@ -1741,6 +1742,7 @@ prod_projects = {
             database_role_assignment = {
               readonly = ["anushka.halder@gov.bc.ca",
                 "dietrich.wolpert@gov.bc.ca",
+                "severin.beauvais@gov.bc.ca",
                 "james.mcfarlane@gov.bc.ca",
                 "mike.huffman@gov.bc.ca",
                 "monica.mow@gov.bc.ca",
