@@ -17,6 +17,10 @@ on:
         default: "."
       codecov_flag:
         type: string
+      coverage_threshold:
+        description: "Required coverage threshold percentage (default: 0, report only)"
+        type: string
+        default: "0"
 
 permissions:
   contents: read
@@ -113,6 +117,8 @@ jobs:
 
   unit-testing-pnpm:
     needs: [linting-pnpm, determine-package-manager]
+    outputs:
+      HAS_COVERAGE: ${{ steps.coverage.outputs.HAS_COVERAGE }}
     strategy:
       fail-fast: true
       matrix:
@@ -180,6 +186,17 @@ jobs:
         with:
           name: coveragefile
           path: tests/coverage
+      - name: Check coverage report
+        id: coverage
+        run: |
+          if [ -f coverage.xml ]; then echo "HAS_COVERAGE=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Upload coverage report for summary
+        if: steps.coverage.outputs.HAS_COVERAGE == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: coverage-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ inputs.working_directory }}/coverage.xml
+          retention-days: 1
 
   verify-build:
     needs: [linting-pnpm, determine-package-manager]
@@ -277,6 +294,8 @@ jobs:
 
   unit-testing-npm:
     needs: linting-npm
+    outputs:
+      HAS_COVERAGE: ${{ steps.coverage.outputs.HAS_COVERAGE }}
     strategy:
       fail-fast: true
       matrix:
@@ -319,6 +338,31 @@ jobs:
         with:
           name: coveragefile
           path: tests/coverage
+      - name: Check coverage report
+        id: coverage
+        run: |
+          if [ -f coverage.xml ]; then echo "HAS_COVERAGE=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Upload coverage report for summary
+        if: steps.coverage.outputs.HAS_COVERAGE == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: coverage-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ inputs.working_directory }}/coverage.xml
+          retention-days: 1
+
+  code-coverage:
+    needs: [unit-testing-pnpm, unit-testing-npm]
+    if: ${{ always() && (needs.unit-testing-pnpm.outputs.HAS_COVERAGE == 'true' || needs.unit-testing-npm.outputs.HAS_COVERAGE == 'true') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Generate Coverage Report
+        uses: bcgov/bcregistry-sre/.github/actions/coverage-report@main
+        with:
+          run_id: ${{ github.run_id }}
+          run_attempt: ${{ github.run_attempt }}
+          coverage_threshold: ${{ inputs.coverage_threshold }}
 
   verify-build-npm:
     needs: linting-npm

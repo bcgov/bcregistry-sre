@@ -23,7 +23,37 @@ fi
 echo "📁 Using coverage file: $COVERAGE_FILE"
 echo ""
 
+# Clover XML (vitest/jest frontends) vs Cobertura XML (pytest)
+IS_CLOVER=false
+grep -q '<coverage[^>]*clover=' "$COVERAGE_FILE" && IS_CLOVER=true
+
+# Prints "<file> <covered> <total>" for each file in a Clover report
+clover_files() {
+    awk -F'"' '
+    /<package / { for(i=1; i<NF; i++) if($i ~ /name=$/) { pkg = $(i+1); gsub(/\./, "/", pkg) } }
+    /<file / { for(i=1; i<NF; i++) if($i ~ / name=$/) file = $(i+1); in_file = 1; next }
+    in_file && /<metrics / {
+        for(i=1; i<NF; i++) {
+            if($i ~ / statements=$/) total = $(i+1)
+            if($i ~ /coveredstatements=$/) covered = $(i+1)
+        }
+        printf "%s %s %s\n", (pkg ? pkg "/" : "") file, covered, total
+        in_file = 0
+    }' "$1"
+}
+
 # Extract coverage data from XML (optimized)
+if [[ "$IS_CLOVER" == "true" ]]; then
+    # First <metrics> is the project total; statements map to lines, conditionals to branches
+    PROJECT_METRICS=$(grep -m1 -o '<metrics [^>]*' "$COVERAGE_FILE")
+    clover_attr() { echo "$PROJECT_METRICS" | grep -o " $1=\"[0-9]*\"" | grep -o '[0-9]*'; }
+    lines_valid=$(clover_attr statements)
+    lines_covered=$(clover_attr coveredstatements)
+    conditionals=$(clover_attr conditionals)
+    covered_conditionals=$(clover_attr coveredconditionals)
+    line_rate=$(awk "BEGIN {print (${lines_valid:-0} > 0) ? ${lines_covered:-0}/${lines_valid} : 0}")
+    branch_rate=$(awk "BEGIN {print (${conditionals:-0} > 0) ? ${covered_conditionals:-0}/${conditionals} : 0}")
+else
 {
     read -r lines_valid
     read -r lines_covered
@@ -34,6 +64,7 @@ echo ""
     head -4 | \
     grep -o '[0-9.]*'
 )
+fi
 
 COVERAGE_PERCENT=$(awk "BEGIN {printf \"%.0f%%\", $line_rate*100}")
 TOTAL_LINES="$lines_valid"
@@ -93,6 +124,22 @@ get_coverage_emoji() {
     fi
 }
 
+if [[ "$IS_CLOVER" == "true" ]]; then
+    CLOVER_RATES=$(clover_files "$COVERAGE_FILE" | awk '{ printf "%s %.4f\n", $1, ($3 > 0) ? $2/$3 : 1 }')
+    echo "$CLOVER_RATES" | awk '{
+        coverage_val = $2 * 100
+        if(coverage_val >= 100) emoji = "🟢"
+        else if(coverage_val >= 90) emoji = "🟡"
+        else if(coverage_val >= 80) emoji = "🟠"
+        else emoji = "🔴"
+        printf "%s %s: %.0f%%\n", emoji, $1, coverage_val
+    }' | sort -k2
+    echo ""
+
+    PERFECT_COUNT=$(echo "$CLOVER_RATES" | awk '$2 >= 1' | wc -l)
+    GOOD_COUNT=$(echo "$CLOVER_RATES" | awk '$2 >= 0.8 && $2 < 1' | wc -l)
+    TOTAL_FILES=$(echo "$CLOVER_RATES" | grep -c .)
+else
 # Process all classes in one pass
 awk -F'"' '
 /<class/ {
@@ -125,6 +172,7 @@ echo ""
 PERFECT_COUNT=$(grep -c 'line-rate="1"' "$COVERAGE_FILE")
 GOOD_COUNT=$(grep 'line-rate="0\.[89]' "$COVERAGE_FILE" | wc -l)
 TOTAL_FILES=$(grep -c '<class' "$COVERAGE_FILE")
+fi
 
 echo "📊 COVERAGE SUMMARY:"
 echo "• Perfect (100%): $PERFECT_COUNT modules"
