@@ -51,7 +51,7 @@ dev_projects or test_projects or prod_projects or other_projects = {
         resource_roles = [{ # Optional list of resource specific roles
           resource        = "" # Specific resource URI (e.g., bucket, topic)
           roles           = [] # List of roles assigned to the resource
-          resource_type   = "" # Type of resource (e.g., storage_bucket, pubsub_topic)
+          resource_type   = "" # Type of resource (e.g., storage_bucket, pubsub_topic, compute_instance with resource "<zone>/<instance>")
         }]
       }
     }

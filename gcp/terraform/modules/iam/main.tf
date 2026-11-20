@@ -198,6 +198,20 @@ resource "google_service_account_iam_member" "resource_iam_members" {
   member             = each.value.is_managed_sa ? "serviceAccount:${google_service_account.sa[each.value.sa_name].email}" : each.value.member
 }
 
+resource "google_compute_instance_iam_member" "resource_iam_members" {
+  for_each = { for combo in local.resource_iam_bindings :
+    (combo.is_managed_sa ? "${combo.sa_name}-${combo.role}-${combo.resource}" : "${combo.member}-${combo.role}-${combo.resource}") => combo
+    if combo.resource_type == "compute_instance"
+  }
+
+  # resource format: "<zone>/<instance_name>"
+  project       = var.project_id
+  zone          = split("/", each.value.resource)[0]
+  instance_name = split("/", each.value.resource)[1]
+  role          = each.value.role
+  member        = each.value.is_managed_sa ? "serviceAccount:${google_service_account.sa[each.value.sa_name].email}" : each.value.member
+}
+
 locals {
   merged_iam_bindings = flatten([
     for binding in concat(var.global_iam_bindings, var.env.iam_bindings, var.iam_bindings) : [
