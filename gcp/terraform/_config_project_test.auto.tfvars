@@ -218,7 +218,7 @@ test_projects = {
       sa-cloudsql-proxy-vm = {
         description = "Service Account for vm running cloudsql proxy"
         external_roles = [{
-          roles      = ["roles/cloudsql.client", "roles/cloudsql.instanceUser"]
+          roles      = ["roles/cloudsql.client"]
           project_id = "a083gt-test"
         }]
       },
@@ -888,7 +888,7 @@ test_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "userHQH"
             database_role_assignment = {
-              readonly  = ["vishnu.preddy@gov.bc.ca", "sa-solr-importer", "sa-cloudsql-proxy-vm@c4hnrd-test.iam.gserviceaccount.com"]
+              readonly  = ["vishnu.preddy@gov.bc.ca", "sa-solr-importer"]
               readwrite = ["sa-api", "gunasegaran.nagarajan@gov.bc.ca", "reema.sagpariya@gov.bc.ca", "mark.ruffolo@gov.bc.ca", "yogesh.manni@gov.bc.ca", "paul.adeyinka@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }
