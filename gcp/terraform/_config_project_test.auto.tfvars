@@ -277,6 +277,7 @@ test_projects = {
           "brandon.1.sharratt@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
+          "dima.kostenyuk@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "divya.chandupatla@gov.bc.ca",
           "eve.deng@gov.bc.ca",
@@ -420,7 +421,7 @@ test_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "auth"
             database_role_assignment = {
-              readonly  = ["noor.nayeem@gov.bc.ca", "patty.stemkens@gov.bc.ca", "divya.chandupatla@gov.bc.ca", "yogesh.manni@gov.bc.ca"]
+              readonly  = ["noor.nayeem@gov.bc.ca", "patty.stemkens@gov.bc.ca", "divya.chandupatla@gov.bc.ca", "yogesh.manni@gov.bc.ca", "dima.kostenyuk@gov.bc.ca"]
               readwrite = ["sa-api", "sa-job", "anish.batra@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }

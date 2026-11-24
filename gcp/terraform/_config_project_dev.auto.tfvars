@@ -338,6 +338,7 @@ dev_projects = {
           "brandon.1.sharratt@gov.bc.ca",
           "chiu.oddyseus@gov.bc.ca",
           "dietrich.wolpert@gov.bc.ca",
+          "dima.kostenyuk@gov.bc.ca",
           "divya.chandupatla@gov.bc.ca",
           "doug.lovett@gov.bc.ca",
           "eve.deng@gov.bc.ca",
@@ -450,7 +451,7 @@ dev_projects = {
             owner   = "auth"
             database_role_assignment = {
               readonly  = ["noor.nayeem@gov.bc.ca", "divya.chandupatla@gov.bc.ca"]
-              readwrite = ["sa-api", "anish.batra@gov.bc.ca", "sa-job", "yogesh.manni@gov.bc.ca"]
+              readwrite = ["sa-api", "anish.batra@gov.bc.ca", "sa-job", "yogesh.manni@gov.bc.ca", "dima.kostenyuk@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }
           }
@@ -1377,7 +1378,6 @@ dev_projects = {
           "steven.chen@gov.bc.ca",
           "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
-          "severin.beauvais@gov.bc.ca",
           "severin.beauvais@gov.bc.ca",
           "vishnu.preddy@gov.bc.ca",
         ]
