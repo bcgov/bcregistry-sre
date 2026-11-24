@@ -137,6 +137,12 @@ test_projects = {
           # WIF OpenShift Namespace: cbaab0-test
           "principal://iam.googleapis.com/projects/331250273634/locations/global/workloadIdentityPools/central-keycloak-pool/subject/67adac47-6e8c-41f8-85e5-516af6d08095"
         ]
+      },
+      {
+        resource      = "northamerica-northeast1-a/sql-bastion-2026-11-19--234730"
+        resource_type = "compute_instance"
+        roles         = ["roles/compute.osLogin"]
+        members       = ["serviceAccount:sa-solr-importer@yfjq17-test.iam.gserviceaccount.com"]
       }
     ]
     instances = [
@@ -208,6 +214,13 @@ test_projects = {
       sa-queue = {
         roles       = ["projects/c4hnrd-test/roles/rolequeue"]
         description = "Service Account for running queue services"
+      },
+      sa-cloudsql-proxy-vm = {
+        description = "Service Account for vm running cloudsql proxy"
+        external_roles = [{
+          roles      = ["roles/cloudsql.client", "roles/cloudsql.instanceUser"]
+          project_id = "a083gt-test"
+        }]
       },
       doc-test-sa = {
         description = "Document Services Service Account"
@@ -874,7 +887,7 @@ test_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "userHQH"
             database_role_assignment = {
-              readonly  = ["vishnu.preddy@gov.bc.ca", "sa-solr-importer"]
+              readonly  = ["vishnu.preddy@gov.bc.ca", "sa-solr-importer", "sa-cloudsql-proxy-vm@c4hnrd-test.iam.gserviceaccount.com"]
               readwrite = ["sa-api", "gunasegaran.nagarajan@gov.bc.ca", "reema.sagpariya@gov.bc.ca", "mark.ruffolo@gov.bc.ca", "yogesh.manni@gov.bc.ca", "paul.adeyinka@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }

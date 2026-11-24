@@ -1378,6 +1378,7 @@ dev_projects = {
           "sumesh.kariyil@gov.bc.ca",
           "thayne.werdal@gov.bc.ca",
           "severin.beauvais@gov.bc.ca",
+          "severin.beauvais@gov.bc.ca",
           "vishnu.preddy@gov.bc.ca",
         ]
       },

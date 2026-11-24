@@ -269,10 +269,10 @@ prod_projects = {
         ]
       },
       {
-        role    = "roles/monitoring.admin"
+        role = "roles/monitoring.admin"
         members = [
           "anish.patel@gov.bc.ca"
-          ]
+        ]
       },
       {
         role = "roles/securitycenter.assetsViewer"
