@@ -348,8 +348,8 @@ prod_projects = {
             roles   = ["readonly", "readwrite", "admin"]
             owner   = "user4ca"
             database_role_assignment = {
-              readonly  = ["dietrich.wolpert@gov.bc.ca", "leo.1.dube@gov.bc.ca", "megan.a.wong@gov.bc.ca", "mark.ruffolo@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "thayne.werdal@gov.bc.ca", "rajandeep.kaur@gov.bc.ca", "sa-job"]
-              readwrite = ["sa-api"]
+              readonly  = ["dietrich.wolpert@gov.bc.ca", "leo.1.dube@gov.bc.ca", "megan.a.wong@gov.bc.ca", "mark.ruffolo@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "thayne.werdal@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
+              readwrite = ["sa-api", "sa-job"]
               admin     = ["sa-db-migrate"]
             }
           }
@@ -406,6 +406,10 @@ prod_projects = {
             resource_type = "storage_bucket"
           }
         ]
+        external_roles = [{
+          roles      = ["roles/cloudsql.client", "roles/cloudsql.instanceUser", "roles/recommender.viewer", "roles/iam.securityReviewer"]
+          project_id = "a083gt-prod"
+        }]
       },
       sa-notebook = {
         roles       = ["projects/c4hnrd-prod/roles/rolejob", ]
@@ -1071,7 +1075,7 @@ prod_projects = {
                 "david.mckinnon@gov.bc.ca",
                 "mihai.dinu@gov.bc.ca",
               "paul.adeyinka@gov.bc.ca"]
-              readwrite = ["sa-api", "omid.x.zamani@gov.bc.ca", "steven.chen@gov.bc.ca", "meng.dong@gov.bc.ca", "doug.lovett@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "rajandeep.kaur@gov.bc.ca"]
+              readwrite = ["sa-api", "omid.x.zamani@gov.bc.ca", "steven.chen@gov.bc.ca", "meng.dong@gov.bc.ca", "doug.lovett@gov.bc.ca", "ketaki.deodhar@gov.bc.ca", "rajandeep.kaur@gov.bc.ca", "sa-job@c4hnrd-prod.iam.gserviceaccount.com"]
               admin     = ["sa-job", "sa-db-migrate"]
             }
           }
