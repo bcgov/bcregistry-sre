@@ -109,7 +109,10 @@ jobs:
 
           pnpm install --ignore-scripts
       - name: Nuxt Prepare
-        run: pnpm exec nuxt prepare 2>/dev/null || true
+        run: |
+          # --ignore-scripts skips workspace deps' prepare (e.g. a Nuxt layer's .playground types)
+          pnpm --filter "{.}^..." --if-present run prepare
+          pnpm exec nuxt prepare 2>/dev/null || true
         continue-on-error: true
       - name: Linting
         run: |
@@ -175,7 +178,10 @@ jobs:
 
           pnpm install --ignore-scripts
       - name: Nuxt Prepare
-        run: pnpm exec nuxt prepare 2>/dev/null || true
+        run: |
+          # --ignore-scripts skips workspace deps' prepare (e.g. a Nuxt layer's .playground types)
+          pnpm --filter "{.}^..." --if-present run prepare
+          pnpm exec nuxt prepare 2>/dev/null || true
         continue-on-error: true
       - name: Testing
         run: |
@@ -246,7 +252,10 @@ jobs:
 
           pnpm install --ignore-scripts
       - name: Nuxt Prepare
-        run: pnpm exec nuxt prepare 2>/dev/null || true
+        run: |
+          # --ignore-scripts skips workspace deps' prepare (e.g. a Nuxt layer's .playground types)
+          pnpm --filter "{.}^..." --if-present run prepare
+          pnpm exec nuxt prepare 2>/dev/null || true
         continue-on-error: true
       - name: Rebuild native addons
         run: |
