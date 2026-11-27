@@ -126,6 +126,10 @@ test_projects = {
         members = [
           "sumesh.kariyil@gov.bc.ca",
         ]
+      },
+      {
+        role    = "roles/compute.viewer"
+        members = ["serviceAccount:sa-solr-importer@a083gt-test.iam.gserviceaccount.com"]
       }
     ]
     resource_iam_bindings = [
@@ -143,6 +147,24 @@ test_projects = {
         resource_type = "compute_instance"
         roles         = ["roles/compute.osLogin"]
         members       = ["serviceAccount:sa-solr-importer@yfjq17-test.iam.gserviceaccount.com"]
+      },
+      {
+        resource      = "northamerica-northeast1-a/sql-proxy-vm-test"
+        resource_type = "iap_tunnel_instance"
+        roles         = ["roles/iap.tunnelResourceAccessor"]
+        members       = ["serviceAccount:sa-solr-importer@a083gt-test.iam.gserviceaccount.com"]
+      },
+      {
+        resource      = "northamerica-northeast1-a/sql-proxy-vm-test"
+        resource_type = "compute_instance"
+        roles         = ["roles/compute.osLogin"]
+        members       = ["serviceAccount:sa-solr-importer@a083gt-test.iam.gserviceaccount.com"]
+      },
+      {
+        resource      = "projects/c4hnrd-test/serviceAccounts/sa-cloudsql-proxy-vm@c4hnrd-test.iam.gserviceaccount.com"
+        resource_type = "sa_iam_member"
+        roles         = ["roles/iam.serviceAccountUser"]
+        members       = ["serviceAccount:sa-solr-importer@a083gt-test.iam.gserviceaccount.com"]
       }
     ]
     instances = [
@@ -155,7 +177,7 @@ test_projects = {
             owner   = "user4ca"
             database_role_assignment = {
               readonly  = []
-              readwrite = ["sa-api", "leo.1.dube@gov.bc.ca"]
+              readwrite = ["sa-api", "sa-job", "leo.1.dube@gov.bc.ca"]
               admin     = ["sa-db-migrate"]
             }
           }
@@ -187,8 +209,12 @@ test_projects = {
         description = "Service Account for running db alembic migration job"
       },
       sa-job = {
-        roles       = ["projects/c4hnrd-test/roles/rolejob"]
+        roles       = ["projects/c4hnrd-test/roles/rolejob", "roles/cloudsql.client", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
+        external_roles = [{
+          roles      = ["roles/cloudsql.client", "roles/cloudsql.instanceUser", "roles/recommender.viewer", "roles/iam.securityReviewer"]
+          project_id = "a083gt-test"
+        }]
       },
       sa-api = {
         roles       = ["projects/c4hnrd-test/roles/roleapi", "roles/cloudsql.instanceUser", "roles/run.serviceAgent"]
@@ -868,13 +894,14 @@ test_projects = {
               readonly = ["sa-solr-importer", "divya.chandupatla@gov.bc.ca", "vishnu.preddy@gov.bc.ca"]
               readwrite = [
                 "sa-api",
+                "sa-job@c4hnrd-test.iam.gserviceaccount.com",
                 "dima.kostenyuk@gov.bc.ca",
                 "mark.ruffolo@gov.bc.ca",
                 "gunasegaran.nagarajan@gov.bc.ca",
                 "hansen.philip@gov.bc.ca",
                 "leo.1.dube@gov.bc.ca",
                 "yogesh.manni@gov.bc.ca",
-              "reema.sagpariya@gov.bc.ca"]
+                "reema.sagpariya@gov.bc.ca"]
               admin = ["sa-job", "sa-db-migrate"]
             }
           }

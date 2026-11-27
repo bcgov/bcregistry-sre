@@ -204,7 +204,7 @@ dev_projects = {
             owner   = "user4ca"
             database_role_assignment = {
               readonly  = []
-              readwrite = ["sa-api", "leo.1.dube@gov.bc.ca"]
+              readwrite = ["sa-api", "leo.1.dube@gov.bc.ca", "sa-job"]
               admin     = ["sa-db-migrate"]
             }
           }
@@ -236,8 +236,12 @@ dev_projects = {
         description = "Service Account for running pubsub services"
       },
       sa-job = {
-        roles       = ["projects/c4hnrd-dev/roles/rolejob"]
+        roles       = ["projects/c4hnrd-dev/roles/rolejob", "roles/cloudsql.client", "roles/cloudsql.instanceUser"]
         description = "Service Account for running job services"
+        external_roles = [{
+          roles      = ["roles/cloudsql.client", "roles/cloudsql.instanceUser", "roles/recommender.viewer", "roles/iam.securityReviewer"]
+          project_id = "a083gt-dev"
+        }]
       },
       sa-api = {
         roles       = ["projects/c4hnrd-dev/roles/roleapi", "roles/cloudsql.instanceUser", "roles/serverless.serviceAgent"]
@@ -943,6 +947,7 @@ dev_projects = {
               readonly = ["sa-solr-importer", "divya.chandupatla@gov.bc.ca", "vishnu.preddy@gov.bc.ca"]
               readwrite = [
                 "sa-api",
+                "sa-job@c4hnrd-dev.iam.gserviceaccount.com",
                 "dima.kostenyuk@gov.bc.ca",
                 "hansen.philip@gov.bc.ca",
                 "leo.1.dube@gov.bc.ca",
